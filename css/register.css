@@ -1,3 +1,4 @@
+/* FORM CONTAINING */
 .form-container {
     background-color: #f5f5f5;
     border-radius: 5px;
@@ -8,20 +9,21 @@
     padding: .375rem .75rem;
 }
 
+/* FORM CONTROLS */
+
 .form_control {
     margin-bottom: 10px;
     position: relative;
 }
 
 .form_control label {
-    display: inline-block;
-    margin-bottom: 5px;
+    display: inline;
 }
 
 .form_control input {
     border: 1px solid #ced4da;
     border-radius: .375rem;
-    display: block;
+    display: inline;
     font-family: inherit;
     font-size: 1rem;
     font-weight: 400;
@@ -29,6 +31,50 @@
     padding: 10px;
     width: 100%;
 }
+
+.form_control select {
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    display: inline;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #212529;
+    padding: 10px;
+    width: 100%;
+}
+
+.form_control input[type=radio] {
+    width: 1rem;
+}
+
+.form_control i {
+    visibility: hidden;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.form_control small {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.form button {
+    background-color: #58cca5;
+    border: 2px solid #58cca5;
+    border-radius: 4px;
+    color: #ffffff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* FORM CONTROL STATES */
 
 .form_control.success input {
     border: 2px solid #2ecc71;
@@ -46,13 +92,6 @@
     border: 2px solid #e74c3c;
 }
 
-.form_control i {
-    visibility: hidden;
-    position: absolute;
-    top: 40px;
-    right: 10px;
-}
-
 .form_control.success i.fa-check-circle {
     visibility: visible;
     color: #2ecc71;
@@ -63,29 +102,12 @@
     color: #e74c3c;
 }
 
-.form_control small {
-    visibility: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
 .form_control.error small {
     color: #e74c3c;
     visibility: visible;
 }
 
-.form button {
-    background-color: #58cca5;
-    border: 2px solid #58cca5;
-    border-radius: 4px;
-    color: #ffffff;
-    display: block;
-    font-family: inherit;
-    font-size: 16px;
-    padding: 10px;
-    width: 100%;
-}
+/* FORM CONTROL EVENTS */
 
 .form button:hover {
     cursor: pointer;

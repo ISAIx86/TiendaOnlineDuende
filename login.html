@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href = "css/style.css">
     <link rel="stylesheet" href = "css/register.css">
-    
 </head>
 <body>
     <header>
@@ -90,6 +89,10 @@
                         <h2>Crear Cuenta</h2>
                     </div>
                     <form class="form" id="form">
+                        <div class="form_control" requerido="false" state='empt'>
+                            <label for="FotoPerfil">Foto de perfil:</label>
+                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                        </div>
                         <div class="form_control" requerido="true" state="empt">
                             <input type="text" id="txt_nombres" name="in_nombres" placeholder="Nombres">
                             <i class="fas fa-check-circle"></i>
@@ -102,22 +105,35 @@
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
-                        <div >Fecha de nacimiento:</div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <div >Género:</div>
+                            <input type="radio" id="rdb_h" name="in_genero" value="H">
+                            <label for="rdb_h">Hombre</label>
+                            <input type="radio" id="rdb_m" name="in_genero" value="M">
+                            <label for="rdb_m">Mujer</label>
+                            <input type="radio" id="rdb_o" name="in_genero" value="O">
+                            <label for="rdb_o">Otro</label>
+                        </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="dd/mm/aaaa">
+                            <div >Fecha de nacimiento:</div>
+                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <select id="cbx_rol" form="form" name="in_rol">
+                                <option disabled selected>Rol de usuario</option>
+                                <option value="comprador">Comprador</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="compravende">Ambos</option>
+                            </select>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
                             <input type="email" id="txt_correo" name="in_correo" placeholder="Correo electrónico">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
-                        </div>
-                        <div class="form_control" requerido="false" state='empt'>
-                            <label for="FotoPerfil">Foto de perfil:</label>
-                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
                             <input type="text" id="txt_username" name="in_username" placeholder="Nombre de usuario">

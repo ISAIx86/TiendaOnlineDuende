@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#txt_nombres').on('change', function() {
         let contenido =  $(this).val();
         if (contenido.length == 0) {
-            setCSSFor($(this)[0], '', '');
+            setCSSFor($(this)[0]);
         }
         else if (contenido.length > 64) {
             setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
@@ -12,14 +12,14 @@ $(document).ready(function() {
             setCSSFor($(this)[0], 'error', 'No debe contener números.');
         }
         else {
-            setCSSFor($(this)[0], 'success', '');
+            setCSSFor($(this)[0], 'success');
         }
     });
 
     $('#txt_apellidos').on('change', function() {
         let contenido =  $(this).val();
         if (contenido.length == 0) {
-            setCSSFor($(this)[0], '', '');
+            setCSSFor($(this)[0]);
         }
         else if (contenido.length > 64) {
             setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
@@ -28,8 +28,16 @@ $(document).ready(function() {
             setCSSFor($(this)[0], 'error', 'No debe contener números.');
         }
         else {
-            setCSSFor($(this)[0], 'success', '');
+            setCSSFor($(this)[0], 'success');
         }
+    });
+
+    $('input[type="radio"][name="in_genero"]').on('change', function(){
+        setCSSFor($(this)[0], 'success');
+    });
+
+    $('#cbx_rol').on('change', function(){
+        setCSSFor($(this)[0], 'success');
     });
 
     $('#txt_fechanac').change(function() {
