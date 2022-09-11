@@ -11,23 +11,41 @@
     <header>
         <div class = "container">
             <div class = "row">
-                <div class = "col-4">
+                <div class = "col-6">
                     <img src='resoruces/logo02.PNG' class='logotipo'/>
                 </div>
-                <div class = "col-4">
-                    <h3> L</h3>
+                <div class = "col-2">
+                    <h3> </h3>
                 </div>
                 <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Iniciar sesión
-                      </button>
-                </div>  
+                    
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src='resoruces/carrito.PNG' class='imgRedonda' />
+                            <h5>$1,500</h5> 
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Comprar</a></li>
+                          <li><a class="dropdown-item" href="#">Guardar Lista</a></li>
+                          <li><a class="dropdown-item" href="#">Limpiar</a></li>
+                        </ul>
+                      </div>
+                </div>    
                 <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Registrarse
-                      </button>
-                </div>         
-            </div>
+                   
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src='resoruces/dongato.PNG' class='imgRedonda' />
+                            <h5>DonGatox16</h5>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Perfil</a></li>
+                          <li><a class="dropdown-item" href="#"></a></li>
+                          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                      </div>
+                    </div>             
+                </div>
             <form class="row" id = "buscador">
                 <div class="col-11">    
                   <input type="text" class="form-control" id="inputPassword2" placeholder="Busca un producto">
@@ -77,42 +95,78 @@
                         <img src='resoruces/dongato.PNG' class='imgRedonda' />
                     </div>
                     <div class = "col-4">
-                        <h1>DonGatox16</h1>
-                    </div>
-                    
+                        <h2>DonGatox16</h2>
+                    </div>       
                 </div>       
             </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class = "row">
-                    <h2>Mis datos</h2>
+                    <h4>Mis datos</h4>
                 </div>
                 <div class = "row" align = "left">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <h2>Usuario</h2>
-                            <h6>DonGatox16</h6>
+                            <h5>Usuario</h5>
+                            <h8>DonGatox16</h8>
                         </li>
                         <li class="list-group-item">
-                            <h2>E-mail</h2>
-                            <h6>topcatofficial@pandilla.com</h6>
+                            <h5>E-mail</h5>
+                            <h8>topcatofficial@pandilla.com</h8>
                         </li>
                         <li class="list-group-item">
-                            <h2>Nombre y Apellido</h2>
-                            <h6>Don Gato Gomez Bolaños</h6>
+                            <h5>Nombre y Apellido</h5>
+                            <h8>Don Gato Gomez Bolaños</h8>
                         </li>
                         <li class="list-group-item">
-                            <h2>Fecha de nacimiento</h2>
-                            <h6>11-06-1957</h6>
+                            <h5>Fecha de nacimiento</h5>
+                            <h8>11-06-1957</h8>
                         </li>
                         <li class="list-group-item">
-                            <h2>Genero</h2>
-                            <h6>Gatuno</h6>
+                            <h5>Genero</h5>
+                            <h8>Gatuno</h8>
                         </li>
                         <li class="list-group-item">
-                            <h2>Fecha de registro</h2>
-                            <h6>11-06-2022</h6>
+                            <h5>Fecha de registro</h5>
+                            <h8>11-06-2022</h8>
+                        </li>
+                      </ul>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class = "row">
+                    <div class = "col-4">
+                        <img src='resoruces/metodoPago.PNG' class='imgRedonda' />
+                    </div>
+                    <div class = "col-8">
+                        <h2>Metodos de pago</h2>
+                    </div>       
+                </div>       
+            </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class = "row">
+                    <h4>Metodos de pago registrados</h4>
+                </div>
+                <div class = "row" align = "left">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h5>Tarjeta Credito</h5>
+                            <h8>XXXX XXXX XXXX X386</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Pay Pal</h5>
+                            <h8>XXXX XXXX XXXX X256</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Bitcoin</h5>
+                            <h8> XXXXXXXXXXXXXXXX125 </h8>
                         </li>
                       </ul>
                 </div>
@@ -120,26 +174,55 @@
             </div>
         </div>
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Accordion Item #2
-            </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-            </div>
-        </div>
-        <div class="accordion-item">
             <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Accordion Item #3
+                <div class = "row">
+                    <div class = "col-4">
+                        <img src='resoruces/home.PNG' class='imgRedonda' />
+                    </div>
+                    <div class = "col-8">
+                        <h2>Direcion</h2>
+                    </div>       
+                </div>    
             </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class = "row">
+                    <h4>Direcion registrada</h4>
+                </div>
+                <div class = "row" align = "left">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h5>Estado</h5>
+                            <h8>Nuevo León</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Municipio</h5>
+                            <h8>Monterrey</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Codigo Postal</h5>
+                            <h8>64000</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Colonia</h5>
+                            <h8>Centro</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Calle</h5>
+                            <h8>Juan Ignacio Ramon</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>No Exterior</h5>
+                            <h8>1400B</h8>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>No Interior</h5>
+                            <h8>4D</h8>
+                        </li>
+                      </ul>
+                </div>
             </div>
             </div>
         </div>
