@@ -1,19 +1,20 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href = "css/style.css">
-    <link rel="stylesheet" href = "css/register">
-  </head>
-  <body>
+    <link rel="stylesheet" href = "css/register.css">
+    
+</head>
+<body>
     <header>
         <div class = "container">
             <div class = "row">
                 <div class = "col-2">
-                    <img src='logo02.PNG' class='logotipo'/>
+                    <img src='resources/logo02.PNG' class='logotipo'/>
                 </div>
                 <div class = "col-2">
                    <h2>AL TIRO CON EL DUENDE</h2>
@@ -24,7 +25,7 @@
                     <h3> de $400</h3>
                 </div>
                 <div class = "col-1">
-                    <img src='carrito.PNG' class='imgRedonda' />
+                    <img src='resources/carrito.PNG' class='imgRedonda' />
                 </div>
                 <div class = "col-1">
                     <div class="dropdown">
@@ -40,7 +41,7 @@
                       
                 </div>        
                 <div class = "col-1">
-                    <img src='dongato.PNG' class='imgRedonda' />
+                    <img src='resources/dongato.PNG' class='imgRedonda' />
                 </div>
                 <div class = "col-1">
                     <div class="dropdown">
@@ -80,99 +81,68 @@
         </div>
     </header>
     <div class = "container" id = "pagina">
-      <div class = "row">
-        <div class = "col-6">
-        </div>
-        <div class = "col-6">
-          <div class="container">
-            <div class="header">
-                <h2>Crear Cuenta</h2>
+        <div class = "row">
+            <div class = "col-6">
             </div>
-            <form class="form" id="form">
-                <div class="form-control">
-                    <input type="text" id="txt_nombres" name="Nombres" placeholder="Nombres">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
+            <div class = "col-6">
+                <div class="form-container">
+                    <div class="header">
+                        <h2>Crear Cuenta</h2>
+                    </div>
+                    <form class="form" id="form">
+                        <div class="form_control" requerido="true" state="empt">
+                            <input type="text" id="txt_nombres" name="in_nombres" placeholder="Nombres">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="text" id="txt_apellidos" name="in_apellidos" placeholder="Apellidos">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div >Fecha de nacimiento:</div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="dd/mm/aaaa">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="email" id="txt_correo" name="in_correo" placeholder="Correo electrónico">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="false" state='empt'>
+                            <label for="FotoPerfil">Foto de perfil:</label>
+                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="text" id="txt_username" name="in_username" placeholder="Nombre de usuario">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="password" id="txt_password" name="in_password" placeholder="Contraseña" minlength="8">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="password" id="txt_confirm" name="in_confirm" placeholder="Confirmar contraseña">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <button id="btn_registrar">Registrarme</button>
+                    </form>
                 </div>
-                <div class="form-control">
-                    <input type="text" id="txt_apellidos" name="Apellidos" placeholder="Apellidos">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    Fecha de nacimiento:
-                </div>
-                <div class="form-control">
-                    <input type="number" id="nbr_dia" name="DiaNac" placeholder="Día">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <select name="MesNac" id="slt_mes">
-                        <option disabled selected value>Mes</option>
-                        <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option>
-                    </select>
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <input type="number" id="nbr_año" name="AñoNac" placeholder="Año">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <input type="email" id="eml_correoe" name="CorreoE" placeholder="Correo electrónico">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <label for="FotoPerfil">Foto de perfil:</label>
-                    <input type="file" id="fle_fotoperfil" name="FotoPerfil">
-                </div>
-                <div class="form-control">
-                    <input type="text" id="txt_username" name="Username" placeholder="Nombre de usuario">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <input type="password" id="psw_password" name="Contraseña" placeholder="Contraseña" minlength="8">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form-control">
-                    <input type="password" id="psw_confpassword" name="ConfirmContra" placeholder="Confirmar contraseña">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <button>Registrarme</button>
-            </form>
+            </div>
         </div>
-        </div>
-      </div>
-      
-        
     </div>
-
 
     <footer>
         <div class="container">
@@ -183,6 +153,11 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-  </body>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script src="js/login.js"></script>
+
+</body>
 </html>
