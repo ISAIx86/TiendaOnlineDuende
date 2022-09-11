@@ -98,27 +98,27 @@ $(document).ready(function() {
         else {
             setCSSFor($(this)[0], '', '');
         }
-        $('txt_confirm').trigger('change');
+        $('#txt_confirm').trigger('change');
     });
 
     $('#txt_confirm').on('change', function() {
         let contenido =  $(this).val();
         let contra = $('#txt_password').val();
-        if (contenido.length > 0) {
-            setCSSFor($(this)[0], 'success', '');
+        if (contenido.length === 0) {
+            setCSSFor($(this)[0], '', '');
         }
         else if (contenido.length > 16) {
             setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
-        else if (contenido !== contra) {
+        else if (contenido != contra) {
             setCSSFor($(this)[0], 'error', 'No coinciden.');
         }
         else {
-            setCSSFor($(this)[0], '', '');
+            setCSSFor($(this)[0], 'success');
         }
     });
 
-    $('#btn_registrar').on('click', function(){
+    $('#form').submit(function(e) {
         let campos = $('#form').children('[requerido="true"]').toArray();
         let todoCorrecto = true;
         todoCorrecto = !campos.some(campo => {
@@ -129,8 +129,9 @@ $(document).ready(function() {
             alert("Datos ingresados correctamente");
         }
         else {
+            e.preventDefault();
             alert("Algunos campos contienen errores o están vacíos.");
         }
-    })
+    });
 
 });
