@@ -73,30 +73,30 @@ $(document).ready(function() {
 
     $('#txt_username').on('change', function() {
         let contenido =  $(this).val();
-        if (contenido.length > 0) {
-            setCSSFor($(this)[0], 'success', '');
+        if (contenido.length === 0) {
+            setCSSFor($(this)[0], '', '');
         }
         else if (contenido.length > 32) {
             setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
         else {
-            setCSSFor($(this)[0], '', '');
+            setCSSFor($(this)[0], 'success', '');
         }
     });
 
     $('#txt_password').on('change', function() {
         let contenido =  $(this).val();
-        if (contenido.length > 0) {
-            setCSSFor($(this)[0], 'success', '');
+        if (contenido.length === 0) {
+            setCSSFor($(this)[0], '', '');
         }
         else if (contenido.length > 16) {
             setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
-        else if (validarPassword(contenido)) {
+        else if (!validarPassword(contenido)) {
             setCSSFor($(this)[0], 'error', 'Contraseña no válida.');
         }
         else {
-            setCSSFor($(this)[0], '', '');
+            setCSSFor($(this)[0], 'success', '');
         }
         $('#txt_confirm').trigger('change');
     });
