@@ -82,91 +82,26 @@
         </div>
     </header>
     <div class = "container" id = "pagina">
-      <h1>Carrito de compra</h1>
-      <div class="cointainer">
-        <ul class="list-group">         
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class = "row">
-                <div class = "col-2">
-                    <img src="resoruces/p01.PNG" class="d-block w-100" alt="...">
-                </div>
-                <div class = "col-8" align = "left">
-                    <div class="fw-bold">Computadora con lucecitas</div>
-                    <h6>1 x 14,000</h6>
-                    <form>
-                      <div class = "row">
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-warning">-</button>
-                        </div>
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-info">1</button>
-                        </div>
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-success">+</button>
-                        </div>
-                      </div>
-                    </form>
-                </div>
-                <div class = "col-2">
-                    <span class="badge bg-primary rounded-pill">$14,000</span>
-                    <form>
-                        <button type="button" class="btn btn-danger">Quitar</button>
-                    </form>
-                </div>
-              </div>
-            </li>
-
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class = "row">
-                <div class = "col-2">
-                    <img src="resoruces/p01.PNG" class="d-block w-100" alt="...">
-                </div>
-                <div class = "col-8" align = "left">
-                    <div class="fw-bold">Computadora con lucecitas</div>
-                    <h6>1 x 14,000</h6>
-                    <form>
-                      <div class = "row">
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-warning">-</button>
-                        </div>
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-info">1</button>
-                        </div>
-                        <div class = "col-1">
-                          <button type="button" class="btn btn-success">+</button>
-                        </div>
-                      </div>
-                    </form>
-                </div>
-                <div class = "col-2">
-                    <span class="badge bg-primary rounded-pill">$14,000</span>
-                    <form>
-                        <button type="button" class="btn btn-danger">Quitar</button>
-                    </form>
-                </div>
-              </div>
-            </li>
-
-
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class = "row">
-                <div class = "col-8">
-                    
-                </div>
-                <div class = "col-2" align = "left">
-                  <img src="resoruces/carrito.PNG" class="d-block w-100" alt="...">
-                </div>
-                <div class = "col-2" align = "right">
-                    <span class="badge bg-primary rounded-pill">$28,000</span>
-                    <form>
-                      <button type="button" class="btn btn-success">Pagar</button>
-                    </form>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-      </div>    
+      <div class = "row">
+        <div class="mb-3">
+            <label for="exampleDataList" class="form-label">Categoria</label>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Ingrese una categoria...">
+            <datalist id="datalistOptions">
+            <option value="Electronica">
+            <option value="Ropa">
+            <option value="Anime">
+            <option value="Oficina">
+            <option value="Jardineria">
+            </datalist>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary mb-3">Registrar</button>
+          </div>
+      </div>
       </div>
 
 
