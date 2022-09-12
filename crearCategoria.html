@@ -12,7 +12,7 @@
         <div class = "container">
             <div class = "row">
                 <div class = "col-6">
-                    <img src='resoruces/logo02.PNG' class='logotipo'/>
+                    <img src='resources/logo02.PNG' class='logotipo'/>
                 </div>
                 <div class = "col-2">
                     <h3> </h3>
@@ -21,7 +21,7 @@
                     
                     <div class="dropdown">
                         <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src='resoruces/carrito.PNG' class='imgRedonda' />
+                            <img src='resources/carrito.PNG' class='imgRedonda' />
                             <h5>$1,500</h5> 
                         </button>
                         <ul class="dropdown-menu">
@@ -35,7 +35,7 @@
                    
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src='resoruces/dongato.PNG' class='imgRedonda' />
+                            <img src='resources/dongato.PNG' class='imgRedonda' />
                             <h5>DonGatox16</h5>
                         </button>
                         <ul class="dropdown-menu">
@@ -83,9 +83,10 @@
     </header>
     <div class = "container" id = "pagina">
       <div class = "row">
+        <form id="form_categoria">
         <div class="mb-3">
             <label for="exampleDataList" class="form-label">Categoria</label>
-            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Ingrese una categoria...">
+            <input class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
             <datalist id="datalistOptions">
             <option value="Electronica">
             <option value="Ropa">
@@ -96,13 +97,14 @@
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="txt_descrip" name="in_descrip" rows="3"></textarea>
           </div>
           <div class="mb-3">
             <button type="submit" class="btn btn-primary mb-3">Registrar</button>
           </div>
+        </form>
       </div>
-      </div>
+    </div>
 
 
 

@@ -118,8 +118,8 @@ $(document).ready(function() {
         }
     });
 
-    $('#form').submit(function(e) {
-        let campos = $('#form').children('[requerido="true"]').toArray();
+    $('#form_login').submit(function(e) {
+        let campos = $(this).children('[requerido="true"]').toArray();
         let todoCorrecto = true;
         todoCorrecto = !campos.some(campo => {
             return campo.getAttribute('state') !== "succ";
