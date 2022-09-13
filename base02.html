@@ -9,25 +9,43 @@
   </head>
   <body>
     <header>
-        <div class = "container">
+        <div class = "container-fluid">
             <div class = "row">
-                <div class = "col-4">
+                <div class = "col-6">
                     <img src='resources/logo02.PNG' class='logotipo'/>
                 </div>
-                <div class = "col-4">
-                    <h3> L</h3>
+                <div class = "col-2">
+                    <h3> </h3>
                 </div>
                 <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Iniciar sesión
-                    </button>
-                </div>  
+                    
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src='resources/carrito.PNG' class='imgRedonda' />
+                            <h5>$1,500</h5> 
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Comprar</a></li>
+                          <li><a class="dropdown-item" href="#">Guardar Lista</a></li>
+                          <li><a class="dropdown-item" href="#">Limpiar</a></li>
+                        </ul>
+                      </div>
+                </div>    
                 <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Registrarse
-                    </button>
-                </div>         
-            </div>
+                   
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src='resources/dongato.PNG' class='imgRedonda' />
+                            <h5>DonGatox16</h5>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Perfil</a></li>
+                          <li><a class="dropdown-item" href="#"></a></li>
+                          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                      </div>
+                    </div>             
+                </div>
             <form class="row" id = "buscador">
                 <div class="col-11">    
                   <input type="text" class="form-control" id="inputPassword2" placeholder="Busca un producto">
