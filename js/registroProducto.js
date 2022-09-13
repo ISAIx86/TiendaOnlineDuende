@@ -1,5 +1,22 @@
 $(document).ready(function() {
 
+    $('#btn_incatego').on('click', e => {
+        let contenido = $('#txt_incatego').val();
+        let entrada = $('#txt_catego').val();
+
+        if (contenido === "") {
+            return;
+        }
+        if (entrada === "") {
+            $('#txt_catego').val(contenido + "\n");
+        }
+        else {
+            $('#txt_catego').val(entrada + contenido + "\n");
+        }
+        
+        $('#txt_incatego').val("");
+    });
+
     $('#form_producto').submit(e => {
         let todoCorrecto = true;
         todoCorrecto = checarNombre();
@@ -14,6 +31,8 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+
+    
 
 });
 
@@ -59,9 +78,17 @@ function checarCategoria() {
 }
 
 function checarPrecio() {
-    let contenido = $('#txt_descrip').val();
+    let contenido = $('#txt_precio').val();
     if (contenido === "") {
         alert("Ingrese una precio.");
+        return false;
+    }
+    else if (!soloNumeros(contenido)) {
+        alert("El precio contiene letras.");
+        return false;
+    }
+    else if (!validarPrecio(contenido)) {
+        alert("El precio es inválido.");
         return false;
     }
     else {

@@ -22,6 +22,10 @@ function tienenNum(input) {
     return /\d/.test(input);
 }
 
+function soloNumeros(input) {
+    return /[0-9]*\.?[0-9]*/.test(input);
+}
+
 function validarFechaNac(input) {
     let today = new Date();
     if (input >= today)
@@ -35,4 +39,8 @@ function validarCorreo(input) {
 
 function validarPassword(input) {
     return /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+|~=`{}\[\]:";'<>?,./-]).{8,}$/.test(input);
+}
+
+function validarPrecio(input) {
+    return /^[0-9]{0,6}(\.[0-9]{1,2})?$/.test(input);
 }
