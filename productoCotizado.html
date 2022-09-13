@@ -9,60 +9,65 @@
   </head>
   <body>
     <header>
-        <div class = "container">
-            <div class = "row">
-                <div class = "col-4">
-                    <img src='resources/logo02.PNG' class='logotipo'/>
-                </div>
-                <div class = "col-4">
-                    <h3> </h3>
-                </div>
-                <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Iniciar sesión
-                      </button>
-                </div>  
-                <div class = "col-2">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                        Registrarse
-                      </button>
-                </div>         
+      <div class="container text-center">
+          <div class="row">
+            <div class="col-sm-8">
+              <img src='resources/logo02.PNG' class='logotipo'/>
             </div>
-            <form class="row" id = "buscador">
-                <div class="col-11">    
-                  <input type="text" class="form-control" id="inputPassword2" placeholder="Busca un producto">
-                </div>
-                <div class="col-1">
-                  <button type="submit" class="btn btn-primary mb-3">Buscar</button>
-                </div>
-              </form>
+            <div class="col-sm-4">
               <div class = "row">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <h4>Categorias</h4>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Computadoras</a></li>
-                              <li><a class="dropdown-item" href="#">Figuras</a></li>
-                              <li><a class="dropdown-item" href="#">Manga</a></li>
-                            </ul>
-                          </div>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Ofertas</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Vender</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled">ayuda</a>
-                    </li>
-                  </ul>
+                  <div class = "col-6">
+                      <div class="dropdown">
+                          <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src='resources/carrito.PNG' class='imgRedonda' />
+                              <h5>$1,500</h5> 
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="carrito.html">Comprar</a></li>
+                            <li><a class="dropdown-item" href="listas.html">Guardar Lista</a></li>
+                            <li><a class="dropdown-item" href="#">Limpiar</a></li>
+                          </ul>
+                        </div>
+                  </div>
+                  <div class = "col-6">
+                      <div class="dropdown">
+                          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img src='resources/dongato.PNG' class='imgRedonda' />
+                              <h5>DonGatox16</h5>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="perfilPrivado.html">Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="profile.html">Mi cuenta</a></li>
+                            <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+                          </ul>
+                        </div>
+                  </div>
               </div>
+            </div>
+          </div>
         </div>
-    </header>
+      <div class = "container-sm">          
+          <form class="row" id = "buscador">
+              <div class="col-9">    
+                  <input class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
+                  <datalist id="datalistOptions">
+                  <option value="Electronica">
+                  <option value="Ropa">
+                  <option value="Anime">
+                  <option value="Oficina">
+                  <option value="Jardineria">
+                  </datalist>
+              </div>
+              <div class="col-3" align = "left">
+                <button type="submit" class="btn btn-warning mb-3">
+                  <a href="busqueda.html">
+                    Buscar
+                  </a>
+                </button>
+              </div>
+            </form>
+      </div>
+  </header>
     <div class = "container" id = "pagina">
       <div class = "row">
         <div class = "col-6">
