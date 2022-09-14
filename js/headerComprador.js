@@ -28,7 +28,7 @@ document.write(`
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="c-perfilPrivado.html">Mi Perfil</a></li>
                   <li><a class="dropdown-item" href="c-profile.html">Mi cuenta</a></li>
-                  <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+                  <li><a class="dropdown-item" href="landingPage.html">Cerrar sesión</a></li>
                 </ul>
               </div>
         </div>
