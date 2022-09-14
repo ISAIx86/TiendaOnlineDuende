@@ -18,21 +18,20 @@ $(document).ready(function() {
     });
 
     $('#form_producto').submit(e => {
-        let todoCorrecto = true;
-        todoCorrecto = checarNombre();
-        todoCorrecto = checarDescripcion();
-        todoCorrecto = checarCategoria();
-        todoCorrecto = checarPrecio();
+        let flag1 = checarNombre();
+        let flag2 = checarDescripcion();
+        let flag3 = checarCategoria();
+        let flag4 = true;
+        if ($('input[name=in_tipoprecio]:checked', '#form_producto').val() === "PF")
+            flag4 = checarPrecio();
 
-        if (todoCorrecto) {
-            alert("Tu producto está registrado. Se publicará una vez que un administrador verifique tu producto.")
+        if (flag1 & flag2 & flag3 & flag4) {
+            alert("Producto registrado con éxito. Se publicará una vez que sea aprobado por un administrador.");
         }
         else {
             e.preventDefault();
         }
     });
-
-    
 
 });
 

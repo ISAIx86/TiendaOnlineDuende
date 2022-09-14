@@ -39,7 +39,7 @@ document.write(`
 <div class = "container-sm">          
 <form class="row" id = "buscador">
     <div class="col-9">    
-        <input class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
+        <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
         <datalist id="datalistOptions">
         <option value="Electronica">
         <option value="Ropa">

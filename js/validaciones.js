@@ -33,6 +33,10 @@ function validarFechaNac(input) {
     else return true;
 }
 
+function validarFechaVenc(input) {
+    return /^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(input);
+}
+
 function validarCorreo(input) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1.3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input);
 }
@@ -43,4 +47,8 @@ function validarPassword(input) {
 
 function validarPrecio(input) {
     return /^[0-9]{0,6}(\.[0-9]{1,2})?$/.test(input);
+}
+
+function validarNumTarj(input) {
+    return /\b(?:\d{4}[ -]?){3}(?=\d{4}\b)(?:\d{4})/.test(input);
 }

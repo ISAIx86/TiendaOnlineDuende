@@ -124,7 +124,7 @@ $(document).ready(function() {
     });
 
     $('#form_registro').submit(function(e) {
-        let campos = $(this).children('[requerido="true"]').toArray();
+        let campos = $('#form_registro').children('div[requerido="true"]').toArray();
         let todoCorrecto = true;
         todoCorrecto = !campos.some(campo => {
             return campo.getAttribute('state') !== "succ";
@@ -134,6 +134,22 @@ $(document).ready(function() {
             e.preventDefault();
             alert("¡Registro exitoso! Inicie sesión con su nueva cuenta.");
             window.location.replace("landingPage.html");
+        }
+        else {
+            e.preventDefault();
+            alert("Algunos campos contienen errores o están vacíos.");
+        }
+    });
+
+    $('#form_registro_upd').submit(function(e) {
+        let campos = $('#form_registro_upd').children('div[requerido="true"]').toArray();
+        let todoCorrecto = true;
+        todoCorrecto = !campos.some(campo => {
+            return campo.getAttribute('state') !== "succ";
+        });
+
+        if (todoCorrecto) {
+            alert("Información actualizada.");
         }
         else {
             e.preventDefault();

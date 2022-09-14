@@ -20,33 +20,31 @@
                     <div class="header">
                         <h2>Registrar Metodo de pago</h2>
                     </div>
-                    <form class="form" id="form_registro">
+                    <form class="form" id="form_metopag">
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_municipio" name="in_correo" placeholder="Nombre del propietario">
+                            <input type="text" id="txt_propietario" name="in_correo" maxlength="128" placeholder="Nombre del propietario">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_colonia" name="in_username" placeholder="Numero de tarjeta">
+                            <input type="text" id="txt_numtarj" name="in_username" maxlength="19" placeholder="Numero de tarjeta XXXX-XXXX-XXXX-XXXX">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_calle" name="in_correo" placeholder="Venciemiento MM/AA">
+                            <input type="text" id="txt_venc" name="in_correo" maxlength="5" placeholder="Venciemiento MM/AA">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_noint" name="in_username" placeholder="CVV">
+                            <input type="text" id="txt_cvv" name="in_username" maxlength="3" placeholder="CVV">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
-
-
                         <button>Guardar</button>
                     </form>
                 </div>
@@ -64,5 +62,8 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script src="js/registroMetodoPago.js"></script>
   </body>
 </html>

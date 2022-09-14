@@ -20,9 +20,9 @@
                     <div class="header">
                         <h2>Mi Dirección</h2>
                     </div>
-                    <form class="form" id="form_registro">
+                    <form class="form" id="form_direc">
                         <div class="form_control" requerido="true" state="empt">
-                            <select id="cbx_estado" form="form" name="in_rol">
+                            <select id="cbx_estado" form="form" name="in_estado">
                                 <option disabled selected>Estado</option>
                                 <option value="comprador">Nuevo León</option>
                                 <option value="vendedor">CDMX</option>
@@ -30,36 +30,35 @@
                             </select>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_municipio" name="in_correo" placeholder="Municipio">
+                            <input type="text" id="txt_municipio" name="in_municipio" maxlength="32" placeholder="Municipio">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_colonia" name="in_username" placeholder="Colonia">
+                            <input type="text" id="txt_colonia" name="in_colonia" maxlength="32" placeholder="Colonia">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_calle" name="in_correo" placeholder="Calle">
+                            <input type="text" id="txt_calle" name="in_calle" maxlength="32" placeholder="Calle">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_noint" name="in_username" placeholder="No Exterior">
+                            <input type="text" id="txt_noext" name="in_noext" maxlength="16" placeholder="No Exterior">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_noext" name="in_username" placeholder="No Exterior">
+                            <input type="text" id="txt_noint" name="in_noint" maxlength="16" placeholder="No Exterior">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
-
                         <button>Guardar</button>
                     </form>
                 </div>
@@ -77,5 +76,8 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script src="js/validaciones.js"></script>
+    <script src="js/regDireccion.js"></script>
   </body>
 </html>
