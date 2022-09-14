@@ -82,6 +82,10 @@ function checarPrecio() {
         alert("Ingrese una precio.");
         return false;
     }
+    else if (contenido.length > 8){
+        alert("El precio no debe tener más de 8 caracteres.");
+        return false;
+    }
     else if (!soloNumeros(contenido)) {
         alert("El precio contiene letras.");
         return false;

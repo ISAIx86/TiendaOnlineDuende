@@ -8,6 +8,9 @@ $(document).ready(function() {
         else if (tienenNum(contenido)) {
             setCSSFor($(this)[0], 'error', 'No debe contener números.');
         }
+        else if (contenido.length > 256) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
+        }
         else {
             setCSSFor($(this)[0], 'success');
         }
@@ -21,6 +24,9 @@ $(document).ready(function() {
         else if (!validarNumTarj(contenido)) {
             setCSSFor($(this)[0], 'error', 'El formato del número no es válido.');
         }
+        else if (contenido.length > 19) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
+        }
         else {
             setCSSFor($(this)[0], 'success');
         }
@@ -33,6 +39,9 @@ $(document).ready(function() {
         }
         else if (!validarFechaVenc(contenido)) {
             setCSSFor($(this)[0], 'error', 'El formato de fecha no es válido.');
+        }
+        else if (contenido.length > 5) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
         else {
             setCSSFor($(this)[0], 'success');

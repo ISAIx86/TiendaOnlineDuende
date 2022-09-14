@@ -27,13 +27,13 @@
                             <input type="file" id="fle_fotoperfil" name="FotoPerfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
-                            <input type="text" id="txt_nombres" name="in_nombres" placeholder="Nombres">
+                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_apellidos" name="in_apellidos" placeholder="Apellidos">
+                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -55,20 +55,20 @@
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="email" id="txt_correo" name="in_correo" placeholder="Correo electrónico">
+                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="password" id="txt_password" name="in_password" placeholder="Contraseña" minlength="8">
+                            <input type="password" id="txt_password" name="in_password" minlength="8" maxlength="16" placeholder="Contraseña">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <p id="pass_format" style="display:none">Tu contraseña debe tener: 1 Mayúscula, 1 minúscula, 1 número y 1 caracter especial.</p>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="password" id="txt_confirm" name="in_confirm" placeholder="Confirmar contraseña">
+                            <input type="password" id="txt_confirm" name="in_confirm" minlength="8" maxlength="16" placeholder="Confirmar contraseña">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>

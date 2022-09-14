@@ -9,6 +9,9 @@ $(document).ready(function (){
         if (contenido === "") {
             setCSSFor($(this)[0]);
         }
+        else if (contenido.length > 32) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
+        }
         else {
             setCSSFor($(this)[0], 'success');
         }
@@ -19,6 +22,9 @@ $(document).ready(function (){
         if (contenido === "") {
             setCSSFor($(this)[0]);
         }
+        else if (contenido.length > 32) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
+        }
         else {
             setCSSFor($(this)[0], 'success');
         }
@@ -28,6 +34,9 @@ $(document).ready(function (){
         let contenido = $('#txt_calle').val();
         if (contenido === "") {
             setCSSFor($(this)[0]);
+        }
+        else if (contenido.length > 32) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
         else {
             setCSSFor($(this)[0], 'success');
@@ -42,6 +51,9 @@ $(document).ready(function (){
         else if (!soloNumeros(contenido)) {
             setCSSFor($(this)[0], 'error', 'Solo números.');
         }
+        else if (contenido.length > 16) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
+        }
         else {
             setCSSFor($(this)[0], 'success');
         }
@@ -54,6 +66,9 @@ $(document).ready(function (){
         }
         else if (!soloNumeros(contenido)) {
             setCSSFor($(this)[0], 'error', 'Solo números.');
+        }
+        else if (contenido.length > 16) {
+            setCSSFor($(this)[0], 'error', 'Demasiados caracteres.');
         }
         else {
             setCSSFor($(this)[0], 'success');
