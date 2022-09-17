@@ -13,6 +13,9 @@ document.write(`
         <a class="nav-link" href="v-crearCategoria.html">Registrar Categoria</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="v-cotizacion.html">Cotizaciones pendientes</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="v-perfilVendedor.html">Perfil Publico</a>
       </li>
       <li class="nav-item dropdown">

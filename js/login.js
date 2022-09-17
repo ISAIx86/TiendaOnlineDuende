@@ -43,7 +43,7 @@ $(document).ready(function() {
 
         if (todoCorrecto) {
             e.preventDefault();
-            window.location.replace("c-home.html");
+            window.location.replace("opciones.html");
         }
         else {
             e.preventDefault();
