@@ -131,9 +131,7 @@ $(document).ready(function() {
         });
 
         if (todoCorrecto) {
-            e.preventDefault();
             alert("¡Registro exitoso! Inicie sesión con su nueva cuenta.");
-            window.location.replace("landingPage.html");
         }
         else {
             e.preventDefault();

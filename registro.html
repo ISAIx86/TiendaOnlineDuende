@@ -79,7 +79,7 @@
                   <h2>Crear cuenta</h2>
               </div>
               
-              <form class="form" id="form_registro">
+              <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post">
                 <div class="form_control" requerido="false" state='empt'>
                     <label for="FotoPerfil">Foto de perfil:</label>
                     <input type="file" id="fle_fotoperfil" name="FotoPerfil">
@@ -113,7 +113,7 @@
                     <small>Error</small>
                 </div>
                 <div class="form_control" requerido="true" state="empt">
-                    <select id="cbx_rol" form="form" name="in_rol">
+                    <select id="cbx_rol" name="in_rolus">
                         <option disabled selected>Rol de usuario</option>
                         <option value="comprador">Comprador</option>
                         <option value="vendedor">Vendedor</option>
@@ -147,7 +147,7 @@
                     <i class="fas fa-exclamation-circle"></i>
                     <small>Error</small>
                 </div>
-                <button>Registrarme</button>
+                <button name="submit">Registrarme</button>
             </form>
           </div>
 
