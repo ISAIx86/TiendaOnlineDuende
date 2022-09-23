@@ -43,7 +43,34 @@ $(document).ready(function() {
 
         if (todoCorrecto) {
             e.preventDefault();
-            window.location.replace("opciones.html");
+            $.ajax({
+                url: './php/includes/login_inc.php',
+                type: 'POST',
+                data: {'submit': 1, 'in_correo': $('#txt_correo').val(), 'in_password': $('#txt_password').val()},
+                success: function(response) {
+                    let data = $.parseJSON(response);
+                    if (data.result == "error") {
+                        switch(data.reason) {
+                            case "empty_inputs":
+                                alert("Campos capturados vacíos.");
+                                break;
+                            case "no_exists":
+                                alert("El correo electrónico no existe.");
+                                break;
+                            case "not_found":
+                                alert("No se pudo encontrar el usuario. Intentelo más tade.");
+                                break;
+                            case "wrong_password":
+                                alert("Contraseña incorrecta.");
+                                break;
+                        }
+                    }
+                    else {
+                        window.location.replace("./c-home.html");
+                    }
+                }
+            })
+            // window.location.replace("opciones.html");
         }
         else {
             e.preventDefault();

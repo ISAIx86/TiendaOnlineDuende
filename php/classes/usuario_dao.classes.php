@@ -2,7 +2,7 @@
 
 include ('../classes/dbo.classes.php');
 
-class UsuarioView extends DBH {
+class UsuarioDAO extends DBH {
 
     // Metodos débiles
     protected function us_checar_correo($correo) {
@@ -16,10 +16,10 @@ class UsuarioView extends DBH {
         $count = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["result"];
         $stmt = null;
 
-        if ($count >= 1){
-            return true;
+        if ($count < 1){
+            return false;
         }
-        else return false;
+        else return true;
 
     }
 
@@ -103,23 +103,33 @@ class UsuarioView extends DBH {
         $stmt = null;
     }
 
-    protected function us_login(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_login(?, ?)');
+    protected function us_login(Usuario &$usu) {
+        $stmt = $this->connect()->prepare('call us_login(?)');
         if (!$stmt->execute(array(
-            $usu->getCorreo(),
-            $usu->getPassword()
+            $usu->getCorreo()
         ))) {
             $stmt = null;
             header("location: ../index.html");
             exit();
         }
 
-        $logged = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["result"];
+        $logged = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt = null;
 
-        if ($logged)
-            return true;
-        else return false;
+        if (!$logged[0]["result"]) {
+            return -1;
+        }
+        else {
+            if (!password_verify($usu->getPassword(), $logged[0]["Pass"]))
+                return 0;
+            else {
+                $usu->setID($logged[0]["ID"])
+                    ->setUsername($logged[0]["Username"])
+                    ->setRol($logged[0]["Rol"])
+                    ->setCorreo($logged[0]["Correo"]);
+                return 1;
+            }
+        }
     }
 
 }

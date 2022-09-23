@@ -15,8 +15,8 @@ if (isset($_POST["submit"])) {
         ->setPassword($_POST['in_password'])
         ->setConfPass($_POST['in_confirm']);
 
-    $register = new UsuarioContr($nuevo_usuario);
-    $register->registrarUsuario();
+    $controller = new UsuarioContr($nuevo_usuario);
+    $controller->registrarUsuario();
 }
 
 ?>

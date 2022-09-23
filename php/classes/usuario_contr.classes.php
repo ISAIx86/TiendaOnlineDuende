@@ -1,8 +1,8 @@
 <?php
 
-include ('../classes/usuario_view.classes.php');
+include ('../classes/usuario_dao.classes.php');
 
-class UsuarioContr extends UsuarioView {
+class UsuarioContr extends UsuarioDAO {
 
     private Usuario $usuario;
 
@@ -19,13 +19,13 @@ class UsuarioContr extends UsuarioView {
     }
 
     private function userCheck() {
-        if (!$this->us_checar_correo($this->usuario->getCorreo())) {
+        if ($this->us_checar_correo($this->usuario->getCorreo())) {
             return false;
         }
         else return true;
     }
 
-    private function emptyInput() {
+    private function emptyInputR() {
         if (
             empty($this->usuario->getNombres()) |
             empty($this->usuario->getApellidos()) |
@@ -41,22 +41,53 @@ class UsuarioContr extends UsuarioView {
         }
         else return true;
     }
+
+    private function emptyInputL() {
+        if (empty($this->usuario->getCorreo()) | empty($this->usuario->getPassword())) {
+            return false;
+        }
+        else return true;
+    }
     
     // Métodos fuertes
     public function registrarUsuario() {
-        if ($this->emptyInput() == false) {
+        if (!$this->emptyInputR()) {
             header('location: ../index.html');
             exit();
         }
-        if ($this->matchPSW() == false) {
+        if (!$this->matchPSW()) {
             header('location: ../index.html');
             exit();
         }
-        if ($this->userCheck()) {
+        if (!$this->userCheck()) {
             header('location: ../index.html');
             exit();
         }
         $this->us_registro($this->usuario);
+    }
+
+    public function ingresarUsuario() {
+        if (!$this->emptyInputL()) {
+            return "empty_inputs";
+        }
+        if ($this->userCheck()) {
+            return "no_exists";
+        }
+        switch($this->us_login($this->usuario)) {
+            case -1:
+                return "not_found";
+                break;
+            case 0:
+                return "wrong_password";
+                break;
+            case 1:
+                return "user_logged";
+                break;
+        }
+    }
+    
+    public function empezarSesion() {
+        return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario.getRol(), 'Correo'=>$this->usuario->getCorreo());
     }
 
 }
