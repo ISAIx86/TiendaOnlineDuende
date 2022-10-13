@@ -130,10 +130,7 @@ $(document).ready(function() {
             return campo.getAttribute('state') !== "succ";
         });
 
-        if (todoCorrecto) {
-            alert("¡Registro exitoso! Inicie sesión con su nueva cuenta.");
-        }
-        else {
+        if (!todoCorrecto) {
             e.preventDefault();
             alert("Algunos campos contienen errores o están vacíos.");
         }

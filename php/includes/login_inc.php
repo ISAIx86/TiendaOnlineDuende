@@ -25,9 +25,9 @@ if (isset($_POST["submit"])) {
         case "user_logged":
             session_start();
             $_SESSION['user'] = $controller->empezarSesion();
-            echo json_encode(array('result'=>"success", 'reason'=>"success"));
-            break;
+            echo json_encode(array('result'=>"success", 'reason'=>"success", 'role'=>$nuevo_usuario->getRol()));
     }
 }
 
 ?>
+

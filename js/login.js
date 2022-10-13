@@ -66,11 +66,20 @@ $(document).ready(function() {
                         }
                     }
                     else {
-                        window.location.replace("./c-home.html");
+                        switch (data.role) {
+                            case "comprador":
+                                window.location.replace("./c-home.php")
+                                break;
+                            case "vendedor":
+                                window.location.replace("./v-perfilVendedor.html")
+                                break;
+                            case "compravende":
+                                window.location.replace("./landingPage.html")
+                                break;
+                        }
                     }
                 }
             })
-            // window.location.replace("opciones.html");
         }
         else {
             e.preventDefault();

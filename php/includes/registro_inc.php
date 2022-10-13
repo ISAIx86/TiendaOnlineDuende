@@ -17,6 +17,8 @@ if (isset($_POST["submit"])) {
 
     $controller = new UsuarioContr($nuevo_usuario);
     $controller->registrarUsuario();
+
+    header("location: ../../landingPage.html");
 }
 
 ?>

@@ -4,17 +4,61 @@ include ('../classes/dbo.classes.php');
 
 class UsuarioDAO extends DBH {
 
-    // Metodos débiles
-    protected function us_checar_correo($correo) {
-        $stmt = $this->connect()->prepare('call us_checar_correo(?)');
-        if (!$stmt->execute(array($correo))) {
-            $stmt = null;
-            header("location: ../index.html");
+    private $stmt = null;
+    private Usuario $usuario;
+
+    public function __construct() {
+        $this->usuario = Usuario::create();
+    }
+
+    private function prepareStatement($proc) {
+        $this->stmt = $this->connect()->prepare('call sp_Usuarios("'.$proc.'", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    }
+
+    private function clearStatement() {
+        $this->stmt = null;
+    }
+
+    private function executeQuery() {
+        if (!$this->stmt->execute(array(
+            $this->usuario->getID(),
+            $this->usuario->getNombres(),
+            $this->usuario->getApellidos(),
+            $this->usuario->getUsername(),
+            $this->usuario->getFechaNac(),
+            $this->usuario->getSexo(),
+            $this->usuario->getRol(),
+            $this->usuario->getCorreo(),
+            $this->usuario->getHashedPassword(),
+            $this->usuario->getAvatar(),
+            $this->usuario->getAvatarDir(),
+            $this->usuario->getCreador()
+        ))) {
+            $this->clearStatement();
+            header("location: ../../landingPage.html");
             exit();
         }
+    }
 
-        $count = $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["result"];
-        $stmt = null;
+    private function setData(Usuario $usu) {
+        $this->usuario->copy($usu);
+    }
+
+    private function fetchData() {
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Metodos débiles
+    protected function us_checar_correo($correo) {
+
+        $this->prepareStatement('checkE');
+
+        $this->setData(Usuario::create()->setCorreo($correo));
+        $this->executeQuery();
+
+        $count = $this->fetchData()[0]["result"];
+
+        $this->clearStatement();
 
         if ($count < 1){
             return false;
@@ -25,96 +69,70 @@ class UsuarioDAO extends DBH {
 
     // Métodos fuertes
     protected function us_registro(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_registro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        if (!$stmt->execute(array(
-            $usu->getNombres(),
-            $usu->getApellidos(),
-            $usu->getUsername(),
-            $usu->getFechaNac(),
-            $usu->getSexo(),
-            $usu->getRol(),
-            $usu->getCorreo(),
-            $usu->getHashedPassword(),
-            null,
-            null,
-            null
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
-        $stmt = null;
+
+        $this->prepareStatement('create');
+
+        $this->setData($usu);
+        $this->executeQuery();
+        
+        $this->clearStatement();
+
     }
 
     protected function us_modificar(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_modificar(?, ?, ?, ?, ?, ?, ?, ?)');
-        if (!$stmt->execute(array(
-            $usu->getID(),
-            $usu->getNombres(),
-            $usu->getApellidos(),
-            $usu->getUsername(),
-            $usu->getFechaNac(),
-            $usu->getSexo(),
-            null,
-            null
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
-        $stmt = null;
+
+        $this->prepareStatement('modify');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $this->clearStatement();
+
     }
 
     protected function us_baja(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_modificar(?)');
-        if (!$stmt->execute(array(
-            $usu->getID()
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
-        $stmt = null;
+
+        $this->prepareStatement('delete');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $this->clearStatement();
+        
     }
 
     protected function us_cambiar_correo(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_cambiar_correo(?, ?)');
-        if (!$stmt->execute(array(
-            $usu->getID(),
-            $usu->getCorreo()
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
-        $stmt = null;
+
+        $this->prepareStatement('changeE');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $this->clearStatement();
+
     }
 
     protected function us_cambiar_contra(Usuario $usu) {
-        $stmt = $this->connect()->prepare('call us_cambiar_contra(?, ?)');
-        if (!$stmt->execute(array(
-            $usu->getID(),
-            $usu->getPassword()
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
-        $stmt = null;
+
+        $this->prepareStatement('changeP');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $this->clearStatement();
+
     }
 
     protected function us_login(Usuario &$usu) {
-        $stmt = $this->connect()->prepare('call us_login(?)');
-        if (!$stmt->execute(array(
-            $usu->getCorreo()
-        ))) {
-            $stmt = null;
-            header("location: ../index.html");
-            exit();
-        }
 
-        $logged = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt = null;
+        $this->prepareStatement('login');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $logged = $this->fetchData();
+
+        $this->clearStatement();
 
         if (!$logged[0]["result"]) {
             return -1;
@@ -130,6 +148,7 @@ class UsuarioDAO extends DBH {
                 return 1;
             }
         }
+        
     }
 
 }

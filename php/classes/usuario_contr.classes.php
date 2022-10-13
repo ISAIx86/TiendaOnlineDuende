@@ -7,6 +7,7 @@ class UsuarioContr extends UsuarioDAO {
     private Usuario $usuario;
 
     public function __construct(Usuario $usu) {
+        parent::__construct();
         $this->usuario = $usu;
     }
     
@@ -87,7 +88,7 @@ class UsuarioContr extends UsuarioDAO {
     }
     
     public function empezarSesion() {
-        return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario.getRol(), 'Correo'=>$this->usuario->getCorreo());
+        return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario->getRol(), 'Correo'=>$this->usuario->getCorreo());
     }
 
 }

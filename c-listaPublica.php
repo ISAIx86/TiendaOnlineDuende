@@ -6,6 +6,7 @@
   <title>Lista</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/Nuevo.css">
 </head>
 <body>
   <!-- Header -->

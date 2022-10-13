@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Producto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href = "css/style.css">
-    <link rel="stylesheet" href="css/comments.css">
-    <style>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Producto</title>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/Nuevo.css">
+  <style>
       .valoracion {
         position: relative;
         overflow: hidden;
@@ -30,15 +30,13 @@
       .valoracion input:checked ~ label {
         color: #ecec00;
       }
-    </style>
-  </head>
-  <body>
-  <header>
-      <script src="js/headerComprador.js "></script>
-  </header>
-
-  <script src="js/navComprador.js "></script>
-    <div class = "container" id = "pagina">
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <?php include("./templates/headerComprador.php") ?>
+  <!-- Container -->
+  <div class = "container" id = "pagina">
       <div class = "row">
         <div class = "col-6">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -419,19 +417,14 @@
         </div><!--End Container -->
       </section><!-- end App -->
     
-    </div>
+  </div>
+  <!-- Footer -->
+  <?php include("./templates/footer.php") ?>
 
-    <footer>
-        <div class="container">
-            <div class = row>
-                <div class = "col-auto">
-                    <h1>Todos los derechos Reservados 2022</h1>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="js/jquery-3.6.1.js"></script>
-    <script src="js/producto.js"></script>
-  </body>
+  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="./js/navComprador.js "></script>
+  <script src="./js/jquery-3.6.1.js"></script>
+  <script src="./js/producto.js"></script>
+
+</body>
 </html>
