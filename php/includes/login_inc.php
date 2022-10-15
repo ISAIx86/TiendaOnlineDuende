@@ -1,7 +1,7 @@
 <?php
 
-include ('../models/usuario-model.php');
-include ('../classes/usuario_contr.classes.php');
+include (__DIR__.'/../models/usuario-model.php');
+include (__DIR__.'/../classes/usuario_contr.classes.php');
 
 if (isset($_POST["submit"])) {
     $nuevo_usuario = Usuario::create()
@@ -24,7 +24,8 @@ if (isset($_POST["submit"])) {
             break;
         case "user_logged":
             session_start();
-            $_SESSION['user'] = $controller->empezarSesion();
+            $_SESSION["user"] = $controller->empezarSesion();
+            $user = $_SESSION["user"];
             echo json_encode(array('result'=>"success", 'reason'=>"success", 'role'=>$nuevo_usuario->getRol()));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-include ('../models/usuario-model.php');
-include ('../classes/usuario_contr.classes.php');
+include (__DIR__.'/../models/usuario-model.php');
+include (__DIR__.'/../classes/usuario_contr.classes.php');
 
 if (isset($_POST["submit"])) {
     $nuevo_usuario = Usuario::create()

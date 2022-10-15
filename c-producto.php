@@ -6,7 +6,7 @@
   <title>Producto</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
   <style>
       .valoracion {
         position: relative;
@@ -86,11 +86,11 @@
                     <div>
                         <h7>5 Disponibles</h7>
                     </div>
-                    <div class ="container" align = "center">
+                    <div class ="container">
                       <form>
                           <div class = "row">
                               
-                              <div class "col-4">
+                              <div class="col-4">
                                   <label for="inputPassword2" class="visually-hidden">Cantidad</label>
                                   <input type="text" class="form-control" id="inputPassword2" placeholder="Cantidad">
                               </div>
@@ -422,7 +422,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
   <script src="./js/jquery-3.6.1.js"></script>
   <script src="./js/producto.js"></script>
 

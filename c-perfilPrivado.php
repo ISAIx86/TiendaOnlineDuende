@@ -6,7 +6,7 @@
   <title>Mi perfil</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
@@ -17,7 +17,7 @@
             <div class = "col-4">
                 <img src='resources/dongato.PNG' class='imgRedonda150' />
             </div>
-            <div class = "col-4" align = "left">
+            <div class = "col-4">
                 <h2>DonGatox16</h2>
                 <h3>Comprador</h3>
                 <h4>3 Listas</h4>
@@ -56,7 +56,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
 
 </body>
 </html>

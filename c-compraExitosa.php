@@ -6,7 +6,7 @@
   <title>Cuidado con el Duende - Pagar</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
@@ -27,7 +27,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
 
 </body>
 </html>

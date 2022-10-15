@@ -6,7 +6,7 @@
   <title>Cuidado con el Duende - Aceptar cotización</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
@@ -62,10 +62,10 @@
             <div>
               <h7>Cotización por 3 piezas</h7>
             </div>
-            <div class ="container" align = "center">
+            <div class ="container">
               <form>
-                <div class = "row">
-                  <div class "col-4"></div>
+                <div class="row">
+                  <div class="col-4"></div>
                 </div>
                 <div class="row">          
                   <div class="col">
@@ -89,7 +89,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
 
 </body>
 </html>

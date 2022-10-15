@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/register.css">
-    <link rel="stylesheet" href="./css/Nuevo.css">
+    <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
     <!-- Header -->
@@ -70,7 +70,6 @@
 
     <script src="./js/bootstrap.bundle.js"></script>
     <script src="./js/jquery-3.6.1.js"></script>
-    <script src="./js/navComprador.js "></script>
     <script src="./js/validaciones.js"></script>
     <script src="./js/regDireccion.js"></script>
 

@@ -6,7 +6,7 @@
     <title>Pagar</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/Nuevo.css">
+    <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
     <!-- Header -->
@@ -26,7 +26,7 @@
                             </a>
                             <h1></h1>
                         </div>
-                        <div class = "row" align = "left">
+                        <div class = "row">
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <h5>Estado</h5>
@@ -117,7 +117,6 @@
     <?php include("./templates/footer.php") ?>
 
     <script src="./js/bootstrap.bundle.js"></script>
-    <script src="./js/navComprador.js "></script>
 
 </body>
 </html>

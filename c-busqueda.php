@@ -6,7 +6,7 @@
   <title>Cuidado con el Duende - Búsqueda</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
@@ -16,7 +16,7 @@
     <div class = "row">
       <div class="container text-center">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p02.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -26,7 +26,7 @@
               </div>
             </div>
           </div>
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p01.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p03.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p02.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p01.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-          <div class="col-auto" align = "center">
+          <div class="col-auto">
             <div class="card" style="width: 18rem;">
               <img src="resources/p03.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -81,7 +81,7 @@
     </div>
     <div class = "row">
       <div class = "col-5"></div>
-        <div class = "col-2" align = "center">
+        <div class = "col-2">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
@@ -107,7 +107,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
 
 </body>
 </html>

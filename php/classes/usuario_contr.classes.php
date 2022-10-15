@@ -1,6 +1,6 @@
 <?php
 
-include ('../classes/usuario_dao.classes.php');
+include (__DIR__.'/../classes/usuario_dao.classes.php');
 
 class UsuarioContr extends UsuarioDAO {
 
@@ -49,6 +49,13 @@ class UsuarioContr extends UsuarioDAO {
         }
         else return true;
     }
+
+    private function emptyInputID() {
+        if (empty($this->usuario->getID())) {
+            return false;
+        }
+        else return true;
+    }
     
     // Métodos fuertes
     public function registrarUsuario() {
@@ -89,6 +96,24 @@ class UsuarioContr extends UsuarioDAO {
     
     public function empezarSesion() {
         return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario->getRol(), 'Correo'=>$this->usuario->getCorreo());
+    }
+
+    public function obtenerDatos() {
+        if (!$this->emptyInputID()) {
+            header('location: ../index.html');
+            exit();
+        }
+        $this->us_getdata($this->usuario);
+        return array(
+            'ID' => $this->usuario->getID(),
+            'Nombres' => $this->usuario->getNombres(),
+            'Apellidos' => $this->usuario->getApellidos(),
+            'Username' => $this->usuario->getUsername(),
+            'Correo' => $this->usuario->getCorreo(),
+            'Fecha_nac' => $this->usuario->getFechaNac(),
+            'Sexo' => $this->usuario->getSexo(),
+            'Fecha_crea' => $this->usuario->getFechaCrea()
+        );
     }
 
 }

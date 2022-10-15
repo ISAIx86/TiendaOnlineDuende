@@ -6,18 +6,28 @@
     <title>Mi cuenta</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/Nuevo.css">
+    <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
     <!-- Header -->
-    <?php include("./templates/headerComprador.php") ?>
+    <?php 
+    
+        include("./templates/headerComprador.php");
+        include (__DIR__.'/php/models/usuario-model.php');
+        include (__DIR__.'/php/classes/usuario_contr.classes.php');
+
+        if (isset($_SESSION['user'])) {
+            $url = "../../c-profile.php";
+            $buscar_usuario = Usuario::create()->setID($_SESSION['user']['ID']);
+            $controller = new UsuarioContr($buscar_usuario);
+            $userData = $controller->obtenerDatos();
+        }
+
+    ?>
+
     <!-- Container -->
     <div class = "container" id = "pagina">
-        <div class = "row">
-
-        </div>
         <div class="accordion" id="accordionExample">
-        
             <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -26,7 +36,7 @@
                         <img src='resources/dongato.PNG' class='imgRedonda' />
                     </div>
                     <div class = "col-4">
-                        <h2>DonGatox16</h2>
+                        <h2><?php echo $loggedUser['Username'] ?></h2>
                     </div>       
                 </div>       
             </button>
@@ -35,35 +45,35 @@
             <div class="accordion-body">
                 <div class = "row">
                     <h4>Mis datos</h4>
-                    <a href = "c-updateDatos.html">
+                    <a href = "c-updateDatos.php">
                         <button type="button" class="btn btn-warning">Actualizar mis datos</button>
                     </a>       
                 </div>
-                <div class = "row" align = "left">
+                <div class = "row">
                     <ul class="list-group">
                         <li class="list-group-item">
                             <h5>Usuario</h5>
-                            <h8>DonGatox16</h8>
+                            <h8><?php echo $userData['Username'] ?></h8>
                         </li>
                         <li class="list-group-item">
                             <h5>E-mail</h5>
-                            <h8>topcatofficial@pandilla.com</h8>
+                            <h8><?php echo $userData['Correo'] ?></h8>
                         </li>
                         <li class="list-group-item">
                             <h5>Nombre y Apellido</h5>
-                            <h8>Don Gato Gomez Bolaños</h8>
+                            <h8><?php echo $userData['Nombres'] . " " . $userData['Apellidos']  ?></h8>
                         </li>
                         <li class="list-group-item">
                             <h5>Fecha de nacimiento</h5>
-                            <h8>11-06-1957</h8>
+                            <h8><?php echo $userData['Fecha_nac'] ?></h8>
                         </li>
                         <li class="list-group-item">
                             <h5>Genero</h5>
-                            <h8>Gatuno</h8>
+                            <h8><?php echo $userData['Sexo'] ?></h8>
                         </li>
                         <li class="list-group-item">
                             <h5>Fecha de registro</h5>
-                            <h8>11-06-2022</h8>
+                            <h8><?php echo $userData['Fecha_crea'] ?></h8>
                         </li>
                       </ul>
                     </div>

@@ -1,6 +1,6 @@
 <?php
 
-include ('../classes/dbo.classes.php');
+include (__DIR__.'/../classes/dbo.classes.php');
 
 class UsuarioDAO extends DBH {
 
@@ -46,6 +46,10 @@ class UsuarioDAO extends DBH {
 
     private function fetchData() {
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function countOfRows() {
+        return $this->stmt->rowCount();
     }
 
     // Metodos débiles
@@ -149,6 +153,34 @@ class UsuarioDAO extends DBH {
             }
         }
         
+    }
+
+    protected function us_getdata(Usuario &$usu) {
+
+        $this->prepareStatement('get_data');
+
+        $this->setData($usu);
+        $this->executeQuery();
+
+        $count = $this->countOfRows();
+        $rt_data = $this->fetchData();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return 0;
+        }
+        else {
+            $usu->setNombres($rt_data[0]['out_nombres'])
+                ->setApellidos($rt_data[0]['out_apellidos'])
+                ->setUsername($rt_data[0]['out_username'])
+                ->setCorreo($rt_data[0]['out_correo'])
+                ->setFechaNac($rt_data[0]['out_fechanac'])
+                ->setSexo($rt_data[0]['out_sexo'])
+                ->setFechaCrea($rt_data[0]['out_feccre']);
+            return 1;
+        }
+
     }
 
 }

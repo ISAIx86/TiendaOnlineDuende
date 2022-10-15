@@ -15,6 +15,7 @@ class Usuario {
     private $avatar = null;
     private $avatar_dir = null;
     private $creador = null;
+    private $fecha_crea = null;
         
     // Building
 
@@ -38,6 +39,7 @@ class Usuario {
     public function getAvatar() { return $this->avatar; }
     public function getAvatarDir() { return $this->avatar_dir; }
     public function getCreador() { return $this->creador; }
+    public function getFechaCrea() { return $this->fecha_crea; }
 
     // Setters
 
@@ -54,6 +56,7 @@ class Usuario {
     public function setAvatar($_ava) { $this->avatar = $_ava; return $this; }
     public function setAvatarDir($_avadir) { $this->avatar_dir = $_avadir; return $this; }
     public function setCreador($_crea) { $this->creador = $_crea; return $this; }
+    public function setFechaCrea($_fcrea) { $this->fecha_crea = $_fcrea; return $this; }
 
     public function copy(Usuario $usu) {
         $this->id_usuario = $usu->getID();

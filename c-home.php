@@ -6,11 +6,12 @@
   <title>¡Cuidado con el Duende!</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/Nuevo.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
   <?php include("./templates/headerComprador.php") ?>
+
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">
@@ -570,7 +571,6 @@
 
   <script src="./js/bootstrap.bundle.js"></script>
   <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script> -->
-  <script src="js/navComprador.js "></script>
   <!-- <script src="js/comments.js"></script> -->
 </body>
 </html>

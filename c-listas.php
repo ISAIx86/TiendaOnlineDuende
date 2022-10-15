@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mi lista</title>
   <link rel="stylesheet" href="./css/bootstrap.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
@@ -20,7 +20,7 @@
             <div class = "col-2">
               <img src="resources/p01.PNG" class="d-block w-100" alt="...">
             </div>
-            <div class = "col-8" align = "left">
+            <div class = "col-8">
               <div class="fw-bold">Computadora con lucecitas</div>
               <h6>$ 14,000</h6>                   
             </div>
@@ -37,7 +37,7 @@
             <div class = "col-2">
               <img src="resources/p01.PNG" class="d-block w-100" alt="...">
             </div>
-            <div class = "col-8" align = "left">
+            <div class = "col-8">
               <div class="fw-bold">Computadora con lucecitas</div>
               <h6>$ 14,000</h6>                   
             </div>
@@ -63,7 +63,6 @@
   <?php include("./templates/footer.php") ?>
 
   <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/navComprador.js "></script>
 
 </body>
 </html>
