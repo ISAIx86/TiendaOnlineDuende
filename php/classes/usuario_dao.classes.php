@@ -35,7 +35,7 @@ class UsuarioDAO extends DBH {
             $this->usuario->getCreador()
         ))) {
             $this->clearStatement();
-            header("location: ../../landingPage.html");
+            header("Location: ../../landingPage.html");
             exit();
         }
     }
@@ -78,8 +78,15 @@ class UsuarioDAO extends DBH {
 
         $this->setData($usu);
         $this->executeQuery();
+
+        $count = $this->countOfRows();
         
         $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
 
     }
 
@@ -90,7 +97,14 @@ class UsuarioDAO extends DBH {
         $this->setData($usu);
         $this->executeQuery();
 
+        $count = $this->countOfRows();
+
         $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
 
     }
 
@@ -101,7 +115,14 @@ class UsuarioDAO extends DBH {
         $this->setData($usu);
         $this->executeQuery();
 
+        $count = $this->countOfRows();
+
         $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
         
     }
 
@@ -112,7 +133,14 @@ class UsuarioDAO extends DBH {
         $this->setData($usu);
         $this->executeQuery();
 
+        $count = $this->countOfRows();
+
         $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
 
     }
 
@@ -123,7 +151,14 @@ class UsuarioDAO extends DBH {
         $this->setData($usu);
         $this->executeQuery();
 
+        $count = $this->countOfRows();
+
         $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
 
     }
 
@@ -168,7 +203,7 @@ class UsuarioDAO extends DBH {
         $this->clearStatement();
 
         if ($count == 0) {
-            return 0;
+            return false;
         }
         else {
             $usu->setNombres($rt_data[0]['out_nombres'])
@@ -178,7 +213,7 @@ class UsuarioDAO extends DBH {
                 ->setFechaNac($rt_data[0]['out_fechanac'])
                 ->setSexo($rt_data[0]['out_sexo'])
                 ->setFechaCrea($rt_data[0]['out_feccre']);
-            return 1;
+            return true;
         }
 
     }

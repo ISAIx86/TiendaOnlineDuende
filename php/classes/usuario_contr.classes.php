@@ -43,6 +43,19 @@ class UsuarioContr extends UsuarioDAO {
         else return true;
     }
 
+    private function emptyInputM() {
+        if (
+            empty($this->usuario->getNombres()) |
+            empty($this->usuario->getApellidos()) |
+            empty($this->usuario->getUsername()) |
+            empty($this->usuario->getFechaNac()) |
+            empty($this->usuario->getSexo())
+        ) {
+            return false;
+        }
+        else return true;
+    }
+
     private function emptyInputL() {
         if (empty($this->usuario->getCorreo()) | empty($this->usuario->getPassword())) {
             return false;
@@ -52,6 +65,20 @@ class UsuarioContr extends UsuarioDAO {
 
     private function emptyInputID() {
         if (empty($this->usuario->getID())) {
+            return false;
+        }
+        else return true;
+    }
+
+    private function emptyInputE() {
+        if (empty($this->usuario->getCorreo())) {
+            return false;
+        }
+        else return true;
+    }
+
+    private function emptyInputPSW() {
+        if (empty($this->usuario->getPassword()) | empty($this->usuario->getConfPass())) {
             return false;
         }
         else return true;
@@ -71,7 +98,7 @@ class UsuarioContr extends UsuarioDAO {
             header('location: ../index.html');
             exit();
         }
-        $this->us_registro($this->usuario);
+        return $this->us_registro($this->usuario);
     }
 
     public function ingresarUsuario() {
@@ -93,6 +120,55 @@ class UsuarioContr extends UsuarioDAO {
                 break;
         }
     }
+
+    public function modificarUsuario() {
+        if (!$this->emptyInputID()) {
+            return "uncaptured_id";
+        }
+        if (!$this->emptyInputM()) {
+            return "empty_inputs";
+        }
+        return $this->us_modificar($this->usuario);
+    }
+
+    public function modificarCorreo() {
+        if (!$this->emptyInputID()) {
+            return "uncaptured_id";
+        }
+        if (!$this->emptyInputE()) {
+            return "empty_inputs";
+        }
+        if (!$this->userCheck()) {
+            header('location: ../index.html');
+            exit();
+        }
+        return $this->us_cambiar_correo($this->usuario);
+    }
+
+    public function modificarContra($curr_pass) {
+        if (!$this->emptyInputID()) {
+            return "uncaptured_id";
+        }
+        if (!$this->emptyInputE()) {
+            return "uncaptured_email";
+        }
+        if (!$this->emptyInputPSW()) {
+            return "empty_inputs";
+        }
+        if ($this->us_login($this->usuario) == 0) {
+            return "wrong_password";
+        }
+        else {
+            $this->usuario->setPassword($curr_pass);
+            if (!$this->emptyInputPSW()) {
+                return "empty_inputs";
+            }
+            if (!$this->matchPSW()) {
+                return "unmatching_psw";
+            }
+            return $this->us_cambiar_contra($this->usuario);
+        }
+    }
     
     public function empezarSesion() {
         return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario->getRol(), 'Correo'=>$this->usuario->getCorreo());
@@ -103,17 +179,17 @@ class UsuarioContr extends UsuarioDAO {
             header('location: ../index.html');
             exit();
         }
-        $this->us_getdata($this->usuario);
-        return array(
-            'ID' => $this->usuario->getID(),
-            'Nombres' => $this->usuario->getNombres(),
-            'Apellidos' => $this->usuario->getApellidos(),
-            'Username' => $this->usuario->getUsername(),
-            'Correo' => $this->usuario->getCorreo(),
-            'Fecha_nac' => $this->usuario->getFechaNac(),
-            'Sexo' => $this->usuario->getSexo(),
-            'Fecha_crea' => $this->usuario->getFechaCrea()
-        );
+        if ($this->us_getdata($this->usuario))
+            return array(
+                'ID' => $this->usuario->getID(),
+                'Nombres' => $this->usuario->getNombres(),
+                'Apellidos' => $this->usuario->getApellidos(),
+                'Username' => $this->usuario->getUsername(),
+                'Correo' => $this->usuario->getCorreo(),
+                'Fecha_nac' => $this->usuario->getFechaNac(),
+                'Sexo' => $this->usuario->getSexo(),
+                'Fecha_crea' => $this->usuario->getFechaCrea()
+            );
     }
 
 }

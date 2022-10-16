@@ -115,7 +115,7 @@
                             <h2>Actualizar contraseña</h2>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="password" id="txt_password" name="in_prevpass" minlength="8" maxlength="16" placeholder="Contraseña">
+                            <input type="password" id="txt_prevpass" name="in_prevpass" minlength="8" maxlength="16" placeholder="Contraseña actual">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>

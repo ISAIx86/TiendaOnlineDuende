@@ -34,7 +34,7 @@ else {
             <div class="dropdown">
               <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src='resources/dongato.PNG' class='imgRedonda'/>
-                <h5><?php echo $loggedUser['Username'] ?></h5>
+                <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="c-perfilPrivado.php">Mi Perfil</a></li>

@@ -3,7 +3,7 @@
 include (__DIR__.'/../models/usuario-model.php');
 include (__DIR__.'/../classes/usuario_contr.classes.php');
 
-if (isset($_POST["submit"])) {
+if (isset($_POST['submit'])) {
     $nuevo_usuario = Usuario::create()
         ->setNombres($_POST['in_nombres'])
         ->setApellidos($_POST['in_apellidos'])
