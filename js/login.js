@@ -68,13 +68,16 @@ $(document).ready(function() {
                     else {
                         switch (data.role) {
                             case "comprador":
-                                window.location.replace("./c-home.php")
+                                window.location.replace("./c-home.php");
                                 break;
                             case "vendedor":
-                                window.location.replace("./v-perfilVendedor.html")
+                                window.location.replace("./v-perfilVendedor.html");
+                                break;
+                            case "administrador":
+                                window.location.replace("./a-listaAprobados.html");
                                 break;
                             case "compravende":
-                                window.location.replace("./landingPage.html")
+                                window.location.replace("./landingPage.html");
                                 break;
                         }
                     }

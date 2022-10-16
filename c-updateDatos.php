@@ -18,7 +18,6 @@
         include (__DIR__.'/php/classes/usuario_contr.classes.php');
 
         if (isset($_SESSION['user'])) {
-            $url = "../../c-profile.php";
             $buscar_usuario = Usuario::create()->setID($_SESSION['user']['ID']);
             $controller = new UsuarioContr($buscar_usuario);
             $userData = $controller->obtenerDatos();
@@ -146,6 +145,7 @@
     <script src="./js/bootstrap.bundle.js"></script>
     <script src="./js/jquery-3.6.1.js"></script>
     <script src="./js/validaciones.js"></script>
+    <script src="./js/checarCampos.js"></script>
     <script src="./js/registro.js"></script>
 
 </body>

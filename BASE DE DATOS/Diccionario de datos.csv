@@ -1,0 +1,135 @@
+schema_nm,table_nm,obj_typ,ord,is_key,column_nm,data_typ,nullable,column_descr
+tienda_online,categorias,TBL,1,PK,id_catego,binary(16),"NOT NULL","ID de la categoría"
+tienda_online,categorias,TBL,2,FK,id_creador,binary(16),"NOT NULL","ID del vendedor creador de la categoría"
+tienda_online,categorias,TBL,3," ",nombre,varchar(32),"NOT NULL","Nombre de la categoría"
+tienda_online,categorias,TBL,4," ",descripcion,varchar(256),"NOT NULL","Breve descripción de lo que trata la categoría"
+tienda_online,categorias,TBL,5," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro"
+tienda_online,categorias,TBL,6," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,categorias,TBL,7," ",fecha_elim,timestamp(4),NULL,"Fecha de baja"
+tienda_online,domicilios,TBL,1,PK,id_domicilio,binary(16),"NOT NULL","ID del domicilio"
+tienda_online,domicilios,TBL,1,PK,id_domicilio,binary(16),"NOT NULL","ID del domicilio"
+tienda_online,domicilios,TBL,2," ",id_cliente,binary(16),"NOT NULL",NULL
+tienda_online,domicilios,TBL,2,FK,id_usuario,binary(16),"NOT NULL","ID del usuario residente del domicilio"
+tienda_online,domicilios,TBL,3," ",calle,varchar(64),"NOT NULL","Nombre de la calle"
+tienda_online,domicilios,TBL,3," ",calle,varchar(32),"NOT NULL","Nombre de la calle"
+tienda_online,domicilios,TBL,4," ",num_ext,varchar(16),"NOT NULL",NULL
+tienda_online,domicilios,TBL,4," ",numext,varchar(16),"NOT NULL","Numero de edificio o casa"
+tienda_online,domicilios,TBL,5," ",num_int,varchar(16),NULL,NULL
+tienda_online,domicilios,TBL,5," ",numint,varchar(16),NULL,"Numero de departamento. Este dato es opcional. Solo si el usuario vive en un complejo departamental"
+tienda_online,domicilios,TBL,6," ",residencial,varchar(64),"NOT NULL","Residencial o colonia"
+tienda_online,domicilios,TBL,6," ",residencial,varchar(32),"NOT NULL","Residencial o colonia"
+tienda_online,domicilios,TBL,7," ",ciudad,varchar(64),"NOT NULL","Ciudad o localidad"
+tienda_online,domicilios,TBL,7," ",ciudad,varchar(32),"NOT NULL","Ciudad o localidad"
+tienda_online,domicilios,TBL,8," ",provincia,varchar(64),"NOT NULL","Estado o provincia"
+tienda_online,domicilios,TBL,8," ",provincia,varchar(32),"NOT NULL","Estado o provincia"
+tienda_online,domicilios,TBL,9," ",creation_date,datetime(8),"NOT NULL",NULL
+tienda_online,domicilios,TBL,9," ",default,tinyint(3),"NOT NULL","Domicilio de entrega por defecto. Es la selección por defecto del usuario para recibir su pedido"
+tienda_online,domicilios,TBL,10," ",created_by,int(10),"NOT NULL",NULL
+tienda_online,domicilios,TBL,10," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro"
+tienda_online,domicilios,TBL,11," ",last_update_date,datetime(8),NULL,NULL
+tienda_online,domicilios,TBL,11," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,domicilios,TBL,12," ",last_update_by,int(10),NULL,NULL
+tienda_online,domicilios,TBL,12," ",fecha_elim,timestamp(4),NULL,"Fecha de baja"
+tienda_online,domicilios,TBL,13," ",active,tinyint(3),"NOT NULL",NULL
+tienda_online,listas,TBL,1,PK,id_lista,binary(16),"NOT NULL","ID de la lista"
+tienda_online,listas,TBL,2,FK,id_usuario,binary(16),"NOT NULL","ID del propietario de la lista"
+tienda_online,listas,TBL,3," ",nombre,varchar(32),NULL,"Nombre de la lista"
+tienda_online,listas,TBL,4," ",descripcion,varchar(256),NULL,"Breve descripción del contenido de la lista"
+tienda_online,listas,TBL,5," ",privacidad,tinyint(3),"NOT NULL","Bandera de privacidad. Si es 0, la lista es pública. Si es 1, la lista es privada"
+tienda_online,listas,TBL,6," ",imagen,blob(65535),NULL,"Imagen miniatura de la lista"
+tienda_online,listas,TBL,7," ",imagen_dir,varchar(256),NULL,"Ruta del recurso de imagen de la lista"
+tienda_online,listas,TBL,8," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro"
+tienda_online,listas,TBL,9," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,listas,TBL,10," ",fecha_elim,timestamp(4),NULL,"Fecha de baja"
+tienda_online,multimedia,TBL,1,PK,id_mult,binary(16),"NOT NULL","ID del contenido multimedia"
+tienda_online,multimedia,TBL,2,FK,id_prod,binary(16),"NOT NULL","ID del producto"
+tienda_online,multimedia,TBL,3," ",contenido,blob(65535),"NOT NULL","Contenido multimedia"
+tienda_online,multimedia,TBL,4," ",contenido_dir,varchar(256),"NOT NULL","Ruta del contenido multimedia"
+tienda_online,multimedia,TBL,5," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro del producto"
+tienda_online,multimedia,TBL,6," ",fecha_elim,timestamp(4),NULL,"Fecha de baja"
+tienda_online,pedidos,TBL,1,PK,folio,varchar(16),"NOT NULL","Folio del pedido"
+tienda_online,pedidos,TBL,2,FK,id_usuario,binary(16),"NOT NULL","ID del usuario que hizo el pedido"
+tienda_online,pedidos,TBL,3,FK,domicilio_entr,binary(16),"NOT NULL","ID del domicilio de entrega"
+tienda_online,pedidos,TBL,4," ",fecha_compra,timestamp(4),"NOT NULL","Fecha y hora de la compra"
+tienda_online,pedidos,TBL,5," ",total,"decimal(8,2)","NOT NULL","Total a pagar del pedido"
+tienda_online,productos,TBL,1," ",clave,varchar(16),"NOT NULL",NULL
+tienda_online,productos,TBL,1,PK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,productos,TBL,2," ",img,blob(65535),NULL,NULL
+tienda_online,productos,TBL,2,FK,id_publicador,binary(16),"NOT NULL","ID del vendedor publicador del producto"
+tienda_online,productos,TBL,3," ",titulo,varchar(64),"NOT NULL","Titulo del producto"
+tienda_online,productos,TBL,3,FK,id_autorizador,binary(16),NULL,"ID del autorizador. Si es nulo, aún no está autorizado"
+tienda_online,productos,TBL,4," ",precio,"decimal(6,2)","NOT NULL","Precio del producto. Si es por cotización el precio será 0.0"
+tienda_online,productos,TBL,4," ",titulo,varchar(64),"NOT NULL","Titulo del producto"
+tienda_online,productos,TBL,5," ",tipo,varchar(16),"NOT NULL",NULL
+tienda_online,productos,TBL,5," ",descripcion,varchar(256),"NOT NULL","Breve descripción del producto"
+tienda_online,productos,TBL,6," ",req_rec,tinyint(3),"NOT NULL",NULL
+tienda_online,productos,TBL,6," ",cotizacion,tinyint(3),"NOT NULL","Bandera de venta o cotización. Si es 0 es venta. Si es 1 es cotizacion"
+tienda_online,productos,TBL,7," ",ing_act,varchar(128),"NOT NULL",NULL
+tienda_online,productos,TBL,7," ",precio,"decimal(8,2)","NOT NULL","Precio del producto. Si es por cotización el precio será 0.0"
+tienda_online,productos,TBL,8," ",dispo,int(10),"NOT NULL",NULL
+tienda_online,productos,TBL,8," ",disponibilidad,int(10),"NOT NULL","Unidades del producto disponibles"
+tienda_online,productos,TBL,9," ",visitas,int(10),"NOT NULL",NULL
+tienda_online,productos,TBL,9," ",calificacion,"decimal(2,1)","NOT NULL","Valoración del producto por los compradores"
+tienda_online,productos,TBL,10," ",compras,int(10),"NOT NULL",NULL
+tienda_online,productos,TBL,10," ",fecha_autorizado,timestamp(4),NULL,"Fecha de autorización"
+tienda_online,productos,TBL,11," ",calificacion,"decimal(3,1)","NOT NULL","Valoración del producto por los compradores"
+tienda_online,productos,TBL,11," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro del producto"
+tienda_online,productos,TBL,12," ",creation_date,datetime(8),"NOT NULL",NULL
+tienda_online,productos,TBL,12," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,productos,TBL,13," ",created_by,int(10),"NOT NULL",NULL
+tienda_online,productos,TBL,13," ",fecha_elim,timestamp(4),NULL,"Fecha de baja"
+tienda_online,productos,TBL,14," ",last_update_date,datetime(8),NULL,NULL
+tienda_online,productos,TBL,15," ",last_update_by,int(10),NULL,NULL
+tienda_online,productos,TBL,16," ",active,tinyint(3),"NOT NULL",NULL
+tienda_online,rel_calif,TBL,1,FK,id_usuario,binary(16),"NOT NULL","ID del usuario"
+tienda_online,rel_calif,TBL,2,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_calif,TBL,3," ",calificacion,"decimal(2,1)","NOT NULL","Valoración del cliente"
+tienda_online,rel_carrito,TBL,1," ",id_cliente,binary(16),"NOT NULL",NULL
+tienda_online,rel_carrito,TBL,1,FK,id_usuario,binary(16),"NOT NULL","ID del usuario"
+tienda_online,rel_carrito,TBL,2," ",clave,varchar(16),"NOT NULL",NULL
+tienda_online,rel_carrito,TBL,2,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_carrito,TBL,3," ",cantidad,tinyint(3),"NOT NULL",NULL
+tienda_online,rel_cat,TBL,1,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_cat,TBL,2,FK,id_categoria,binary(16),"NOT NULL","ID de categoría"
+tienda_online,rel_comment,TBL,1,FK,id_usuario,binary(16),"NOT NULL","ID del usuario"
+tienda_online,rel_comment,TBL,2,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_comment,TBL,3," ",contenido,varchar(256),"NOT NULL","Comentario del cliente"
+tienda_online,rel_comment,TBL,4," ",fecha,timestamp(4),"NOT NULL","Fecha y hora del comentario"
+tienda_online,rel_li_prod,TBL,1,FK,id_lista,binary(16),"NOT NULL","ID de lista"
+tienda_online,rel_li_prod,TBL,2,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_ped_prod,TBL,1,FK,folio_pedido,varchar(16),"NOT NULL","ID del pedido"
+tienda_online,rel_ped_prod,TBL,2,FK,id_producto,binary(16),"NOT NULL","ID del producto"
+tienda_online,rel_ped_prod,TBL,3," ",subtotal,"decimal(8,2)","NOT NULL","Suma de los productos"
+tienda_online,rel_ped_prod,TBL,4," ",cantidad,int(10),"NOT NULL","Cantidad de productos a comprar"
+tienda_online,super_admins,TBL,1,PK,id_sadmin,binary(16),"NOT NULL","ID del super administrador"
+tienda_online,super_admins,TBL,2," ",nombres,varchar(64),"NOT NULL","Nombres del super administrador"
+tienda_online,super_admins,TBL,3," ",apellidos,varchar(64),"NOT NULL","Apellidos del super administrador"
+tienda_online,super_admins,TBL,4," ",username,varchar(32),"NOT NULL","Nickname o nombre de usuario"
+tienda_online,super_admins,TBL,5," ",attr2,varchar(256),"NOT NULL","Correo electrónico"
+tienda_online,super_admins,TBL,6," ",attr3,varchar(256),"NOT NULL",Contraseña
+tienda_online,super_admins,TBL,7," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro del usuario"
+tienda_online,super_admins,TBL,8," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,super_admins,TBL,9," ",fecha_elim,timestamp(4),NULL,"Fecha de baja del usuario"
+tienda_online,tarjetas,TBL,1,PK,id_tarj,binary(16),"NOT NULL","ID de la tarjeta"
+tienda_online,tarjetas,TBL,2,FK,id_usuario,binary(16),"NOT NULL","ID del propietario de la tarjeta"
+tienda_online,tarjetas,TBL,3," ",nombre_tarj,varchar(128),"NOT NULL","Nombre completo del propietario"
+tienda_online,tarjetas,TBL,4," ",num_tarj,varchar(256),"NOT NULL","Número de tarjeta"
+tienda_online,tarjetas,TBL,5," ",cad,char(4),"NOT NULL","Caducidad de la tarjeta"
+tienda_online,tarjetas,TBL,6," ",cvv,char(3),"NOT NULL","Clave de seguridad"
+tienda_online,tarjetas,TBL,7," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro"
+tienda_online,tarjetas,TBL,8," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,usuarios,TBL,1,PK,id_usuario,binary(16),"NOT NULL","ID de usuario"
+tienda_online,usuarios,TBL,2," ",nombres,varchar(64),"NOT NULL","Nombres del usuario"
+tienda_online,usuarios,TBL,3," ",apellidos,varchar(64),"NOT NULL","Apellidos del usuario"
+tienda_online,usuarios,TBL,4," ",username,varchar(32),"NOT NULL","Nickname o nombre de usuario"
+tienda_online,usuarios,TBL,5," ",fecha_nac,date(3),"NOT NULL","Fecha de nacimiento del usuario, para obtener dinamicamente su edad"
+tienda_online,usuarios,TBL,6," ",sexo,char(1),"NOT NULL","Sexo del usuario, hombre/mujer/etc."
+tienda_online,usuarios,TBL,7," ",attr1,varchar(16),"NOT NULL","Rol de usuario"
+tienda_online,usuarios,TBL,8," ",attr2,varchar(256),"NOT NULL","Correo electrónico"
+tienda_online,usuarios,TBL,9," ",attr3,varchar(256),"NOT NULL",Contraseña
+tienda_online,usuarios,TBL,10," ",avatar,blob(65535),NULL,"Imagen avatar del usuario"
+tienda_online,usuarios,TBL,11," ",avatar_dir,varchar(256),NULL,"Ruta del recurso del avatar del usuario"
+tienda_online,usuarios,TBL,12,FK,creador,binary(16),NULL,"Super administrador creador del usuario. Solo aplica a administradores"
+tienda_online,usuarios,TBL,13," ",fecha_creacion,timestamp(4),"NOT NULL","Fecha de registro del usuario"
+tienda_online,usuarios,TBL,14," ",fecha_modif,timestamp(4),NULL,"Fecha de última modificacion"
+tienda_online,usuarios,TBL,15," ",fecha_elim,timestamp(4),NULL,"Fecha de baja del usuario"

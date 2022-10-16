@@ -3,6 +3,10 @@ session_start();
 if(isset($_SESSION["user"])){
   $loggedUser = $_SESSION["user"];
 }
+else {
+  header('Location: ../index.php');
+  exit();
+}
 ?>
 
 <header>
@@ -35,7 +39,7 @@ if(isset($_SESSION["user"])){
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="c-perfilPrivado.php">Mi Perfil</a></li>
                 <li><a class="dropdown-item" href="c-profile.php">Mi cuenta</a></li>
-                <li><a class="dropdown-item" href="landingPage.html">Cerrar sesión</a></li>
+                <li><a class="dropdown-item" href="./php/includes/close_session_inc.php">Cerrar sesión</a></li>
               </ul>
             </div>
           </div>
