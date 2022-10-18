@@ -8,6 +8,7 @@ class Usuario {
     private $username = null;
     private $fecha_nac = null;
     private $sexo = null;
+    private $privacidad = null;
     private $rol = null;
     private $correo = null;
     private $pass = null;
@@ -31,6 +32,7 @@ class Usuario {
     public function getUsername() { return $this->username; }
     public function getFechaNac() { return $this->fecha_nac; }
     public function getSexo() { return $this->sexo; }
+    public function getPrivacidad() { return $this->privacidad; }
     public function getRol() { return $this->rol; }
     public function getCorreo () { return $this->correo; }
     public function getPassword() { return $this->pass; }
@@ -49,6 +51,7 @@ class Usuario {
     public function setUsername($_usr) { $this->username = $_usr; return $this; }
     public function setFechaNac($_fec) { $this->fecha_nac = $_fec; return $this; }
     public function setSexo($_sex) { $this->sexo = $_sex; return $this; }
+    public function setPrivacidad($_priv) { $this->privacidad = $_priv; return $this; }
     public function setRol($_rol) { $this->rol = $_rol; return $this; }
     public function setCorreo($_corr) { $this->correo = $_corr; return $this; }
     public function setPassword($_pass) { $this->pass = $_pass; return $this; }
@@ -65,6 +68,7 @@ class Usuario {
         $this->username = $usu->getUsername();
         $this->fecha_nac = $usu->getFechaNac();
         $this->sexo = $usu->getSexo();
+        $this->privacidad = $usu->getPrivacidad();
         $this->rol = $usu->getRol();
         $this->correo = $usu->getCorreo();
         $this->pass = $usu->getPassword();

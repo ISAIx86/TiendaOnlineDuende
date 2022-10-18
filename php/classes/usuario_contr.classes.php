@@ -112,10 +112,13 @@ class UsuarioContr extends UsuarioDAO {
             case -1:
                 return "not_found";
                 break;
-            case 0:
+            case -2:
                 return "wrong_password";
                 break;
-            case 1:
+            case -3:
+                return "unauthorized_admin";
+                break;
+            case 0:
                 return "user_logged";
                 break;
         }
@@ -188,6 +191,7 @@ class UsuarioContr extends UsuarioDAO {
                 'Correo' => $this->usuario->getCorreo(),
                 'Fecha_nac' => $this->usuario->getFechaNac(),
                 'Sexo' => $this->usuario->getSexo(),
+                'Privacidad' => $this->usuario->getPrivacidad(),
                 'Fecha_crea' => $this->usuario->getFechaCrea()
             );
     }

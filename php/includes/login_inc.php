@@ -22,6 +22,9 @@ if (isset($_POST["submit"])) {
         case "wrong_password":
             echo json_encode(array('result'=>"error", 'reason'=>"wrong_password"));
             break;
+        case "unauthorized_admin":
+            echo json_encode(array('result'=>"error", 'reason'=>"unauthorized_admin"));
+            break;
         case "user_logged":
             session_start();
             $_SESSION["user"] = $controller->empezarSesion();

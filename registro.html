@@ -4,172 +4,156 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href = "css/style.css">
-    <link rel="stylesheet" href="css/Nuevo.css">
-    <link rel="stylesheet" href = "css/register.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href = "./css/style.css">
+    <link rel="stylesheet" href="./css/Nuevo.css">
+    <link rel="stylesheet" href = "./css/register.css">
 </head>
 <body>
-  <header>
-    <div class="container_menu">
-        <div class="logo">
-            <img src="resources/logo02.png" alt="">
+    <header>
+        <div class="container_menu">
+            <div class="logo">
+                <img src="resources/logo02.png" alt="">
+            </div>
+            <div class="menu">
+                <nav id="nav">
+                    <ul>
+                        <li><button onclick="location.href='index.php'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button></li>
+                        <li><button onclick="location.href='registroAdmin.html'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Aplicar para administrador</button></li>
+                        <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="menu">
-            <nav id="nav">
-                <ul>
-                    <li><button onclick="location.href='index.php'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button></li>
-                    <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
-                </ul>
-            </nav>
+    </header>
+    <main>
+        <div class="container_portada">
+            <div class="portada">
+                <div class="Parte1">
+                    <div class = "row" id="Carusel">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="resources/producto01.PNG" class="d-block w-100">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/producto02.PNG" class="d-block w-100">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="resources/producto03.PNG" class="d-block w-100">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <h1>Cuidado con el Duende.</h1>
+                        <p>Los mejores productos de ensueño, solo en ¡Cuidado con el Duende!</p>
+                        <p>Una plataforma segura y confiable para llevar a delante tu negocio. Y si eres comprador, aquí encontraras lo que buscas al mejor precio.</p>
+                        <p>Miles de personas están comprando y vendiendo en Cuidado con el Duende. Registrate y explora el mejor mercado en línea.</p>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="header">
+                        <h2>Crear cuenta</h2>
+                    </div>
+                    <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post">
+                        <div class="form_control" requerido="false" state='empt'>
+                            <label for="FotoPerfil">Foto de perfil:</label>
+                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                        </div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <div >Género:</div>
+                            <input type="radio" id="rdb_h" name="in_genero" value="H">
+                            <label for="rdb_h">Hombre</label>
+                            <input type="radio" id="rdb_m" name="in_genero" value="M">
+                            <label for="rdb_m">Mujer</label>
+                            <input type="radio" id="rdb_o" name="in_genero" value="O">
+                            <label for="rdb_o">Otro</label>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <div >Fecha de nacimiento:</div>
+                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <select id="cbx_rol" name="in_rolus">
+                                <option disabled selected>Rol de usuario</option>
+                                <option value="comprador">Comprador</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="compravende">Ambos</option>
+                            </select>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="password" id="txt_password" name="in_password" maxlength="16" minlength="8" placeholder="Contraseña">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <div>
+                        <p id="pass_format" style="display:none">Tu contraseña debe tener: 1 Mayúscula, 1 minúscula, 1 número y 1 caracter especial.</p>
+                        </div>
+                        <div class="form_control" requerido="true" state='empt'>
+                            <input type="password" id="txt_confirm" name="in_confirm" maxlength="16" minlength="8" placeholder="Confirmar contraseña">
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error</small>
+                        </div>
+                        <button name="submit">Registrarme</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</header>
-<main>
-  <div class="container_portada">
-      <div class="portada">
-          <div class="Parte1">
-                  <div class = "row" id="Carusel">
-                      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                          <div class="carousel-indicators">
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                          </div>
-
-                          <div class="carousel-inner">
-
-                              <div class="carousel-item active">
-                                  <img src="resources/producto01.PNG" class="d-block w-100">
-                              </div>
-
-                              <div class="carousel-item">
-                                  <img src="resources/producto02.PNG" class="d-block w-100">
-                              </div>
-
-                              <div class="carousel-item">
-                                  <img src="resources/producto03.PNG" class="d-block w-100">
-                              </div>
-                          </div>
-
-                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
-                          </button>
-
-                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
-                          </button>
-                      </div>
-                  </div>
-
-              <div class="text">
-                  <h1>Cuidado con el Duende.</h1>
-
-                  <p>Los mejores productos de ensueño, solo en ¡Cuidado con el Duende!</p>
-                  <p>Una plataforma segura y confiable para llevar a delante tu negocio. Y si eres comprador, aquí encontraras lo que buscas al mejor precio.</p>
-                  <p>Miles de personas están comprando y vendiendo en Cuidado con el Duende. Registrate y explora el mejor mercado en línea.</p>
-              </div>
-
-          </div>
-
-          <div class="form-container">
-              <div class="header">
-                  <h2>Crear cuenta</h2>
-              </div>
-              
-              <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post">
-                <div class="form_control" requerido="false" state='empt'>
-                    <label for="FotoPerfil">Foto de perfil:</label>
-                    <input type="file" id="fle_fotoperfil" name="FotoPerfil">
-                </div>
-                <div class="form_control" requerido="true" state="empt">
-                    <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form_control" requerido="true" state="empt">
-                    <div >Género:</div>
-                    <input type="radio" id="rdb_h" name="in_genero" value="H">
-                    <label for="rdb_h">Hombre</label>
-                    <input type="radio" id="rdb_m" name="in_genero" value="M">
-                    <label for="rdb_m">Mujer</label>
-                    <input type="radio" id="rdb_o" name="in_genero" value="O">
-                    <label for="rdb_o">Otro</label>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <div >Fecha de nacimiento:</div>
-                    <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form_control" requerido="true" state="empt">
-                    <select id="cbx_rol" name="in_rolus">
-                        <option disabled selected>Rol de usuario</option>
-                        <option value="comprador">Comprador</option>
-                        <option value="vendedor">Vendedor</option>
-                        <option value="compravende">Ambos</option>
-                    </select>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <input type="password" id="txt_password" name="in_password" maxlength="16" minlength="8" placeholder="Contraseña">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <div>
-                  <p id="pass_format" style="display:none">Tu contraseña debe tener: 1 Mayúscula, 1 minúscula, 1 número y 1 caracter especial.</p>
-                </div>
-                <div class="form_control" requerido="true" state='empt'>
-                    <input type="password" id="txt_confirm" name="in_confirm" maxlength="16" minlength="8" placeholder="Confirmar contraseña">
-                    <i class="fas fa-check-circle"></i>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <small>Error</small>
-                </div>
-                <button name="submit">Registrarme</button>
-            </form>
-          </div>
-
-      </div>
-  </div>
-  
-</main>
-
+    </main>
     <!--Footer-->
     <div class="container-footer">
-
       <footer>
-          
-          <h4>Todos los derechos Reservados 2022</h4>
-
+            <h4>Todos los derechos Reservados 2022</h4>
       </footer>
-  </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="js/jquery-3.6.1.js"></script>
-    <script src="js/validaciones.js"></script>
-    <script src="js/registro.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/jquery-3.6.1.js"></script>
+    <script src="./js/validaciones.js"></script>
+    <script src="./js/registro.js"></script>
 
 </body>
 </html>

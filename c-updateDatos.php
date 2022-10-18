@@ -1,9 +1,10 @@
+<?php include_once("./templates/get_session.php");?>
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Metodo de pago</title>
+    <title>Cuidado con el Duenda - Modificar información</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/register.css">
@@ -12,8 +13,21 @@
 <body>
     <!-- Header -->
     <?php
-    
-        include("./templates/headerComprador.php");
+        switch ($loggedUser['Rol']) {
+            case "comprador":
+                include_once("./templates/headerComprador.php");
+                break;
+            case "vendedor":
+                include_once("./templates/headerVendedor.php");
+                break;
+            case "administrador":
+                include_once("./templates/headerAdministrador.php");
+                break;
+            case "compravende":
+                include_once("./templates/headerCompraVende.php");
+                break;
+        }
+        
         include (__DIR__.'/php/models/usuario-model.php');
         include (__DIR__.'/php/classes/usuario_contr.classes.php');
 
@@ -22,7 +36,6 @@
             $controller = new UsuarioContr($buscar_usuario);
             $userData = $controller->obtenerDatos();
         }
-
     ?>
     <!-- Container -->
     <div class = "container" id = "pagina">
@@ -53,7 +66,7 @@
                             <div >Género:</div>
                             <?php
                                 switch($userData['Sexo']) {
-                                    case 'Hombre': ?>
+                                    case 'H': ?>
                                 <input type="radio" id="rdb_h" name="in_genero" value="H" checked>
                                 <label for="rdb_h">Hombre</label>
                                 <input type="radio" id="rdb_m" name="in_genero" value="M">
@@ -62,7 +75,7 @@
                                 <label for="rdb_o">Otro</label>
                             <?php
                                         break;
-                                    case 'Mujer': ?>
+                                    case 'M': ?>
                                 <input type="radio" id="rdb_h" name="in_genero" value="H">
                                 <label for="rdb_h">Hombre</label>
                                 <input type="radio" id="rdb_m" name="in_genero" value="M" checked>
@@ -80,6 +93,26 @@
                                 <label for="rdb_o">Otro</label>
                             <?php
                                         break;
+                                }
+                            ?>
+                        </div>
+                        <div class="form_control" requerido="true" state="empt">
+                            <div >Privacidad de cuenta:</div>
+                            <?php
+                                if ($userData['Privacidad']) {
+                            ?>
+                                <input type="radio" id="rdb_priv" name="in_privacidad" value="1" checked>
+                                <label for="rdb_priv">Privado</label>
+                                <input type="radio" id="rdb_publ" name="in_privacidad" value="0">
+                                <label for="rdb_publ">Público</label>
+                            <?php
+                                } else {
+                            ?>
+                                <input type="radio" id="rdb_priv" name="in_privacidad" value="1">
+                                <label for="rdb_priv">Privado</label>
+                                <input type="radio" id="rdb_publ" name="in_privacidad" value="0" checked>
+                                <label for="rdb_publ">Público</label>
+                            <?php
                                 }
                             ?>
                         </div>

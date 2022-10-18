@@ -14,7 +14,8 @@ if (isset($_SESSION['user'])) {
                     ->setApellidos($_POST['in_apellidos'])
                     ->setUsername($_POST['in_username'])
                     ->setFechaNac($_POST['in_fechanac'])
-                    ->setSexo($_POST['in_genero']);
+                    ->setSexo($_POST['in_genero'])
+                    ->setPrivacidad($_POST['in_privacidad']);
                 $controller = new UsuarioContr($user);
                 if ($controller->modificarUsuario()) {
                     $_SESSION['user']['Username'] = $_POST['in_username'];
@@ -24,7 +25,8 @@ if (isset($_SESSION['user'])) {
                             'out_apellidos'=>$_POST['in_apellidos'],
                             'out_username'=>$_POST['in_username'],
                             'out_fechanac'=>$_POST['in_fechanac'],
-                            'out_genero'=>$_POST['in_genero']
+                            'out_genero'=>$_POST['in_genero'],
+                            'out_privacidad'=>$_POST['in_privacidad']
                         )
                     ));
                     exit();

@@ -1,3 +1,4 @@
+<?php include_once("./templates/get_session.php");?>
 <!doctype html>
 <html lang="es">
 <head>

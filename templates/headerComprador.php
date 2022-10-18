@@ -1,14 +1,3 @@
-<?php
-session_start();
-if(isset($_SESSION["user"])){
-  $loggedUser = $_SESSION["user"];
-}
-else {
-  header('Location: ../index.php');
-  exit();
-}
-?>
-
 <header>
   <div class="container text-center">
     <div class="row">

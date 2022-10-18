@@ -29,6 +29,9 @@ $(document).ready(function() {
                         case "wrong_password":
                             alert("Contraseña incorrecta.");
                             break;
+                        case "unauthorized_admin":
+                            alert("Administrador no autorizado.");
+                            break;
                     }
                 }
                 else {
@@ -37,10 +40,10 @@ $(document).ready(function() {
                             window.location.replace("./c-home.php");
                             break;
                         case "vendedor":
-                            window.location.replace("./v-perfilVendedor.html");
+                            window.location.replace("./c-profile.php");
                             break;
                         case "administrador":
-                            window.location.replace("./a-listaAprobados.html");
+                            window.location.replace("./c-profile.php");
                             break;
                         case "compravende":
                             window.location.replace("./landingPage.html");
@@ -85,7 +88,7 @@ $(document).ready(function() {
                 let data = $.parseJSON(response);
                 $('#txt_nombres').val(data.data.out_nombres);
                 $('#txt_apellidos').val(data.data.out_apellidos);
-                switch(data.data.out_username) {
+                switch(data.data.out_genero) {
                     case 'Hombre':
                         ("#rdb_h").attr('checked', true);
                         break;
@@ -95,6 +98,12 @@ $(document).ready(function() {
                     case 'Otro':
                         ("#rdb_o").attr('checked', true);
                         break;
+                }
+                if (data.data.out_privacidad) {
+                    ("#rdb_priv").attr('checked', true);
+                }
+                else {
+                    ("#rdb_publ").attr('checked', true);
                 }
                 $('#txt_fechanac').val(data.data.out_fechanac);
                 $('#txt_username').val(data.data.out_username);

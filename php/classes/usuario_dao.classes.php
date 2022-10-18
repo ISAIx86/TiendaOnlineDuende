@@ -12,7 +12,7 @@ class UsuarioDAO extends DBH {
     }
 
     private function prepareStatement($proc) {
-        $this->stmt = $this->connect()->prepare('call sp_Usuarios("'.$proc.'", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+        $this->stmt = $this->connect()->prepare('call sp_Usuarios("'.$proc.'", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
     }
 
     private function clearStatement() {
@@ -27,6 +27,7 @@ class UsuarioDAO extends DBH {
             $this->usuario->getUsername(),
             $this->usuario->getFechaNac(),
             $this->usuario->getSexo(),
+            $this->usuario->getPrivacidad(),
             $this->usuario->getRol(),
             $this->usuario->getCorreo(),
             $this->usuario->getHashedPassword(),
@@ -35,7 +36,7 @@ class UsuarioDAO extends DBH {
             $this->usuario->getCreador()
         ))) {
             $this->clearStatement();
-            header("Location: ../../landingPage.html");
+            header("Location: ../../index.php");
             exit();
         }
     }
@@ -169,22 +170,28 @@ class UsuarioDAO extends DBH {
         $this->setData($usu);
         $this->executeQuery();
 
+        $count = $this->countOfRows();
         $logged = $this->fetchData();
 
         $this->clearStatement();
 
-        if (!$logged[0]["result"]) {
-            return -1;
+        if ($count < 1) {
+            return -3;
         }
         else {
-            if (!password_verify($usu->getPassword(), $logged[0]["Pass"]))
-                return 0;
+            if (!$logged[0]["result"]) {
+                return -1;
+            }
             else {
-                $usu->setID($logged[0]["ID"])
-                    ->setUsername($logged[0]["Username"])
-                    ->setRol($logged[0]["Rol"])
-                    ->setCorreo($logged[0]["Correo"]);
-                return 1;
+                if (!password_verify($usu->getPassword(), $logged[0]["out_pass"]))
+                    return -2;
+                else {
+                    $usu->setID($logged[0]["out_id"])
+                        ->setUsername($logged[0]["out_username"])
+                        ->setRol($logged[0]["out_rol"])
+                        ->setCorreo($logged[0]["out_correo"]);
+                    return 0;
+                }
             }
         }
         
@@ -212,6 +219,7 @@ class UsuarioDAO extends DBH {
                 ->setCorreo($rt_data[0]['out_correo'])
                 ->setFechaNac($rt_data[0]['out_fechanac'])
                 ->setSexo($rt_data[0]['out_sexo'])
+                ->setPrivacidad($rt_data[0]['out_privacidad'])
                 ->setFechaCrea($rt_data[0]['out_feccre']);
             return true;
         }
