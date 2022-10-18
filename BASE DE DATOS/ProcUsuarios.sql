@@ -27,15 +27,16 @@ create definer=`root`@`localhost` procedure `sp_Usuarios`(
     in `_username` varchar(32),
     in `_fecha_nac` datetime,
     in `_sexo` char(1),
+    in `_privacidad` boolean,
     in `_rol` varchar(16),
     in `_correo_e` varchar(256),
     in `_pass` varchar(256),
     in `_avatar` blob,
     in `_avatar_dir` varchar(256),
-    in `_creador` varchar(36)
+    in `_autorizador` varchar(36)
 )
 begin
-
+declare excluder int;
 case
 -- //// REGISTRAR USUARIO \\\\ --
 	when (_proc = 'create') then
@@ -50,8 +51,7 @@ case
 			attr2,
 			attr3,
 			avatar,
-			avatar_dir,
-			creador
+			avatar_dir
 		)
 		values (
 			uuid_to_bin(uuid()),
@@ -64,8 +64,7 @@ case
 			_correo_e,
 			_pass,
 			_avatar,
-			_avatar_dir,
-			_creador
+			_avatar_dir
 		);
 -- //// MODIFICAR USUARIO \\\\ --
     when (_proc = 'modify') then
@@ -75,6 +74,7 @@ case
 			`username` = ifnull(_username, `username`),
 			`fecha_nac` = ifnull(_fecha_nac, `fecha_nac`),
 			`sexo` = ifnull(_sexo, `sexo`),
+            `privacidad` = ifnull(_privacidad, `privacidad`),
 			`avatar` = ifnull(_avatar, `avatar`),
 			`avatar_dir` = ifnull(_avatar_dir, `avatar_dir`),
 			`fecha_modif` = sysdate()
@@ -87,13 +87,13 @@ case
 -- //// RECUPERAR USUARIO \\\\ --
     when (_proc = 'backup') then
 		update `usuarios` set
-		`fecha_elim` = null
+			`fecha_elim` = null
 		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is not null;
 -- //// CHECAR CORREO \\\\ --
     when (_proc = 'checkE') then
 		select
 			count(*) as "result"
-		from `usuarios`
+			from `usuarios`
 		where `attr2` = _correo_e;
 -- //// MODIFICAR CORREO ELECTRÓNICO \\\\ --
     when (_proc = 'changeE') then
@@ -110,29 +110,44 @@ case
 -- //// INICIO DE SESIÓN \\\\ --
     when (_proc = 'login') then
 		if exists(select 1 from `usuarios` where `attr2` = _correo_e) then
-			select
-				1 as "result",
-				bin_to_uuid(`id_usuario`) as "ID",
-				`username` as "Username",
-				`attr1` as "Rol",
-				`attr2` as "Correo",
-				`attr3` as "Pass",
-				`avatar_dir` as "Imagen"
-			from `usuarios`
-			where `attr2` = _correo_e;
+			if ("administrador" = (select `attr1` from `usuarios` where `attr2` = _correo_e)) then
+				select
+					1 as 'result',
+					bin_to_uuid(`id_usuario`) as 'out_id',
+					`username` as 'out_username',
+					`attr1` as 'out_rol',
+					`attr2` as 'out_correo',
+					`attr3` as 'out_pass',
+					`avatar_dir` as 'out_img'
+				from `usuarios`
+				where `attr2` = _correo_e and `autorizador` is not null;
+            else
+				select
+					1 as 'result',
+					bin_to_uuid(`id_usuario`) as 'out_id',
+					`username` as 'out_username',
+					`attr1` as 'out_rol',
+					`attr2` as 'out_correo',
+					`attr3` as 'out_pass',
+					`avatar_dir` as 'out_img'
+				from `usuarios`
+				where `attr2` = _correo_e;
+            end if;
 		else
-			select 0 as "result";
+			select 0 as 'result';
 		end if;
+-- //// OBTENER DATOS PARA FORMULARIO \\\\ --
 	when (_proc = 'get_data') then
 		select
-			1 as "result",
-			`nombres` as "out_nombres",
-            `apellidos` as "out_apellidos",
-            `username` as "out_username",
-            `attr2` as "out_correo",
-            `fecha_nac` as "out_fechanac",
-            case `sexo` when 'H' then "Hombre" when 'M' then "Mujer" end as "out_sexo",
-            `fecha_creacion` as "out_feccre"
+			1 as 'result',
+			`nombres` as 'out_nombres',
+            `apellidos` as 'out_apellidos',
+            `username` as 'out_username',
+            `attr2` as 'out_correo',
+            `fecha_nac` as 'out_fechanac',
+            `sexo` as 'out_sexo',
+            `privacidad` as 'out_privacidad',
+            `fecha_creacion` as 'out_feccre'
         from `usuarios`
         where `id_usuario` = uuid_to_bin(_id_usuario);
 -- //// COMANDO NO VÁLIDO \\\\ --

@@ -46,6 +46,7 @@ create table if not exists `usuarios`(
     `username` varchar(32) not null comment "Nickname o nombre de usuario",
     `fecha_nac` date not null comment "Fecha de nacimiento del usuario, para obtener dinamicamente su edad",
     `sexo` char not null comment "Sexo del usuario, hombre/mujer/etc.",
+    `privacidad` boolean not null default 0 comment "Privacidad del usuario. 0 si es público, 1 si es privado",
     
     `attr1` varchar(16) not null comment "Rol de usuario",
     `attr2` varchar(256) not null unique comment "Correo electrónico",
@@ -54,10 +55,10 @@ create table if not exists `usuarios`(
     `avatar` blob comment "Imagen avatar del usuario",
     `avatar_dir` varchar(256) comment "Ruta del recurso del avatar del usuario",
     
-    `creador` binary(16) comment "Super administrador creador del usuario. Solo aplica a administradores",
+    `autorizador` binary(16) default null comment "Super administrador que autoriza al usuario administrador. Solo aplica a administradores",
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro del usuario",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja del usuario",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja del usuario",
     
     primary key (id_usuario)
 );
@@ -78,8 +79,8 @@ create table if not exists `domicilios`(
     `default` boolean not null default 0 comment "Domicilio de entrega por defecto. Es la selección por defecto del usuario para recibir su pedido",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja",
     
     primary key (id_domicilio)
 );
@@ -99,8 +100,8 @@ create table if not exists `listas`(
     `imagen_dir` varchar(256) comment "Ruta del recurso de imagen de la lista",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja",
     
     primary key (id_lista)
 );
@@ -117,7 +118,7 @@ create table if not exists `tarjetas`(
     `cvv` char(3) not null comment "Clave de seguridad",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
     
     primary key (id_tarj)
 );
@@ -132,8 +133,8 @@ create table if not exists `categorias`(
     `descripcion` text not null comment "Breve descripción de lo que trata la categoría",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja",
     
     primary key (id_catego)
 );
@@ -153,11 +154,11 @@ create table if not exists `productos`(
     `disponibilidad` int not null comment "Unidades del producto disponibles",
     `calificacion` decimal (2, 1) not null default 0.0 comment "Valoración del producto por los compradores",
     
-    `fecha_autorizado` timestamp comment "Fecha de autorización",
+    `fecha_autorizado` timestamp default null comment "Fecha de autorización",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro del producto",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja",
     
     primary key (id_producto)
 );
@@ -186,7 +187,7 @@ create table if not exists `multimedia`(
     `contenido_dir` varchar(256) not null comment "Ruta del contenido multimedia",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro del producto",
-    `fecha_elim` timestamp comment "Fecha de baja",
+    `fecha_elim` timestamp default null comment "Fecha de baja",
     
     primary key (id_mult)
 );
@@ -201,11 +202,11 @@ create table if not exists `super_admins`(
     `username` varchar(32) not null comment "Nickname o nombre de usuario",
     
     `attr2` varchar(256) not null comment "Correo electrónico",
-    `attr3` varchar(256) not null comment "Contraseña",
+    `attr3` varchar(16) not null comment "Contraseña",
     
     `fecha_creacion` timestamp not null default current_timestamp comment "Fecha de registro del usuario",
-    `fecha_modif` timestamp comment "Fecha de última modificacion",
-    `fecha_elim` timestamp comment "Fecha de baja del usuario",
+    `fecha_modif` timestamp default null comment "Fecha de última modificacion",
+    `fecha_elim` timestamp default null comment "Fecha de baja del usuario",
     
     primary key (id_sadmin)
 );
