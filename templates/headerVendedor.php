@@ -13,7 +13,6 @@
                             <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./v-perfilVendedor.php">Mi Perfil</a></li>
                             <li><a class="dropdown-item" href="./c-profile.php">Mi cuenta</a></li>
                             <li><a class="dropdown-item" href="./php/includes/close_session_inc.php">Cerrar sesión</a></li>
                         </ul>
@@ -51,16 +50,13 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="v-registrarProducto.html">Registrar Producto</a>
+                    <a class="nav-link active" aria-current="page" href="v-registrarProducto.html">Registrar producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="v-crearCategoria.html">Registrar Categoria</a>
+                    <a class="nav-link" href="v-crearCategoria.html">Registrar categoria</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="v-cotizacion.html">Cotizaciones pendientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="v-perfilVendedor.html">Perfil Publico</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +65,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="v-existencia.html">Existencias</a></li>  
                         <li><a class="dropdown-item" href="v-listaVentas.html">Ventas detalladas</a></li>
-                        <li><a class="dropdown-item" href="v-ventaAgrupada.html">Ventas Agrupadas</a></li>    
+                        <li><a class="dropdown-item" href="v-ventaAgrupada.html">Ventas agrupadas</a></li>    
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>

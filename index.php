@@ -27,18 +27,18 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuidado con el duende</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href = "css/Nuevo.css">
+    <link rel="stylesheet" href = "./css/Nuevo.css">
 </head>
 <body>
     <header>
         <div class="container_menu">
             <div class="logo">
-                <img src="resources/logo02.png" alt="">
+                <img src="./resources/logo02.png" alt="">
             </div>
             <div class="menu">
                 <nav id="nav">
                     <ul>
-                        <li><button onclick="location.href='registro.html'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Registrarse</button></li>
+                        <li><button onclick="location.href='./registro.html'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Registrarse</button></li>
                         <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
                     </ul>
                 </nav>
