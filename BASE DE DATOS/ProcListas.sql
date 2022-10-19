@@ -7,7 +7,7 @@
 
 -- // Bases de datos multimedia y Programación web de capa intermedia.
 -- // Alexis Isaí Contreras Garza / Matrícula 1823636
--- // Maikol Ariel Paredes Olguín / Matrícula 
+-- // Maikol Ariel Paredes Olguín / Matrícula 1687850
 
 use tienda_online;
 
@@ -16,34 +16,33 @@ use tienda_online;
 -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 DELIMITER $$
-drop procedure if exists `sp_Listas`;
+drop procedure if exists sp_Listas;
 $$ DELIMITER ;
 DELIMITER $$
-create definer=`root`@`localhost` procedure `sp_Listas`(
-	in `_proc` varchar(16),
-    in `_id_lista` varchar(36),
-	in `_id_usuario` varchar(36),
-    in `_nombre` varchar(32),
-    in `_descripcion` varchar(256),
-    in `_privacidad` boolean,
-    in `_imagen` blob,
-    in `_imagen_dir` varchar(256)
+create procedure sp_Listas (
+	in _proc varchar(16),
+    in _id_lista varchar(36),
+	in _id_usuario varchar(36),
+    in _nombre varchar(32),
+    in _descripcion varchar(256),
+    in _privacidad boolean,
+    in _imagen blob,
+    in _imagen_dir varchar(256)
 )
 begin
 
-case
+case (_proc)
 -- //// CREAR LISTA \\\\ --
-	when (_proc = 'create') then
-		insert into `listas` (
-			`id_lista`,
-			`id_usuario`,
-			`nombre`,
-			`descripcion`,
-			`privacidad`,
-			`imagen`,
-			`imagen_dir`
-		)
-		values (
+	when ('create') then
+		insert into listas (
+			id_lista,
+			id_usuario,
+			nombre,
+			descripcion,
+			privacidad,
+			imagen,
+			imagen_dir
+		) values (
 			uuid_to_bin(uuid()),
 			uuid_to_bin(_id_usuario),
 			_nombre,
@@ -53,20 +52,20 @@ case
 			_imagen_dir
 		);
 -- //// MODIFICAR LISTA \\\\ --
-    when (_proc = 'modify') then
-		update `listas` set
-			`nombre` = ifnull(_nombre, `nombre`),
-			`descripcion` = ifnull(_descripcion, `descripcion`),
-			`privacidad` = ifnull(_privacidad, `privacidad`),
-			`imagen` = ifnull(_imagen, `imagen`),
-			`imagen_dir` = ifnull(_imagen_dir, `imagen_dir`),
-			`fecha_modif` = sysdate()
-		where `id_lista` = uuid_to_bin(_id_lista);
+    when ('modify') then
+		update listas set
+			nombre = ifnull(_nombre, nombre),
+			descripcion = ifnull(_descripcion, descripcion),
+			privacidad = ifnull(_privacidad, privacidad),
+			imagen = ifnull(_imagen, imagen),
+			imagen_dir = ifnull(_imagen_dir, imagen_dir),
+			fecha_modif = sysdate()
+		where id_lista = uuid_to_bin(_id_lista);
 -- //// ELIMINAR LISTA \\\\ --
-    when (_proc = 'delete') then
-		update `listas` set
-			`fecha_elim` = sysdate()
-		where `id_lista` = uuid_to_bin(_id_lista);
+    when ('delete') then
+		update listas set
+			fecha_elim = sysdate()
+		where id_lista = uuid_to_bin(_id_lista);
 -- //// COMANDO NO VÁLIDO \\\\ --
 	else 
 		select "invalid_command" as 'result';

@@ -7,7 +7,7 @@
 
 -- // Bases de datos multimedia y Programación web de capa intermedia.
 -- // Alexis Isaí Contreras Garza / Matrícula 1823636
--- // Maikol Ariel Paredes Olguín / Matrícula 
+-- // Maikol Ariel Paredes Olguín / Matrícula 1687850
 
 use tienda_online;
 
@@ -16,31 +16,31 @@ use tienda_online;
 -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 DELIMITER $$
-drop procedure if exists `sp_Usuarios`;
+drop procedure if exists sp_Usuarios;
 $$ DELIMITER ;
 DELIMITER $$
-create definer=`root`@`localhost` procedure `sp_Usuarios`(
-	in `_proc` varchar(16),
-    in `_id_usuario` varchar(36),
-    in `_nombres` varchar(64),
-    in `_apellidos` varchar(64),
-    in `_username` varchar(32),
-    in `_fecha_nac` datetime,
-    in `_sexo` char(1),
-    in `_privacidad` boolean,
-    in `_rol` varchar(16),
-    in `_correo_e` varchar(256),
-    in `_pass` varchar(256),
-    in `_avatar` blob,
-    in `_avatar_dir` varchar(256),
-    in `_autorizador` varchar(36)
+create procedure sp_Usuarios (
+	in _proc varchar(16),
+    in _id_usuario varchar(36),
+    in _nombres varchar(64),
+    in _apellidos varchar(64),
+    in _username varchar(32),
+    in _fecha_nac datetime,
+    in _sexo char(1),
+    in _privacidad boolean,
+    in _rol varchar(16),
+    in _correo_e varchar(256),
+    in _pass varchar(256),
+    in _avatar blob,
+    in _avatar_dir varchar(256),
+    in _autorizador varchar(36)
 )
 begin
 declare excluder int;
-case
+case _proc
 -- //// REGISTRAR USUARIO \\\\ --
-	when (_proc = 'create') then
-		insert into `usuarios` (
+	when ('create') then
+		insert into usuarios (
 			id_usuario,
 			nombres,
 			apellidos,
@@ -52,8 +52,7 @@ case
 			attr3,
 			avatar,
 			avatar_dir
-		)
-		values (
+		) values (
 			uuid_to_bin(uuid()),
 			_nombres,
 			_apellidos,
@@ -67,89 +66,89 @@ case
 			_avatar_dir
 		);
 -- //// MODIFICAR USUARIO \\\\ --
-    when (_proc = 'modify') then
-		update `usuarios` set
-			`nombres` = ifnull(_nombres, `nombres`),
-			`apellidos` = ifnull(_apellidos, `apellidos`),
-			`username` = ifnull(_username, `username`),
-			`fecha_nac` = ifnull(_fecha_nac, `fecha_nac`),
-			`sexo` = ifnull(_sexo, `sexo`),
-            `privacidad` = ifnull(_privacidad, `privacidad`),
-			`avatar` = ifnull(_avatar, `avatar`),
-			`avatar_dir` = ifnull(_avatar_dir, `avatar_dir`),
-			`fecha_modif` = sysdate()
-		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is null;
+    when ('modify') then
+		update usuarios set
+			nombres = ifnull(_nombres, nombres),
+			apellidos = ifnull(_apellidos, apellidos),
+			username = ifnull(_username, username),
+			fecha_nac = ifnull(_fecha_nac, fecha_nac),
+			sexo = ifnull(_sexo, sexo),
+            privacidad = ifnull(_privacidad, privacidad),
+			avatar = ifnull(_avatar, avatar),
+			avatar_dir = ifnull(_avatar_dir, avatar_dir),
+			fecha_modif = sysdate()
+		where id_usuario = uuid_to_bin(_id_usuario) and fecha_elim is null;
 -- //// ELIMINAR USUARIO \\\\ --
-    when (_proc = 'delete') then
-		update `usuarios` set
-			`fecha_elim` = sysdate()
-		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is null;
+    when ('delete') then
+		update usuarios set
+			fecha_elim = sysdate()
+		where id_usuario = uuid_to_bin(_id_usuario) and fecha_elim is null;
 -- //// RECUPERAR USUARIO \\\\ --
-    when (_proc = 'backup') then
-		update `usuarios` set
-			`fecha_elim` = null
-		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is not null;
+    when ('backup') then
+		update usuarios set
+			fecha_elim = null
+		where id_usuario = uuid_to_bin(_id_usuario) and fecha_elim is not null;
 -- //// CHECAR CORREO \\\\ --
-    when (_proc = 'checkE') then
+    when ('checkE') then
 		select
 			count(*) as "result"
-			from `usuarios`
-		where `attr2` = _correo_e;
+			from usuarios
+		where attr2 = _correo_e;
 -- //// MODIFICAR CORREO ELECTRÓNICO \\\\ --
-    when (_proc = 'changeE') then
-		update `usuarios` set
-			`attr2` = ifnull(_correo_e, `attr2`),
-			`fecha_modif` = sysdate()
-		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is null;
+    when ('changeE') then
+		update usuarios set
+			attr2 = ifnull(_correo_e, attr2),
+			fecha_modif = sysdate()
+		where id_usuario = uuid_to_bin(_id_usuario) and fecha_elim is null;
 -- //// MODIFICAR CONTRASEÑA \\\\ --
-    when (_proc = 'changeP') then
-		update `usuarios` set
-			`attr3` = ifnull(_pass, `attr3`),
-			`fecha_modif` = sysdate()
-		where `id_usuario` = uuid_to_bin(_id_usuario) and `fecha_elim` is null;
+    when ('changeP') then
+		update usuarios set
+			attr3 = ifnull(_pass, attr3),
+			fecha_modif = sysdate()
+		where id_usuario = uuid_to_bin(_id_usuario) and fecha_elim is null;
 -- //// INICIO DE SESIÓN \\\\ --
-    when (_proc = 'login') then
-		if exists(select 1 from `usuarios` where `attr2` = _correo_e) then
-			if ("administrador" = (select `attr1` from `usuarios` where `attr2` = _correo_e)) then
+    when ('login') then
+		if exists(select 1 from usuarios where attr2 = _correo_e) then
+			if ("administrador" = (select attr1 from usuarios where attr2 = _correo_e)) then
 				select
 					1 as 'result',
-					bin_to_uuid(`id_usuario`) as 'out_id',
-					`username` as 'out_username',
-					`attr1` as 'out_rol',
-					`attr2` as 'out_correo',
-					`attr3` as 'out_pass',
-					`avatar_dir` as 'out_img'
-				from `usuarios`
-				where `attr2` = _correo_e and `autorizador` is not null;
+					bin_to_uuid(id_usuario) as 'out_id',
+					username as 'out_username',
+					attr1 as 'out_rol',
+					attr2 as 'out_correo',
+					attr3 as 'out_pass',
+					avatar_dir as 'out_img'
+				from usuarios
+				where attr2 = _correo_e and autorizador is not null;
             else
 				select
 					1 as 'result',
-					bin_to_uuid(`id_usuario`) as 'out_id',
-					`username` as 'out_username',
-					`attr1` as 'out_rol',
-					`attr2` as 'out_correo',
-					`attr3` as 'out_pass',
-					`avatar_dir` as 'out_img'
-				from `usuarios`
-				where `attr2` = _correo_e;
+					bin_to_uuid(id_usuario) as 'out_id',
+					username as 'out_username',
+					attr1 as 'out_rol',
+					attr2 as 'out_correo',
+					attr3 as 'out_pass',
+					avatar_dir as 'out_img'
+				from usuarios
+				where attr2 = _correo_e;
             end if;
 		else
 			select 0 as 'result';
 		end if;
 -- //// OBTENER DATOS PARA FORMULARIO \\\\ --
-	when (_proc = 'get_data') then
+	when ('get_data') then
 		select
 			1 as 'result',
-			`nombres` as 'out_nombres',
-            `apellidos` as 'out_apellidos',
-            `username` as 'out_username',
-            `attr2` as 'out_correo',
-            `fecha_nac` as 'out_fechanac',
-            `sexo` as 'out_sexo',
-            `privacidad` as 'out_privacidad',
-            `fecha_creacion` as 'out_feccre'
-        from `usuarios`
-        where `id_usuario` = uuid_to_bin(_id_usuario);
+			nombres as 'out_nombres',
+            apellidos as 'out_apellidos',
+            username as 'out_username',
+            attr2 as 'out_correo',
+            fecha_nac as 'out_fechanac',
+            sexo as 'out_sexo',
+            privacidad as 'out_privacidad',
+            fecha_creacion as 'out_feccre'
+        from usuarios
+        where id_usuario = uuid_to_bin(_id_usuario);
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';
