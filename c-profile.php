@@ -30,9 +30,20 @@
         include (__DIR__.'/php/classes/usuario_contr.classes.php');
 
         if (isset($_SESSION['user'])) {
-            $buscar_usuario = Usuario::create()->setID($_SESSION['user']['ID']);
-            $controller = new UsuarioContr($buscar_usuario);
-            $userData = $controller->obtenerDatos();
+            $controller = new UsuarioContr();
+            $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
+            if (gettype($userData) == "string") {
+                switch ($userData) {
+                    case "uncaptured_id":
+                        header("Location: ./index.php");
+                        break;
+                    case "not_found":
+                        header("Location: ./index.php");
+                        break;
+                }
+            } else if (!$userData) {
+                header("Location: ./index.php");
+            }
         }
     ?>
     <!-- Container -->
@@ -63,25 +74,25 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <h5>Usuario</h5>
-                                    <h8><?php echo $userData['Username'] ?></h8>
+                                    <h8><?php echo $userData['rs_username'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>E-mail</h5>
-                                    <h8><?php echo $userData['Correo'] ?></h8>
+                                    <h8><?php echo $userData['rs_correo'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Nombre y Apellido</h5>
-                                    <h8><?php echo $userData['Nombres'] . " " . $userData['Apellidos']  ?></h8>
+                                    <h8><?php echo $userData['rs_nombres'] . " " . $userData['rs_apellidos']  ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Fecha de nacimiento</h5>
-                                    <h8><?php echo $userData['Fecha_nac'] ?></h8>
+                                    <h8><?php echo $userData['rs_fecha_nac'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Genero</h5>
                                     <h8>
                                         <?php
-                                            switch ($userData['Sexo']) {
+                                            switch ($userData['rs_sexo']) {
                                                 case 'H':
                                                     echo "Hombre";
                                                     break;
@@ -99,7 +110,7 @@
                                     <h5>Privacidad de la cuenta</h5>
                                     <h8>
                                         <?php 
-                                            if ($userData['Privacidad']) {
+                                            if ($userData['rs_privacidad']) {
                                                 echo "Privado";
                                             }
                                             else {
@@ -110,7 +121,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Fecha de registro</h5>
-                                    <h8><?php echo $userData['Fecha_crea'] ?></h8>
+                                    <h8><?php echo $userData['rs_fecha_crea'] ?></h8>
                                 </li>
                             </ul>
                         </div>

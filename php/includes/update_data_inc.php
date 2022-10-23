@@ -7,70 +7,70 @@ session_start();
 if (isset($_SESSION['user'])) {
     if (isset($_POST['submit'])) {
         $mode = $_POST['mode'];
-        $user = Usuario::create()->setID($_SESSION['user']['ID']);
-        switch($mode) {
-            case 'data':
-                $user->setNombres($_POST['in_nombres'])
+        switch ($mode) {
+            case 'data': {
+                $user = Usuario::create()
+                    ->setID($_SESSION['user']['ID'])
+                    ->setNombres($_POST['in_nombres'])
                     ->setApellidos($_POST['in_apellidos'])
                     ->setUsername($_POST['in_username'])
                     ->setFechaNac($_POST['in_fechanac'])
                     ->setSexo($_POST['in_genero'])
                     ->setPrivacidad($_POST['in_privacidad']);
-                $controller = new UsuarioContr($user);
-                if ($controller->modificarUsuario()) {
-                    $_SESSION['user']['Username'] = $_POST['in_username'];
-                    echo json_encode(array('result'=>"success", 'reason'=>"success",
-                        'data'=>array(
-                            'out_nombres'=>$_POST['in_nombres'],
-                            'out_apellidos'=>$_POST['in_apellidos'],
-                            'out_username'=>$_POST['in_username'],
-                            'out_fechanac'=>$_POST['in_fechanac'],
-                            'out_genero'=>$_POST['in_genero'],
-                            'out_privacidad'=>$_POST['in_privacidad']
-                        )
-                    ));
+                $controller = new UsuarioContr();
+                $result = $controller->modificarUsuario();
+                if (gettype($result) == "string") {
+                    echo json_encode(array('result'=>"error", 'reason'=>$result));
+                    exit();
+                } else if (!$result) {
+                    echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
                     exit();
                 }
-                else {
-                    echo json_encode(array('result'=>"error", 'reason'=>"failure_tried_update_info"));
-                    exit();
-                }
+                $_SESSION['user']['Username'] = $_POST['in_username'];
+                echo json_encode(array('result'=>"success", 'reason'=>"success"));
+                exit();
                 break;
-            case 'email':
-                if ($_SESSION['user']['Correo'] != $_POST['in_correo']) {
-                    $user->setCorreo($_POST['in_correo']);
-                    $controller = new UsuarioContr($user);
-                    if ($controller->modificarCorreo()) {
-                        $_SESSION['user']['Correo'] = $_POST['in_correo'];
-                        echo json_encode(array('result'=>"success", 'reason'=>"success",
-                            'data'=>array('out_email'=>$_POST['in_correo'])
-                        ));
-                        exit();
-                    }
-                    else {
-                        echo json_encode(array('result'=>"error", 'reason'=>"failure_tried_update_email"));
-                        exit();
-                    }
-                }
-                else {
+            }
+            case 'email': {
+                if ($_SESSION['user']['Correo'] == $_POST['in_correo']) {
                     echo json_encode(array('result'=>"error", 'reason'=>"actual_email"));
                     exit();
                 }
+                $controller = new UsuarioContr();
+                $result = $controller->modificarCorreo($_SESSION['user']['ID'], $_POST['in_correo']);
+                if (gettype($result) == "string") {
+                    echo json_encode(array('result'=>"error", 'reason'=>$result));
+                    exit();
+                }
+                else if (!$result) {
+                    echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
+                    exit();
+                }
+                $_SESSION['user']['Correo'] = $_POST['in_correo'];
+                echo json_encode(array('result'=>"success", 'reason'=>"success",
+                    'data'=>array('out_email'=>$_POST['in_correo'])
+                ));
+                exit();
                 break;
-            case 'password':
-                $user->setCorreo($_SESSION['user']['Correo'])
+            }
+            case 'password': {
+                $user->setCorreo()
                     ->setPassword($_POST['in_prevpass'])
                     ->setConfPass($_POST['in_confirm']);
                 $controller = new UsuarioContr($user);
-                if ($controller->modificarContra($_POST['in_password'])) {
-                    echo json_encode(array('result'=>"success", 'reason'=>"success"));
+                $result = $controller->modificarContra($_SESSION['user']['ID'], $_SESSION['user']['Correo'], $_POST['in_prevpass'], $_POST['in_password'], $_POST['in_confirm']);
+                if (gettype($result) == "string") {
+                    echo json_encode(array('result'=>"error", 'reason'=>$result));
                     exit();
                 }
-                else {
-                    echo json_encode(array('result'=>"error", 'reason'=>"failure_tried_update_passw"));
+                else if (!$result) {
+                    echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
                     exit();
                 }
+                echo json_encode(array('result'=>"success", 'reason'=>"success"));
+                exit();
                 break;
+            }
         }
     }
 }

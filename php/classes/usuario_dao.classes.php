@@ -3,82 +3,42 @@
 include (__DIR__.'/../classes/dbo.classes.php');
 
 class UsuarioDAO extends DBH {
-
-    private $stmt = null;
-    private Usuario $usuario;
-
+   
+    /*
     public function __construct() {
-        $this->usuario = Usuario::create();
+        
+    }
+    */
+
+    // Statement
+    protected function prepareStatement($proc) {
+        $this->setPrepareStatement("call sp_Usuarios('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     }
 
-    private function prepareStatement($proc) {
-        $this->stmt = $this->connect()->prepare('call sp_Usuarios("'.$proc.'", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    private function executeCall($data) {
+        $this->executeQuery(array(
+            $data->getID(),
+            $data->getNombres(),
+            $data->getApellidos(),
+            $data->getUsername(),
+            $data->getFechaNac(),
+            $data->getSexo(),
+            $data->getPrivacidad(),
+            $data->getRol(),
+            $data->getCorreo(),
+            $data->getHashedPassword(),
+            $data->getAvatar(),
+            $data->getAvatarDir(),
+            $data->getCreador()
+        ));
     }
 
-    private function clearStatement() {
-        $this->stmt = null;
-    }
-
-    private function executeQuery() {
-        if (!$this->stmt->execute(array(
-            $this->usuario->getID(),
-            $this->usuario->getNombres(),
-            $this->usuario->getApellidos(),
-            $this->usuario->getUsername(),
-            $this->usuario->getFechaNac(),
-            $this->usuario->getSexo(),
-            $this->usuario->getPrivacidad(),
-            $this->usuario->getRol(),
-            $this->usuario->getCorreo(),
-            $this->usuario->getHashedPassword(),
-            $this->usuario->getAvatar(),
-            $this->usuario->getAvatarDir(),
-            $this->usuario->getCreador()
-        ))) {
-            $this->clearStatement();
-            header("Location: ../../index.php");
-            exit();
-        }
-    }
-
-    private function setData(Usuario $usu) {
-        $this->usuario->copy($usu);
-    }
-
-    private function fetchData() {
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    private function countOfRows() {
-        return $this->stmt->rowCount();
-    }
-
-    // Metodos débiles
-    protected function us_checar_correo($correo) {
-
-        $this->prepareStatement('checkE');
-
-        $this->setData(Usuario::create()->setCorreo($correo));
-        $this->executeQuery();
-
-        $count = $this->fetchData()[0]["result"];
-
-        $this->clearStatement();
-
-        if ($count < 1){
-            return false;
-        }
-        else return true;
-
-    }
-
-    // Métodos fuertes
+    // CRUD
     protected function us_registro(Usuario $usu) {
 
         $this->prepareStatement('create');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
         
@@ -95,8 +55,7 @@ class UsuarioDAO extends DBH {
 
         $this->prepareStatement('modify');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -109,12 +68,13 @@ class UsuarioDAO extends DBH {
 
     }
 
-    protected function us_baja(Usuario $usu) {
+    protected function us_baja($id) {
 
         $this->prepareStatement('delete');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $usu = Usuario::create()->setID($id);
+
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -127,30 +87,14 @@ class UsuarioDAO extends DBH {
         
     }
 
-    protected function us_cambiar_correo(Usuario $usu) {
+    // Consultas
+    protected function us_checar_correo($correo) {
 
-        $this->prepareStatement('changeE');
+        $this->prepareStatement('checkE');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $usu = Usuario::create()->setCorreo($correo);
 
-        $count = $this->countOfRows();
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-
-    }
-
-    protected function us_cambiar_contra(Usuario $usu) {
-
-        $this->prepareStatement('changeP');
-
-        $this->setData($usu);
-        $this->executeQuery();
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -163,46 +107,49 @@ class UsuarioDAO extends DBH {
 
     }
 
-    protected function us_login(Usuario &$usu) {
+    protected function us_login($correo, $pass) {
 
         $this->prepareStatement('login');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $usu = Usuario::create()->setCorreo($correo);
+
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
-        $logged = $this->fetchData();
+        $rt_data = $this->fetchData();
 
         $this->clearStatement();
 
         if ($count < 1) {
-            return -3;
+            return "unauthorized_admin";
         }
         else {
-            if (!$logged[0]["result"]) {
-                return -1;
+            if (!$rt_data[0]["result"]) {
+                return "not_found";
             }
             else {
-                if (!password_verify($usu->getPassword(), $logged[0]["out_pass"]))
-                    return -2;
+                if (!password_verify($pass, $rt_data[0]["out_pass"]))
+                    return "wrong_password";
                 else {
-                    $usu->setID($logged[0]["out_id"])
-                        ->setUsername($logged[0]["out_username"])
-                        ->setRol($logged[0]["out_rol"])
-                        ->setCorreo($logged[0]["out_correo"]);
-                    return 0;
+                    return array(
+                        "ID"=>$rt_data[0]["out_id"],
+                        "Username"=>$rt_data[0]["out_username"],
+                        "Rol"=>$rt_data[0]["out_rol"],
+                        "Correo"=>$rt_data[0]["out_correo"]
+                    );
                 }
             }
         }
         
     }
 
-    protected function us_getdata(Usuario &$usu) {
+    protected function us_getdata($id) {
 
         $this->prepareStatement('get_data');
 
-        $this->setData($usu);
-        $this->executeQuery();
+        $usu = Usuario::create()->setID($id);
+
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
         $rt_data = $this->fetchData();
@@ -213,16 +160,56 @@ class UsuarioDAO extends DBH {
             return false;
         }
         else {
-            $usu->setNombres($rt_data[0]['out_nombres'])
-                ->setApellidos($rt_data[0]['out_apellidos'])
-                ->setUsername($rt_data[0]['out_username'])
-                ->setCorreo($rt_data[0]['out_correo'])
-                ->setFechaNac($rt_data[0]['out_fechanac'])
-                ->setSexo($rt_data[0]['out_sexo'])
-                ->setPrivacidad($rt_data[0]['out_privacidad'])
-                ->setFechaCrea($rt_data[0]['out_feccre']);
-            return true;
+            return array(
+                "rs_nombres"=>$rt_data[0]['out_nombres'],
+                "rs_apellidos"=>$rt_data[0]['out_apellidos'],
+                "rs_username"=>$rt_data[0]['out_username'],
+                "rs_correo"=>$rt_data[0]['out_correo'],
+                "rs_fecha_nac"=>$rt_data[0]['out_fechanac'],
+                "rs_sexo"=>$rt_data[0]['out_sexo'],
+                "rs_privacidad"=>$rt_data[0]['out_privacidad'],
+                "rs_fecha_crea"=>$rt_data[0]['out_feccre']
+            );
         }
+
+    }
+
+    // Modificaciones individuales
+    protected function us_cambiar_correo($id, $correo) {
+
+        $this->prepareStatement('changeE');
+
+        $usu = Usuario::create()->setID($id)->setCorreo($correo);
+
+        $this->executeCall($usu);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
+    protected function us_cambiar_contra($id, $pass) {
+
+        $this->prepareStatement('changeP');
+
+        $usu = Usuario::create()->setID($id)->setPassword($pass);
+
+        $this->executeCall($usu);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
 
     }
 

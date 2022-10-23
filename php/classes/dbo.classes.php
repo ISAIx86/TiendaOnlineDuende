@@ -1,22 +1,48 @@
 <?php
 
-class DBH {
+abstract class DBH {
 
+    private $conn = null;
+    private $stmt = null;
     private $server = "localhost";
     private $username = "root";
     private $password = "root";
     private $database = "tienda_online";
 
-    protected function connect() {
+    private function connect() {
         try {
-            $conn = new PDO("mysql:host=$this->server;dbname=$this->database;", $this->username, $this->password);
-            return $conn;
+            $this->conn = new PDO("mysql:host=$this->server;dbname=$this->database;", $this->username, $this->password);
         }
         catch (PDOException $error) {
             die ("Connection failed" . $error->getMessage());
         }
     }
-    
+
+    protected function setPrepareStatement($state) {
+        $this->connect();
+        $this->stmt = $this->conn->prepare($state);
+    }
+
+    protected function executeQuery($data_arr) {
+        if (!$this->stmt->execute($data_arr)) {
+            $this->clearStatement();
+            header("Location: ../../index.php");
+            exit();
+        }
+    }
+
+    protected function countOfRows() {
+        return $this->stmt->rowCount();
+    }
+
+    protected function fetchData() {
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    protected function clearStatement() {
+        $this->stmt = null;
+    }
+
 }
 
 ?>

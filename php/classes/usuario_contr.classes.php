@@ -4,196 +4,123 @@ include (__DIR__.'/../classes/usuario_dao.classes.php');
 
 class UsuarioContr extends UsuarioDAO {
 
-    private Usuario $usuario;
-
-    public function __construct(Usuario $usu) {
-        parent::__construct();
-        $this->usuario = $usu;
+    public function __construct() {
     }
     
     // Métodos débiles
-    private function matchPSW() {
-        if ($this->usuario->getPassword() !== $this->usuario->getConfPass()) {
+    private function isMatchPassword($usu) {
+        if ($usu->getPassword() !== $usu->getConfPass()) {
             return false;
         }
         else return true;
     }
 
-    private function userCheck() {
-        if ($this->us_checar_correo($this->usuario->getCorreo())) {
-            return false;
-        }
-        else return true;
+    private function userCheck($email) {
+        return $this->us_checar_correo($email);
     }
 
-    private function emptyInputR() {
+    private function hasEmptyInputForRegister(Usuario $usu) {
         if (
-            empty($this->usuario->getNombres()) |
-            empty($this->usuario->getApellidos()) |
-            empty($this->usuario->getUsername()) |
-            empty($this->usuario->getFechaNac()) |
-            empty($this->usuario->getSexo()) |
-            empty($this->usuario->getRol()) |
-            empty($this->usuario->getCorreo()) |
-            empty($this->usuario->getPassword()) |
-            empty($this->usuario->getConfPass())
+            empty($usu->getNombres()) |
+            empty($usu->getApellidos()) |
+            empty($usu->getUsername()) |
+            empty($usu->getFechaNac()) |
+            empty($usu->getSexo()) |
+            empty($usu->getRol()) |
+            empty($usu->getCorreo()) |
+            empty($usu->getPassword()) |
+            empty($usu->getConfPass())
         ) {
-            return false;
+            return true;
         }
-        else return true;
+        else return false;
     }
 
-    private function emptyInputM() {
+    private function hasEmptyInputForModify(Usuario $usu) {
         if (
-            empty($this->usuario->getNombres()) |
-            empty($this->usuario->getApellidos()) |
-            empty($this->usuario->getUsername()) |
-            empty($this->usuario->getFechaNac()) |
-            empty($this->usuario->getSexo())
+            empty($usu->getNombres()) |
+            empty($usu->getApellidos()) |
+            empty($usu->getUsername()) |
+            empty($usu->getFechaNac()) |
+            empty($usu->getSexo())
         ) {
-            return false;
+            return true;
         }
-        else return true;
-    }
-
-    private function emptyInputL() {
-        if (empty($this->usuario->getCorreo()) | empty($this->usuario->getPassword())) {
-            return false;
-        }
-        else return true;
-    }
-
-    private function emptyInputID() {
-        if (empty($this->usuario->getID())) {
-            return false;
-        }
-        else return true;
-    }
-
-    private function emptyInputE() {
-        if (empty($this->usuario->getCorreo())) {
-            return false;
-        }
-        else return true;
-    }
-
-    private function emptyInputPSW() {
-        if (empty($this->usuario->getPassword()) | empty($this->usuario->getConfPass())) {
-            return false;
-        }
-        else return true;
+        else return false;
     }
     
     // Métodos fuertes
-    public function registrarUsuario() {
-        if (!$this->emptyInputR()) {
-            header('location: ../index.html');
-            exit();
-        }
-        if (!$this->matchPSW()) {
-            header('location: ../index.html');
-            exit();
-        }
-        if (!$this->userCheck()) {
-            header('location: ../index.html');
-            exit();
-        }
-        return $this->us_registro($this->usuario);
-    }
-
-    public function ingresarUsuario() {
-        if (!$this->emptyInputL()) {
+    public function registrarUsuario(Usuario $nuevo_usu) {
+        if ($this->hasEmptyInputForRegister($nuevo_usu)) {
             return "empty_inputs";
         }
+        if (!$this->isMatchPassword()) {
+            return "unmatch_confirm";
+        }
         if ($this->userCheck()) {
-            return "no_exists";
+            return "already_exists";
         }
-        switch($this->us_login($this->usuario)) {
-            case -1:
-                return "not_found";
-                break;
-            case -2:
-                return "wrong_password";
-                break;
-            case -3:
-                return "unauthorized_admin";
-                break;
-            case 0:
-                return "user_logged";
-                break;
-        }
+        return $this->us_registro($nuevo_usu);
     }
 
-    public function modificarUsuario() {
-        if (!$this->emptyInputID()) {
+    public function ingresarUsuario($email, $pass) {
+        if (empty($email) | empty($pass)) {
+            return "empty_inputs";
+        }
+        if (!$this->userCheck($email)) {
+            return "no_exists";
+        }
+        return $this->us_login($email, $pass);
+    }
+
+    public function modificarUsuario(Usuario $datos) {
+        if (empty($datos->getID())) {
             return "uncaptured_id";
         }
-        if (!$this->emptyInputM()) {
+        if ($this->hasEmptyInputForModify($datos)) {
             return "empty_inputs";
         }
         return $this->us_modificar($this->usuario);
     }
 
-    public function modificarCorreo() {
-        if (!$this->emptyInputID()) {
+    public function modificarCorreo($id, $email) {
+        if (empty($id)) {
             return "uncaptured_id";
         }
-        if (!$this->emptyInputE()) {
+        if (empty($email)) {
             return "empty_inputs";
         }
-        if (!$this->userCheck()) {
-            header('location: ../index.html');
-            exit();
+        if ($this->userCheck($email)) {
+            return "already_exists";
         }
-        return $this->us_cambiar_correo($this->usuario);
+        return $this->us_cambiar_correo($id, $email);
     }
 
-    public function modificarContra($curr_pass) {
-        if (!$this->emptyInputID()) {
+    public function modificarContra($id, $email, $curr_pass, $nueva_pass, $conf_pass) {
+        if (empty($id)) {
             return "uncaptured_id";
         }
-        if (!$this->emptyInputE()) {
-            return "uncaptured_email";
-        }
-        if (!$this->emptyInputPSW()) {
+        if (empty($email) |empty($curr_pass) | empty($nueva_pass) | empty($conf_pass)) {
             return "empty_inputs";
         }
-        if ($this->us_login($this->usuario) == 0) {
+        if ($this->us_login($email, $curr_pass) == "wrong_password") {
             return "wrong_password";
         }
-        else {
-            $this->usuario->setPassword($curr_pass);
-            if (!$this->emptyInputPSW()) {
-                return "empty_inputs";
-            }
-            if (!$this->matchPSW()) {
-                return "unmatching_psw";
-            }
-            return $this->us_cambiar_contra($this->usuario);
+        if ($nueva_pass != $conf_pass) {
+            return "unmatching_psw";
         }
-    }
-    
-    public function empezarSesion() {
-        return array('ID'=>$this->usuario->getID(), 'Username'=>$this->usuario->getUsername(), 'Rol'=>$this->usuario->getRol(), 'Correo'=>$this->usuario->getCorreo());
+        return $this->us_cambiar_contra($id, $nueva_pass);
     }
 
-    public function obtenerDatos() {
-        if (!$this->emptyInputID()) {
-            header('location: ../index.html');
-            exit();
+    public function obtenerDatos($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
         }
-        if ($this->us_getdata($this->usuario))
-            return array(
-                'ID' => $this->usuario->getID(),
-                'Nombres' => $this->usuario->getNombres(),
-                'Apellidos' => $this->usuario->getApellidos(),
-                'Username' => $this->usuario->getUsername(),
-                'Correo' => $this->usuario->getCorreo(),
-                'Fecha_nac' => $this->usuario->getFechaNac(),
-                'Sexo' => $this->usuario->getSexo(),
-                'Privacidad' => $this->usuario->getPrivacidad(),
-                'Fecha_crea' => $this->usuario->getFechaCrea()
-            );
+        $result = $this->us_getdata($id);
+        if (!$result) {
+            return "not_found";
+        }
+        return $result;
     }
 
 }

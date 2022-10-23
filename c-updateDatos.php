@@ -32,9 +32,20 @@
         include (__DIR__.'/php/classes/usuario_contr.classes.php');
 
         if (isset($_SESSION['user'])) {
-            $buscar_usuario = Usuario::create()->setID($_SESSION['user']['ID']);
-            $controller = new UsuarioContr($buscar_usuario);
-            $userData = $controller->obtenerDatos();
+            $controller = new UsuarioContr();
+            $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
+            if (gettype($userData) == "string") {
+                switch ($userData) {
+                    case "uncaptured_id":
+                        header("Location: ./index.php");
+                        break;
+                    case "not_found":
+                        header("Location: ./index.php");
+                        break;
+                }
+            } else if (!$userData) {
+                header("Location: ./index.php");
+            }
         }
     ?>
     <!-- Container -->
@@ -51,13 +62,13 @@
                             <input type="file" id="fle_fotoperfil" name="FotoPerfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
-                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['Nombres'] ?>">
+                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['rs_nombres'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['Apellidos'] ?>">
+                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['rs_apellidos'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -65,7 +76,7 @@
                         <div class="form_control" requerido="true" state="empt">
                             <div >Género:</div>
                             <?php
-                                switch($userData['Sexo']) {
+                                switch($userData['rs_sexo']) {
                                     case 'H': ?>
                                 <input type="radio" id="rdb_h" name="in_genero" value="H" checked>
                                 <label for="rdb_h">Hombre</label>
@@ -99,7 +110,7 @@
                         <div class="form_control" requerido="true" state="empt">
                             <div >Privacidad de cuenta:</div>
                             <?php
-                                if ($userData['Privacidad']) {
+                                if ($userData['rs_privacidad']) {
                             ?>
                                 <input type="radio" id="rdb_priv" name="in_privacidad" value="1" checked>
                                 <label for="rdb_priv">Privado</label>
@@ -118,13 +129,13 @@
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
                             <div >Fecha de nacimiento:</div>
-                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento" value="<?php echo $userData['Fecha_nac'] ?>">
+                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento" value="<?php echo $userData['rs_fecha_nac'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['Username'] ?>">
+                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['rs_username'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -136,7 +147,7 @@
                             <h2>Actualizar correo electrónico</h2>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['Correo'] ?>">
+                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['rs_correo'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
