@@ -2,19 +2,19 @@
 <div class="container text-center">
     <div class="row">
         <div class="col-sm-8">
-            <img src='resources/logo02.PNG' class='logotipo'/>
+            <img src='../resources/logo02.PNG' class='logotipo'/>
         </div>
         <div class="col-sm-4">
             <div class = "row">
                 <div class = "col-6">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src='resources/dongato.PNG' class='imgRedonda' />
-                            <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
+                            <img src='../resources/dongato.PNG' class='imgRedonda' />
+                            <h5 id="txt_usertag"><?php echo $loggedUser['Username']?></h5>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./c-profile.php">Mi cuenta</a></li>
-                            <li><a class="dropdown-item" href="./php/includes/close_session_inc.php">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-3">
             <button type="submit" class="btn btn-warning mb-3">
-                <a href="c-busqueda.html">Buscar</a>
+                <a href="../c-busqueda.html">Buscar</a>
             </button>
         </div>
     </form>
@@ -50,22 +50,22 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="v-registrarProducto.html">Registrar producto</a>
+                    <a class="nav-link active" aria-current="page" href="../v-registrarProducto.html">Registrar producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="v-crearCategoria.html">Registrar categoria</a>
+                    <a class="nav-link" href="../v-crearCategoria.html">Registrar categoria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="v-cotizacion.html">Cotizaciones pendientes</a>
+                    <a class="nav-link" href="../v-cotizacion.html">Cotizaciones pendientes</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Consultas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="v-existencia.html">Existencias</a></li>  
-                        <li><a class="dropdown-item" href="v-listaVentas.html">Ventas detalladas</a></li>
-                        <li><a class="dropdown-item" href="v-ventaAgrupada.html">Ventas agrupadas</a></li>    
+                        <li><a class="dropdown-item" href="../v-existencia.html">Existencias</a></li>  
+                        <li><a class="dropdown-item" href="../v-listaVentas.html">Ventas detalladas</a></li>
+                        <li><a class="dropdown-item" href="../v-ventaAgrupada.html">Ventas agrupadas</a></li>    
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>

@@ -1,7 +1,9 @@
 <?php
+include ("../../php/classes/filemanager.classes.php");
+$root = FilesManager::rootDirectory();
 
-include (__DIR__.'/../models/usuario-model.php');
-include (__DIR__.'/../classes/usuario_contr.classes.php');
+include ("$root/php/models/usuario-model.php");
+include ("$root/php/classes/usuario_contr.classes.php");
 
 session_start();
 if (isset($_SESSION['user'])) {

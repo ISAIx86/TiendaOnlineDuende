@@ -1,6 +1,6 @@
 <?php
 
-include (__DIR__.'/../classes/usuario_dao.classes.php');
+include ("$root/php/classes/usuarios/usuario_dao.classes.php");
 
 class UsuarioContr extends UsuarioDAO {
 

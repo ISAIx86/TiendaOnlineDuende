@@ -1,12 +1,15 @@
-<?php include_once("./templates/get_session.php");?>
+<?php
+include_once("../templates/get_session.php");
+$root = FilesManager::rootDirectory();
+?>
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuidado con el Duende - <?php echo $loggedUser['Username'] ?></title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
@@ -14,20 +17,20 @@
     <?php 
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once("./templates/headerComprador.php");
+                include_once("$root/templates/headerComprador.php");
                 break;
             case "vendedor":
-                include_once("./templates/headerVendedor.php");
+                include_once("$root/templates/headerVendedor.php");
                 break;
             case "administrador":
-                include_once("./templates/headerAdministrador.php");
+                include_once("$root/templates/headerAdministrador.php");
                 break;
             case "compravende":
-                include_once("./templates/headerCompraVende.php");
+                include_once("$root/templates/headerCompraVende.php");
                 break;
         }
-        include (__DIR__.'/php/models/usuario-model.php');
-        include (__DIR__.'/php/classes/usuario_contr.classes.php');
+        include ("$root/php/models/usuario-model.php");
+        include ("$root/php/classes/usuarios/usuario_contr.classes.php");
 
         if (isset($_SESSION['user'])) {
             $controller = new UsuarioContr();
@@ -35,14 +38,14 @@
             if (gettype($userData) == "string") {
                 switch ($userData) {
                     case "uncaptured_id":
-                        header("Location: ./index.php");
+                        header("Location: $root/index.php");
                         break;
                     case "not_found":
-                        header("Location: ./index.php");
+                        header("Location: $root/index.php");
                         break;
                 }
             } else if (!$userData) {
-                header("Location: ./index.php");
+                header("Location: $root/index.php");
             }
         }
     ?>
@@ -54,7 +57,7 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='resources/dongato.PNG' class='imgRedonda' />
+                                <img src='../resources/dongato.PNG' class='imgRedonda' />
                             </div>
                             <div class = "col-4">
                                 <h2><?php echo $loggedUser['Username'] ?></h2>
@@ -66,7 +69,7 @@
                     <div class="accordion-body">
                         <div class = "row">
                             <h4>Mis datos</h4>
-                            <a href = "c-updateDatos.php">
+                            <a href="./c-updateDatos.php">
                                 <button type="button" class="btn btn-warning">Actualizar mis datos</button>
                             </a>       
                         </div>
@@ -134,7 +137,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='resources/metodoPago.PNG' class='imgRedonda' />
+                                <img src='../resources/metodoPago.PNG' class='imgRedonda' />
                             </div>
                             <div class = "col-8">
                                 <h2>Metodos de pago</h2>
@@ -186,7 +189,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='resources/home.PNG' class='imgRedonda' />
+                                <img src='../resources/home.PNG' class='imgRedonda' />
                             </div>
                             <div class = "col-8">
                                 <h2>Direcion</h2>
@@ -241,9 +244,9 @@
         </div>
     </div>
     <!-- Footer -->
-    <?php include("./templates/footer.php") ?>
+    <?php include("$root/templates/footer.php") ?>
 
-    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
 
 </body>
 </html>

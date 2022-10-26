@@ -1,13 +1,16 @@
-<?php include_once("./templates/get_session.php");?>
+<?php
+include_once("../templates/get_session.php");
+$root = FilesManager::rootDirectory();
+?>
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuidado con el Duenda - Modificar información</title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/register.css">
     <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
@@ -15,21 +18,21 @@
     <?php
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once("./templates/headerComprador.php");
+                include_once("$root/templates/headerComprador.php");
                 break;
             case "vendedor":
-                include_once("./templates/headerVendedor.php");
+                include_once("$root/templates/headerVendedor.php");
                 break;
             case "administrador":
-                include_once("./templates/headerAdministrador.php");
+                include_once("$root/templates/headerAdministrador.php");
                 break;
             case "compravende":
-                include_once("./templates/headerCompraVende.php");
+                include_once("$root/templates/headerCompraVende.php");
                 break;
         }
         
-        include (__DIR__.'/php/models/usuario-model.php');
-        include (__DIR__.'/php/classes/usuario_contr.classes.php');
+        include ("$root/php/models/usuario-model.php");
+        include ("$root/php/classes/usuarios/usuario_contr.classes.php");
 
         if (isset($_SESSION['user'])) {
             $controller = new UsuarioContr();
@@ -37,14 +40,14 @@
             if (gettype($userData) == "string") {
                 switch ($userData) {
                     case "uncaptured_id":
-                        header("Location: ./index.php");
+                        header("Location: $root/index.php");
                         break;
                     case "not_found":
-                        header("Location: ./index.php");
+                        header("Location: $root/index.php");
                         break;
                 }
             } else if (!$userData) {
-                header("Location: ./index.php");
+                header("Location: $root/index.php");
             }
         }
     ?>
@@ -184,13 +187,13 @@
         </div>
     </div>
     <!-- Footer -->
-    <?php include("./templates/footer.php") ?>
+    <?php include("$root/templates/footer.php") ?>
 
-    <script src="./js/bootstrap.bundle.js"></script>
-    <script src="./js/jquery-3.6.1.js"></script>
-    <script src="./js/validaciones.js"></script>
-    <script src="./js/checarCampos.js"></script>
-    <script src="./js/registro.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/jquery-3.6.1.js"></script>
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/checarCampos.js"></script>
+    <script src="../js/registro.js"></script>
 
 </body>
 </html>

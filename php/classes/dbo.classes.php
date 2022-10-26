@@ -18,6 +18,10 @@ abstract class DBH {
         }
     }
 
+    private function disconnect() {
+        $this->conn = null;
+    }
+
     protected function setPrepareStatement($state) {
         $this->connect();
         $this->stmt = $this->conn->prepare($state);
@@ -41,6 +45,7 @@ abstract class DBH {
 
     protected function clearStatement() {
         $this->stmt = null;
+        $this->disconnect();
     }
 
 }

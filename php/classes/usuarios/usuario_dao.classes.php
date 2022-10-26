@@ -1,6 +1,6 @@
 <?php
 
-include (__DIR__.'/../classes/dbo.classes.php');
+include ("$root/php/classes/dbo.classes.php");
 
 class UsuarioDAO extends DBH {
    

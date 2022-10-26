@@ -13,7 +13,7 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/login_inc.php',
+            url: './php/includes/usuarios/login_inc.php',
             type: 'POST',
             data: $('#form_login').serialize() + "&submit=1"
         }).done(response => {
@@ -40,16 +40,16 @@ $(document).ready(function() {
             else {
                 switch (data.role) {
                     case "comprador":
-                        window.location.replace("./c-home.php");
+                        window.location.replace("./usuarios/c-home.php");
                         break;
                     case "vendedor":
-                        window.location.replace("./c-profile.php");
+                        window.location.replace("./usuarios/c-profile.php");
                         break;
                     case "administrador":
-                        window.location.replace("./c-profile.php");
+                        window.location.replace("./usuarios/c-profile.php");
                         break;
                     case "compravende":
-                        window.location.replace("./landingPage.html");
+                        window.location.replace("./usuarios/landingPage.html");
                         break;
                 }
             }
@@ -69,7 +69,7 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/registro_inc.php',
+            url: './php/includes/usuarios/registro_inc.php',
             type: 'POST',
             data: $('#form_registro').serialize() + "&submit=1"
         })
@@ -106,7 +106,7 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/update_data_inc.php',
+            url: './php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: $('#form_registro_upd').serialize() + "&mode=data" + "&submit=1"
         })
@@ -141,7 +141,7 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/update_data_inc.php',
+            url: './php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: $('#form_correo_upd').serialize() + "&mode=email" + "&submit=1"
         })
@@ -179,7 +179,7 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/update_data_inc.php',
+            url: './php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: $('#form_contra_upd').serialize() + "&mode=password" + "&submit=1"
         })

@@ -1,7 +1,9 @@
 <?php
+include ("../../classes/filemanager.classes.php");
+$root = FilesManager::rootDirectory();
 
-include (__DIR__.'/../models/usuario-model.php');
-include (__DIR__.'/../classes/usuario_contr.classes.php');
+include ("$root/php/models/usuario-model.php");
+include ("$root/php/classes/usuarios/usuario_contr.classes.php");
 
 if (isset($_POST["submit"])) {
     $controller = new UsuarioContr();

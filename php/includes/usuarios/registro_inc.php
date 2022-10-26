@@ -1,7 +1,9 @@
 <?php
+include ("../../php/classes/filemanager.classes.php");
+$root = FilesManager::rootDirectory();
 
-include (__DIR__.'/../models/usuario-model.php');
-include (__DIR__.'/../classes/usuario_contr.classes.php');
+include ("$root/php/models/usuario-model.php");
+include ("$root/php/classes/usuario_contr.classes.php");
 
 if (isset($_POST['submit'])) {
     $controller = new UsuarioContr();
@@ -23,7 +25,7 @@ if (isset($_POST['submit'])) {
         echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
         exit();
     }
-    header("location: ../../index.php");
+    header("location: $root/index.php");
     exit();
 }
 
