@@ -1,6 +1,7 @@
 <?php
 
 include ("$root/php/classes/usuarios/usuario_dao.classes.php");
+define("__ROOT", FilesManager::rootDirectory());
 
 class UsuarioContr extends UsuarioDAO {
 
@@ -48,17 +49,46 @@ class UsuarioContr extends UsuarioDAO {
         }
         else return false;
     }
+
+    private function checkImageAndSet(Usuario &$usu) {
+        $img_info = $usu->getAvatarInfo();
+        $img_ex = strtolower(pathinfo($img_info["name"], PATHINFO_EXTENSION));
+        $allowed_exs = array("jpg", "jpeg", "png");
+        if ($img_info["name"] == "") {
+            $usu->setAvatarDir(null)
+                ->setAvatar(null);
+            return "img_ok";
+        }
+        if ($img_info["error"] != 0) {
+            return "img_error";
+        } else if ($img_info["size"] > 8388608) {
+            return "img_oversize";
+        }
+        else if (!in_array($img_ex, $allowed_exs)) {
+            return "img_wrongext";
+        }
+        $new_img_name = uniqid("IMG-", true).'.'.$img_ex;
+        $img_upload_path = "/resources/users/$new_img_name";
+        $usu->setAvatarDir($img_upload_path)
+            ->setAvatar(file_get_contents($img_info["tmp_name"]));
+        $result = move_uploaded_file($img_info["tmp_name"], __ROOT.$img_upload_path);
+        return "img_ok";
+    }
     
     // Métodos fuertes
     public function registrarUsuario(Usuario $nuevo_usu) {
         if ($this->hasEmptyInputForRegister($nuevo_usu)) {
             return "empty_inputs";
         }
-        if (!$this->isMatchPassword()) {
+        if (!$this->isMatchPassword($nuevo_usu)) {
             return "unmatch_confirm";
         }
-        if ($this->userCheck()) {
+        if ($this->userCheck($nuevo_usu->getCorreo())) {
             return "already_exists";
+        }
+        $img_result = $this->checkImageAndSet($nuevo_usu);
+        if ($img_result != "img_ok") {
+            return $img_result;
         }
         return $this->us_registro($nuevo_usu);
     }
@@ -73,14 +103,18 @@ class UsuarioContr extends UsuarioDAO {
         return $this->us_login($email, $pass);
     }
 
-    public function modificarUsuario(Usuario $datos) {
+    public function modificarUsuario(Usuario &$datos) {
         if (empty($datos->getID())) {
             return "uncaptured_id";
         }
         if ($this->hasEmptyInputForModify($datos)) {
             return "empty_inputs";
         }
-        return $this->us_modificar($this->usuario);
+        $img_result = $this->checkImageAndSet($datos);
+        if ($img_result != "img_ok") {
+            return $img_result;
+        }
+        return $this->us_modificar($datos);
     }
 
     public function modificarCorreo($id, $email) {

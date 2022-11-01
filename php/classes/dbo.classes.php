@@ -28,10 +28,15 @@ abstract class DBH {
     }
 
     protected function executeQuery($data_arr) {
-        if (!$this->stmt->execute($data_arr)) {
-            $this->clearStatement();
+        try {
+            if (!$this->stmt->execute($data_arr)) {
+                $this->clearStatement();
+                header("Location: ../../index.php");
+                exit();
+            }
+        } catch(PDOException $e) {
+            die("Connection failed".$e->getMessage());
             header("Location: ../../index.php");
-            exit();
         }
     }
 

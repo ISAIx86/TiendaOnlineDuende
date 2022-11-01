@@ -62,7 +62,7 @@ $root = FilesManager::rootDirectory();
                     <form class="form" id="form_registro_upd">
                         <div class="form_control" requerido="false" state='empt'>
                             <label for="FotoPerfil">Foto de perfil:</label>
-                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                            <input type="file" id="fle_fotoperfil" name="in_fotoperfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
                             <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['rs_nombres'] ?>">

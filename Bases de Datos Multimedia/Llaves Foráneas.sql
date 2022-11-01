@@ -73,7 +73,15 @@ add
 	foreign key (id_creador)
 	references usuarios (id_usuario)
 	on delete no action
-	on update no action;
+	on update no action,
+add
+	index fk_cat_adm_idx (id_autorizador asc) visible,
+add
+	constraint fk_cat_adm
+    foreign key (id_autorizador)
+    references usuario (id_usuario)
+    on delete no action
+    on update no action;
     
 -- //// LLAVES DE PRODUCTOS //// --
 alter table productos
@@ -128,6 +136,36 @@ add
 	references productos (id_producto)
 	on delete no action
 	on update no action;
+    
+-- //// LLAVES DE COTIZACION //// --
+alter table cotizaciones
+
+add
+	index fk_cot_publ_idx (id_publicador asc) visible,
+add
+	constraint fk_cot_publ
+    foreign key (id_publicador)
+    references usuarios (id_usuario)
+    on delete no action
+    on update no action,
+    
+add
+	index fk_cot_comp_idx (id_comprador asc) visible,
+add
+	constraint fk_cot_comp
+    foreign key (id_comprador)
+    references usuarios (id_usuario)
+    on delete no action
+    on update no action,
+
+add
+	index fk_cot_prod_idx (id_producto asc) visible,
+add
+	constraint fk_cot_prod
+    foreign key (id_producto)
+    references productos (id_producto)
+    on delete no action
+    on update no action;
     
 -- /// LLAVES RELACIÓN LISTA PRODUCTO /// --
 alter table rel_li_prod
@@ -214,42 +252,21 @@ add
 	on update no action;
     
 -- /// LLAVES RELACIÓN CALIFICACIONES /// --
-alter table rel_calif
+alter table rel_review
 
 add
-	index fk_calif_usu_idx (id_usuario asc) visible,
+	index fk_review_usu_idx (id_usuario asc) visible,
 add
-	constraint fk_calif_usu
+	constraint fk_review_usu
 	foreign key (id_usuario)
 	references usuarios (id_usuario)
 	on delete no action
 	on update no action,
     
 add
-	index fk_calif_prod_idx (id_producto asc) visible,
+	index fk_review_prod_idx (id_producto asc) visible,
 add
-	constraint fk_calif_prod
-	foreign key (id_producto)
-	references productos (id_producto)
-	on delete no action
-	on update no action;
-    
--- /// LLAVES RELACIÓN COMENTARIOS /// --
-alter table rel_comment
-
-add
-	index fk_comment_usu_idx (id_usuario asc) visible,
-add
-	constraint fk_comment_usu
-	foreign key (id_usuario)
-	references usuarios (id_usuario)
-	on delete no action
-	on update no action,
-    
-add
-	index fk_comment_prod_idx (id_producto asc) visible,
-add
-	constraint fk_comment_prod
+	constraint fk_review_prod
 	foreign key (id_producto)
 	references productos (id_producto)
 	on delete no action

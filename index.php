@@ -1,20 +1,18 @@
 <?php
-include("php/classes/filemanager.classes.php");
-$root = FilesManager::rootDirectory();
 session_start();
 if (isset($_SESSION['user'])) {
     $current_user = $_SESSION['user'];
     switch($current_user['Rol']) {
         case 'comprador':
-            header("Location: $root/usuarios/c-home.php");
+            header("Location: usuarios/c-home.php");
             exit();
             break;
         case 'vendedor':
-            header("Location: $root/usuarios/c-profile.php");
+            header("Location: usuarios/c-profile.php");
             exit();
             break;
         case 'administrador':
-            header("Location: $root/usuarios/c-profile.php");
+            header("Location: usuarios/c-profile.php");
             exit();
             break;
         case 'compravende':

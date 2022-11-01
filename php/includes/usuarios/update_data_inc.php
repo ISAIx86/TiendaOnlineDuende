@@ -1,9 +1,9 @@
 <?php
-include ("../../php/classes/filemanager.classes.php");
+include ("../../classes/filemanager.classes.php");
 $root = FilesManager::rootDirectory();
 
 include ("$root/php/models/usuario-model.php");
-include ("$root/php/classes/usuario_contr.classes.php");
+include ("$root/php/classes/usuarios/usuario_contr.classes.php");
 
 session_start();
 if (isset($_SESSION['user'])) {
@@ -18,9 +18,10 @@ if (isset($_SESSION['user'])) {
                     ->setUsername($_POST['in_username'])
                     ->setFechaNac($_POST['in_fechanac'])
                     ->setSexo($_POST['in_genero'])
-                    ->setPrivacidad($_POST['in_privacidad']);
+                    ->setPrivacidad($_POST['in_privacidad'])
+                    ->setAvatarInfo($_FILES['in_fotoperfil']);
                 $controller = new UsuarioContr();
-                $result = $controller->modificarUsuario();
+                $result = $controller->modificarUsuario($user);
                 if (gettype($result) == "string") {
                     echo json_encode(array('result'=>"error", 'reason'=>$result));
                     exit();
@@ -29,6 +30,7 @@ if (isset($_SESSION['user'])) {
                     exit();
                 }
                 $_SESSION['user']['Username'] = $_POST['in_username'];
+                $_SESSION['user']['Avatar'] = $user->getAvatar();
                 echo json_encode(array('result'=>"success", 'reason'=>"success"));
                 exit();
                 break;

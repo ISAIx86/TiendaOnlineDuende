@@ -68,10 +68,14 @@ $(document).ready(function() {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
+        let formdata = new FormData($('#form_registro')[0]);
+        formdata.append('submit', 1);
         $.ajax({
             url: './php/includes/usuarios/registro_inc.php',
             type: 'POST',
-            data: $('#form_registro').serialize() + "&submit=1"
+            data: formdata,
+            processData: false,
+            contentType: false
         })
         .done(response => {
             let data = $.parseJSON(response);
@@ -90,6 +94,8 @@ $(document).ready(function() {
                         alert("Hubo un problema al consultar la información.");
                         break;
                 }
+            } else {
+                window.location.replace("index.php");
             }
         });
     });
@@ -105,10 +111,15 @@ $(document).ready(function() {
             alert("Algunos campos están incorrectos.");
             return;
         }
+        let formdata = new FormData($('#form_registro_upd')[0]);
+        formdata.append('submit', 1);
+        formdata.append('mode', 'data');
         $.ajax({
-            url: './php/includes/usuarios/update_data_inc.php',
+            url: '../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
-            data: $('#form_registro_upd').serialize() + "&mode=data" + "&submit=1"
+            data: formdata,
+            processData: false,
+            contentType: false
         })
         .done(response => {
             let data = $.parseJSON(response);
@@ -126,6 +137,7 @@ $(document).ready(function() {
                 }
             }
             alert("Información actualizada");
+            window.location.reload();
         });
     });
 
@@ -140,10 +152,15 @@ $(document).ready(function() {
             alert("Algunos campos están incorrectos.");
             return;
         }
+        let formdata = new FormData($('#form_registro_upd')[0]);
+        formdata.append('submit', 1);
+        formdata.append('mode', 'email');
         $.ajax({
-            url: './php/includes/usuarios/update_data_inc.php',
+            url: '../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
-            data: $('#form_correo_upd').serialize() + "&mode=email" + "&submit=1"
+            data: formdata,
+            processData: false,
+            contentType: false
         })
         .done(response => {
             let data = $.parseJSON(response);
@@ -178,10 +195,15 @@ $(document).ready(function() {
             alert("Algunos campos están incorrectos.");
             return;
         }
+        let formdata = new FormData($('#form_registro_upd')[0]);
+        formdata.append('submit', 1);
+        formdata.append('mode', 'password');
         $.ajax({
-            url: './php/includes/usuarios/update_data_inc.php',
+            url: '../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
-            data: $('#form_contra_upd').serialize() + "&mode=password" + "&submit=1"
+            data: formdata,
+            processData: false,
+            contentType: false
         })
         .done(response => {
             let data = $.parseJSON(response);
