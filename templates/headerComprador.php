@@ -36,7 +36,8 @@
       </div>
     </div>
   </div>
-  <div class = "container-sm">          
+</header>
+<div class = "container" id = "divBusqueda">          
     <form class="row" id = "buscador">
       <div class="col-9">    
         <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
@@ -54,8 +55,7 @@
         </button>
       </div>
     </form>
-  </div>
-</header>
+</div>
 <div class = "container" id = "navegacion">
 <nav class="navbar navbar-expand-lg bg-opacity-50">
   <div class="container-fluid">

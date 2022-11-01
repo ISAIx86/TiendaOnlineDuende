@@ -1,20 +1,24 @@
 header{
-    background: lightgreen;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
+    background: #3cc47c;
+    font-family: 'Verona';
 }
 .partesuperior{
-    background: lightgreen;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: #1e392a;
+    font-family: 'Verona';
     text-align: center;
 }
 .buscador {
-    background: lightgreen;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: black;
+    font-family: 'Verona';
+    text-align: left;
+}
+#divBusqueda {
+    background: black;
+    font-family: 'Verona';
     text-align: left;
 }
 footer{
-    background: lightgreen;
+    background: #3cc47c;
     text-align: center;
 }
 .imgRedonda {
@@ -27,7 +31,7 @@ footer{
     height:150px;
     border-radius:75px;
 }
-.logotipo {
+#logotipo {
     width:240px;
     height:120px;
     align-content: left;
