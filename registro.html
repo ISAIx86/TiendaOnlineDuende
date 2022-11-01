@@ -69,10 +69,10 @@
                     <div class="header">
                         <h2>Crear cuenta</h2>
                     </div>
-                    <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post">
+                    <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post" enctype="multipart/form-data">
                         <div class="form_control" requerido="false" state='empt'>
                             <label for="FotoPerfil">Foto de perfil:</label>
-                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                            <input type="file" id="fle_fotoperfil" name="in_fotoperfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
                             <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres">

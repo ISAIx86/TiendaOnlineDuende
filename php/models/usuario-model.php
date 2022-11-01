@@ -13,6 +13,7 @@ class Usuario {
     private $correo = null;
     private $pass = null;
     private $confirm = null;
+    private $avatar_info = null;
     private $avatar = null;
     private $avatar_dir = null;
     private $creador = null;
@@ -38,6 +39,7 @@ class Usuario {
     public function getPassword() { return $this->pass; }
     public function getHashedPassword() { return password_hash($this->pass, PASSWORD_DEFAULT); }
     public function getConfPass() { return $this->confirm; }
+    public function getAvatarInfo() { return $this->avatar_info; }
     public function getAvatar() { return $this->avatar; }
     public function getAvatarDir() { return $this->avatar_dir; }
     public function getCreador() { return $this->creador; }
@@ -56,6 +58,7 @@ class Usuario {
     public function setCorreo($_corr) { $this->correo = $_corr; return $this; }
     public function setPassword($_pass) { $this->pass = $_pass; return $this; }
     public function setConfPass($_conf) { $this->confirm = $_conf; return $this; }
+    public function setAvatarInfo($_avainf) { $this->avatar_info = $_avainf; return $this; }
     public function setAvatar($_ava) { $this->avatar = $_ava; return $this; }
     public function setAvatarDir($_avadir) { $this->avatar_dir = $_avadir; return $this; }
     public function setCreador($_crea) { $this->creador = $_crea; return $this; }

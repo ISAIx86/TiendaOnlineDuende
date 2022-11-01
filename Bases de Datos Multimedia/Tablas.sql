@@ -52,7 +52,7 @@ create table if not exists usuarios (
     attr2 varchar(256) not null unique comment "Correo electrónico",
     attr3 varchar(256) not null comment "Contraseña",
     
-    avatar blob comment "Imagen avatar del usuario",
+    avatar longblob comment "Imagen avatar del usuario",
     avatar_dir varchar(256) comment "Ruta del recurso del avatar del usuario",
     
     autorizador binary(16) default null comment "Super administrador que autoriza al usuario administrador. Solo aplica a administradores",
@@ -67,6 +67,7 @@ create table if not exists usuarios (
 drop table if exists domicilios;
 create table if not exists domicilios (
 	id_domicilio binary(16) comment "ID del domicilio",
+    
     id_usuario binary(16) not null comment "ID del usuario residente del domicilio",
     
     calle varchar(32) not null comment "Nombre de la calle",
@@ -89,6 +90,7 @@ create table if not exists domicilios (
 drop table if exists listas;
 create table if not exists listas (
 	id_lista binary(16) comment "ID de la lista",
+    
     id_usuario binary(16) not null comment "ID del propietario de la lista",
     
     nombre varchar(32) comment "Nombre de la lista",
@@ -110,6 +112,7 @@ create table if not exists listas (
 drop table if exists tarjetas;
 create table if not exists tarjetas (
 	id_tarj binary(16) comment "ID de la tarjeta",
+    
     id_usuario binary(16) not null comment "ID del propietario de la tarjeta",
     
     nombre_tar varchar(128) not null comment "Nombre completo del propietario",
@@ -127,10 +130,14 @@ create table if not exists tarjetas (
 drop table if exists categorias;
 create table if not exists categorias (
 	id_catego binary(16) comment "ID de la categoría",
+    
     id_creador binary(16) not null comment "ID del vendedor creador de la categoría",
+    id_autorizador binary(16) comment "ID del administrador que aprueba la categoría",
     
     nombre varchar(32) not null unique comment "Nombre de la categoría",
     descripcion text not null comment "Breve descripción de lo que trata la categoría",
+    
+    fecha_autorizado timestamp default null comment "Fecha de autorización",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro",
     fecha_modif timestamp default null comment "Fecha de última modificacion",
@@ -143,6 +150,7 @@ create table if not exists categorias (
 drop table if exists productos;
 create table if not exists productos (
 	id_producto binary(16) comment "ID del producto",
+    
     id_publicador binary(16) not null comment "ID del vendedor publicador del producto",
     id_autorizador binary(16) comment "ID del autorizador. Si es nulo, aún no está autorizado",
     
@@ -167,6 +175,7 @@ create table if not exists productos (
 drop table if exists pedidos;
 create table if not exists pedidos (
 	folio bigint unsigned auto_increment comment "Folio del pedido",
+    
     id_usuario binary(16) not null comment "ID del usuario que hizo el pedido",
     domicilio_entr binary(16) not null comment "ID del domicilio de entrega",
     
@@ -181,6 +190,7 @@ alter table pedidos auto_increment = 146231;
 drop table if exists multimedia;
 create table if not exists multimedia (
 	id_mult binary(16) comment "ID del contenido multimedia",
+    
     id_prod binary(16) not null comment "ID del producto",
     
     contenido blob not null comment "Contenido multimedia",
@@ -190,6 +200,25 @@ create table if not exists multimedia (
     fecha_elim timestamp default null comment "Fecha de baja",
     
     primary key (id_mult)
+);
+
+-- //// TABLA COTIZACIONES //// --
+drop table if exists cotizaciones;
+create table if not exists cotizaciones (
+	id_cotiz binary(16) not null comment "ID del registro de cotizacion",
+
+	id_publicador binary(16) not null comment "ID del vendedor",
+    id_comprador binary(16) not null comment "ID del comprador",
+	id_producto binary(16) not null comment "ID del producto",
+    
+    precio decimal(8,2) not null comment "Oferta de precio por el producto",
+    cantidad int not null comment "Cantidad de productos a comprar",
+    aprovado boolean comment "Cotización aprovada por el vendedor. 0 si no fue aprovada, 1 si fue aprovada",
+    aceptado boolean comment "Cotización aceptada por el comprado. 0 si no fue aceptada, 1 si fue aceptada",
+    
+    fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro del cotizacion",
+    
+    primary key(id_cotiz)
 );
 
 -- //// TABLA SUPER ADMINISTRADORES //// --
@@ -238,25 +267,18 @@ create table if not exists rel_ped_prod (
 	folio_pedido bigint unsigned not null comment "ID del pedido",
 	id_producto binary(16) not null comment "ID del producto",
     
+    precio decimal(8,2) not null comment "Precio unitario del producto",
     subtotal decimal(8,2) not null comment "Suma de los productos",
     cantidad int not null comment "Cantidad de productos a comprar"
 );
 
 -- //// TABLA RELACIÓN CALIFICACIONES  //// --
-drop table if exists rel_calif;
-create table if not exists rel_calif (
+drop table if exists rel_review;
+create table if not exists rel_review (
 	id_usuario binary(16) not null comment "ID del usuario",
 	id_producto binary(16) not null comment "ID del producto",
     
-    calificacion decimal (2,1) not null comment "Valoración del cliente"
-);
-
--- //// TABLA RELACIÓN CALIFICACIONES  //// --
-drop table if exists rel_comment;
-create table if not exists rel_comment (
-	id_usuario binary(16) not null comment "ID del usuario",
-	id_producto binary(16) not null comment "ID del producto",
-    
-    contenido varchar(256) not null comment "Comentario del cliente",
+    calificacion decimal (2,1) not null comment "Valoración del cliente",
+    comentario varchar(256) not null comment "Comentario del cliente",
     fecha timestamp not null default current_timestamp comment "Fecha y hora del comentario"
 );

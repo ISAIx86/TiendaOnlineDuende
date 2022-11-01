@@ -57,12 +57,16 @@ $root = FilesManager::rootDirectory();
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='../resources/dongato.PNG' class='imgRedonda' />
+                                <?php if ($loggedUser["Avatar"] == null) { ?>
+                                <img src='../resources/default_user.jpg' class='imgRedonda'/>
+                                <?php } else { $imageSrc = '"data:image/jpg;base64,'.base64_encode($loggedUser["Avatar"]).'"'; ?>
+                                <img src=<?php echo $imageSrc ?> class='imgRedonda'/>
+                                <?php } ?>
                             </div>
                             <div class = "col-4">
                                 <h2><?php echo $loggedUser['Username'] ?></h2>
-                            </div>       
-                        </div>       
+                            </div>
+                        </div>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">

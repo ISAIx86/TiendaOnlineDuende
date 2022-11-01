@@ -128,7 +128,7 @@ case _proc
 					attr1 as 'out_rol',
 					attr2 as 'out_correo',
 					attr3 as 'out_pass',
-					avatar_dir as 'out_img'
+					avatar as 'out_img'
 				from usuarios
 				where attr2 = _correo_e;
             end if;

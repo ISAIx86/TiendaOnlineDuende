@@ -22,7 +22,11 @@
           <div class = "col-6">
             <div class="dropdown">
               <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src='../resources/dongato.PNG' class='imgRedonda'/>
+                <?php if ($loggedUser["Avatar"] == null) { ?>
+                <img src='../resources/default_user.jpg' class='imgRedonda'/>
+                <?php } else { $imageSrc = '"data:image/jpg;base64,'.base64_encode($loggedUser["Avatar"]).'"'; ?>
+                <img src=<?php echo $imageSrc ?> class='imgRedonda'/>
+                <?php } ?>
                 <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
               </button>
               <ul class="dropdown-menu">

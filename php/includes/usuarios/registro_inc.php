@@ -1,22 +1,23 @@
 <?php
-include ("../../php/classes/filemanager.classes.php");
+include ("../../classes/filemanager.classes.php");
 $root = FilesManager::rootDirectory();
 
 include ("$root/php/models/usuario-model.php");
-include ("$root/php/classes/usuario_contr.classes.php");
+include ("$root/php/classes/usuarios/usuario_contr.classes.php");
 
 if (isset($_POST['submit'])) {
     $controller = new UsuarioContr();
     $nuevo = Usuario::create()
-        ->setNombres()
-        ->setApellidos()
-        ->setUsername()
-        ->setFechaNac()
-        ->setSexo()
-        ->setRol()
-        ->setCorreo()
-        ->setPassword()
-        ->setConfPass();
+        ->setNombres($_POST['in_nombres'])
+        ->setApellidos($_POST['in_apellidos'])
+        ->setUsername($_POST['in_username'])
+        ->setFechaNac($_POST['in_fechanac'])
+        ->setSexo($_POST['in_genero'])
+        ->setRol($_POST['in_rolus'])
+        ->setCorreo($_POST['in_correo'])
+        ->setPassword($_POST['in_password'])
+        ->setConfPass($_POST['in_confirm'])
+        ->setAvatarInfo($_FILES['in_fotoperfil']);
     $result = $controller->registrarUsuario($nuevo);
     if (gettype($result) == "string") {
         echo json_encode(array('result'=>"error", 'reason'=>$result));
@@ -25,7 +26,7 @@ if (isset($_POST['submit'])) {
         echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
         exit();
     }
-    header("location: $root/index.php");
+    echo json_encode(array('result'=>"success"));
     exit();
 }
 

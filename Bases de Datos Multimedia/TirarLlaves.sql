@@ -46,7 +46,12 @@ alter table categorias
 drop
 	index fk_cat_usu_idx,
 drop
-	constraint fk_cat_usu;
+	constraint fk_cat_usu,
+    
+drop
+	index fk_cat_adm_idx,
+drop
+	constraint fk_cat_adm;
     
 -- //// LLAVES DE PRODUCTOS //// --
 alter table	productos
@@ -79,7 +84,24 @@ drop
 drop
 	constraint fk_mult_prod;
     
--- /// LLAVES RELACIÓN LISTA PRODUCTO /// --
+-- //// LLAVES COTIZACIONES //// --
+alter table cotizaciones
+drop
+	index fk_cot_publ_idx,
+drop
+	constraint fk_cot_publ,
+
+drop
+	index fk_cot_comp_idx,
+drop
+	constraint fk_cot_comp,
+    
+drop
+	index fk_cot_prod_idx,
+drop
+	constraint fk_cot_prod;
+    
+-- //// LLAVES RELACIÓN LISTA PRODUCTO //// --
 alter table rel_li_prod
 drop
 	index fk_rlp_lista_idx,
@@ -128,25 +150,13 @@ drop
 	constraint fk_rpp_prod;
     
 -- /// LLAVES RELACIÓN CALIFICACIONES /// --
-alter table rel_calif
+alter table rel_review
 drop
-	index fk_calif_usu_idx,
+	index fk_review_usu_idx,
 drop
-	constraint fk_calif_usu,
+	constraint fk_review_usu,
     
 drop
-	index fk_calif_prod_idx,
+	index fk_review_prod_idx,
 drop
-	constraint fk_calif_prod;
-    
--- /// LLAVES RELACIÓN COMENTARIOS /// --
-alter table rel_comment
-drop
-	index fk_comment_usu_idx,
-drop
-	constraint fk_comment_usu,
-    
-drop
-	index fk_comment_prod_idx,
-drop
-	constraint fk_comment_prod;
+	constraint fk_review_prod;

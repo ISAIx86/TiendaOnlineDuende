@@ -96,7 +96,7 @@ class UsuarioDAO extends DBH {
 
         $this->executeCall($usu);
 
-        $count = $this->countOfRows();
+        $count = $this->fetchData()[0]["result"];
 
         $this->clearStatement();
 
@@ -135,7 +135,8 @@ class UsuarioDAO extends DBH {
                         "ID"=>$rt_data[0]["out_id"],
                         "Username"=>$rt_data[0]["out_username"],
                         "Rol"=>$rt_data[0]["out_rol"],
-                        "Correo"=>$rt_data[0]["out_correo"]
+                        "Correo"=>$rt_data[0]["out_correo"],
+                        "Avatar"=>$rt_data[0]["out_img"]
                     );
                 }
             }

@@ -14,6 +14,10 @@ $(document).ready(function() {
         setCSSFor($(this)[0], 'success');
     });
 
+    $('input[type="radio"][name="in_privacidad"]').on('change', function(){
+        setCSSFor($(this)[0], 'success');
+    });
+
     $('#cbx_rol').on('change', function(){
         setCSSFor($(this)[0], 'success');
     });
