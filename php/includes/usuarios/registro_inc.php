@@ -1,12 +1,12 @@
 <?php
-include ("../../classes/filemanager.classes.php");
-$root = FilesManager::rootDirectory();
 
-include ("$root/php/models/usuario-model.php");
-include ("$root/php/classes/usuarios/usuario_contr.classes.php");
+define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 
-if (isset($_POST['submit'])) {
-    $controller = new UsuarioContr();
+require_once __ROOT."php/models/usuario-model.php";
+require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+    $controller = new UsuarioController();
     $nuevo = Usuario::create()
         ->setNombres($_POST['in_nombres'])
         ->setApellidos($_POST['in_apellidos'])

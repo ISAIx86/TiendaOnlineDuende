@@ -4,21 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href = "./css/style.css">
-    <link rel="stylesheet" href="./css/Nuevo.css">
-    <link rel="stylesheet" href = "./css/register.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href = "../../css/style.css">
+    <link rel="stylesheet" href="../../css/Nuevo.css">
+    <link rel="stylesheet" href = "../../css/register.css">
 </head>
 <body>
     <header>
         <div class="container_menu">
             <div class="logo">
-                <img src="resources/logo02.png" alt="">
+                <img src="../../resources/logo02.png" alt="">
             </div>
             <div class="menu">
                 <nav id="nav">
                     <ul>
-                        <li><button onclick="location.href='index.php'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button></li>
+                        <li><button onclick="location.href='landingPage.php'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button></li>
                         <li><button onclick="location.href='registro.html'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Registro de usuario</button></li>
                         <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
                     </ul>
@@ -39,13 +39,13 @@
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="resources/producto01.PNG" class="d-block w-100">
+                                    <img src="../../resources/producto01.PNG" class="d-block w-100">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="resources/producto02.PNG" class="d-block w-100">
+                                    <img src="../../resources/producto02.PNG" class="d-block w-100">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="resources/producto03.PNG" class="d-block w-100">
+                                    <img src="../../resources/producto03.PNG" class="d-block w-100">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -69,11 +69,11 @@
                     <div class="header">
                         <h2>Crear cuenta administrador</h2>
                     </div>
-                    <form class="form" id="form_registro" action="php/includes/registro_inc.php" method="post">
+                    <form class="form" id="form_registro">
                         <input type="hidden" name="in_rolus" value="administrador">
                         <div class="form_control" requerido="false" state='empt'>
                             <label for="FotoPerfil">Foto de perfil:</label>
-                            <input type="file" id="fle_fotoperfil" name="FotoPerfil">
+                            <input type="file" id="fle_fotoperfil" name="in_fotoperfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
                             <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres">
@@ -143,10 +143,10 @@
         </footer>
     </div>
 
-    <script src="./js/bootstrap.bundle.js"></script>
-    <script src="./js/jquery-3.6.1.js"></script>
-    <script src="./js/validaciones.js"></script>
-    <script src="./js/registro.js"></script>
+    <script src="../../js/bootstrap.bundle.js"></script>
+    <script src="../../js/jquery-3.6.1.js"></script>
+    <script src="../../js/validaciones.js"></script>
+    <script src="../../js/registro.js"></script>
 
 </body>
 </html>

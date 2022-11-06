@@ -1,6 +1,6 @@
 <?php
-include_once("../templates/get_session.php");
-$root = FilesManager::rootDirectory();
+define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
+include_once __ROOT."html/templates/get_session.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -8,13 +8,13 @@ $root = FilesManager::rootDirectory();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>¡Cuidado con el Duende!</title>
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <!-- <link rel="stylesheet" href="../css/Nuevo.css"> -->
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- <link rel="stylesheet" href="../../css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
-  <?php include("$root/templates/headerComprador.php") ?>
+  <?php include_once __ROOT."html/templates/headerComprador.php" ?>
 
   <!-- Container -->
   <div class = "container" id = "pagina">
@@ -28,21 +28,21 @@ $root = FilesManager::rootDirectory();
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="../resources/producto01.PNG" class="d-block w-100" alt="...">
+              <img src="../../resources/producto01.PNG" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>First slide label</h5>
                 <p>Some representative placeholder content for the first slide.</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="../resources/producto02.PNG" class="d-block w-100" alt="...">
+              <img src="../../resources/producto02.PNG" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Second slide label</h5>
                 <p>Some representative placeholder content for the second slide.</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="../resources/producto03.PNG" class="d-block w-100" alt="...">
+              <img src="../../resources/producto03.PNG" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Some representative placeholder content for the third slide.</p>
@@ -73,7 +73,7 @@ $root = FilesManager::rootDirectory();
               <div class = "row">
                 <div class = "col-4">
                   <div class="card" style="width: 18rem;">
-                    <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                    <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -83,7 +83,7 @@ $root = FilesManager::rootDirectory();
                 </div>
                 <div class = "col-4">
                   <div class="card" style="width: 18rem;">
-                    <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                    <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -93,7 +93,7 @@ $root = FilesManager::rootDirectory();
                 </div>
                 <div class = "col-4">
                   <div class="card" style="width: 18rem;">
-                    <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                    <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -107,7 +107,7 @@ $root = FilesManager::rootDirectory();
               <div class = "row">
                 <div class = "col-4">
                   <div class="card" style="width: 18rem;">
-                    <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                    <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -117,7 +117,7 @@ $root = FilesManager::rootDirectory();
                 </div>
                 <div class = "col-4">
                   <div class="card" style="width: 18rem;">
-                    <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                    <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">Card title</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -127,7 +127,7 @@ $root = FilesManager::rootDirectory();
                 </div>
                           <div class = "col-4">
                             <div class="card" style="width: 18rem;">
-                              <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                              <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -141,7 +141,7 @@ $root = FilesManager::rootDirectory();
                         <div class = "row">
                           <div class = "col-4">
                             <div class="card" style="width: 18rem;">
-                              <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                              <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -151,7 +151,7 @@ $root = FilesManager::rootDirectory();
                           </div>
                           <div class = "col-4">
                             <div class="card" style="width: 18rem;">
-                              <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                              <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -161,7 +161,7 @@ $root = FilesManager::rootDirectory();
                           </div>
                           <div class = "col-4">
                             <div class="card" style="width: 18rem;">
-                              <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                              <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -201,7 +201,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -211,7 +211,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -221,7 +221,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -235,7 +235,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -245,7 +245,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -255,7 +255,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -269,7 +269,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -279,7 +279,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -289,7 +289,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -330,7 +330,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -340,7 +340,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -350,7 +350,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -364,7 +364,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -374,7 +374,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -384,7 +384,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -398,7 +398,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -408,7 +408,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -418,7 +418,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -458,7 +458,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -468,7 +468,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -478,7 +478,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -492,7 +492,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -502,7 +502,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -512,7 +512,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -526,7 +526,7 @@ $root = FilesManager::rootDirectory();
                     <div class = "row">
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p03.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -536,7 +536,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p02.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -546,7 +546,7 @@ $root = FilesManager::rootDirectory();
                       </div>
                       <div class = "col-4">
                         <div class="card" style="width: 18rem;">
-                          <img src="../resources/p01.PNG" class="card-img-top" alt="...">
+                          <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -571,10 +571,8 @@ $root = FilesManager::rootDirectory();
       </div>    
   </div>
   <!-- Footer -->
-  <?php include("$root/templates/footer.php") ?>
+  <?php include __ROOT."html/templates/footer.php" ?>
 
-  <script src="../js/bootstrap.bundle.js"></script>
-  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script> -->
-  <!-- <script src="js/comments.js"></script> -->
+  <script src="../../js/bootstrap.bundle.js"></script>
 </body>
 </html>

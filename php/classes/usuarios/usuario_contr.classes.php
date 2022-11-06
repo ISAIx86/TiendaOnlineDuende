@@ -1,12 +1,8 @@
 <?php
 
-include ("$root/php/classes/usuarios/usuario_dao.classes.php");
-define("__ROOT", FilesManager::rootDirectory());
+require_once "usuario_dao.classes.php";
 
-class UsuarioContr extends UsuarioDAO {
-
-    public function __construct() {
-    }
+class UsuarioController extends UsuarioDAO {
     
     // Métodos débiles
     private function isMatchPassword($usu) {

@@ -13,11 +13,17 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: './php/includes/usuarios/login_inc.php',
+            url: '../../php/includes/usuarios/login_inc.php',
             type: 'POST',
             data: $('#form_login').serialize() + "&submit=1"
         }).done(response => {
-            let data = $.parseJSON(response);
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
             if (data.result == "error") {
                 switch(data.reason) {
                     case "empty_inputs":
@@ -40,16 +46,16 @@ $(document).ready(function() {
             else {
                 switch (data.role) {
                     case "comprador":
-                        window.location.replace("./usuarios/c-home.php");
+                        window.location.replace("../usuarios/c-home.php");
                         break;
                     case "vendedor":
-                        window.location.replace("./usuarios/c-profile.php");
+                        window.location.replace("../usuarios/c-profile.php");
                         break;
                     case "administrador":
-                        window.location.replace("./usuarios/c-profile.php");
+                        window.location.replace("../usuarios/c-profile.php");
                         break;
                     case "compravende":
-                        window.location.replace("./usuarios/landingPage.html");
+                        window.location.replace("../starting/landingPage.html");
                         break;
                 }
             }
@@ -71,14 +77,20 @@ $(document).ready(function() {
         let formdata = new FormData($('#form_registro')[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: './php/includes/usuarios/registro_inc.php',
+            url: '../../php/includes/usuarios/registro_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
             contentType: false
         })
         .done(response => {
-            let data = $.parseJSON(response);
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
             if (data.result == "error") {
                 switch (data.reason) {
                     case "empty_inputs":
@@ -115,14 +127,20 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'data');
         $.ajax({
-            url: '../php/includes/usuarios/update_data_inc.php',
+            url: '../../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
             contentType: false
         })
         .done(response => {
-            let data = $.parseJSON(response);
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
             if (data.result == "error") {
                 switch (data.reason) {
                     case "uncaptured_id":
@@ -156,14 +174,20 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'email');
         $.ajax({
-            url: '../php/includes/usuarios/update_data_inc.php',
+            url: '../../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
             contentType: false
         })
         .done(response => {
-            let data = $.parseJSON(response);
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
             if (data.result == "error") {
                 switch (data.reason) {
                     case "uncaptured_id":
@@ -199,14 +223,20 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'password');
         $.ajax({
-            url: '../php/includes/usuarios/update_data_inc.php',
+            url: '../../php/includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
             contentType: false
         })
         .done(response => {
-            let data = $.parseJSON(response);
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
             if (data.result == "error") {
                 switch (data.reason) {
                     case "uncaptured_id":

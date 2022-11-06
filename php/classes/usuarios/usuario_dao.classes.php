@@ -1,14 +1,8 @@
 <?php
 
-include ("$root/php/classes/dbo.classes.php");
+require_once __ROOT."/php/classes/dbo.classes.php";
 
 class UsuarioDAO extends DBH {
-   
-    /*
-    public function __construct() {
-        
-    }
-    */
 
     // Statement
     protected function prepareStatement($proc) {
@@ -16,7 +10,7 @@ class UsuarioDAO extends DBH {
     }
 
     private function executeCall($data) {
-        $this->executeQuery(array(
+        return $this->executeQuery(array(
             $data->getID(),
             $data->getNombres(),
             $data->getApellidos(),
@@ -38,7 +32,9 @@ class UsuarioDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
         
@@ -55,7 +51,9 @@ class UsuarioDAO extends DBH {
 
         $this->prepareStatement('modify');
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
 
@@ -74,7 +72,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
 
@@ -94,7 +94,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setCorreo($correo);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->fetchData()[0]["result"];
 
@@ -113,7 +115,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setCorreo($correo);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
         $rt_data = $this->fetchData();
@@ -150,7 +154,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
         $rt_data = $this->fetchData();
@@ -182,7 +188,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id)->setCorreo($correo);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
 
@@ -201,7 +209,9 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id)->setPassword($pass);
 
-        $this->executeCall($usu);
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
 
         $count = $this->countOfRows();
 

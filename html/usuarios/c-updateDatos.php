@@ -1,6 +1,6 @@
 <?php
-include_once("../templates/get_session.php");
-$root = FilesManager::rootDirectory();
+define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
+include_once __ROOT."html/templates/get_session.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -8,9 +8,9 @@ $root = FilesManager::rootDirectory();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuidado con el Duenda - Modificar información</title>
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/register.css">
     <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
@@ -18,36 +18,36 @@ $root = FilesManager::rootDirectory();
     <?php
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once("$root/templates/headerComprador.php");
+                include_once __ROOT."html/templates/headerComprador.php";
                 break;
             case "vendedor":
-                include_once("$root/templates/headerVendedor.php");
+                include_once __ROOT."html/templates/headerVendedor.php";
                 break;
             case "administrador":
-                include_once("$root/templates/headerAdministrador.php");
+                include_once __ROOT."html/templates/headerAdministrador.php";
                 break;
             case "compravende":
-                include_once("$root/templates/headerCompraVende.php");
+                include_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
         
-        include ("$root/php/models/usuario-model.php");
-        include ("$root/php/classes/usuarios/usuario_contr.classes.php");
+        include __ROOT."php/models/usuario-model.php";
+        include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
         if (isset($_SESSION['user'])) {
-            $controller = new UsuarioContr();
+            $controller = new UsuarioController();
             $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
             if (gettype($userData) == "string") {
                 switch ($userData) {
                     case "uncaptured_id":
-                        header("Location: $root/index.php");
+                        header("Location: ../../index.php");
                         break;
                     case "not_found":
-                        header("Location: $root/index.php");
+                        header("Location: ../../index.php");
                         break;
                 }
             } else if (!$userData) {
-                header("Location: $root/index.php");
+                header("Location: ../../index.php");
             }
         }
     ?>
@@ -187,13 +187,13 @@ $root = FilesManager::rootDirectory();
         </div>
     </div>
     <!-- Footer -->
-    <?php include("$root/templates/footer.php") ?>
+    <?php include_once __ROOT."html/templates/footer.php" ?>
 
-    <script src="../js/bootstrap.bundle.js"></script>
-    <script src="../js/jquery-3.6.1.js"></script>
-    <script src="../js/validaciones.js"></script>
-    <script src="../js/checarCampos.js"></script>
-    <script src="../js/registro.js"></script>
+    <script src="../../js/bootstrap.bundle.js"></script>
+    <script src="../../js/jquery-3.6.1.js"></script>
+    <script src="../../js/validaciones.js"></script>
+    <script src="../../js/checarCampos.js"></script>
+    <script src="../../js/registro.js"></script>
 
 </body>
 </html>

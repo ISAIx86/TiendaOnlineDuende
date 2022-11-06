@@ -1,6 +1,6 @@
 <?php
-include_once("../templates/get_session.php");
-$root = FilesManager::rootDirectory();
+define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
+include_once __ROOT."html/templates/get_session.php";
 ?>
 <!doctype html>
 <html lang="es">
@@ -8,8 +8,8 @@ $root = FilesManager::rootDirectory();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cuidado con el Duende - <?php echo $loggedUser['Username'] ?></title>
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
@@ -17,35 +17,35 @@ $root = FilesManager::rootDirectory();
     <?php 
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once("$root/templates/headerComprador.php");
+                include_once __ROOT."html/templates/headerComprador.php";
                 break;
             case "vendedor":
-                include_once("$root/templates/headerVendedor.php");
+                include_once __ROOT."html/templates/headerVendedor.php";
                 break;
             case "administrador":
-                include_once("$root/templates/headerAdministrador.php");
+                include_once __ROOT."html/templates/headerAdministrador.php";
                 break;
             case "compravende":
-                include_once("$root/templates/headerCompraVende.php");
+                include_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
-        include ("$root/php/models/usuario-model.php");
-        include ("$root/php/classes/usuarios/usuario_contr.classes.php");
+        include __ROOT."php/models/usuario-model.php";
+        include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
         if (isset($_SESSION['user'])) {
-            $controller = new UsuarioContr();
+            $controller = new UsuarioController();
             $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
             if (gettype($userData) == "string") {
                 switch ($userData) {
                     case "uncaptured_id":
-                        header("Location: $root/index.php");
+                        header("Location: ../../index.php");
                         break;
                     case "not_found":
-                        header("Location: $root/index.php");
+                        header("Location: ../../index.php");
                         break;
                 }
             } else if (!$userData) {
-                header("Location: $root/index.php");
+                header("Location: ../../index.php");
             }
         }
     ?>
@@ -73,7 +73,7 @@ $root = FilesManager::rootDirectory();
                     <div class="accordion-body">
                         <div class = "row">
                             <h4>Mis datos</h4>
-                            <a href="./c-updateDatos.php">
+                            <a href="c-updateDatos.php">
                                 <button type="button" class="btn btn-warning">Actualizar mis datos</button>
                             </a>       
                         </div>
@@ -141,7 +141,7 @@ $root = FilesManager::rootDirectory();
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='../resources/metodoPago.PNG' class='imgRedonda' />
+                                <img src='../../resources/metodoPago.PNG' class='imgRedonda' />
                             </div>
                             <div class = "col-8">
                                 <h2>Metodos de pago</h2>
@@ -193,7 +193,7 @@ $root = FilesManager::rootDirectory();
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <div class = "row">
                             <div class = "col-4">
-                                <img src='../resources/home.PNG' class='imgRedonda' />
+                                <img src='../../resources/home.PNG' class='imgRedonda' />
                             </div>
                             <div class = "col-8">
                                 <h2>Direcion</h2>
@@ -248,9 +248,9 @@ $root = FilesManager::rootDirectory();
         </div>
     </div>
     <!-- Footer -->
-    <?php include("$root/templates/footer.php") ?>
+    <?php include __ROOT."html/templates/footer.php" ?>
 
-    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../../js/bootstrap.bundle.js"></script>
 
 </body>
 </html>

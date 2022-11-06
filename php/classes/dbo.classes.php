@@ -28,16 +28,16 @@ abstract class DBH {
     }
 
     protected function executeQuery($data_arr) {
-        try {
-            if (!$this->stmt->execute($data_arr)) {
-                $this->clearStatement();
-                header("Location: ../../index.php");
+        if (!$this->stmt->execute($data_arr)) {
+            $this->clearStatement();
+            if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
+                return false;
+            } else {
+                header("Location: ".__ROOT."index.php");
                 exit();
             }
-        } catch(PDOException $e) {
-            die("Connection failed".$e->getMessage());
-            header("Location: ../../index.php");
         }
+        return true;
     }
 
     protected function countOfRows() {
