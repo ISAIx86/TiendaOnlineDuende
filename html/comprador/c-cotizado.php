@@ -1,16 +1,20 @@
+<?php
+define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
+include_once __ROOT."html/templates/get_session.php";
+?>
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cuidado con el Duende - Aceptar cotización</title>
-  <link rel="stylesheet" href="./css/bootstrap.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
   <!-- Header -->
-  <?php include("./templates/headerComprador.php") ?>
+  <?php include __ROOT."html/templates/headerComprador.php"?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
@@ -18,13 +22,13 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="./resources/p02.PNG" class="d-block w-100" alt="...">
+              <img src="../../resources/p02.PNG" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-              <video src="./resources/videoprueba.mp4" controls autoplay> Vídeo no es soportado... </video>
+              <video src="../../resources/videoprueba.mp4" controls autoplay> Vídeo no es soportado... </video>
             </div>
             <div class="carousel-item">
-              <video src="./resources/clipShort.mp4" controls autoplay> Vídeo no es soportado... </video>
+              <video src="../../resources/clipShort.mp4" controls autoplay> Vídeo no es soportado... </video>
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -86,9 +90,9 @@
     </div> 
   </div>
   <!-- Footer -->
-  <?php include("./templates/footer.php") ?>
+  <?php include __ROOT."html/templates/footer.php"?>
 
-  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="../../js/bootstrap.bundle.js"></script>
 
 </body>
 </html>

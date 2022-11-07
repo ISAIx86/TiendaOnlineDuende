@@ -17,7 +17,7 @@
                             <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="c-profile.php">Mi cuenta</a></li>
+                            <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
                             <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="col-3">
             <button type="submit" class="btn btn-warning mb-3">
-                <a href="../../c-busqueda.html">Buscar</a>
+                <a href="../producto/c-busqueda.html">Buscar</a>
             </button>
         </div>
     </form>
@@ -54,10 +54,10 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-                <a class="nav-link" href="../../a-aprobarproducto.php">Aprobar Productos</a>
+                <a class="nav-link" href="../administrador/a-aprobarproducto.php">Aprobar Productos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../../a-listaAprobados.php">Productos aprobados</a>
+                <a class="nav-link" href="../administrador/a-listaAprobados.php">Productos aprobados</a>
             </li>
         </ul>
     </div>

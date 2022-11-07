@@ -13,8 +13,8 @@
                 <h5>$1,500</h5> 
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../../c-carrito.php">Comprar</a></li>
-                <li><a class="dropdown-item" href="../../c-listas.php">Guardar Lista</a></li>
+                <li><a class="dropdown-item" href="../comprador/c-carrito.php">Comprar</a></li>
+                <li><a class="dropdown-item" href="../listas/c-listas.php">Guardar Lista</a></li>
                 <li><a class="dropdown-item" href="#">Limpiar</a></li>
               </ul>
             </div>
@@ -30,8 +30,7 @@
                 <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../../c-perfilPrivado.php">Mi Perfil</a></li>
-                <li><a class="dropdown-item" href="./c-profile.php">Mi cuenta</a></li>
+                <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
                 <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
               </ul>
             </div>
@@ -55,7 +54,7 @@
       </div>
       <div class="col-3">
         <button type="submit" class="btn btn-warning mb-3">
-          <a href="../../c-busqueda.html">Buscar</a>
+          <a href="../producto/c-busqueda.html">Buscar</a>
         </button>
       </div>
     </form>
@@ -69,20 +68,17 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../../c-busqueda.php">Productos</a>
+          <a class="nav-link active" aria-current="page" href="../producto/c-busqueda.php">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../../c-listaPublica.php">Regalar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../c-perfilPublico.php">Perfil Publico</a>
+          <a class="nav-link" href="../listas/c-listas.php">Regalar</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Recomendados</a></li>
             <li><a class="dropdown-item" href="#">Más populares</a></li>
-            <li><a class="dropdown-item" href="#">Más Vendidos</a></li>           
+            <li><a class="dropdown-item" href="#">Más Vendidos</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Vender</a></li>
           </ul>
