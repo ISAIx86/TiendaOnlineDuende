@@ -1,21 +1,31 @@
+#encabezado{
+
+	top :0;
+}
 header{
-    background: #3cc47c;
-    font-family: 'Verona';
+    background: #FFFFFF;
+    font-family: 'Candara';
 }
 .partesuperior{
     background: #1e392a;
-    font-family: 'Verona';
+    font-family: 'Candara';
     text-align: center;
+
 }
 .buscador {
-    background: black;
-    font-family: 'Verona';
+    background: 120727;
+    font-family: 'Candara';
     text-align: left;
+
 }
 #divBusqueda {
     background: black;
-    font-family: 'Verona';
+    font-family: 'Candara';
     text-align: left;
+}
+.txt-busqueda{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 footer{
     background: #3cc47c;
@@ -31,15 +41,20 @@ footer{
     height:150px;
     border-radius:75px;
 }
-#logotipo {
-    width:240px;
-    height:120px;
-    align-content: left;
+.logotipo {
+    float: left;
+    min-width: 50%;
+    max-width: 100%;
+
+    height: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #pagina{
-    background: whitesmoke;
+    background: green;
     text-align: center;
+    position: relative;
 }
 .card{
     display: flex;
@@ -54,4 +69,13 @@ footer{
     height: auto;
     width: 450px;
     margin: 15px 0; 
+}
+.divBusqueda{
+    align-items: center;
+}
+#ico-header{
+    position: relative;
+    bottom: 0;
+    left: 0;
+
 }

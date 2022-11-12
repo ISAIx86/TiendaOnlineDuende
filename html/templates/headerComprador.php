@@ -1,10 +1,11 @@
-<header>
+<div id = "encabezado">
+  <header>
   <div class="container text-center">
     <div class="row">
       <div class="col-sm-8">
         <img src='../../resources/logo02.PNG' class='logotipo'/>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4" id = "ico-header" >
         <div class = "row">
           <div class = "col-6">
             <div class="dropdown">
@@ -40,9 +41,10 @@
     </div>
   </div>
 </header>
-<div class = "container" id = "divBusqueda">          
+
+<div class = "container-fliuid " id = "divBusqueda">          
     <form class="row" id = "buscador">
-      <div class="col-9">    
+      <div class="col-9" id = "txt-busqueda">    
         <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
         <datalist id="datalistOptions">
           <option value="Electronica">
@@ -87,4 +89,5 @@
     </div>
   </div>
 </nav>
+</div>
 </div>
