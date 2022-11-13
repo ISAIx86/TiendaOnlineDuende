@@ -55,6 +55,26 @@ case (_proc)
 		update categorias set
 			fecha_elim = sysdate()
 		where id_catego = uuid_to_bin(_id_catego);
+-- //// AUTORIZAR CATEGOÍRA \\\\ --
+	when ('authorize') then
+		update categorias set
+			id_autorizador = ifnull(uuid_to_bin(_id_creador), id_autorizador),
+            fecha_autorizador = sysdate()
+		where id_catego = uuid_to_bin(_id_catego);
+-- //// BUSCAR CATEGORÍA POR NOMBRE \\\\ --
+	when ('check') then
+		select
+			count(*) as "result"
+			from categorias
+		where nombre = _nombre;
+-- /// BUSCAR POR TEXTO \\\\ --
+	when ('search_text') then
+		select
+			bin_to_uuid(id_catego) as 'ID',
+            nombre as 'Nombre'
+		from categorias
+        where nombre like concat(_nombre, '%')
+        limit 10;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

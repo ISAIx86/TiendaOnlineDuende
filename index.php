@@ -17,6 +17,7 @@ if (isset($_SESSION['user'])) {
             exit();
             break;
         case 'compravende':
+            // TODO: Direccionar a inicio de rol de comprador-vendedor.
             break;
     }
 }

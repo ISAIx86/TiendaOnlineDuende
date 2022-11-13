@@ -8,6 +8,7 @@ require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 session_start();
 if (isset($_SESSION['user'])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+        $controller = new UserController();
         switch ($_POST['mode']) {
             case 'data': {
                 $user = Usuario::create()
@@ -19,7 +20,6 @@ if (isset($_SESSION['user'])) {
                     ->setSexo($_POST['in_genero'])
                     ->setPrivacidad($_POST['in_privacidad'])
                     ->setAvatarInfo($_FILES['in_fotoperfil']);
-                $controller = new UsuarioController();
                 $result = $controller->modificarUsuario($user);
                 if (gettype($result) == "string") {
                     echo json_encode(array('result'=>"error", 'reason'=>$result));
@@ -39,7 +39,6 @@ if (isset($_SESSION['user'])) {
                     echo json_encode(array('result'=>"error", 'reason'=>"actual_email"));
                     exit();
                 }
-                $controller = new UsuarioController();
                 $result = $controller->modificarCorreo($_SESSION['user']['ID'], $_POST['in_correo']);
                 if (gettype($result) == "string") {
                     echo json_encode(array('result'=>"error", 'reason'=>$result));
@@ -60,7 +59,6 @@ if (isset($_SESSION['user'])) {
                 $user->setCorreo()
                     ->setPassword($_POST['in_prevpass'])
                     ->setConfPass($_POST['in_confirm']);
-                $controller = new UsuarioController($user);
                 $result = $controller->modificarContra($_SESSION['user']['ID'], $_SESSION['user']['Correo'], $_POST['in_prevpass'], $_POST['in_password'], $_POST['in_confirm']);
                 if (gettype($result) == "string") {
                     echo json_encode(array('result'=>"error", 'reason'=>$result));

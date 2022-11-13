@@ -58,7 +58,7 @@ include_once __ROOT."html/templates/get_session.php";
                         <div class = "row">
                             <div class = "col-4">
                                 <?php if ($loggedUser["Avatar"] == null) { ?>
-                                <img src='../resources/default_user.jpg' class='imgRedonda'/>
+                                <img src='../../resources/default_user.jpg' class='imgRedonda'/>
                                 <?php } else { $imageSrc = '"data:image/jpg;base64,'.base64_encode($loggedUser["Avatar"]).'"'; ?>
                                 <img src=<?php echo $imageSrc ?> class='imgRedonda'/>
                                 <?php } ?>

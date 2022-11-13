@@ -29,8 +29,7 @@ class UsuarioController extends UsuarioDAO {
             empty($usu->getConfPass())
         ) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     private function hasEmptyInputForModify(Usuario $usu) {

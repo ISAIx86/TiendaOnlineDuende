@@ -41,32 +41,29 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="mb-3">
             <div class="col-auto">
               <label for="txt_incatego" class="form-label">Categoria</label>
-              <input class="form-control" list="datalistOptions" id="txt_incatego" placeholder="Ingrese una categoria...">
-              <datalist id="datalistOptions">
-              <option value="Electronica">
-              <option value="Ropa">
-              <option value="Anime">
-              <option value="Oficina">
-              <option value="Jardineria">
-              </datalist>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-3" id="btn_incatego">Agregar Categoria</button>
+              <input class="form-control" id="txt_incatego" placeholder="Ingrese una categoria...">
+              <ul id="search-list" class="searchul">
+              </ul>
             </div>
           </div>
         </div>
       </div>
       <div class = "col-6">
         <form id="form_producto">
-          <div class="mb-3">
-            <label for="txt_nombre" class="form-label">Producto</label>
-            <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto">
+          <div class="form_control" requerido="true" state='empt'>
+            <div class="mb-3">
+              <label for="txt_nombre" class="form-label">Producto</label>
+              <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="txt_descrip" class="form-label">Descripcion</label>
-            <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3"></textarea>
+          <div class="form_control" requerido="true" state='empt'>
+            <div class="mb-3">
+              <label for="txt_descrip" class="form-label">Descripcion</label>
+              <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form_control" requerido="true" state='empt'>
+            
           </div>
           <div class="mb-3">
             <label for="img_fotos" class="form-label">Fotografias del producto</label>

@@ -28,7 +28,7 @@
 </div>
 <div class = "container-sm">
     <form class="row" id = "buscador">
-        <div class="col-9">    
+        <div class="col-9">
             <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
             <datalist id="datalistOptions">
                 <option value="Electronica">
@@ -54,22 +54,20 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../vendedor/v-registrarProducto.html">Registrar producto</a>
+                    <a class="nav-link active" aria-current="page" href="../vendedor/v-registrarProducto.php">Registrar producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../vendedor/v-crearCategoria.html">Registrar categoria</a>
+                    <a class="nav-link" href="../vendedor/v-crearCategoria.php">Registrar categoria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../vendedor/v-cotizacion.html">Cotizaciones pendientes</a>
+                    <a class="nav-link" href="../vendedor/v-cotizacion.php">Cotizaciones pendientes</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Consultas
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../vendedor/v-existencia.html">Existencias</a></li>  
-                        <li><a class="dropdown-item" href="../vendedor/v-listaVentas.html">Ventas detalladas</a></li>
-                        <li><a class="dropdown-item" href="../vendedor/v-ventaAgrupada.html">Ventas agrupadas</a></li>    
+                        <li><a class="dropdown-item" href="../vendedor/v-existencia.php">Existencias</a></li>
+                        <li><a class="dropdown-item" href="../vendedor/v-listaVentas.php">Ventas detalladas</a></li>
+                        <li><a class="dropdown-item" href="../vendedor/v-ventaAgrupada.php">Ventas agrupadas</a></li>
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>

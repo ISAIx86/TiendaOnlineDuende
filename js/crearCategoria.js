@@ -1,40 +1,60 @@
-$(document).ready(function(){
+// Formulario de categoria
+$(document).ready(function() {
 
     $('#form_categoria').submit(function(e){
-        let nombre_categoria = $('#txt_nombre').val();
-        let descripcion = $('#txt_descrip').val();
-
-        let todo_correcto = true;
-
-        if (nombre_categoria === "") {
-            alert("Ingrese un nombre de categoría.");
-            todo_correcto = false;
+        e.preventDefault();
+        if (!checkCorrectInputs($('#form_categoria'))) {
+            alert("Algunos campos contienen errores o están vacíos.");
+            return;
         }
-        else if (tienenNum(nombre_categoria)) {
-            alert("El nombre no debe contener números.");
-            todo_correcto = false;
-        }
-        else if (nombre_categoria.length > 32) {
-            alert("Demasiados caracteres en el nombre.");
-            todo_correcto = false;
-        }
-
-        if (descripcion === "") {
-            alert("Ingrese un descripción.");
-            todo_correcto = false;
-        }
-        else if (descripcion.length > 256) {
-            alert("Demasiados caracteres en el nombre.");
-            todo_correcto = false;
-        }
-
-        if (todo_correcto) {
-            alert("¡Nueva Categoría creada!");
-        }
-        else {
-            e.preventDefault();
-        }
-
+        let formdata = new FormData($('#form_categoria')[0]);
+        formdata.append('submit', 1);
+        $.ajax({
+            url: '../../php/includes/categorias/insert_catego_inc.php',
+            type: 'POST',
+            data: formdata
+        })
+        .done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch (data.reason) {
+                    case "uncaptured_id":
+                        alert("No se pudo capturar el ID");
+                        break;
+                    case "empty_inputs":
+                        alert("Algunos campos están vacíos.");
+                        break;
+                    case "no_query_results":
+                        alert("Hubo un problema al consultar la información.");
+                        break;
+                }
+            } else {
+                alert("Información actualizada.");
+                window.location.reload();
+            }
+        });
     });
 
+    bindFields()
+
 });
+
+function bindFields() {
+
+    $('#txt_nombre').on('change', function() {
+        let contenido =  $(this).val();
+        type_text($(this)[0], contenido, 32);
+    });
+
+    $('#txt_descrip').on('change', function() {
+        let contenido =  $(this).val();
+        type_textnum($(this)[0], contenido, 256);
+    });
+    
+}

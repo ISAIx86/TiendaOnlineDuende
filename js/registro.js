@@ -1,21 +1,18 @@
+// Formularios de usuario.
 $(document).ready(function() {
 
     $('#form_login').submit( e => {
         e.preventDefault();
-        let campos = $(this).children('[requerido="true"]').toArray();
-        let todoCorrecto = true;
-        todoCorrecto = !campos.some(campo => {
-            return campo.getAttribute('state') !== "succ";
-        });
-
-        if (!todoCorrecto) {
+        if (!checkCorrectInputs($('#form_login'))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
+        let formdata = new FormData($('#form_login')[0]);
+        formdata.append('submit', 1);
         $.ajax({
             url: '../../php/includes/usuarios/login_inc.php',
             type: 'POST',
-            data: $('#form_login').serialize() + "&submit=1"
+            data: formdata
         }).done(response => {
             let data;
             try {
@@ -64,13 +61,7 @@ $(document).ready(function() {
 
     $('#form_registro').submit( e => {
         e.preventDefault();
-        let campos = $('#form_registro').children('div[requerido="true"]').toArray();
-        let todoCorrecto = true;
-        todoCorrecto = !campos.some(campo => {
-            return campo.getAttribute('state') !== "succ";
-        });
-
-        if (!todoCorrecto) {
+        if (!checkCorrectInputs($('#form_registro'))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
@@ -114,13 +105,8 @@ $(document).ready(function() {
 
     $('#form_registro_upd').submit( e => {
         e.preventDefault();
-        let campos = $('#form_registro_upd').children('div[requerido="true"]').toArray();
-        let todoCorrecto = true;
-        todoCorrecto = !campos.some(campo => {
-            return campo.getAttribute('state') !== "succ";
-        });
-        if (!todoCorrecto) {
-            alert("Algunos campos están incorrectos.");
+        if (!checkCorrectInputs($('#form_registro_upd'))) {
+            alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
         let formdata = new FormData($('#form_registro_upd')[0]);
@@ -153,24 +139,20 @@ $(document).ready(function() {
                         alert("Hubo un problema al consultar la información.");
                         break;
                 }
+            } else {
+                alert("Información actualizada.");
+                window.location.reload();
             }
-            alert("Información actualizada");
-            window.location.reload();
         });
     });
 
     $('#form_correo_upd').submit( e => {
         e.preventDefault();
-        let campos = $('#form_correo_upd').children('div[requerido="true"]').toArray();
-        let todoCorrecto = true;
-        todoCorrecto = !campos.some(campo => {
-            return campo.getAttribute('state') !== "succ";
-        });
-        if (!todoCorrecto) {
-            alert("Algunos campos están incorrectos.");
+        if (!checkCorrectInputs($('#form_correo_upd'))) {
+            alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
-        let formdata = new FormData($('#form_registro_upd')[0]);
+        let formdata = new FormData($('#form_correo_upd')[0]);
         formdata.append('submit', 1);
         formdata.append('mode', 'email');
         $.ajax({
@@ -203,23 +185,19 @@ $(document).ready(function() {
                         alert("Hubo un problema al consultar la información.");
                         break;
                 }
+            } else {
+                alert("Correo electrónico actualizado");
             }
-            alert("Correo electrónico actualizado");
         });
-    })
+    });
 
     $('#form_contra_upd').submit( e => {
         e.preventDefault();
-        let campos = $('#form_contra_upd').children('div[requerido="true"]').toArray();
-        let todoCorrecto = true;
-        todoCorrecto = !campos.some(campo => {
-            return campo.getAttribute('state') !== "succ";
-        });
-        if (!todoCorrecto) {
-            alert("Algunos campos están incorrectos.");
+        if (!checkCorrectInputs($('#form_contra_upd'))) {
+            alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
-        let formdata = new FormData($('#form_registro_upd')[0]);
+        let formdata = new FormData($('#form_contra_upd')[0]);
         formdata.append('submit', 1);
         formdata.append('mode', 'password');
         $.ajax({
@@ -258,20 +236,74 @@ $(document).ready(function() {
                         alert("Hubo un problema al consultar la información.");
                         break;
                 }
-            }
-            else {
+            } else {
                 emptyInputs($('#form_contra_upd'));
                 alert("Contraseña actualizada");
             }
         });
-    })
+    });
+
+    bindFields();
 
 });
 
-function emptyInputs(element) {
-    debugger;
-    let campos = element.find('input').toArray();
-    campos.forEach(element => {
-        element.value = "";
+// Campos de formularios
+
+function bindFields() {
+
+    $('#txt_nombres').on('change', function() {
+        let contenido =  $(this).val();
+        type_text($(this)[0], contenido, 64);
     });
+
+    $('#txt_apellidos').on('change', function() {
+        let contenido =  $(this).val();
+        type_text($(this)[0], contenido, 64);
+    });
+
+    $('input[type="radio"][name="in_genero"]').on('change', function(){
+        setCSSFor($(this)[0], 'success');
+    });
+
+    $('input[type="radio"][name="in_privacidad"]').on('change', function(){
+        setCSSFor($(this)[0], 'success');
+    });
+
+    $('#cbx_rol').on('change', function(){
+        setCSSFor($(this)[0], 'success');
+    });
+
+    $('#txt_fechanac').change(function() {
+        let contenido = $(this).val();
+        type_date($(this)[0], contenido);
+    });
+
+    $('#txt_correo').on('change', function() {
+        let contenido =  $(this).val();
+        type_email($(this)[0], contenido);
+    });
+
+    $('#txt_username').on('change', function() {
+        let contenido =  $(this).val();
+        type_textnum($(this)[0], contenido, 32);
+    });
+
+    $('#txt_prevpass').on('change', function() {
+        let contenido =  $(this).val();
+        type_password($(this)[0], contenido);
+    });
+
+    $('#txt_password').on('change', function() {
+        let contenido =  $(this).val();
+        $('#pass_format').hide();
+        type_password($(this)[0], contenido);
+        $('#txt_confirm').trigger('change');
+    });
+
+    $('#txt_confirm').on('change', function() {
+        let contenido =  $(this).val();
+        let contra = $('#txt_password').val();
+        type_confirm($(this)[0], contenido, contra);
+    });
+    
 }

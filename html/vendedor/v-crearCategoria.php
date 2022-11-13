@@ -18,20 +18,17 @@ include_once __ROOT."html/templates/get_session.php";
   <div class = "container" id = "pagina">
     <div class = "row">
       <form id="form_categoria">
-        <div class="mb-3">
-          <label for="in_nombre" class="form-label">Categoria</label>
-          <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
-          <datalist id="datalistOptions">
-            <option value="Electronica">
-            <option value="Ropa">
-            <option value="Anime">
-            <option value="Oficina">
-            <option value="Jardineria">
-          </datalist>
+        <div class="form_control" requerido="true" state='empt'>
+          <div class="mb-3">
+            <label for="in_nombre" class="form-label">Categoria</label>
+            <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="in_descrip" class="form-label">Descripcion</label>
-          <textarea class="form-control" id="txt_descrip" name="in_descrip" rows="3"></textarea>
+        <div class="form_control" requerido="true" state='empt'>
+          <div class="mb-3">
+            <label for="in_descrip" class="form-label">Descripcion</label>
+            <textarea class="form-control" id="txt_descrip" name="in_descrip" rows="3"></textarea>
+          </div>
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary mb-3">Registrar</button>

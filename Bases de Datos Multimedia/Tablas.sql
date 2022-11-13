@@ -132,7 +132,7 @@ create table if not exists categorias (
 	id_catego binary(16) comment "ID de la categoría",
     
     id_creador binary(16) not null comment "ID del vendedor creador de la categoría",
-    id_autorizador binary(16) comment "ID del administrador que aprueba la categoría",
+    id_autorizador binary(16) default null comment "ID del administrador que aprueba la categoría",
     
     nombre varchar(32) not null unique comment "Nombre de la categoría",
     descripcion text not null comment "Breve descripción de lo que trata la categoría",

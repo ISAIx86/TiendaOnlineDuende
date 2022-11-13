@@ -1,4 +1,45 @@
+class Categoria {
+    constructor(id, nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+}
+
+let categorias = [];
+
 $(document).ready(function() {
+
+    $('#txt_incatego').on('keyup', e => {
+        let text = $('#txt_incatego').val();
+        $.ajax({
+            url: '../../php/includes/categorias/buscar_catego_inc.php',
+            type: 'GET',
+            data: { 'in_texto' : text }
+        })
+        .done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch(data.reason) {
+                    case "empty":
+                        $('#search-list').html("");
+                        break;
+                }
+            } else {
+                let htmlList = [""];
+                data.content.forEach(element => {
+                    appendElement(htmlList, element);
+                });
+                $('#search-list').html(htmlList);
+            }
+        });
+    })
+
 
     $('#btn_incatego').on('click', e => {
         let contenido = $('#txt_incatego').val();
@@ -35,66 +76,7 @@ $(document).ready(function() {
 
 });
 
-function checarNombre() {
-    let contenido = $('#txt_nombre').val();
-    if (contenido === "") {
-        alert("Ingrese un nombre para el producto.");
-        return false;
-    }
-    else if (contenido.length > 64) {
-        alert("Demasiados caracteres en el nombre.");
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-function checarDescripcion() {
-    let contenido = $('#txt_descrip').val();
-    if (contenido === "") {
-        alert("Ingrese una descripción para el producto.");
-        return false;
-    }
-    else if (contenido.length > 256) {
-        alert("Demasiados caracteres en la descripción.");
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-function checarCategoria() {
-    let contenido = $('#txt_catego').val();
-    if (contenido === "") {
-        alert("Ingrese una categoría para el producto.");
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-function checarPrecio() {
-    let contenido = $('#txt_precio').val();
-    if (contenido === "") {
-        alert("Ingrese una precio.");
-        return false;
-    }
-    else if (contenido.length > 8){
-        alert("El precio no debe tener más de 8 caracteres.");
-        return false;
-    }
-    else if (!soloNumeros(contenido)) {
-        alert("El precio contiene letras.");
-        return false;
-    }
-    else if (!validarPrecio(contenido)) {
-        alert("El precio es inválido.");
-        return false;
-    }
-    else {
-        return true;
-    }
+function appendElement(htmlList, element) {
+    let text='<li><a id="'+element["ID"]+'" value"'+element["Nombre"]+'">'+element["Nombre"]+'</a></li>';
+    htmlList[0] += text;
 }

@@ -1,68 +1,13 @@
-$(document).ready(function() {
+//////////////////////////////
+//// TIPOS DE VALIDADORES ////
+//////////////////////////////
 
-    $('#txt_nombres').on('change', function() {
-        let contenido =  $(this).val();
-        type_names($(this)[0], contenido);
-    });
-
-    $('#txt_apellidos').on('change', function() {
-        let contenido =  $(this).val();
-        type_names($(this)[0], contenido);
-    });
-
-    $('input[type="radio"][name="in_genero"]').on('change', function(){
-        setCSSFor($(this)[0], 'success');
-    });
-
-    $('input[type="radio"][name="in_privacidad"]').on('change', function(){
-        setCSSFor($(this)[0], 'success');
-    });
-
-    $('#cbx_rol').on('change', function(){
-        setCSSFor($(this)[0], 'success');
-    });
-
-    $('#txt_fechanac').change(function() {
-        let contenido = $(this).val();
-        type_date($(this)[0], contenido);
-    });
-
-    $('#txt_correo').on('change', function() {
-        let contenido =  $(this).val();
-        type_email($(this)[0], contenido);
-    });
-
-    $('#txt_username').on('change', function() {
-        let contenido =  $(this).val();
-        type_nickname($(this)[0], contenido);
-    });
-
-    $('#txt_prevpass').on('change', function() {
-        let contenido =  $(this).val();
-        type_password($(this)[0], contenido);
-    });
-
-    $('#txt_password').on('change', function() {
-        let contenido =  $(this).val();
-        $('#pass_format').hide();
-        type_password($(this)[0], contenido);
-        $('#txt_confirm').trigger('change');
-    });
-
-    $('#txt_confirm').on('change', function() {
-        let contenido =  $(this).val();
-        let contra = $('#txt_password').val();
-        type_confirm($(this)[0], contenido, contra);
-    });
-    
-});
-
-function type_names(element, contenido) {
+function type_text(element, contenido, limite) {
     if (contenido.length == 0) {
         setCSSFor(element);
     }
-    else if (contenido.length > 64) {
-        setCSSFor(element, 'error', 'Demasiados caracteres.');
+    else if (contenido.length > limite) {
+        setCSSFor(element, 'error', 'Demasiados caracteres. No más de '+limite+' caracteres.');
     }
     else if (tienenNum(contenido)) {
         setCSSFor(element, 'error', 'No debe contener números.');
@@ -86,12 +31,12 @@ function type_date(element, contenido) {
         }
 }
 
-function type_nickname(element, contenido) {
+function type_textnum(element, contenido, limite) {
     if (contenido.length === 0) {
         setCSSFor(element, '', '');
     }
-    else if (contenido.length > 32) {
-        setCSSFor(element, 'error', 'Demasiados caracteres.');
+    else if (contenido.length > limite) {
+        setCSSFor(element, 'error', 'Demasiados caracteres. No mas de '+limite+' caracteres.');
     }
     else {
         setCSSFor(element, 'success', '');
@@ -147,6 +92,10 @@ function type_confirm(element, contenido, confirma) {
     }
 }
 
+//////////////////////////
+//// ESTADO DEL CAMPO ////
+//////////////////////////
+
 function setCSSFor(input, _class, message) {
     const formControl = input.parentElement;
     const sm = formControl.querySelector('small');
@@ -166,6 +115,27 @@ function setCSSFor(input, _class, message) {
             break;
     }
 }
+
+function checkCorrectInputs(form) {
+    let campos = form.children('div[requerido="true"]').toArray();
+    let todoCorrecto = true;
+    todoCorrecto = !campos.some(campo => {
+        return campo.getAttribute('state') !== "succ";
+    });
+    return todoCorrecto;
+}
+
+function emptyInputs(element) {
+    debugger;
+    let campos = element.find('input').toArray();
+    campos.forEach(element => {
+        element.value = "";
+    });
+}
+
+/////////////////////////////
+//// VALIDACION DE DATOS ////
+/////////////////////////////
 
 function tienenNum(input) {
     return /\d/.test(input);
