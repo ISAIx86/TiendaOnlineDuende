@@ -51,9 +51,9 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
-      <div class="container text-center">
+      <div class="col-auto">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-          <div class="col-auto">
+          <div class="col-m">
             <div class="card" style="width: 18rem;">
               <img src="../../resources/p02.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -63,7 +63,7 @@ include_once __ROOT."html/templates/get_session.php";
               </div>
             </div>
           </div>
-          <div class="col-auto">
+          <div class="col-m">
             <div class="card" style="width: 18rem;">
               <img src="../../resources/p01.PNG" class="card-img-top" alt="...">
               <div class="card-body">
@@ -73,7 +73,7 @@ include_once __ROOT."html/templates/get_session.php";
               </div>
             </div>
           </div>
-          <div class="col-auto">
+          <div class="col-m">
             <div class="card" style="width: 18rem;">
               <img src="../../resources/p03.PNG" class="card-img-top" alt="...">
               <div class="card-body">

@@ -10,7 +10,7 @@
           <div class = "col-6">
             <div class="dropdown">
               <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src='../../resources/carrito.PNG' class='imgRedonda' />
+                <img src='../../resources/carrito.PNG' class='imgCuadrada' />
                 <h5>$1,500</h5> 
               </button>
               <ul class="dropdown-menu">
@@ -42,7 +42,7 @@
   </div>
 </header>
 
-<div class = "container-fliuid " id = "divBusqueda">          
+<div class = "container" id = "divBusqueda">          
     <form class="row" id = "buscador">
       <div class="col-9" id = "txt-busqueda">    
         <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
@@ -54,9 +54,9 @@
           <option value="Jardineria">
         </datalist>
       </div>
-      <div class="col-3">
+      <div class="col-3" id = "txt-busqueda">
         <button type="submit" class="btn btn-warning mb-3">
-          <a href="../producto/c-busqueda.html">Buscar</a>
+          <a href="../producto/c-busqueda.php">Buscar</a>
         </button>
       </div>
     </form>
