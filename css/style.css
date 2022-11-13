@@ -1,21 +1,36 @@
+#encabezado{
+
+	top :0;
+}
 header{
-    background: #3cc47c;
-    font-family: 'Verona';
+    background: #FFFFFF;
+    font-family: 'Candara';
 }
 .partesuperior{
     background: #1e392a;
-    font-family: 'Verona';
+    font-family: 'Candara';
     text-align: center;
+
 }
 .buscador {
-    background: black;
-    font-family: 'Verona';
+    background: #CADE01;
+    font-family: 'Candara';
     text-align: left;
+    position: absolute;
+
 }
 #divBusqueda {
-    background: black;
-    font-family: 'Verona';
+    background: #CADE01;
+    font-family: 'Candara';
     text-align: left;
+}
+#navegacion{
+    background: #CADE01;
+    font-family: 'Candara';
+    text-align: left;
+}
+#txt-busqueda{
+    margin-top: 10px;
 }
 footer{
     background: #3cc47c;
@@ -26,20 +41,30 @@ footer{
     height:50px;
     border-radius:25px;
 }
+.imgCuadrada {
+    width:50px;
+    height:50px;
+}
+
 .imgRedonda150 {
     width:150px;
     height:150px;
     border-radius:75px;
 }
-#logotipo {
-    width:240px;
-    height:120px;
-    align-content: left;
+.logotipo {
+    float: left;
+    min-width: 50%;
+    max-width: 100%;
+
+    height: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #pagina{
-    background: whitesmoke;
+    background: #6924A5;
     text-align: center;
+    position: relative;
 }
 .card{
     display: flex;
@@ -76,4 +101,16 @@ display: block; /* Make it into a block element to fill the whole list */
 
 .searchul li a:hover:not(.header) {
 background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+.divBusqueda{
+    align-items: center;
+}
+#ico-header{
+    position: relative;
+    bottom: 0;
+    left: 0;
+
+}
+#divProducto{
+    align-items: center;
 }

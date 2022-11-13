@@ -1,15 +1,16 @@
-<header>
+<div id = "encabezado">
+  <header>
   <div class="container text-center">
     <div class="row">
       <div class="col-sm-8">
         <img src='../../resources/logo02.PNG' class='logotipo'/>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4" id = "ico-header" >
         <div class = "row">
           <div class = "col-6">
             <div class="dropdown">
               <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src='../../resources/carrito.PNG' class='imgRedonda' />
+                <img src='../../resources/carrito.PNG' class='imgCuadrada' />
                 <h5>$1,500</h5> 
               </button>
               <ul class="dropdown-menu">
@@ -40,9 +41,10 @@
     </div>
   </div>
 </header>
+
 <div class = "container" id = "divBusqueda">          
     <form class="row" id = "buscador">
-      <div class="col-9">    
+      <div class="col-9" id = "txt-busqueda">    
         <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
         <datalist id="datalistOptions">
           <option value="Electronica">
@@ -52,9 +54,9 @@
           <option value="Jardineria">
         </datalist>
       </div>
-      <div class="col-3">
+      <div class="col-3" id = "txt-busqueda">
         <button type="submit" class="btn btn-warning mb-3">
-          <a href="../producto/c-busqueda.html">Buscar</a>
+          <a href="../producto/c-busqueda.php">Buscar</a>
         </button>
       </div>
     </form>
@@ -87,4 +89,5 @@
     </div>
   </div>
 </nav>
+</div>
 </div>
