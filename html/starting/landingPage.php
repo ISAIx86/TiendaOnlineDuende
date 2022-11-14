@@ -74,7 +74,7 @@
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="password" id="txt_password1" name="in_password" placeholder="Contraseña" minlength="8">
+                            <input type="password" id="txt_password" name="in_password" placeholder="Contraseña" minlength="8">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>

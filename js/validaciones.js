@@ -17,6 +17,33 @@ function type_text(element, contenido, limite) {
     }
 }
 
+function type_textnum(element, contenido, limite) {
+    if (contenido.length === 0) {
+        setCSSFor(element, '', '');
+    }
+    else if (contenido.length > limite) {
+        setCSSFor(element, 'error', 'Demasiados caracteres. No mas de '+limite+' caracteres.');
+    }
+    else {
+        setCSSFor(element, 'success', '');
+    }
+}
+
+function type_float(element, contenido) {
+    if (contenido.length === 0) {
+        setCSSFor(element, '', '');
+    }
+    else if (contenido.length > 7) {
+        setCSSFor(element, 'error', 'Demasiados caracteres. No mas de 7 caracteres.');
+    }
+    else if (!validarPrecio(contenido)) {
+        setCSSFor(element, 'error', 'El formato de precio no es válido.');
+    }
+    else {
+        setCSSFor(element, 'success', '');
+    }
+}
+
 function type_date(element, contenido) {
     let sep = contenido.split('-');
         let fecnac = new Date(sep[0], sep[1] - 1, sep[2]);
@@ -29,18 +56,6 @@ function type_date(element, contenido) {
         else {
             setCSSFor(element, 'success');
         }
-}
-
-function type_textnum(element, contenido, limite) {
-    if (contenido.length === 0) {
-        setCSSFor(element, '', '');
-    }
-    else if (contenido.length > limite) {
-        setCSSFor(element, 'error', 'Demasiados caracteres. No mas de '+limite+' caracteres.');
-    }
-    else {
-        setCSSFor(element, 'success', '');
-    }
 }
 
 function type_email(element, contenido) {
@@ -97,21 +112,21 @@ function type_confirm(element, contenido, confirma) {
 //////////////////////////
 
 function setCSSFor(input, _class, message) {
-    const formControl = input.parentElement;
-    const sm = formControl.querySelector('small');
+    const formControl = input.parents('.form_control');
+    const sm = formControl.children('small');
     switch(_class) {
         case 'error':
-            sm.innerText = message;
-            formControl.className='form_control error';
-            formControl.setAttribute('state', 'erro');
+            sm.text(message);
+            formControl.attr('class', 'form_control error');
+            formControl.attr('state', 'erro');
             break;
         case 'success':
-            formControl.className='form_control success';
-            formControl.setAttribute('state', 'succ');
+            formControl.attr('class', 'form_control success');
+            formControl.attr('state', 'succ');
             break;
         default:
-            formControl.className='form_control';
-            formControl.setAttribute('state', 'empt');
+            formControl.attr('class', 'form_control');
+            formControl.attr('state', 'empt');
             break;
     }
 }

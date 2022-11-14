@@ -59,41 +59,44 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_descrip" class="form-label">Descripcion</label>
-              <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3"></textarea>
+              <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3" style="resize: none;"></textarea>
             </div>
           </div>
+          <div class="form_control" requerido="false" state='empt'>
+            <div class="mb-3">
+              <label for="img_fotos" class="form-label">Fotografias del producto</label>
+              <input class="form-control" type="file" id="img_fotos" name="in_files" multiple>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="in_catego" class="form-label">Categorias</label>
+            <select id="lbx_catego" name="in_catego" size="5">
+              <option>Sin categorías</option>
+            </select>
+          </div>
           <div class="form_control" requerido="true" state='empt'>
-            
-          </div>
-          <div class="mb-3">
-            <label for="img_fotos" class="form-label">Fotografias del producto</label>
-            <input class="form-control" type="file" id="img_fotos" multiple>
-          </div>
-          <div class="mb-3">
-            <label for="txt_catego" class="form-label">Categorias</label>
-            <textarea class="form-control" id="txt_catego" rows="3" readonly></textarea>
-          </div>
-          <div class="mb-3">
-            <div class = "row">
-              <div class = "col-6">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="in_tipoprecio" id="rdb_precio" value="PF" checked>
-                    <label class="form-check-label" for="rdb_precio">
-                      Precio Fijo
-                    </label>
+            <div class="mb-3">
+              <div class = "row">
+                <div class = "col-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="in_tipoprecio" id="rdb_precio" value="PF" checked>
+                      <label class="form-check-label" for="rdb_precio">
+                        Precio Fijo
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="in_tipoprecio" id="rdb_cotiz" value="CT">
+                      <label class="form-check-label" for="rdb_cotiz">
+                        Cotización
+                      </label>
+                    </div>    
+                </div>
+                <div class = "col-6">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text">.00</span>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="in_tipoprecio" id="rdb_cotiz" value="CT">
-                    <label class="form-check-label" for="rdb_cotiz">
-                      Cotización
-                    </label>
-                  </div>    
-              </div>
-              <div class = "col-6">
-                <div class="input-group mb-3">
-                  <span class="input-group-text">$</span>
-                  <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)">
-                  <span class="input-group-text">.00</span>
                 </div>
               </div>
             </div>

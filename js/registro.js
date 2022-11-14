@@ -12,7 +12,9 @@ $(document).ready(function() {
         $.ajax({
             url: '../../php/includes/usuarios/login_inc.php',
             type: 'POST',
-            data: formdata
+            data: formdata,
+            processData: false,
+            contentType: false
         }).done(response => {
             let data;
             try {
@@ -39,8 +41,7 @@ $(document).ready(function() {
                         alert("Administrador no autorizado.");
                         break;
                 }
-            }
-            else {
+            } else {
                 switch (data.role) {
                     case "comprador":
                         window.location.replace("../usuarios/c-home.php");
@@ -253,57 +254,57 @@ function bindFields() {
 
     $('#txt_nombres').on('change', function() {
         let contenido =  $(this).val();
-        type_text($(this)[0], contenido, 64);
+        type_text($(this), contenido, 64);
     });
 
     $('#txt_apellidos').on('change', function() {
         let contenido =  $(this).val();
-        type_text($(this)[0], contenido, 64);
+        type_text($(this), contenido, 64);
     });
 
     $('input[type="radio"][name="in_genero"]').on('change', function(){
-        setCSSFor($(this)[0], 'success');
+        setCSSFor($(this), 'success');
     });
 
     $('input[type="radio"][name="in_privacidad"]').on('change', function(){
-        setCSSFor($(this)[0], 'success');
+        setCSSFor($(this), 'success');
     });
 
     $('#cbx_rol').on('change', function(){
-        setCSSFor($(this)[0], 'success');
+        setCSSFor($(this), 'success');
     });
 
     $('#txt_fechanac').change(function() {
         let contenido = $(this).val();
-        type_date($(this)[0], contenido);
+        type_date($(this), contenido);
     });
 
     $('#txt_correo').on('change', function() {
         let contenido =  $(this).val();
-        type_email($(this)[0], contenido);
+        type_email($(this), contenido);
     });
 
     $('#txt_username').on('change', function() {
         let contenido =  $(this).val();
-        type_textnum($(this)[0], contenido, 32);
+        type_textnum($(this), contenido, 32);
     });
 
     $('#txt_prevpass').on('change', function() {
         let contenido =  $(this).val();
-        type_password($(this)[0], contenido);
+        type_password($(this), contenido);
     });
 
     $('#txt_password').on('change', function() {
         let contenido =  $(this).val();
         $('#pass_format').hide();
-        type_password($(this)[0], contenido);
+        type_password($(this), contenido);
         $('#txt_confirm').trigger('change');
     });
 
     $('#txt_confirm').on('change', function() {
         let contenido =  $(this).val();
         let contra = $('#txt_password').val();
-        type_confirm($(this)[0], contenido, contra);
+        type_confirm($(this), contenido, contra);
     });
     
 }
