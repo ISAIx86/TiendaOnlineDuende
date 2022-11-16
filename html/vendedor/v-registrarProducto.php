@@ -62,6 +62,12 @@ include_once __ROOT."html/templates/get_session.php";
               <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3" style="resize: none;"></textarea>
             </div>
           </div>
+          <div class="form_control" requerido="true" state='empt'>
+            <div class="mb-3">
+              <label for="txt_descrip" class="form-label">Cantidad disponible</label>
+              <input type="number" class="form-control" id="txt_dispo" name="in_dispo" max="256", min="1"></input>
+            </div>
+          </div>
           <div class="form_control" requerido="false" state='empt'>
             <div class="mb-3">
               <label for="img_fotos" class="form-label">Fotografias del producto</label>

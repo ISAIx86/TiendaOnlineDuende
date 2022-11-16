@@ -211,7 +211,7 @@ create table if not exists cotizaciones (
     id_comprador binary(16) not null comment "ID del comprador",
 	id_producto binary(16) not null comment "ID del producto",
     
-    precio decimal(8,2) not null comment "Oferta de precio por el producto",
+    precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
     cantidad int not null comment "Cantidad de productos a comprar",
     aprovado boolean comment "Cotización aprovada por el vendedor. 0 si no fue aprovada, 1 si fue aprovada",
     aceptado boolean comment "Cotización aceptada por el comprado. 0 si no fue aceptada, 1 si fue aceptada",
@@ -251,7 +251,9 @@ create table if not exists rel_li_prod (
 drop table if exists rel_carrito;
 create table if not exists rel_carrito (
 	id_usuario binary(16) not null comment "ID del usuario",
-    id_producto binary(16) not null comment "ID del producto"
+    id_producto binary(16) not null comment "ID del producto",
+    
+    cantidad int not null comment "Cantidad de productos a comprar"
 );
 
 -- //// TABLA RELACIÓN PRODUCTO CATEGORÍA //// --

@@ -6,7 +6,7 @@ class CategoriaDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Categorias('".$proc."', ?, ?, ?, ?)");
+        $this->setPrepareStatement("call sp_Categorias('".$proc."', ?, ?, ?, ?);");
     }
 
     private function executeCall($data) {
@@ -19,7 +19,6 @@ class CategoriaDAO extends DBH {
     }
 
     // CRUD
-
     protected function cat_crear(Categoria $cat) {
 
         $this->prepareStatement('create');

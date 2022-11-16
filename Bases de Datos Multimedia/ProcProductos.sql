@@ -52,6 +52,11 @@ case (_proc)
 			_cotizacion,
 			_precio
 		);
+        if (row_count() != 0) then
+			select bin_to_uuid(last_insert_id()) as "result";
+        else
+			select "failed_insertion" as 'result';
+        end if;
 -- //// MODIFICAR PRODUCTO \\\\ --
     when ('modify') then
 		update productos set
