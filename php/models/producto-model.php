@@ -5,6 +5,7 @@ class Producto {
     private $id_producto = null;
     private $id_publicador = null;
     private $id_autorizador = null;
+    private $id_catego = null;
     private $titulo = null;
     private $descripcion = null;
     private $cotizacion = null;
@@ -22,6 +23,7 @@ class Producto {
     public function getID() { return $this->id_producto; }
     public function getPublicador() { return $this->id_publicador; }
     public function getAutorizador() { return $this->id_autorizador; }
+    public function getCategoria() { return $this->id_catego; }
     public function getTitulo() { return $this->titulo; }
     public function getDescripcion() { return $this->descripcion; }
     public function getCotizacion() { return $this->cotizacion; }
@@ -33,6 +35,7 @@ class Producto {
     public function setID($_id) { $this->id_producto = $_id; return $this; }
     public function setPublicador($_publi) { $this->id_publicador = $_publi; return $this; }
     public function setAutorizador($_auto) { $this->id_autorizador = $_auto; return $this; }
+    public function setCategoria($catego) { $this->id_catego = $catego; return $this; }
     public function setTitulo($_tit) { $this->titulo = $_tit; return $this; }
     public function setDescripcion($_desc) { $this->descripcion = $_desc; return $this; }
     public function setCotizacion($_coti) { $this->cotizacion = $_coti; return $this; }

@@ -12,7 +12,9 @@ $(document).ready(function() {
         $.ajax({
             url: '../../php/includes/categorias/insert_catego_inc.php',
             type: 'POST',
-            data: formdata
+            data: formdata,
+            processData: false,
+            contentType: false
         })
         .done(response => {
             let data;
@@ -35,7 +37,7 @@ $(document).ready(function() {
                         break;
                 }
             } else {
-                alert("Información actualizada.");
+                alert("¡Categoría creada!");
                 window.location.reload();
             }
         });
@@ -47,14 +49,14 @@ $(document).ready(function() {
 
 function bindFields() {
 
-    $('#txt_nombre').on('change', function() {
-        let contenido =  $(this).val();
-        type_text($(this)[0], contenido, 32);
+    $('#txt_nombre').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_text($(e.target), contenido, 32);
     });
 
-    $('#txt_descrip').on('change', function() {
-        let contenido =  $(this).val();
-        type_textnum($(this)[0], contenido, 256);
+    $('#txt_descrip').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_textnum($(e.target), contenido, 256);
     });
     
 }

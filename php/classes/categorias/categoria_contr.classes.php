@@ -23,7 +23,9 @@ class CategoriaController extends CategoriaDAO {
         if ($this->hasEmptyInput($cat)) {
             return "empty_inputs";
         }
-        if ($this->categoCheck($cat->getNombre()))
+        if ($this->categoCheck($cat->getNombre())) {
+            return "already_exists";
+        }
         return $this->cat_crear($cat);
     }
 

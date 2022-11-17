@@ -50,8 +50,10 @@ include_once __ROOT."html/templates/get_session.php";
             include_once __ROOT."html/templates/headerCompraVende.php";
             break;
     }
-    include __ROOT."php/models/usuario-model.php";
-    include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+    require_once __ROOT."php/models/usuario-model.php";
+    require_once __ROOT."php/models/producto-model.php";
+    require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
     if (isset($_SESSION['user'])) {
         $controller = new UsuarioController();
         $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
@@ -67,6 +69,11 @@ include_once __ROOT."html/templates/get_session.php";
         } else if (!$userData) {
             header("Location: ../../index.php");
         }
+    }
+    $infoProd = array("rs_id"=>"", "rs_titulo"=>"", "rs_descripcion"=>"", "rs_precio"=>"", "rs_dispo"=>"", "rs_calif"=>0.0);
+    if (isset($_GET['prod'])) {
+        $controller = new ProductoController();
+        $infoProd = $controller->obtenerProducto($_GET['prod']);
     }
   ?>
   <!-- Container -->
@@ -99,27 +106,26 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="card">
           <div class="card-body">
             <div>
-                <h5 class="card-title">Computadora Gamer de Ultima Generación</h5>
+                <h5 class="card-title"><?php echo $infoProd['rs_titulo']?></h5>
             </div>
             <div>
-                <h6 class="card-subtitle mb-2 text-muted">Nuevo</h6>
+                <p class="card-text"><?php echo $infoProd['rs_descripcion']?></p>
             </div>
             <div>
-                <p class="card-text">-Pc de escritorio solo agrega tu monitor preferido HD o incluso 4k
-                    (soporta monitores con entrada VGA y HDMI capacidad de hasta 2 monitores simultáneos) </p>
+                <h3>$ <?php echo $infoProd['rs_precio']?></h3>
+            </div>
+
+            <?php if ($infoProd['rs_dispo']) { ?>
+            <div>
+              <h6>Stock Disponible</h6>
             </div>
             <div>
-                <h3> $15,999 </h3>
+              <h7> <?php echo $infoProd['rs_dispo'] ?> Disponibles</h7>
             </div>
-            <div>
-                <h6>IVA incluido</h6>
-            </div>
-            <div>
-                <h6>Stock Disponible</h6>
-            </div>
-            <div>
-                <h7>5 Disponibles</h7>
-            </div>
+            <?php } else { ?>
+            <h6>Sin Stock Disponible</h6>
+            <?php } ?>
+            
             <div class ="container">
               <form>
                 <div class = "row">
@@ -153,17 +159,18 @@ include_once __ROOT."html/templates/get_session.php";
             </div> 
             <div>
               <div class="valoracion">
-                <input id="radio1" type="radio" name="in_calif" value="5">
+                <input id="radio1" type="radio" name="in_calif" value="5" disabled <?php if ($infoProd['rs_descripcion'] >= 5.0) { ?>checked<?php }?>>
                 <label for="radio1">★</label>
-                <input id="radio2" type="radio" name="in_calif" value="4">
+                <input id="radio2" type="radio" name="in_calif" value="4" disabled <?php if ($infoProd['rs_descripcion'] >= 4.0 & $infoProd['rs_descripcion'] < 4.9) { ?>checked<?php }?>>
                 <label for="radio2">★</label>
-                <input id="radio3" type="radio" name="in_calif" value="3">
+                <input id="radio3" type="radio" name="in_calif" value="3" disabled <?php if ($infoProd['rs_descripcion'] >= 3.0 & $infoProd['rs_descripcion'] < 3.9) { ?>checked<?php }?>>
                 <label for="radio3">★</label>
-                <input id="radio4" type="radio" name="in_calif" value="2">
+                <input id="radio4" type="radio" name="in_calif" value="2" disabled <?php if ($infoProd['rs_descripcion'] >= 2.0 & $infoProd['rs_descripcion'] < 2.9) { ?>checked<?php }?>>
                 <label for="radio4">★</label>
-                <input id="radio5" type="radio" name="in_calif" value="1">
+                <input id="radio5" type="radio" name="in_calif" value="1" disabled <?php if ($infoProd['rs_descripcion'] >= 1.0 & $infoProd['rs_descripcion'] < 1.9) { ?>checked<?php }?>>
                 <label for="radio5">★</label>
               </div>
+              <p><?php echo $infoProd['rs_calif']?></p>
             </div>
           </div>
         </div>
@@ -426,22 +433,6 @@ include_once __ROOT."html/templates/get_session.php";
       </div>
     </div>
     <section id="app">
-      <div class="container">
-        <div class="row">
-          <div class="col-6">
-            <div class="comment">
-          <p v-for="items in item" v-text="items"></p>
-            </div><!--End Comment-->
-            </div><!--End col -->
-            </div><!-- End row -->
-        <div class="row">
-          <div class="col-6">
-        <textarea type="text" class="input" placeholder="Write a comment" v-model="newItem" @keyup.enter="addItem()"></textarea>
-            <button v-on:click="addItem()" class='primaryContained float-right' type="submit">Add Comment</button>
-          </div><!-- End col -->
-        </div><!--End Row -->
-      </div><!--End Container -->
-    </section><!-- end App -->
   </div>
   <!-- Footer -->
   <?php include __ROOT."html/templates/footer.php"?>

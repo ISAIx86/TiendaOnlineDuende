@@ -161,6 +161,7 @@ create table if not exists productos (
     
     disponibilidad int not null comment "Unidades del producto disponibles",
     calificacion decimal (2, 1) not null default 0.0 comment "Valoración del producto por los compradores",
+    vistas int not null default 0 comment "Cantidad de visitas al producto",
     
     fecha_autorizado timestamp default null comment "Fecha de autorización",
     

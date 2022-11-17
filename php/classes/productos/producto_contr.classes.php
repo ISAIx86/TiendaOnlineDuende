@@ -1,7 +1,6 @@
 <?php
 
 require_once "producto_dao.classes.php";
-require_once __ROOT."/php/classes/assocs/rel_cat_dao.classes.php";
 
 class ProductoController extends ProductoDAO {
 
@@ -11,7 +10,7 @@ class ProductoController extends ProductoDAO {
             empty($prod->getTitulo()) |
             empty($prod->getDescripcion()) |
             empty($prod->getDisponibilidad()) |
-            empty($prod->getCotizacion()) |
+            $prod->getCotizacion() != null |
             empty($prod->getPrecio())
         ) {
             return true;
@@ -20,7 +19,7 @@ class ProductoController extends ProductoDAO {
 
     // Métodos fuertes
     public function crearProducto(Producto $prod, $categos) {
-        if (empty($prod->getPublicador)) {
+        if (empty($prod->getPublicador())) {
             return "missing_owner";
         }
         if ($this->hasEmptyInput($prod)) {
@@ -30,12 +29,11 @@ class ProductoController extends ProductoDAO {
             return "no_categos";
         }
         $prodid = $this->pro_crear($prod);
-        if (gettype($proid) == "string") {
+        if ($prodid == "query_error") {
             return "query_error";
         }
-        $rl_cat_dao = new RelCatDAO();
         foreach ($categos as &$cat) {
-            $rl_cat_dao->rcat_crear($proid, $cat['ID']);
+            $this->rcat_add($prodid, $cat->id);
         }
         return true;
     }
@@ -65,6 +63,13 @@ class ProductoController extends ProductoDAO {
             return "uncaptured_id";
         }
         return $this->cat_baja($id);
+    }
+
+    public function obtenerProducto($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        return $this->pro_getdata($id);
     }
 
 }

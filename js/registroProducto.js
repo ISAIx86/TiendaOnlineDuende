@@ -61,10 +61,10 @@ $(document).ready(function() {
             return;
         }
         let formdata = new FormData($(e.target)[0]);
-        formdata.append('in_categos', categorias);
+        formdata.append('in_categos', JSON.stringify(categorias));
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/productos/',
+            url: '../../php/includes/productos/new_prod_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -153,6 +153,11 @@ function bindFields() {
         let contenido =  $(e.target).val();
         type_textnum($(e.target), contenido, 256);
     });
+
+    $('#txt_dispo').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_numeric($(e.target), contenido);
+    })
 
     $('#txt_precio').on('change', e => {
         let contenido =  $(e.target).val();

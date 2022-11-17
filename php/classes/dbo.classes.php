@@ -29,13 +29,14 @@ abstract class DBH {
 
     protected function executeQuery($data_arr) {
         if (!$this->stmt->execute($data_arr)) {
-            $this->clearStatement();
+            $info = $this->stmt->errorInfo();
             if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
-                return false;
+                echo json_encode(array('result'=>"error", 'reason'=>"query_error", 'details'=>$this->stmt->errorInfo())); 
             } else {
                 header("Location: ".__ROOT."index.php");
-                exit();
             }
+            $this->clearStatement();
+            exit();
         }
         return true;
     }

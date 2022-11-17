@@ -12,11 +12,11 @@ if (isset($_SESSION['user'])) {
             ->setPublicador($_SESSION['user']['ID'])
             ->setTitulo($_POST['in_nombre'])
             ->setDescripcion($_POST['in_descrip'])
-            ->setCotizacion($_POST['in_tipoprecio'] == 'CT' ? true : false)
+            ->setCotizacion($_POST['in_tipoprecio'] == 'CT' ? 1 : 0)
             ->setPrecio($_POST['in_precio'])
             ->setDisponibilidad($_POST['in_dispo']);
         $controller = new ProductoController();
-        $result = $controller->crearProducto($nuevo, $_POST['in_categos']);
+        $result = $controller->crearProducto($nuevo, json_decode($_POST['in_categos']));
         if (gettype($result) == "string") {
             echo json_encode(array('result'=>"error", 'reason'=>$result));
             exit();

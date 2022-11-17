@@ -29,6 +29,18 @@ function type_textnum(element, contenido, limite) {
     }
 }
 
+function type_numeric(element, contenido) {
+    if (contenido.length === 0) {
+        setCSSFor(element, '', '');
+    }
+    else if (!soloNumeros(contenido)) {
+        setCSSFor(element, 'error', 'Solo se aceptan números.');
+    }
+    else {
+        setCSSFor(element, 'success', '');
+    }
+}
+
 function type_float(element, contenido) {
     if (contenido.length === 0) {
         setCSSFor(element, '', '');

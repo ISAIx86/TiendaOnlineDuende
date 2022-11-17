@@ -3,7 +3,9 @@
   <div class="container text-center">
     <div class="row">
       <div class="col-sm-8">
-        <img src='../../resources/logo02.PNG' class='logotipo'/>
+        <a href="../usuarios/c-home.php">
+          <img src='../../resources/logo02.PNG' class='logotipo'/>
+        </a>
       </div>
       <div class="col-sm-4" id = "ico-header" >
         <div class = "row">

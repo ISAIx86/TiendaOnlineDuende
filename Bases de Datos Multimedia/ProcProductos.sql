@@ -14,7 +14,6 @@ use tienda_online;
 -- /////////////////////////////////////
 -- //// PROCEDIMIENTOS DE PRODUCTOS \\\\
 -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
 DELIMITER $$
 drop procedure if exists sp_Productos;
 $$ DELIMITER ;
@@ -23,6 +22,7 @@ create procedure sp_Productos (
 	in _proc varchar(16),
 	in _id_producto varchar(36),
 	in _id_publicador varchar(36),
+    in _id_catego varchar(36),
     in _titulo varchar(64),
     in _descripcion varchar(256),
     in _disponibilidad int,
@@ -30,10 +30,13 @@ create procedure sp_Productos (
     in _precio decimal(8,2)
 )
 begin
-	
+
+declare _insert_id binary(16);
+
 case (_proc)
 -- //// REGISTRAR PRODUCTO \\\\ --
 	when ('create') then
+		set _insert_id = uuid_to_bin(uuid());
 		insert into productos(
 			id_producto,
 			id_publicador,
@@ -44,8 +47,8 @@ case (_proc)
 			precio
 		)
 		values(
-			uuid_to_bin(uuid()),
-			_id_publicador,
+			_insert_id,
+			uuid_to_bin(_id_publicador),
 			_titulo,
 			_descripcion,
 			_disponibilidad,
@@ -53,7 +56,7 @@ case (_proc)
 			_precio
 		);
         if (row_count() != 0) then
-			select bin_to_uuid(last_insert_id()) as "result";
+			select bin_to_uuid(_insert_id) as 'result';
         else
 			select "failed_insertion" as 'result';
         end if;
@@ -82,9 +85,105 @@ case (_proc)
 		update productos set
 			disponibilidad = disponibilidad + _disponibilidad
 		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+	when ('get_data') then
+		select
+			bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            cotizacion as 'out_cotiz',
+            precio as 'out_precio',
+            disponibilidad as 'out_dispo',
+            calificacion as 'out_calif'
+		from productos
+        where id_producto = uuid_to_bin(_id_producto);
+-- //// AÑADIR CATEGORIA \\\\ --
+	when ('add_cat') then
+		insert into rel_cat(
+			id_producto,
+			id_categoria
+		)
+		values (
+			uuid_to_bin(_id_producto),
+            uuid_to_bin(_id_catego)
+		);
+-- //// ELIMINAR TODA CATEGORIA \\\\ --
+    when ('restart_cat') then
+		delete from rel_cat
+        where id_producto = uuid_to_bin(_id_producto);
     else
 		select "invalid_command" as 'result';
 end case;
     
 end
+$$ DELIMITER ;
+
+-- ////////////////////////////////
+-- //// BUSQUEDAS DE PRODUCTOS \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+DELIMITER $$
+drop procedure if exists sp_BusquedaProd;
+$$ DELIMITER ;
+DELIMITER $$
+create procedure sp_BusquedaProd (
+	in _proc varchar(16),
+    in _titulo varchar(64),
+    in _order_by text,
+    in _catego_filter text,
+    in _page int,
+    in _size int
+)
+begin
+
+case (_proc)
+-- //// VISTA HOME MÁS VENDIDOS \\\\ --
+	when ('get_vendidos') then
+		select
+            bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            precio as 'out_precio'
+        from productos
+        order by fn_ventasProductos(id_producto)
+        limit 10;
+-- //// VISTA HOME MÁS VISITADOS \\\\\ --
+	when ('get_vistos') then
+		select
+			bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            precio as 'out_precio'
+        from productos
+        order by vistas
+        limit 10;
+-- //// VISTA HOME MÁS RECOMENDADOS \\\\\ --
+    when ('get_recomend') then
+		select
+			bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            precio as 'out_precio'
+        from productos
+        order by calificacion
+        limit 10;
+-- //// BÚSQUEDA AVANZADA \\\\\ --
+	when ('adv_search') then
+		set @pagem = ((_page - 1) * _size);
+		set @_search_qry = concat(
+			"select
+				bin_to_uuid(id_producto) as 'out_id',
+				titulo as 'out_titulo',
+				descripcion as 'out_descripcion',
+				precio as 'out_precio'
+			from productos
+            where titulo like concat(",_titulo,", '%')
+            order by ",_order_by,"
+            limit ",@pagem,", ",_size,";"
+		);
+		prepare qry from @_search_qry;
+		execute qry;
+	else
+		select "invalid_command" as 'result';
+end case;
+	
+end;
 $$ DELIMITER ;

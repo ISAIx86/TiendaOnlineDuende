@@ -8,7 +8,7 @@ require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
 session_start();
 if (isset($_SESSION['user'])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-        $nuevo = Categorias::create()
+        $nuevo = Categoria::create()
             ->setCreador($_SESSION['user']['ID'])
             ->setNombre($_POST['in_nombre'])
             ->setDescripcion($_POST['in_descrip']);
