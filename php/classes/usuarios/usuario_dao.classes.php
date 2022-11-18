@@ -6,7 +6,7 @@ class UsuarioDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Usuarios('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $this->setPrepareStatement("call sp_Usuarios('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     }
 
     private function executeCall($data) {
@@ -23,7 +23,9 @@ class UsuarioDAO extends DBH {
             $data->getHashedPassword(),
             $data->getAvatar(),
             $data->getAvatarDir(),
-            $data->getCreador()
+            $data->getCreador(),
+            $data->prodid,
+            $data->cantidad
         ));
     }
 
@@ -221,6 +223,79 @@ class UsuarioDAO extends DBH {
             return false;
         }
         else return true;
+
+    }
+
+    // Carrito
+    protected function us_addcarrito($id, $prod, $cant) {
+
+        $this->prepareStatement('add_carrito');
+
+        $usu = Usuario::create()->setID($id);
+        $usu->prodid = $prod;
+        $usu->cantidad = $cant;
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
+    protected function us_getcarrito($id) {
+
+        $this->prepareStatement('get_carrito');
+
+        $usu = Usuario::create()->setID($id);
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $rt_data = $this->fetchData();
+        $result = array();
+
+        $this->clearStatement();
+
+        foreach ($rt_data as &$row) {
+            array_push($result, array(
+                "rs_id"=>$row['out_id'],
+                "rs_titulo"=>$row['out_titulo'],
+                "rs_precio"=>$row['out_precio'],
+                "rs_cantidad"=>$row['out_cantidad'],
+                "rs_total"=>$row['out_total']
+            ));
+        }
+
+        return $result;
+
+    }
+
+    protected function us_gettot_carrito($id) {
+
+        $this->prepareStatement('get_carr_tot');
+
+        $usu = Usuario::create()->setID($id);
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+        $result = false;
+        if ($count != 0) {
+            $result = $this->fetchData()[0]['out_total'];
+        }
+
+        $this->clearStatement();
+
+        return $result;
 
     }
 

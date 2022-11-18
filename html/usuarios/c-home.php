@@ -14,7 +14,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php include_once __ROOT."html/templates/headerComprador.php" ?>
+  <?php include_once __ROOT."html/templates/headerComprador.php";?>
 
   <!-- Container -->
   <div class = "container" id = "pagina">

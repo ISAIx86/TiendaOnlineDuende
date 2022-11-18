@@ -1,11 +1,5 @@
 $(document).ready(function (){
 
-    obtenerProductos();
-
-});
-
-function obtenerProductos() {
-
     $.ajax({
         url: '../../php/includes/productos/home_inc.php',
         type: 'GET',
@@ -72,37 +66,40 @@ function obtenerProductos() {
         }
     });
 
-}
+});
 
 function setHtmlProdList(element, prods) {
-    debugger;
-    let allhtml = "";
+    let allhtml = [""];
     let count = 0;
     let size = prods.length
     let rows = Math.ceil(size / 3.0);
     for (let i = 0; i < rows; i++) {
-        allhtml +=
+        allhtml[0] +=
         '<div class="carousel-item active">'+
         '   <div class = "row">';
         for (let j = 0; j < 3; j++) {
             if (count >= size) break;
-            allhtml +=
-            '<div class = "col-4">' +
-                '<div class="card" style="width: 18rem;">'+
-                    '<img src="../../resources/p01.PNG" class="card-img-top" alt="...">'+
-                    '<div class="card-body">'+
-                        '<h5 class="card-title">'+prods[count].rs_titulo+'</h5>'+
-                        '<p class="card-text">'+prods[count].rs_descripcion+'</p>'+
-                        '<p class="card-text">$ '+prods[count].rs_precio+'</p>'+
-                        '<a href="../producto/c-producto.php?prod='+prods[count].rs_id+'" class="btn btn-primary">Ver detalles</a>'+
-                    '</div>'+
-                '</div>'+
-            '</div>';
+            appendElement(allhtml[0], prods[count]);
             count++;
         }
-        allhtml +=
+        allhtml[0] +=
         '    </div>'+
         '</div>';
     }
     element.append(allhtml);
+}
+
+function appendElement(htmltext, info) {
+    htmltext +=
+    '<div class = "col-4">' +
+        '<div class="card" style="width: 18rem;">'+
+            '<img src="../../resources/p01.PNG" class="card-img-top" alt="...">'+
+            '<div class="card-body">'+
+                '<h5 class="card-title">'+info.rs_titulo+'</h5>'+
+                '<p class="card-text">'+info.rs_descripcion+'</p>'+
+                '<p class="card-text">$ '+info.rs_precio+'</p>'+
+                '<a href="../producto/c-producto.php?prod='+info.rs_id+'" class="btn btn-primary">Ver detalles</a>'+
+            '</div>'+
+        '</div>'+
+    '</div>';
 }

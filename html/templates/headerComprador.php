@@ -1,3 +1,10 @@
+<?php
+require_once __ROOT."php/models/usuario-model.php";
+require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+$controller = new UsuarioController();
+$carritoTot = $controller->totalCarrito($loggedUser['ID']);
+?>
+
 <div id = "encabezado">
   <header>
   <div class="container text-center">
@@ -13,7 +20,11 @@
             <div class="dropdown">
               <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src='../../resources/carrito.PNG' class='imgCuadrada' />
-                <h5>$1,500</h5> 
+                <?php if ($carritoTot) { ?> 
+                <h5><?php echo $carritoTot ?></h5>
+                <?php } else { ?>
+                  <h5>$0</h5>
+                <?php } ?>
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../comprador/c-carrito.php">Comprar</a></li>

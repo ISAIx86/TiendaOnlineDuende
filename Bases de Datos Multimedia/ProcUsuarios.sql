@@ -33,7 +33,9 @@ create procedure sp_Usuarios (
     in _pass varchar(256),
     in _avatar blob,
     in _avatar_dir varchar(256),
-    in _autorizador varchar(36)
+    in _autorizador varchar(36),
+    in _id_producto varchar(36),
+    in _cantidad int
 )
 begin
 declare excluder int;
@@ -149,6 +151,38 @@ case _proc
             fecha_creacion as 'out_feccre'
         from usuarios
         where id_usuario = uuid_to_bin(_id_usuario);
+-- //// AÑADIR A CARRITO \\\\ --
+	when ('add_carrito') then
+		replace into rel_carrito (
+			id_usuario,
+            id_producto,
+            cantidad
+        ) values (
+			uuid_to_bin(_id_usuario),
+			uuid_to_bin(_id_producto),
+            _cantidad
+        );
+-- //// SUMA TOTAL DEL CARRITO \\\\ --
+	when ('get_carr_tot') then
+		select
+			sum(total) as 'out_total'
+        from vw_carrito
+        where id_usuario = uuid_to_bin(_id_usuario)
+        group by id_usuario;
+-- //// PRODUCTOS DEL CARRITO \\\\ --
+	when ('get_carrito') then
+		select
+			id_producto as 'out_id',
+            titulo as 'out_titulo',
+            precio as 'out_precio',
+            cantidad as 'out_cantidad',
+            total as 'out_total'
+        from vw_carrito
+        where id_usuario = uuid_to_bin(_id_usuario);
+-- //// LIMPIAR CARRITO \\\\ --
+	when ('clean_carrito') then
+		delete from rel_carrito
+        where id_usuario = _id_usuario;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

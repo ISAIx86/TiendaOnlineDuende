@@ -18,6 +18,9 @@ class Usuario {
     private $avatar_dir = null;
     private $creador = null;
     private $fecha_crea = null;
+
+    public $prodid = null;
+    public $cantidad = null;
         
     // Building
 

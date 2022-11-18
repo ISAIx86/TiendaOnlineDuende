@@ -131,12 +131,12 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class = "row">
                   <div class="col-4">
                     <label for="inputPassword2" class="visually-hidden">Cantidad</label>
-                    <input type="text" class="form-control" id="inputPassword2" placeholder="Cantidad">
+                    <input type="text" class="form-control" id="txt_cantidad" placeholder="Cantidad">
                   </div>
                 </div>
                 <div class="row">          
                   <div class="col">
-                    <button type="button" class="btn btn-warning">Agregar a carrito</button>
+                    <button id="btn_carrito" type="button" class="btn btn-warning">Agregar a carrito</button>
                   </div>
                 </div>
               </form>

@@ -39,6 +39,8 @@ class BusquedaProdDAO extends DBH {
         $rt_data = $this->fetchData();
         $result = array();
 
+        $this->clearStatement();
+
         foreach ($rt_data as &$row) {
             array_push($result, array(
                 "rs_id"=>$row['out_id'],
@@ -47,6 +49,7 @@ class BusquedaProdDAO extends DBH {
                 "rs_precio"=>$row['out_precio']
             ));
         }
+        
         return $result;
 
     }
@@ -69,6 +72,8 @@ class BusquedaProdDAO extends DBH {
 
         $rt_data = $this->fetchData();
         $result = array();
+
+        $this->clearStatement();
 
         foreach ($rt_data as &$row) {
             array_push($result, array(
@@ -101,6 +106,8 @@ class BusquedaProdDAO extends DBH {
         $rt_data = $this->fetchData();
         $result = array();
 
+        $this->clearStatement();
+
         foreach ($rt_data as &$row) {
             array_push($result, array(
                 "rs_id"=>$row['out_id'],
@@ -130,6 +137,8 @@ class BusquedaProdDAO extends DBH {
         }
 
         $result = $this->fetchData();
+
+        $this->clearStatement();
 
         return $result;
 

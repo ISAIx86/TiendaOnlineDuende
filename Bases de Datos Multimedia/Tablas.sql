@@ -254,7 +254,9 @@ create table if not exists rel_carrito (
 	id_usuario binary(16) not null comment "ID del usuario",
     id_producto binary(16) not null comment "ID del producto",
     
-    cantidad int not null comment "Cantidad de productos a comprar"
+    cantidad int not null comment "Cantidad de productos a comprar",
+    
+    primary key(id_usuario, id_producto)
 );
 
 -- //// TABLA RELACIÓN PRODUCTO CATEGORÍA //// --
