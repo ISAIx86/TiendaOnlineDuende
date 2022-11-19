@@ -79,18 +79,18 @@ function setHtmlProdList(element, prods) {
         '   <div class = "row">';
         for (let j = 0; j < 3; j++) {
             if (count >= size) break;
-            appendElement(allhtml[0], prods[count]);
+            appendElement(allhtml, prods[count]);
             count++;
         }
         allhtml[0] +=
         '    </div>'+
         '</div>';
     }
-    element.append(allhtml);
+    element.append(allhtml[0]);
 }
 
 function appendElement(htmltext, info) {
-    htmltext +=
+    htmltext[0] +=
     '<div class = "col-4">' +
         '<div class="card" style="width: 18rem;">'+
             '<img src="../../resources/p01.PNG" class="card-img-top" alt="...">'+

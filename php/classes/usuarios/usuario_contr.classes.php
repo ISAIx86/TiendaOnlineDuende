@@ -165,6 +165,36 @@ class UsuarioController extends UsuarioDAO {
         return $this->us_addcarrito($id, $prodid, $cantidad);
     }
 
+    public function modifCantCarrito($id, $prodid, $cantidad) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        if (
+            empty($prodid) |
+            empty($cantidad)
+        ) {
+            return "empty_inputs";
+        }
+        return $this->us_modcantcarr($id, $prodid, $cantidad);
+    }
+
+    public function quitarCarrito($id, $prodid) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        if (empty($prodid)) {
+            return "empty_inputs";
+        }
+        return $this->us_popcarrito($id, $prodid);
+    }
+
+    public function limpiarCarrito($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        $this->us_cleancarrito($id);
+    }
+
     public function listaCarrito($id) {
         if (empty($id)) {
             return "uncaptured_id";

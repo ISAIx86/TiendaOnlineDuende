@@ -162,6 +162,32 @@ case _proc
 			uuid_to_bin(_id_producto),
             _cantidad
         );
+-- //// MODIFICAR CANTIDAD \\\\ --
+	when ('set_carrito') then
+		update rel_carrito set
+			cantidad = ifnull(_cantidad, cantidad)
+		where id_usuario = uuid_to_bin(_id_usuario) and
+			  id_producto = uuid_to_bin(_id_producto);
+		
+-- //// QUITAR PRODUCTO DEL CARRITO \\\\ --
+	when ('pop_carrito') then
+		delete from rel_carrito
+        where id_usuario = uuid_to_bin(_id_usuario) and
+			  id_producto = uuid_to_bin(_id_producto);
+-- //// LIMPIAR CARRITO \\\\ --
+	when ('clean_carrito') then
+		delete from rel_carrito
+        where id_usuario = _id_usuario;
+-- //// PRODUCTOS DEL CARRITO \\\\ --
+	when ('get_carrito') then
+		select
+			bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            precio as 'out_precio',
+            cantidad as 'out_cantidad',
+            total as 'out_total'
+        from vw_carrito
+        where id_usuario = uuid_to_bin(_id_usuario);
 -- //// SUMA TOTAL DEL CARRITO \\\\ --
 	when ('get_carr_tot') then
 		select
@@ -169,20 +195,6 @@ case _proc
         from vw_carrito
         where id_usuario = uuid_to_bin(_id_usuario)
         group by id_usuario;
--- //// PRODUCTOS DEL CARRITO \\\\ --
-	when ('get_carrito') then
-		select
-			id_producto as 'out_id',
-            titulo as 'out_titulo',
-            precio as 'out_precio',
-            cantidad as 'out_cantidad',
-            total as 'out_total'
-        from vw_carrito
-        where id_usuario = uuid_to_bin(_id_usuario);
--- //// LIMPIAR CARRITO \\\\ --
-	when ('clean_carrito') then
-		delete from rel_carrito
-        where id_usuario = _id_usuario;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

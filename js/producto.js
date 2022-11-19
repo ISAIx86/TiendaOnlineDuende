@@ -8,10 +8,15 @@ $(document).ready(function (){
     $('#btn_carrito').on('click', e => {
         const urlParams = new URLSearchParams(window.location.search);
         const cantidad = $('#txt_cantidad').val();
+        if (cantidad == "") {
+            return;
+        } else if (cantidad == 0) {
+            return;
+        }
         $.ajax({
-            url: '../../php/includes/productos/home_inc.php',
-        type: 'GET',
-        data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad},
+            url: '../../php/includes/usuarios/add_carrito_inc.php',
+            type: 'POST',
+            data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad},
         })
         .done(response => {
             let data;
@@ -27,6 +32,7 @@ $(document).ready(function (){
             }
         } else {
             alert("Producto añadido al carrito.");
+            window.location.reload();
         }
         })
     });

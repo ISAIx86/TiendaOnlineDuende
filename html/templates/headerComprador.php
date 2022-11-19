@@ -21,13 +21,13 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
               <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src='../../resources/carrito.PNG' class='imgCuadrada' />
                 <?php if ($carritoTot) { ?> 
-                <h5><?php echo $carritoTot ?></h5>
+                <h5 id="hdr_carrito"><?php echo "$$carritoTot" ?></h5>
                 <?php } else { ?>
-                  <h5>$0</h5>
+                  <h5 id="hdr_carrito">$0</h5>
                 <?php } ?>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../comprador/c-carrito.php">Comprar</a></li>
+                <li><a class="dropdown-item" href="../comprador/c-carrito.php">Ver carrito</a></li>
                 <li><a class="dropdown-item" href="../listas/c-listas.php">Guardar Lista</a></li>
                 <li><a class="dropdown-item" href="#">Limpiar</a></li>
               </ul>

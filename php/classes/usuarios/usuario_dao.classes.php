@@ -248,6 +248,66 @@ class UsuarioDAO extends DBH {
 
     }
 
+    protected function us_modcantcarr($id, $prod, $cant) {
+
+        $this->prepareStatement('set_carrito');
+
+        $usu = Usuario::create()->setID($id);
+        $usu->prodid = $prod;
+        $usu->cantidad = $cant;
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
+    protected function us_popcarrito($id, $prod) {
+
+        $this->prepareStatement('pop_carrito');
+
+        $usu = Usuario::create()->setID($id);
+        $usu->prodid = $prod;
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
+    protected function us_cleancarrito($id) {
+
+        $this->prepareStatement('clean_carrito');
+
+        $usu = Usuario::create()->setID($id);
+
+        if (!$this->executeCall($usu)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
     protected function us_getcarrito($id) {
 
         $this->prepareStatement('get_carrito');

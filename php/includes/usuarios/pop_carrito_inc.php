@@ -7,10 +7,9 @@ require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
 session_start();
 if (isset($_SESSION['user'])) {
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $controller = new UsuarioController();
-        $result = $controller->listaCarrito($_SESSION['user']['ID']);
-        $total = $controller->totalCarrito($_SESSION['user']['ID']);
+        $result = $controller->quitarCarrito($_SESSION['user']['ID'], $_POST['in_prodid']);
         if (gettype($result) == "string") {
             echo json_encode(array('result'=>"error", 'reason'=>$result));
             exit();
@@ -18,7 +17,7 @@ if (isset($_SESSION['user'])) {
             echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
             exit();
         }
-        echo json_encode(array('result'=>"success", 'products'=>$result, 'total_sum'=>$total));
+        echo json_encode(array('result'=>"success"));
         exit();
     }
 }
