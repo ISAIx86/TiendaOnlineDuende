@@ -50,6 +50,7 @@ include_once __ROOT."html/templates/get_session.php";
               <th scope="col">Calificación</th>
               <th scope="col">Precio</th>
               <th scope="col">Existencia</th>
+              <th scope="col">Añadir</th>
             </tr>
           </thead>
           <tbody>
@@ -59,7 +60,14 @@ include_once __ROOT."html/templates/get_session.php";
               <td>Computadora gamer</td>
               <td>5</td>
               <td>$12,500</td>
-              <td>5</td>                       
+              <td>5</td>          
+              <td>
+                <div class="input-group mb-1">
+                <input type="text" class="form-control col-6" placeholder="Añadir" aria-label="Piezas" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary col-6" type="button" id="button-addon2">Agregar a invetario</button>
+                </div>  
+              </td>
+                         
             </tr>
             <tr>
               <th scope="row">2</th>

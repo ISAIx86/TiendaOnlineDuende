@@ -29,7 +29,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../comprador/c-carrito.php">Ver carrito</a></li>
                 <li><a class="dropdown-item" href="../listas/c-listas.php">Guardar Lista</a></li>
-                <li><a class="dropdown-item" href="#">Limpiar</a></li>
               </ul>
             </div>
           </div>
@@ -69,7 +68,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
       </div>
       <div class="col-3" id = "txt-busqueda">
         <button type="submit" class="btn btn-warning mb-3">
-          <a href="../producto/c-busqueda.php">Buscar</a>
+          <img src='../../resources/busqueda.png' class='imgCuadrada30' href="../producto/c-busqueda.php"/>
         </button>
       </div>
     </form>

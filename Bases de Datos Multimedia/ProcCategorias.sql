@@ -75,6 +75,14 @@ case (_proc)
 		from categorias
         where nombre like concat(_nombre, '%')
         limit 10;
+        -- //// OBTENER DATOS PARA FORMULARIO \\\\ --
+	when ('get_name') then
+		select
+			id_catego as 'out_id',
+			nombre as 'out_nombres'
+			from categorias
+        where fecha_elim is null
+        limit 10;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';
@@ -82,3 +90,4 @@ end case;
 	
 end
 $$ DELIMITER ;
+SELECT * FROM categorias;

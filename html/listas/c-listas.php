@@ -8,6 +8,7 @@ include_once __ROOT."html/templates/get_session.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mi lista</title>
+  <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/bootstrap.css">
   <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
@@ -43,7 +44,8 @@ include_once __ROOT."html/templates/get_session.php";
             </div>
             <div class = "col-8">
               <div class="fw-bold">Computadora con lucecitas</div>
-              <h6>$ 14,000</h6>                   
+              <h6>$ 14,000</h6>
+              <span class="badge bg-primary rounded-pill">10 disponibles</span>                   
             </div>
             <div class = "col-2">
               <span class="badge bg-primary rounded-pill">$14,000</span>

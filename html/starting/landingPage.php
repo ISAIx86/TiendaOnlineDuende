@@ -68,13 +68,13 @@
                     </div>
                     <form class="form" id="form_login">
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="email" id="txt_correo" name="in_correo" placeholder="Correo electrónico">
+                            <input type="email" id="txt_correo" name="in_correo" placeholder="Correo electrónico" autocomplete="on"> 
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="password" id="txt_password" name="in_password" placeholder="Contraseña" minlength="8">
+                            <input type="password" id="txt_password" name="in_password" placeholder="Contraseña" autocomplete="on">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
