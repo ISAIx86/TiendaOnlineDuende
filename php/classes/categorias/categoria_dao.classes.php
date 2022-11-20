@@ -148,7 +148,35 @@ class CategoriaDAO extends DBH {
         }
 
     }
+    protected function get_name() {
+
+        $this->prepareStatement('get_name');
+
+        $data = array(
+            'in_id'=>null,
+            'in_titulo'=>null
+        );
+
+        if (!$this->executeCall($data)) {
+            return "query_error";
+        }
+
+        $rt_data = $this->fetchData();
+        $result = array();
+
+        $this->clearStatement();
+
+        foreach ($rt_data as &$row) {
+            array_push($result, array(
+                "in_id"=>$row['out_id'],
+                "in_titulo"=>$row['out_titulo'],
+            ));
+        }
+        return $result;
+
+    }
 
 }
 
 ?>
+

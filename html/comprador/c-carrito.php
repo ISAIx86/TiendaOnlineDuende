@@ -19,7 +19,34 @@ include_once __ROOT."html/templates/get_session.php";
   <div class = "container" id = "pagina">
     <h1>Carrito de compra</h1>
     <div class="cointainer">
-      <ul class="list-group">
+      <ul id="lst_carrito" class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class = "row">
+            <div class = "col-2">
+              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
+            </div>
+            <div class = "col-8">
+              <div class="fw-bold">Computadora con lucecitas</div>
+              <h6>$ 14,000</h6>
+              <span class="badge bg-primary rounded-pill">10 disponibles</span>
+              <p></p>
+              <button>Eliminar</button>
+              <button>Guardar en lista</button>
+              <button>Ver productos similares</button>                
+            </div>
+
+            <div class = "col-2">
+              <span class="badge bg-primary rounded-pill">$14,000</span>
+              <p></p>  
+              <button type="button" class="btn btn-secondary btn-circle btn-sm">-</button>
+              <span class="badge bg-primary rounded-pill">5</span>
+              <button type="button" class="btn btn-secondary btn-circle btn-sm">+</button>
+              <form>
+                <button type="button" class="btn btn-danger">Quitar</button>
+              </form>
+            </div>
+          </div>
+        </li>         
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class = "row">
             <div class = "col-8"></div>
@@ -28,9 +55,23 @@ include_once __ROOT."html/templates/get_session.php";
             </div>
             <div class = "col-2">
               <span id="lbl_total" class="badge bg-primary rounded-pill">$0</span>
-                <a href="c-pagando.php">
+              <span id="lbl_total" class="badge bg-primary rounded-pill">5 disponibles</span>
+              <form>
+                <a href = "c-pagando.html">
                   <button type="button" class="btn btn-success">Pagar</button>
                 </a>
+              </form>
+              <form>
+                <a href = "c-pagando.html">
+                  <button type="button" class="btn btn-success">Guardar en lista</button>
+                </a>
+              </form>
+    
+              <form>
+                <a href = "c-pagando.html">
+                  <button type="button" class="btn btn-danger">Limpiar Carrito</button>
+                </a>
+              </form>
             </div>
           </div>
         </li>

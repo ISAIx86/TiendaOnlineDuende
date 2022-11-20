@@ -99,7 +99,7 @@ $(document).ready(function() {
                         break;
                 }
             } else {
-                window.location.replace("index.php");
+                window.location.replace("landingPage.php");
             }
         });
     });

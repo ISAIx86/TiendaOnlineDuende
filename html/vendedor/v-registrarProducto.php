@@ -40,10 +40,11 @@ include_once __ROOT."html/templates/get_session.php";
           </button>
           <div class="mb-3">
             <div class="col-auto">
+  
               <label for="txt_incatego" class="form-label">Categoria</label>
               <input class="form-control" id="txt_incatego" placeholder="Ingrese una categoria...">
               <ul id="search-list" class="searchul">
-              </ul>
+              </ul>          
             </div>
           </div>
         </div>
