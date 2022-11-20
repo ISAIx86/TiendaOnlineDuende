@@ -24,7 +24,7 @@ include_once __ROOT."html/templates/get_session.php";
                         <div class = "row">
                             <h4>Direcion de envio</h4>
                         </div>
-                        <div class = "row">
+                        <div class="row">
                             <a href = "../comprador/c-dirección.html">
                                 <button type="button" class="btn btn-warning">Actualizar mi Direcion</button>
                             </a>

@@ -4,67 +4,6 @@ $(document).ready(function (){
 
 });
 
-function llenarLista() {
-    $.ajax({
-        url: '../../php/includes/usuarios/carrito_inc.php',
-        type: 'GET'
-    })
-    .done(response => {
-        let data;
-        try {
-            data = $.parseJSON(response);
-        } catch (err) {
-            $(".container-footer").append(response);
-            return;
-        }
-        if (data.result == "error") {
-            switch(data.reason) {
-                case "no_query_results": {
-                    $('#lst_carrito').append(
-                        '<p>Carrito vacio</p>'
-                    );
-                }
-            }
-        } else {
-            emptyList();
-            data.products.forEach(prod => {
-                appendElement(prod);
-            });
-            if (data.total_sum) {
-                $('#hdr_carrito').html("$"+data.total_sum);
-                $('#lbl_total').html("$"+data.total_sum);
-            }
-            else {
-                $('#hdr_carrito').html("$0");
-                $('#lbl_total').html("$0");
-            } 
-        }
-    });
-}
-
-function quitarProductoDeLista(producto_id) {
-    $.ajax({
-        url: '../../php/includes/usuarios/pop_carrito_inc.php',
-        type: 'POST',
-        data: {'in_prodid':producto_id}
-    })
-    .done(response => {
-        let data;
-        try {
-            data = $.parseJSON(response);
-        } catch (err) {
-            $(".container-footer").append(response);
-            return;
-        }
-        if (data.result == "error") {
-            
-        } else {
-            alert("Producto eliminado del carrito.");
-            window.location.reload();
-        }
-    });
-}
-
 $(document).on('click', '#btn_quitar', e => {
     e.preventDefault();
     let producto_id = $(e.target).parents('li#emt-list').attr('prodid');
@@ -128,6 +67,67 @@ $(document).on('click', '#btn_mas', e => {
     });
 });
 
+function llenarLista() {
+    $.ajax({
+        url: '../../php/includes/usuarios/carrito_inc.php',
+        type: 'GET'
+    })
+    .done(response => {
+        let data;
+        try {
+            data = $.parseJSON(response);
+        } catch (err) {
+            $(".container-footer").append(response);
+            return;
+        }
+        if (data.result == "error") {
+            switch(data.reason) {
+                case "no_query_results": {
+                    $('#lst_carrito').append(
+                        '<p>Carrito vacio</p>'
+                    );
+                }
+            }
+        } else {
+            $('#lst_carrito').html("");
+            if (data.total_sum) {
+                $('#hdr_carrito').html("$"+data.total_sum);
+                $('#lbl_total').html("$"+data.total_sum);
+            }
+            else {
+                $('#hdr_carrito').html("$0");
+                $('#lbl_total').html("$0");
+            } 
+            data.products.forEach(prod => {
+                appendElement(prod);
+            });
+        }
+    });
+}
+
+function quitarProductoDeLista(producto_id) {
+    $.ajax({
+        url: '../../php/includes/usuarios/pop_carrito_inc.php',
+        type: 'POST',
+        data: {'in_prodid':producto_id}
+    })
+    .done(response => {
+        let data;
+        try {
+            data = $.parseJSON(response);
+        } catch (err) {
+            $(".container-footer").append(response);
+            return;
+        }
+        if (data.result == "error") {
+            
+        } else {
+            alert("Producto eliminado del carrito.");
+            window.location.reload();
+        }
+    });
+}
+
 function appendElement(prod) {
     $('#lst_carrito').append(
     '<li id="emt-list" prodid="'+prod.rs_id+'" class="list-group-item d-flex justify-content-between align-items-start">'+
@@ -160,26 +160,5 @@ function appendElement(prod) {
             '</div>'+
         '</div>'+
     '</li>'
-    );
-}
-
-function emptyList() {
-    $('#lst_carrito').html(
-        '<li class="list-group-item d-flex justify-content-between align-items-start">'+
-        '<div class = "row">'+
-          '<div class = "col-8"></div>'+
-          '<div class = "col-2">'+
-            '<img src="../../resources/carrito.PNG" class="d-block w-100" alt="...">'+
-          '</div>'+
-          '<div class = "col-2">'+
-            '<span id="lbl_total" class="badge bg-primary rounded-pill">$0</span>'+
-            '<form>'+
-              '<a href = "c-pagando.html">'+
-                '<button type="button" class="btn btn-success">Pagar</button>'+
-              '</a>'+
-            '</form>'+
-          '</div>'+
-        '</div>'+
-      '</li>'
     );
 }

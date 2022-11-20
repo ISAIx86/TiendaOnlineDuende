@@ -19,7 +19,7 @@ include_once __ROOT."html/templates/get_session.php";
   <div class = "container" id = "pagina">
     <h1>Carrito de compra</h1>
     <div class="cointainer">
-      <ul id="lst_carrito" class="list-group">         
+      <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class = "row">
             <div class = "col-8"></div>
@@ -28,14 +28,15 @@ include_once __ROOT."html/templates/get_session.php";
             </div>
             <div class = "col-2">
               <span id="lbl_total" class="badge bg-primary rounded-pill">$0</span>
-              <form>
-                <a href = "c-pagando.html">
+                <a href="c-pagando.php">
                   <button type="button" class="btn btn-success">Pagar</button>
                 </a>
-              </form>
             </div>
           </div>
         </li>
+        <div id="lst_carrito">
+
+        </div>
       </ul>
     </div>    
   </div>
