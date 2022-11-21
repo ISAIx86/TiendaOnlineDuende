@@ -22,9 +22,10 @@ deterministic
 begin
 	declare _total_ventas int;
 	select
-		count(id_producto) into _total_ventas
+		sum(cantidad) into _total_ventas
 	from rel_ped_prod
-	where id_producto = _id_prod;
+	where id_producto = _id_prod
+    group by id_producto;
     return _total_ventas;
 end;
 $$ DELIMITER ;
