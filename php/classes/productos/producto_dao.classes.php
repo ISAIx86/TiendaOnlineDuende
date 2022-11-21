@@ -33,6 +33,8 @@ class ProductoDAO extends DBH {
 
         $result = $this->fetchData();
 
+        $this->clearStatement();
+
         return $result[0]["result"];
 
     }

@@ -329,6 +329,7 @@ class UsuarioDAO extends DBH {
                 "rs_titulo"=>$row['out_titulo'],
                 "rs_precio"=>$row['out_precio'],
                 "rs_cantidad"=>$row['out_cantidad'],
+                "rs_dispo"=>$row['out_dispo'],
                 "rs_total"=>$row['out_total']
             ));
         }

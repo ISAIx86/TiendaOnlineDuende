@@ -20,6 +20,7 @@ select
 	prod.titulo as 'titulo',
     prod.precio as 'precio',
     rlc.cantidad as 'cantidad',
+    prod.disponibilidad as 'disponibilidad',
     prod.precio * rlc.cantidad as 'total'
 from rel_carrito as rlc
 left outer join productos as prod

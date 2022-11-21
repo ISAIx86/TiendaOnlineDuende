@@ -1,5 +1,38 @@
 $(document).ready(function (){
 
+    $('#btn_pagar').on('click', e => {
+        const products = $("div#lst_carrito").children().length;
+        if (products > 0) {
+            window.location.replace("c-pagando.php");
+        }
+    })
+
+    $('#btn_clean').on('click', e => {
+        const products = $("div#lst_carrito").children().length;
+        if (products == 0) {
+            return;
+        }
+        $.ajax({
+            url: '../../php/includes/usuarios/limpiar_carrito_inc.php',
+            type: 'POST'
+        })
+        .done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                
+            } else {
+                alert("Carrito vaciado.");
+                window.location.reload();
+            }
+        });
+    })
+
     llenarLista();
 
 });
@@ -13,7 +46,7 @@ $(document).on('click', '#btn_quitar', e => {
 $(document).on('click', '#btn_menos', e => {
     e.preventDefault();
     let producto_id = $(e.target).parents('li#emt-list').attr('prodid');
-    let cantidad = parseInt($(e.target).parents('div#cant_control').find('button#lbl_cant').html());
+    let cantidad = parseInt($(e.target).parents('div#cant_control').children('span#lbl_cant').html());
     let nueva_cant = cantidad - 1;
     if (nueva_cant == 0) {
         quitarProductoDeLista(producto_id);
@@ -44,7 +77,7 @@ $(document).on('click', '#btn_menos', e => {
 $(document).on('click', '#btn_mas', e => {
     e.preventDefault();
     let producto_id = $(e.target).parents('li#emt-list').attr('prodid');
-    let cantidad = parseInt($(e.target).parents('div#cant_control').find('button#lbl_cant').html());
+    let cantidad = parseInt($(e.target).parents('div#cant_control').children('span#lbl_cant').html());
     let nueva_cant = cantidad + 1;
     $.ajax({
         url: '../../php/includes/usuarios/cant_carrito_inc.php',
@@ -131,31 +164,26 @@ function quitarProductoDeLista(producto_id) {
 function appendElement(prod) {
     $('#lst_carrito').append(
     '<li id="emt-list" prodid="'+prod.rs_id+'" class="list-group-item d-flex justify-content-between align-items-start">'+
-        '<div class = "row">'+
-            '<div class = "col-2">'+
+        '<div class="row">'+
+            '<div class="col-2">'+
                 '<img src="../../resources/p01.PNG" class="d-block w-100" alt="...">'+
             '</div>'+
-            '<div class = "col-8">'+
+            '<div class="col-8">'+
                 '<div class="fw-bold">'+prod.rs_titulo+'</div>'+
-                '<h6>'+prod.rs_cantidad+' x '+prod.rs_precio+'</h6>'+
-                '<form>'+
-                    '<div id="cant_control" class = "row">'+
-                        '<div class = "col-1">'+
-                            '<button id="btn_menos" class="btn btn-warning">-</button>'+
-                        '</div>'+
-                        '<div class = "col-1">'+
-                            '<button id="lbl_cant" class="btn btn-info">'+prod.rs_cantidad+'</button>'+
-                        '</div>'+
-                        '<div class = "col-1">'+
-                            '<button id="btn_mas" class="btn btn-success">+</button>'+
-                        '</div>'+
-                    '</div>'+
-                '</form>'+
+                '<h6>$'+prod.rs_precio+'</h6>'+
+                '<span class="badge bg-primary rounded-pill">'+prod.rs_dispo+' disponibles</span>'+
+                '</br>'+
+                '<button>Guardar en lista</button>'+
+                '<button>Ver productos similares</button>'+
             '</div>'+
-            '<div class = "col-2">'+
-                '<span class="badge bg-primary rounded-pill">'+prod.rs_total+'</span>'+
+            '<div id="cant_control" class="col-2">'+
+                '<span class="badge bg-primary rounded-pill">$'+prod.rs_total+'</span>'+
+                '</br>'+
+                '<button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>'+
+                '<span id="lbl_cant" class="badge bg-primary rounded-pill">'+prod.rs_cantidad+'</span>'+
+                '<button id="btn_mas" class="btn btn-secondary btn-circle btn-sm">+</button>'+
                 '<form>'+
-                    '<button id="btn_quitar" class="btn btn-danger">Quitar</button>'+
+                '<button id="btn_quitar" class="btn btn-danger">Quitar</button>'+
                 '</form>'+
             '</div>'+
         '</div>'+

@@ -97,7 +97,6 @@ $(document).ready(function() {
                 }
             } else {
                 alert("Producto registrado con éxito. Se publicará una vez que sea aprobado por un administrador.");
-                window.location.reload();
             }
         });
     });

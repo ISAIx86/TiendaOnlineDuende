@@ -1,0 +1,85 @@
+-- // FILENAME: ProcPedidos.sql
+-- // Autor: Alexis Isaí Contreras Garza
+-- // Desc: Procedimientos para Pedidos.
+
+-- // UNIVERSIDAD AUTÓNOMA DE NUEVO LEÓN
+-- // FACULTAD DE CIENCIAS FÍSICO MATEMÁTICAS
+
+-- // Bases de datos multimedia y Programación web de capa intermedia.
+-- // Alexis Isaí Contreras Garza / Matrícula 1823636
+-- // Maikol Ariel Paredes Olguín / Matrícula 1687850
+
+use tienda_online;
+
+-- ///////////////////////////////////
+-- //// PROCEDIMIENTOS DE PEDIDOS \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+DELIMITER $$
+drop procedure if exists sp_Pedidos;
+$$ DELIMITER ;
+DELIMITER $$
+create procedure sp_Pedidos (
+	in _proc varchar(16),
+    in _folio bigint,
+    in _id_usuario varchar(36),
+    in _domicilio_entr varchar(36),
+    in _id_producto varchar(36),
+    in _cantidad int
+)
+begin
+declare _precio decimal(8,2);
+case (_proc)
+-- //// CREAR NUEVO PEDIDO \\\\ --
+	when ('create') then
+		insert into pedidos(
+			id_usuario,
+            domicilio_entr,
+            total
+        ) values (
+			uuid_to_bin(_id_usuario),
+            uuid_to_bin(_domicilio_entr),
+            fn_totalCarrito(uuid_to_bin(_id_usuario))
+        );
+        if (row_count() != 0) then
+			select last_insert_id() as 'result';
+        else
+			select "failed_insertion" as 'result';
+        end if;
+-- //// AÑADIR PRODUCTO AL PEDIDO \\\\ --
+	when ('add_prod') then
+		select
+			precio into _precio
+		from productos
+		where id_producto = uuid_to_bin(_id_producto);
+		insert into rel_ped_prod(
+			folio_pedido,
+            id_producto,
+            cantidad,
+            precio,
+            subtotal
+        ) values (
+			_folio,
+            uuid_to_bin(_id_producto),
+            _cantidad,
+            _precio,
+            _precio * _cantidad
+        );
+-- //// CHECAR PRODUCTO \\\\ --
+	when ('checkP') then
+		select
+			count(*) as "result"
+		from productos
+        where id_producto = uuid_to_bin(_id_producto);
+-- //// CHECAR EXISTENCIA \\\\ --
+	when ('checkEx') then
+		select
+			disponibilidad as "result"
+		from productos
+        where id_producto = uuid_to_bin(_id_producto);
+-- //// COMANDO NO VÁLIDO \\\\ --
+    else
+		select "invalid_command" as 'result';
+end case;
+end
+$$ DELIMITER ;

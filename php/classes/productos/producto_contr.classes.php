@@ -32,6 +32,9 @@ class ProductoController extends ProductoDAO {
         if ($prodid == "query_error") {
             return "query_error";
         }
+        if ($prodid == "insertion_failed") {
+            return "insertion_failed";
+        }
         foreach ($categos as &$cat) {
             $this->rcat_add($prodid, $cat->id);
         }
