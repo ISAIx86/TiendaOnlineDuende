@@ -3,29 +3,32 @@
 	top :0;
 }
 header{
-    background: #FFFFFF;
+    background: #F6F8F0     ;
     font-family: 'Candara';
 }
-.partesuperior{
-    background: #1e392a;
+.superior{
+    background: #F6F8F0 ;
+}
+.parteSuperior{
+    background: #F6F8F0;
     font-family: 'Candara';
     text-align: center;
 
 }
 .buscador {
-    background: #CADE01;
+    background: #F6F8F0       ;
     font-family: 'Candara';
     text-align: left;
     position: absolute;
 
 }
 #divBusqueda {
-    background: #CADE01;
+    background: #F6F8F0       ;
     font-family: 'Candara';
     text-align: left;
 }
 #navegacion{
-    background: #CADE01;
+    background: #F6F8F0       ;
     font-family: 'Candara';
     text-align: left;
 }
@@ -33,7 +36,7 @@ header{
     margin-top: 10px;
 }
 footer{
-    background: #3cc47c;
+    background: #F6F8F0;
     text-align: center;
 }
 .imgRedonda {
