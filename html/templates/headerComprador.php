@@ -108,3 +108,4 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 </div>
 
 </div>
+
