@@ -18,7 +18,7 @@ function type_text(element, contenido, limite) {
 }
 
 function type_textnum(element, contenido, limite) {
-    if (contenido.length === 0) {
+    if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
     else if (contenido.length > limite) {
@@ -30,7 +30,7 @@ function type_textnum(element, contenido, limite) {
 }
 
 function type_numeric(element, contenido) {
-    if (contenido.length === 0) {
+    if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
     else if (!soloNumeros(contenido)) {
@@ -42,7 +42,7 @@ function type_numeric(element, contenido) {
 }
 
 function type_float(element, contenido) {
-    if (contenido.length === 0) {
+    if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
     else if (contenido.length > 7) {
@@ -54,6 +54,41 @@ function type_float(element, contenido) {
     else {
         setCSSFor(element, 'success', '');
     }
+}
+
+function type_image(element, contenido) {
+    const extensions = ['jpeg', 'jpg', 'png', 'gif'];
+    if (contenido.length === 0) {
+        setCSSFor(element, '', '');
+        return;
+    }
+    for (let i = 0; i < contenido.length; i++) {
+        if ($.inArray(contenido[i].name.split('.').pop().toLowerCase(), extensions) == -1) {
+            setCSSFor(element, 'error', 'El formato de archivo no está permitido.');
+            return;
+        }
+    }
+    setCSSFor(element, 'success', '');
+}
+
+function type_media(element, contenido) {
+    const extensions = ['jpeg', 'jpg', 'png', 'gif', 'mp4'];
+    if (contenido.length === 0) {
+        setCSSFor(element, '', '');
+        return false;
+    }
+    for (let i = 0; i < contenido.length; i++) {
+        if ($.inArray(contenido[i].name.split('.').pop().toLowerCase(), extensions) == -1) {
+            setCSSFor(element, 'error', 'El formato de archivo no está permitido.');
+            return false;
+        }
+    }
+    if (!cantidadContenidoCorrecto(contenido)) {
+        setCSSFor(element, 'error', 'Debe haber almenos 3 imagenes y 1 video.');
+        return false;
+    }
+    setCSSFor(element, 'success', '');
+    return true;
 }
 
 function type_date(element, contenido) {
@@ -86,7 +121,7 @@ function type_email(element, contenido) {
 }
 
 function type_password(element, contenido) {
-    if (contenido.length === 0) {
+    if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
     else if (contenido.length < 8) {
@@ -105,7 +140,7 @@ function type_password(element, contenido) {
 }
 
 function type_confirm(element, contenido, confirma) {
-    if (contenido.length === 0) {
+    if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
     else if (contenido.length > 16) {
@@ -192,9 +227,27 @@ function validarPassword(input) {
 }
 
 function validarPrecio(input) {
-    return /^[0-9]{0,6}(\.[0-9]{1,2})?$/.test(input);
+    return /^\d+\.\d{0,2}$/.test(input)
 }
 
 function validarNumTarj(input) {
     return /\b(?:\d{4}[ -]?){3}(?=\d{4}\b)(?:\d{4})/.test(input);
+}
+
+function cantidadContenidoCorrecto(input) {
+    const filearray = Array.from(input);
+    const imgext = ['jpeg', 'jpg', 'png', 'gif'];
+    const vidext = ['mp4'];
+    const countImg = filearray.filter(file => { 
+        if ($.inArray(file.name.split('.').pop().toLowerCase(), imgext) > -1) {
+            return true;
+        } else return false;
+    }).length;
+    const countVideo = filearray.filter(file => { 
+        if ($.inArray(file.name.split('.').pop().toLowerCase(), vidext) > -1) {
+            return true;
+        } else return false;
+    }).length;
+    if (countImg >= 3 & countVideo >= 1) return true;
+    else return false;
 }

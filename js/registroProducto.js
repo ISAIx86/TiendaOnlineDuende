@@ -97,6 +97,7 @@ $(document).ready(function() {
                 }
             } else {
                 alert("Producto registrado con éxito. Se publicará una vez que sea aprobado por un administrador.");
+                window.location.reload();
             }
         });
     });
@@ -143,9 +144,15 @@ function updateCategoList() {
 
 function bindFields() {
 
+    $('#fle_media').on('change', e => {
+        let contenido = $(e.target).get(0).files;
+        let files_ok = type_media($(e.target), contenido);
+        if (files_ok) loadMedia(contenido);
+    });
+
     $('#txt_nombre').on('change', e => {
         let contenido =  $(e.target).val();
-        type_text($(e.target), contenido, 64);
+        type_textnum($(e.target), contenido, 64);
     });
 
     $('#txt_descrip').on('change', e => {
@@ -163,4 +170,26 @@ function bindFields() {
         type_float($(e.target), contenido);
     });
 
+}
+
+function loadMedia(elements) {
+    const imgext = ['jpeg', 'jpg', 'png', 'gif'];
+    const vidext = ['mp4'];
+    for (let i = 0; i < elements.length; i++) {
+        let ext = elements[i].name.split('.').pop().toLowerCase()
+        if ($.inArray(ext, imgext) > -1) {
+            $('#mda_carousel').append(
+                '<div class="carousel-item active">'+
+                  '<img src="'+URL.createObjectURL(elements[i])+'" class="d-block w-100" alt="...">'+
+                '</div>'
+            );
+        }
+        else if ($.inArray(ext, vidext) > -1) {
+            $('#mda_carousel').append(
+                '<div class="carousel-item active">'+
+                    '<video src="'+URL.createObjectURL(elements[i])+'" controls autoplay> Vídeo no es soportado... </video>'+
+                '</div>'
+            );
+        }
+    }
 }

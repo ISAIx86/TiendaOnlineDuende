@@ -17,6 +17,7 @@ create or replace view vw_carrito as
 select
 	rlc.id_usuario as 'id_usuario',
     rlc.id_producto as 'id_producto',
+    mult.contenido_dir as 'imagen',
 	prod.titulo as 'titulo',
     prod.precio as 'precio',
     rlc.cantidad as 'cantidad',
@@ -24,4 +25,8 @@ select
     prod.precio * rlc.cantidad as 'total'
 from rel_carrito as rlc
 left outer join productos as prod
-on rlc.id_producto = prod.id_producto;
+on rlc.id_producto = prod.id_producto
+left outer join multimedia as mult
+on rlc.id_producto = mult.id_prod
+where mult.tipo = 'i'
+group by rlc.id_producto;

@@ -19,16 +19,8 @@ include_once __ROOT."html/templates/get_session.php";
     <div class = "row">
       <div class = "col-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
+          <div id="mda_carousel" class="carousel-inner">
+            
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,7 +42,7 @@ include_once __ROOT."html/templates/get_session.php";
         </div>
       </div>
       <div class = "col-6">
-        <form id="form_producto">
+        <form id="form_producto" enctype='multiple/form-data'>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_nombre" class="form-label">Producto</label>
@@ -69,10 +61,10 @@ include_once __ROOT."html/templates/get_session.php";
               <input type="number" class="form-control" id="txt_dispo" name="in_dispo" max="256", min="1"></input>
             </div>
           </div>
-          <div class="form_control" requerido="false" state='empt'>
+          <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="img_fotos" class="form-label">Fotografias del producto</label>
-              <input class="form-control" type="file" id="img_fotos" name="in_files" multiple>
+              <input class="form-control" type="file" id="fle_media" name="in_files[]" multiple>
             </div>
           </div>
           <div class="mb-3">

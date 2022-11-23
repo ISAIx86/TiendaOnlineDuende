@@ -164,11 +164,11 @@ case (_proc)
         );
 -- //// MODIFICAR CANTIDAD \\\\ --
 	when ('set_carrito') then
-		update rel_carrito set
-			cantidad = ifnull(_cantidad, cantidad)
-		where id_usuario = uuid_to_bin(_id_usuario) and
-			  id_producto = uuid_to_bin(_id_producto);
-		
+			update rel_carrito set
+				cantidad = ifnull(_cantidad, cantidad)
+			where id_usuario = uuid_to_bin(_id_usuario) and
+				  id_producto = uuid_to_bin(_id_producto);
+			select "updated" as 'result';
 -- //// QUITAR PRODUCTO DEL CARRITO \\\\ --
 	when ('pop_carrito') then
 		delete from rel_carrito
@@ -182,6 +182,7 @@ case (_proc)
 	when ('get_carrito') then
 		select
 			bin_to_uuid(id_producto) as 'out_id',
+            imagen as 'out_img',
             titulo as 'out_titulo',
             precio as 'out_precio',
             cantidad as 'out_cantidad',

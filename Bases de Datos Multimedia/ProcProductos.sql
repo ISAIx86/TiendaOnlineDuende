@@ -138,32 +138,47 @@ case (_proc)
 -- //// VISTA HOME MÁS VENDIDOS \\\\ --
 	when ('get_vendidos') then
 		select
-            bin_to_uuid(id_producto) as 'out_id',
-            titulo as 'out_titulo',
-            descripcion as 'out_descripcion',
-            precio as 'out_precio'
-        from productos
-        order by fn_ventasProductos(id_producto)
+            bin_to_uuid(p.id_producto) as 'out_id',
+            m.contenido_dir as 'out_img',
+            p.titulo as 'out_titulo',
+            p.descripcion as 'out_descripcion',
+            p.precio as 'out_precio'
+        from productos as p
+        left outer join multimedia as m
+        on m.id_prod = p.id_producto
+        where m.tipo = 'i'
+        group by p.id_producto
+        order by fn_ventasProductos(id_producto) desc
         limit 10;
 -- //// VISTA HOME MÁS VISITADOS \\\\\ --
 	when ('get_vistos') then
 		select
-			bin_to_uuid(id_producto) as 'out_id',
-            titulo as 'out_titulo',
-            descripcion as 'out_descripcion',
-            precio as 'out_precio'
-        from productos
-        order by vistas
+			bin_to_uuid(p.id_producto) as 'out_id',
+            m.contenido_dir as 'out_img',
+            p.titulo as 'out_titulo',
+            p.descripcion as 'out_descripcion',
+            p.precio as 'out_precio'
+        from productos as p
+        left outer join multimedia as m
+        on m.id_prod = p.id_producto
+        where m.tipo = 'i'
+        group by p.id_producto
+        order by vistas desc
         limit 10;
 -- //// VISTA HOME MÁS RECOMENDADOS \\\\\ --
     when ('get_recomend') then
 		select
-			bin_to_uuid(id_producto) as 'out_id',
-            titulo as 'out_titulo',
-            descripcion as 'out_descripcion',
-            precio as 'out_precio'
-        from productos
-        order by calificacion
+			bin_to_uuid(p.id_producto) as 'out_id',
+            m.contenido_dir as 'out_img',
+            p.titulo as 'out_titulo',
+            p.descripcion as 'out_descripcion',
+            p.precio as 'out_precio'
+        from productos as p
+        left outer join multimedia as m
+        on m.id_prod = p.id_producto
+        where m.tipo = 'i'
+        group by p.id_producto
+        order by calificacion desc
         limit 10;
 -- //// BÚSQUEDA AVANZADA \\\\\ --
 	when ('adv_search') then

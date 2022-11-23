@@ -17,7 +17,8 @@ if (isset($_SESSION['user'])) {
             echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
             exit();
         }
-        echo json_encode(array('result'=>"success"));
+        $result = $controller->totalCarrito($_SESSION['user']['ID']);
+        echo json_encode(array('result'=>"success", 'total'=>$result));
         exit();
     }
 }

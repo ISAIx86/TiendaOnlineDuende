@@ -5,7 +5,7 @@ $(document).ready(function (){
         if (products > 0) {
             window.location.replace("c-pagando.php");
         }
-    })
+    });
 
     $('#btn_clean').on('click', e => {
         const products = $("div#lst_carrito").children().length;
@@ -31,9 +31,7 @@ $(document).ready(function (){
                 window.location.reload();
             }
         });
-    })
-
-    llenarLista();
+    });
 
 });
 
@@ -50,7 +48,6 @@ $(document).on('click', '#btn_menos', e => {
     let nueva_cant = cantidad - 1;
     if (nueva_cant == 0) {
         quitarProductoDeLista(producto_id);
-        llenarLista();
         return;
     }
     $.ajax({
@@ -67,9 +64,13 @@ $(document).on('click', '#btn_menos', e => {
             return;
         }
         if (data.result == "error") {
-            $('#lbl_cant').html(cantidad);
+            $('#lbl_total').html('$'+data.total);
+            $('#hdr_carrito').html('$'+data.total);
+            setNumber($(e.target), cantidad);
         } else {
-            llenarLista();
+            $('#lbl_total').html('$'+data.total);
+            $('#hdr_carrito').html('$'+data.total);
+            setNumber($(e.target), nueva_cant);
         }
     });
 });
@@ -93,50 +94,16 @@ $(document).on('click', '#btn_mas', e => {
             return;
         }
         if (data.result == "error") {
-            $('#lbl_cant').html(cantidad);
+            $('#lbl_total').html('$'+data.total);
+            $('#hdr_carrito').html('$'+data.total);
+            setNumber($(e.target), cantidad);
         } else {
-            llenarLista();
+            $('#lbl_total').html('$'+data.total);
+            $('#hdr_carrito').html('$'+data.total);
+            setNumber($(e.target), nueva_cant);
         }
     });
 });
-
-function llenarLista() {
-    $.ajax({
-        url: '../../php/includes/usuarios/carrito_inc.php',
-        type: 'GET'
-    })
-    .done(response => {
-        let data;
-        try {
-            data = $.parseJSON(response);
-        } catch (err) {
-            $(".container-footer").append(response);
-            return;
-        }
-        if (data.result == "error") {
-            switch(data.reason) {
-                case "no_query_results": {
-                    $('#lst_carrito').append(
-                        '<p>Carrito vacio</p>'
-                    );
-                }
-            }
-        } else {
-            $('#lst_carrito').html("");
-            if (data.total_sum) {
-                $('#hdr_carrito').html("$"+data.total_sum);
-                $('#lbl_total').html("$"+data.total_sum);
-            }
-            else {
-                $('#hdr_carrito').html("$0");
-                $('#lbl_total').html("$0");
-            } 
-            data.products.forEach(prod => {
-                appendElement(prod);
-            });
-        }
-    });
-}
 
 function quitarProductoDeLista(producto_id) {
     $.ajax({
@@ -161,12 +128,17 @@ function quitarProductoDeLista(producto_id) {
     });
 }
 
+function setNumber(element, cant) {
+    element.parents('div#cant_control').children('span#lbl_cant').html(cant);
+}
+
+/*
 function appendElement(prod) {
     $('#lst_carrito').append(
     '<li id="emt-list" prodid="'+prod.rs_id+'" class="list-group-item d-flex justify-content-between align-items-start">'+
         '<div class="row">'+
             '<div class="col-2">'+
-                '<img src="../../resources/p01.PNG" class="d-block w-100" alt="...">'+
+                '<img src="../../'+prod.rs_img+'" class="d-block w-100" alt="...">'+
             '</div>'+
             '<div class="col-8">'+
                 '<div class="fw-bold">'+prod.rs_titulo+'</div>'+
@@ -190,3 +162,4 @@ function appendElement(prod) {
     '</li>'
     );
 }
+*/

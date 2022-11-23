@@ -252,6 +252,11 @@ $(document).ready(function() {
 
 function bindFields() {
 
+    $('#fle_fotoperfil').on('change', function() {
+        let contenido = $(this).val();
+        type_image($(this), contenido);
+    });
+
     $('#txt_nombres').on('change', function() {
         let contenido =  $(this).val();
         type_text($(this), contenido, 64);

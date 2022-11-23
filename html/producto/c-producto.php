@@ -52,8 +52,10 @@ include_once __ROOT."html/templates/get_session.php";
     }
     require_once __ROOT."php/models/usuario-model.php";
     require_once __ROOT."php/models/producto-model.php";
+    require_once __ROOT."php/models/multimedia-model.php";
     require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
     require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+    require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
     if (isset($_SESSION['user'])) {
         $controller = new UsuarioController();
         $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
@@ -71,9 +73,12 @@ include_once __ROOT."html/templates/get_session.php";
         }
     }
     $infoProd = array("rs_id"=>"", "rs_titulo"=>"", "rs_descripcion"=>"", "rs_precio"=>"", "rs_dispo"=>"", "rs_calif"=>0.0);
+    $filesProd = array();
     if (isset($_GET['prod'])) {
         $controller = new ProductoController();
         $infoProd = $controller->obtenerProducto($_GET['prod']);
+        $controllermult = new MultimediaController();
+        $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
     }
   ?>
   <!-- Container -->
@@ -82,15 +87,24 @@ include_once __ROOT."html/templates/get_session.php";
       <div class = "col-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <video src="../../resources/clipShort.mp4" controls autoplay> Vídeo no es soportado... </video>
-              </div>
+              <?php
+              foreach ($filesProd as &$file) {
+                if ($file['out_tipo'] == 'i') {
+                  $imageSrc = '"data:image/jpg;base64,'.base64_encode($file["out_cont"]).'"';
+              ?>
+                <div class="carousel-item active">
+                  <img src=<?php echo $imageSrc ?> class="d-block w-100" alt="...">
+                </div>
+              <?php 
+                } else if ($file['out_tipo'] == 'v') {
+              ?>
+                  <div class="carousel-item">
+                    <video src=<?php echo $file['out_dir'] ?> controls autoplay> Vídeo no es soportado... </video>
+                  </div>
+              <?php
+                } 
+              }
+              ?>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -106,13 +120,13 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="card">
           <div class="card-body">
             <div>
-                <h5 class="card-title"><?php echo $infoProd['rs_titulo']?></h5>
+              <h5 class="card-title"><?php echo $infoProd['rs_titulo']?></h5>
             </div>
             <div>
-                <p class="card-text"><?php echo $infoProd['rs_descripcion']?></p>
+              <p class="card-text"><?php echo $infoProd['rs_descripcion']?></p>
             </div>
             <div>
-                <h3>$ <?php echo $infoProd['rs_precio']?></h3>
+              <h3>$ <?php echo $infoProd['rs_precio']?></h3>
             </div>
 
             <?php if ($infoProd['rs_dispo']) { ?>

@@ -18,7 +18,7 @@ class ProductoController extends ProductoDAO {
     }
 
     // Métodos fuertes
-    public function crearProducto(Producto $prod, $categos) {
+    public function crearProducto(Producto &$prod, $categos) {
         if (empty($prod->getPublicador())) {
             return "missing_owner";
         }
@@ -35,6 +35,7 @@ class ProductoController extends ProductoDAO {
         if ($prodid == "insertion_failed") {
             return "insertion_failed";
         }
+        $prod->setID($prodid);
         foreach ($categos as &$cat) {
             $this->rcat_add($prodid, $cat->id);
         }

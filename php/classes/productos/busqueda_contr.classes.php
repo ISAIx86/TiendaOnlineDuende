@@ -4,19 +4,6 @@ require_once "busqueda_dao.classes.php";
 
 class BusquedaProdController extends BusquedaProdDAO {
 
-    // Métodos débiles
-    private function hasEmptyInput(Producto $prod) {
-        if (
-            empty($prod->getTitulo()) |
-            empty($prod->getDescripcion()) |
-            empty($prod->getDisponibilidad()) |
-            $prod->getCotizacion() != null |
-            empty($prod->getPrecio())
-        ) {
-            return true;
-        } else return false;
-    }
-
     // Métodos fuertes
     public function masVendidos() {
         return $this->get_vendidos();

@@ -25,7 +25,7 @@ from rel_ped_prod;
 create or replace view vw_histo_pedidos as
 select
 	peds.fecha_compra as 'fecha_compra',
-    group_concat() as 'categoria',
+    group_concat(cat.nombre) as 'categoria',
     prods.titulo as 'producto',
     prods.calificacion as 'calificacion',
     prods.precio as 'precio'
@@ -37,4 +37,5 @@ on rpp.id_producto = prods.id_producto
 left outer join rel_cat as rlc
 on prods.id_producto = rlc.id_producto
 left outer join categorias as cat
-on rlc.id_categoria = cat.id_catego;
+on rlc.id_categoria = cat.id_catego
+group by rlc.id_categoria;

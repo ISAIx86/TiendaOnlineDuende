@@ -241,6 +241,8 @@ class UsuarioDAO extends DBH {
 
         $count = $this->countOfRows();
 
+        $this->clearStatement();
+
         if ($count == 0) {
             return false;
         }
@@ -261,6 +263,8 @@ class UsuarioDAO extends DBH {
         }
 
         $count = $this->countOfRows();
+
+        $this->clearStatement();
 
         if ($count == 0) {
             return false;
@@ -326,6 +330,7 @@ class UsuarioDAO extends DBH {
         foreach ($rt_data as &$row) {
             array_push($result, array(
                 "rs_id"=>$row['out_id'],
+                "rs_img"=>$row['out_img'],
                 "rs_titulo"=>$row['out_titulo'],
                 "rs_precio"=>$row['out_precio'],
                 "rs_cantidad"=>$row['out_cantidad'],

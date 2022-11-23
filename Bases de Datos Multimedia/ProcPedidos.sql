@@ -14,7 +14,6 @@ use tienda_online;
 -- ///////////////////////////////////
 -- //// PROCEDIMIENTOS DE PEDIDOS \\\\
 -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
 DELIMITER $$
 drop procedure if exists sp_Pedidos;
 $$ DELIMITER ;

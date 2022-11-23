@@ -79,7 +79,7 @@ add
 add
 	constraint fk_cat_adm
     foreign key (id_autorizador)
-    references usuario (id_usuario)
+    references usuarios (id_usuario)
     on delete no action
     on update no action;
     

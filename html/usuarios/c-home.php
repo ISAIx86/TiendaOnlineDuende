@@ -14,7 +14,19 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php include_once __ROOT."html/templates/headerComprador.php";?>
+  <?php
+  include_once __ROOT."html/templates/headerComprador.php";
+  require_once __ROOT."php/classes/productos/busqueda_contr.classes.php";
+  $d_recomend = array();
+  $d_vistos = array();
+  $d_vendidos = array();
+  if (isset($_SESSION['user'])) {
+    $controller = new BusquedaProdController();
+    $d_recomend = $controller->masRecomendados();
+    $d_vistos = $controller->masVistos();
+    $d_vendidos = $controller->masVendidos();
+  }
+  ?>
 
   <!-- Container -->
   <div class = "container" id = "pagina">
@@ -83,7 +95,22 @@ include_once __ROOT."html/templates/get_session.php";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                   </div>
                   <div class="carousel-inner" id="disp_recomend">
-                    
+                  <?php foreach($d_recomend as &$prod) { ?>
+                    <div class="carousel-item active">
+                      <div class = "row">
+                        <div class = "col-4">
+                          <div class="card" style="width: 18rem;">
+                            <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
+                              <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
+                              <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
+                              <a href="../producto/c-producto.php?prod='<?php echo $prod['rs_id'] ?>'" class="btn btn-primary">Ver detalles</a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  <?php } ?>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -111,7 +138,22 @@ include_once __ROOT."html/templates/get_session.php";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                   </div>
                   <div class="carousel-inner" id="disp_vistos">
-                    
+                  <?php foreach($d_vistos as &$prod) { ?>
+                    <div class="carousel-item active">
+                      <div class = "row">
+                        <div class = "col-4">
+                          <div class="card" style="width: 18rem;">
+                            <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
+                              <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
+                              <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
+                              <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  <?php } ?>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -139,7 +181,22 @@ include_once __ROOT."html/templates/get_session.php";
                       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner" id="disp_vendidos">
-                      
+                    <?php foreach($d_vendidos as &$prod) { ?>
+                      <div class="carousel-item active">
+                        <div class = "row">
+                          <div class = "col-4">
+                            <div class="card" style="width: 18rem;">
+                              <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
+                                <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
+                                <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
+                                <a href="../producto/c-producto.php?prod='<?php echo $prod['rs_id'] ?>'" class="btn btn-primary">Ver detalles</a>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    <?php } ?>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -3,7 +3,9 @@
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 
 require_once __ROOT."php/models/producto-model.php";
+require_once __ROOT."php/models/multimedia-model.php";
 require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
 
 session_start();
 if (isset($_SESSION['user'])) {
@@ -17,6 +19,26 @@ if (isset($_SESSION['user'])) {
             ->setDisponibilidad($_POST['in_dispo']);
         $controller = new ProductoController();
         $result = $controller->crearProducto($nuevo, json_decode($_POST['in_categos']));
+        if (gettype($result) == "string") {
+            echo json_encode(array('result'=>"error", 'reason'=>$result));
+            exit();
+        } else if (!$result) {
+            echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
+            exit();
+        }
+        $array_files = array();
+        $countfiles = count($_FILES['in_files']['name']);
+        for ($i = 0; $i < $countfiles; $i++) {
+            array_push($array_files, array(
+                'name' => $_FILES['in_files']['name'][$i],
+                'type' => $_FILES['in_files']['type'][$i],
+                'tmp_name' => $_FILES['in_files']['tmp_name'][$i],
+                'error' => $_FILES['in_files']['error'][$i],
+                'size' => $_FILES['in_files']['size'][$i],
+            ));
+        }
+        $controllermult = new MultimediaController();
+        $result = $controllermult->insertarMultimedia($nuevo->getID(), $array_files);
         if (gettype($result) == "string") {
             echo json_encode(array('result'=>"error", 'reason'=>$result));
             exit();

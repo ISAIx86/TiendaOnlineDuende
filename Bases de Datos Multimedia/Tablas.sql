@@ -194,8 +194,9 @@ create table if not exists multimedia (
     
     id_prod binary(16) not null comment "ID del producto",
     
-    contenido blob not null comment "Contenido multimedia",
+    contenido mediumblob comment "Contenido multimedia",
     contenido_dir varchar(256) not null comment "Ruta del contenido multimedia",
+    tipo char(1) not null comment "Tipo de contenido. Video o imagenes.",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro del producto",
     fecha_elim timestamp default null comment "Fecha de baja",

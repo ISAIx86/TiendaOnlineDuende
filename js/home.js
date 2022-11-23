@@ -1,5 +1,6 @@
 $(document).ready(function (){
 
+    /*
     $.ajax({
         url: '../../php/includes/productos/home_inc.php',
         type: 'GET',
@@ -65,6 +66,7 @@ $(document).ready(function (){
             setHtmlProdList($('#disp_recomend'), data.products);
         }
     });
+    */
 
 });
 
@@ -93,7 +95,7 @@ function appendElement(htmltext, info) {
     htmltext[0] +=
     '<div class = "col-4">' +
         '<div class="card" style="width: 18rem;">'+
-            '<img src="../../resources/p01.PNG" class="card-img-top" alt="...">'+
+            '<img src="../../'+info.rs_img+'" class="card-img-top" alt="...">'+
             '<div class="card-body">'+
                 '<h5 class="card-title">'+info.rs_titulo+'</h5>'+
                 '<p class="card-text">'+info.rs_descripcion+'</p>'+
