@@ -21,10 +21,10 @@
                     <div class="col-sm-4" id = "ico-header" >
                         <div class = "row">
                             <div class = "col-6">
-                                <li><button onclick='location.href="registro.html"' type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Registrarse</button></li>
+                                <button onclick='location.href="registro.html"' type="button" class="btn btn-outline-success" data-toggle="button" aria-pressed="false" autocomplete="off">Registrarse</button>
                             </div>
                             <div class = "col-6">
-                                <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
+                                <button type="button" class="btn btn-outline-success" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button>
                             </div>
                         </div>
                     </div>

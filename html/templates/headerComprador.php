@@ -7,7 +7,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 
 <div id = "encabezado">
   <header>
-  <div class = "cointainer-fluid" class="superior">
+  <div class = "cointainer-fluid" >
     <div class="container-xxl">
       <div class="row">
         <div class="col-sm-8">
@@ -70,7 +70,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
           </datalist>
         </div>
         <div class="col-3" id = "txt-busqueda">
-          <button type="submit" class="btn btn-danger mb-3">
+          <button type="submit" class="btn btn-outline-success mb-3">
             <img src='../../resources/busqueda.png' class='imgCuadrada30' href="../producto/c-busqueda.php"/>
           </button>
         </div>

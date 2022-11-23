@@ -39,7 +39,7 @@
             </datalist>
         </div>
         <div class="col-3">
-            <button type="submit" class="btn btn-warning mb-3">
+            <button type="submit" class="btn btn-outline-success mb-3">
                 <a href="../producto/c-busqueda.html">Buscar</a>
             </button>
         </div>

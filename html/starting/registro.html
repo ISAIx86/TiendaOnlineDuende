@@ -11,18 +11,28 @@
 </head>
 <body>
     <header>
-        <div class="container_menu">
-            <div class="logo">
-                <img src="../../resources/logo02.png" alt="">
-            </div>
-            <div class="menu">
-                <nav id="nav">
-                    <ul>
-                        <li><button onclick="location.href='landingPage.php'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button></li>
-                        <li><button onclick="location.href='registroAdmin.html'" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Aplicar para administrador</button></li>
-                        <li><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button></li>
-                    </ul>
-                </nav>
+        <div class = "container-fluid" class="superior">
+            <div class="container-xxl">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <a href="../usuarios/c-home.php">
+                            <img src='../../resources/logo02.PNG' class='logotipo'/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4" id = "ico-header" >
+                        <div class = "row">      
+                            <div class = "col-4">
+                                <button onclick="location.href='landingPage.php'" type="button" class="btn btn-outline-success" data-toggle="button" aria-pressed="false" autocomplete="off">Inicio sesión</button>
+                            </div>
+                            <div class = "col-4">
+                                <button onclick="location.href='registroAdmin.html'" type="button" class="btn btn-outline-success" data-toggle="button" aria-pressed="false" autocomplete="off">Aplicar para administrador</button>
+                            </div>
+                            <div class = "col-4">
+                                <button type="button" class="btn btn-outline-success" data-toggle="button" aria-pressed="false" autocomplete="off">Ayuda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>        
             </div>
         </div>
     </header>
