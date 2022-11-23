@@ -67,24 +67,6 @@ class Usuario {
     public function setCreador($_crea) { $this->creador = $_crea; return $this; }
     public function setFechaCrea($_fcrea) { $this->fecha_crea = $_fcrea; return $this; }
 
-    public function copy(Usuario $usu) {
-        $this->id_usuario = $usu->getID();
-        $this->nombres = $usu->getNombres();
-        $this->apellidos = $usu->getApellidos();
-        $this->username = $usu->getUsername();
-        $this->fecha_nac = $usu->getFechaNac();
-        $this->sexo = $usu->getSexo();
-        $this->privacidad = $usu->getPrivacidad();
-        $this->rol = $usu->getRol();
-        $this->correo = $usu->getCorreo();
-        $this->pass = $usu->getPassword();
-        $this->confirm = $usu->getConfPass();
-        $this->avatar = $usu->getAvatar();
-        $this->avatar_dir = $usu->getAvatarDir();
-        $this->creador = $usu->getCreador();
-        return $this;
-    }
-
 }
 
 ?>

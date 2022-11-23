@@ -25,14 +25,6 @@ class Categoria {
     public function setNombre($_nom) { $this->nombre = $_nom; return $this; }
     public function setDescripcion($_desc) { $this->descripcion = $_desc; return $this; }
 
-    public function copy(Categoria $cat) {
-        $this->id_catego = $cat->getID();
-        $this->id_creador = $cat->getCreador();
-        $this->nombre = $cat->getNombre();
-        $this->descripcion = $cat->getDescripcion();
-        return $this;
-    }
-
 }
 
 ?>

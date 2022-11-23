@@ -178,7 +178,7 @@ create table if not exists pedidos (
 	folio bigint unsigned auto_increment comment "Folio del pedido",
     
     id_usuario binary(16) not null comment "ID del usuario que hizo el pedido",
-    domicilio_entr binary(16) not null comment "ID del domicilio de entrega",
+    domicilio_entr binary(16) comment "ID del domicilio de entrega",
     
     fecha_compra timestamp not null default current_timestamp comment "Fecha y hora de la compra",
     total decimal(8,2) not null comment "Total a pagar del pedido",

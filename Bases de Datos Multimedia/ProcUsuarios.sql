@@ -39,7 +39,7 @@ create procedure sp_Usuarios (
 )
 begin
 declare excluder int;
-case _proc
+case (_proc)
 -- //// REGISTRAR USUARIO \\\\ --
 	when ('create') then
 		insert into usuarios (
@@ -177,7 +177,7 @@ case _proc
 -- //// LIMPIAR CARRITO \\\\ --
 	when ('clean_carrito') then
 		delete from rel_carrito
-        where id_usuario = _id_usuario;
+        where id_usuario = uuid_to_bin(_id_usuario);
 -- //// PRODUCTOS DEL CARRITO \\\\ --
 	when ('get_carrito') then
 		select
@@ -185,16 +185,13 @@ case _proc
             titulo as 'out_titulo',
             precio as 'out_precio',
             cantidad as 'out_cantidad',
+            disponibilidad as 'out_dispo',
             total as 'out_total'
         from vw_carrito
         where id_usuario = uuid_to_bin(_id_usuario);
 -- //// SUMA TOTAL DEL CARRITO \\\\ --
 	when ('get_carr_tot') then
-		select
-			sum(total) as 'out_total'
-        from vw_carrito
-        where id_usuario = uuid_to_bin(_id_usuario)
-        group by id_usuario;
+		select fn_totalCarrito(uuid_to_bin(_id_usuario)) as 'out_total';
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

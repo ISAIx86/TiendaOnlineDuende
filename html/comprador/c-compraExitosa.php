@@ -21,7 +21,7 @@ include_once __ROOT."html/templates/get_session.php";
       <div class = "row">
         <h1>Compra exitosa</h1>
         <img src="../../resources/checkimage.png" class="d-block w-100" alt="...">
-        <a href = "../usuarios/c-home.html">
+        <a href="../usuarios/c-home.php">
           <button type="button" class="btn btn-success">Seguir Comprando</button>
         </a>     
       </div>

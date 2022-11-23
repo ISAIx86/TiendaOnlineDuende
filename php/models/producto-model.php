@@ -43,19 +43,6 @@ class Producto {
     public function setDisponibilidad($_disp) { $this->disponibilidad = $_disp; return $this; }
     public function setCalificacion($_calif) { $this->calificacion = $_calif; return $this; }
 
-    public function copy(Producto $prod) {
-        $this->id_producto = $prod->getID();
-        $this->id_publicador = $prod->getPublicador();
-        $this->id_autorizador = $prod->getAutorizador();
-        $this->titulo = $prod->getTitulo();
-        $this->descripcion = $prod->getDescripcion();
-        $this->cotizacion = $prod->getCotizacion();
-        $this->precio = $prod->getPrecio();
-        $this->disponibilidad = $prod->getDisponibilidad();
-        $this->calificacion = $prod->getCalificacion();
-        return $this;
-    }
-
 }
 
 ?>

@@ -18,6 +18,11 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Container -->
     <div class = "container" id = "pagina">
         <div class="container">
+            <ul class="list-group">
+                <div id="lst_carrito">
+
+                </div>
+            </ul>
             <div class = "row">
                 <div class = "col-6">
                     <div class = "container">
@@ -101,14 +106,12 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class = "row">
                                 <h1></h1>
                                 <span class="badge bg-secondary rounded-pill">Total a pagar</span>
-                                <span class="badge bg-info rounded-pill">$14,000</span>
+                                <span id="lbl_total" class="badge bg-info rounded-pill">$0</span>
                             </div>
-                            <div class = "row">
+                            <div class="row">
                                 <h1></h1>
                                 <div class = "col-12">
-                                    <a href = "c-compraExitosa.html">
-                                        <span class="btn text-bg-success" >Pagar</span>
-                                    </a>
+                                    <span id="btn_pagar" class="btn text-bg-success">Pagar</span>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +124,8 @@ include_once __ROOT."html/templates/get_session.php";
     <?php include __ROOT."html/templates/footer.php"?>
 
     <script src="../../js/bootstrap.bundle.js"></script>
+    <script src="../../js/jquery-3.6.1.js"></script>
+    <script src="../../js/pagando.js"></script>
 
 </body>
 </html>
