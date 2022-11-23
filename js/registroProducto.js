@@ -1,70 +1,167 @@
+class Categoria {
+    constructor(id, nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+}
+
+let categorias = [];
+
 $(document).ready(function() {
 
-    $('#form_producto').submit(e => {
-        let todoCorrecto = true;
-        todoCorrecto = checarNombre();
-        todoCorrecto = checarDescripcion();
-        todoCorrecto = checarCategoria();
-        todoCorrecto = checarPrecio();
+    $('#txt_incatego').on('keyup', e => {
+        let text = $('#txt_incatego').val();
+        $.ajax({
+            url: '../../php/includes/categorias/buscar_catego_inc.php',
+            type: 'GET',
+            data: { 'in_texto' : text }
+        })
+        .done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch(data.reason) {
+                    case "empty":
+                        $('#search-list').html("");
+                        break;
+                }
+            } else {
+                let htmlList = [""];
+                data.content.forEach(element => {
+                    appendElement(htmlList, element);
+                });
+                $('#search-list').html(htmlList);
+            }
+        });
+    })
 
-        if (todoCorrecto) {
-            alert("Tu producto está registrado. Se publicará una vez que un administrador verifique tu producto.")
-        }
-        else {
-            e.preventDefault();
+    $('input[type="radio"][name="in_tipoprecio"]').on('change', e => {
+        if ($('input[type="radio"][name="in_tipoprecio"]:checked').val() == "CT") {
+            $('#txt_precio').prop('disabled', true);
+            $('#txt_precio').parents('.form_control').attr('requerido', false);
+        } else {
+            $('#txt_precio').prop('disabled', false);
+            $('#txt_precio').parents('.form_control').attr('requerido', true);
         }
     });
 
+    $('#form_producto').submit(e => {
+        e.preventDefault();
+        if (!checkCorrectInputs($(e.target))) {
+            alert("Algunos campos contienen errores o están vacíos.");
+            return;
+        }
+        if (categorias.length == 0) {
+            alert("Asigne al menos una categoria al producto.");
+            return;
+        }
+        let formdata = new FormData($(e.target)[0]);
+        formdata.append('in_categos', JSON.stringify(categorias));
+        formdata.append('submit', 1);
+        $.ajax({
+            url: '../../php/includes/productos/new_prod_inc.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false
+        }).done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch(data.reason) {
+                    case "empty_inputs":
+                        alert("Campos capturados vacíos.");
+                        break;
+                    case "no_exists":
+                        alert("El correo electrónico no existe.");
+                        break;
+                    case "not_found":
+                        alert("No se pudo encontrar el usuario. Intentelo más tade.");
+                        break;
+                    case "wrong_password":
+                        alert("Contraseña incorrecta.");
+                        break;
+                    case "unauthorized_admin":
+                        alert("Administrador no autorizado.");
+                        break;
+                }
+            } else {
+                alert("Producto registrado con éxito. Se publicará una vez que sea aprobado por un administrador.");
+                window.location.reload();
+            }
+        });
+    });
+
+    bindFields();
+
 });
 
-function checarNombre() {
-    let contenido = $('#txt_nombre').val();
-    if (contenido === "") {
-        alert("Ingrese un nombre para el producto.");
-        return false;
-    }
-    else if (contenido.length > 64) {
-        alert("Demasiados caracteres en el nombre.");
-        return false;
-    }
-    else {
-        return true;
+// Manejo de categorias
+$(document).on('click', '#item_catego', e => {
+    let id = $(e.target).attr('catego_id');
+    let name = $(e.target).text();
+    categorias.push(new Categoria(
+        id,
+        name
+    ));
+    updateCategoList()
+});
+
+$(document).on('click', '#item_catego_list', e => {
+    let id = $(e.target).attr('catego_id');
+    categorias.splice(categorias.findIndex(cat => { return cat.id == id }), 1)
+    updateCategoList()
+});
+
+function appendElement(htmlList, element) {
+    let text='<li><a id="item_catego" catego_id="'+element["ID"]+'" value="'+element["Nombre"]+'">'+element["Nombre"]+'</a></li>';
+    htmlList[0] += text;
+}
+
+function updateCategoList() {
+    if (categorias.length != 0) {
+        $('#lbx_catego').html("");
+        categorias.forEach(catego => {
+            $('#lbx_catego').append('<option id="item_catego_list" catego_id="'+catego.id+'" value="'+catego.nombre+'">'+catego.nombre+'</option>');
+        });
+    } else {
+        $('#lbx_catego').html("");
+        $('#lbx_catego').append('<option>Sin categorías</option>');
     }
 }
 
-function checarDescripcion() {
-    let contenido = $('#txt_descrip').val();
-    if (contenido === "") {
-        alert("Ingrese una descripción para el producto.");
-        return false;
-    }
-    else if (contenido.length > 256) {
-        alert("Demasiados caracteres en la descripción.");
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+// Campos de formularios
 
-function checarCategoria() {
-    let contenido = $('#txt_catego').val();
-    if (contenido === "") {
-        alert("Ingrese una categoría para el producto.");
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+function bindFields() {
 
-function checarPrecio() {
-    let contenido = $('#txt_descrip').val();
-    if (contenido === "") {
-        alert("Ingrese una precio.");
-        return false;
-    }
-    else {
-        return true;
-    }
+    $('#txt_nombre').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_text($(e.target), contenido, 64);
+    });
+
+    $('#txt_descrip').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_textnum($(e.target), contenido, 256);
+    });
+
+    $('#txt_dispo').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_numeric($(e.target), contenido);
+    })
+
+    $('#txt_precio').on('change', e => {
+        let contenido =  $(e.target).val();
+        type_float($(e.target), contenido);
+    });
+
 }
