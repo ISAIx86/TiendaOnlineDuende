@@ -192,7 +192,7 @@ class UsuarioController extends UsuarioDAO {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        $this->us_cleancarrito($id);
+        return $this->us_cleancarrito($id);
     }
 
     public function listaCarrito($id) {

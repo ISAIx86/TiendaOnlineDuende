@@ -145,7 +145,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class = "row">
                   <div class="col-4">
                     <label for="inputPassword2" class="visually-hidden">Cantidad</label>
-                    <input type="text" class="form-control" id="txt_cantidad" placeholder="Cantidad">
+                    <input type="number" class="form-control" id="txt_cantidad" placeholder="Cantidad" min="1" max="256" onKeyDown="return false">
                   </div>
                 </div>
                 <div class="row">          

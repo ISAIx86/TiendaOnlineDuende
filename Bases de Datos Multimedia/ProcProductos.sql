@@ -80,6 +80,26 @@ case (_proc)
 			id_autorizador = uuid_to_bin(_id_aurorizador),
 			fecha_autorizado = sysdate()
 		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+-- //// EXISTENCIAS \\\\ --
+	when ('get_exist') then
+        set @_categos = "";
+        if (_descripcion is not null) then
+			set @_categos = concat(' and categorias like "%', _descripcion, '%"');
+		end if;
+		set @_search_qry = concat(
+			'select
+				categorias as out_categos,
+                bin_to_uuid(id_prod) as out_prodid,
+                titulo as out_titulo,
+				calificacion as out_calif,
+				precio as out_precio,
+                disponibilidad as out_dispo
+			from vw_existencias
+            where id_publicador = uuid_to_bin("',_id_publicador,'")',
+            @_categos,';'
+		);
+        prepare qry from @_search_qry;
+		execute qry;
 -- //// SUMAR INVENTARIO \\\\ --
     when ('restock') then
 		update productos set

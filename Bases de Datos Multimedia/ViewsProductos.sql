@@ -16,6 +16,7 @@ drop view if exists vw_prod_categos;
 drop view if exists vw_histo_pedidos;
 drop view if exists vw_ventas_detallada;
 drop view if exists vw_ventas_agrupada;
+drop view if exists vw_existencias;
 
 -- /////////////////////////////////////////////////
 -- //// VISTA RELACION PEDIDO PRODUCTOS SOLO ID \\\\
@@ -106,3 +107,19 @@ on prods.id_producto = rlc.id_producto
 left outer join categorias as cat
 on rlc.id_categoria = cat.id_catego
 group by cat.id_catego;
+
+-- ///////////////////////////
+-- //// VISTA EXISTENCIAS \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\
+create or replace view vw_existencias as
+select
+	prod.id_publicador as 'id_publicador',
+    prod.id_producto as 'id_prod',
+	vpc.categorias as 'categorias',
+	prod.titulo as 'titulo',
+	prod.calificacion as 'calificacion',
+	prod.precio as 'precio',
+	prod.disponibilidad as 'disponibilidad'
+from productos as prod
+left outer join vw_prod_categos as vpc
+on prod.id_producto = vpc.id_producto;

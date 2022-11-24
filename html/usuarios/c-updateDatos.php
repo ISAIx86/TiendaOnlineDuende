@@ -30,9 +30,6 @@ include_once __ROOT."html/templates/get_session.php";
                 include_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
-        
-        include __ROOT."php/models/usuario-model.php";
-        include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
         if (isset($_SESSION['user'])) {
             $controller = new UsuarioController();

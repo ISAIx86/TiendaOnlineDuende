@@ -79,6 +79,29 @@ class ProductoDAO extends DBH {
 
     }
 
+    protected function pro_restock($id, $cant) {
+
+        $this->prepareStatement('restock');
+
+        $prod = Producto::create()
+            ->setID($id)
+            ->setDisponibilidad($cant);
+
+        if (!$this->executeCall($prod)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
     // Cagetorias
     protected function rcat_add($id_prod, $id_catego) {
 
@@ -155,6 +178,26 @@ class ProductoDAO extends DBH {
                 "rs_calif"=>$rt_data[0]['out_calif']
             );
         }
+
+    }
+
+    protected function pro_getexist($id_publ, $categos) {
+
+        $this->prepareStatement('get_exist');
+
+        $prod = Producto::create()
+            ->setPublicador($id_publ)
+            ->setDescripcion($categos);
+
+        if (!$this->executeCall($prod)) {
+            return "query_error";
+        }
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
 
     }
 

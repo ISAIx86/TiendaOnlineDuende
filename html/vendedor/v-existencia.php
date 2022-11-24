@@ -13,7 +13,24 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php include_once __ROOT."html/templates/headerVendedor.php" ?>
+  <?php
+  require_once __ROOT."html/templates/headerVendedor.php";
+  require_once __ROOT."php/models/categoria-model.php";
+  require_once __ROOT."php/models/producto-model.php";
+  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+  require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+  $catcontroller = new CategoriaController();
+  $prodcontroller = new ProductoController();
+  $categos = $catcontroller->obtenerTodos();
+  $productos = array();
+  $cat = null;
+  if (isset($_GET['in_cat'])) {
+    if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
+  }
+  if (isset($_SESSION['user'])) {
+    $productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
+  }
+  ?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">
@@ -22,18 +39,20 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="row">
             <div class="col-sm-6">
               <div class = "row">
-                <div class="col-6 col-sm-6">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Todas las categorias</option>
-                    <option value="1">Computadoras</option>
-                    <option value="2">Oficina</option>
-                    <option value="3">Belleza</option>
-                  </select>
-                </div>
-                <div class="col-6 col-sm-6">
-                    <button type="button" class="btn btn-info">Filtrar</button>
-                </div>       
-              </div>      
+                <form action="v-existencia.php" method="get">
+                  <div class="col-6 col-sm-6">
+                    <select class="form-select" aria-label="Default select example" name="in_cat">
+                      <option selected value="">Todas las categorias</option>
+                      <?php foreach($categos as &$cat) { ?>
+                      <option value=<?php echo $cat['out_nombre']?>><?php echo $cat['out_nombre']?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                    <button type="submit" class="btn btn-info">Filtrar</button>
+                  </div>
+                </form>  
+              </div>
             </div>
           </div>
         </div>
@@ -44,7 +63,6 @@ include_once __ROOT."html/templates/get_session.php";
         <table class="table table-sm table-dark">
           <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Categoria</th>
               <th scope="col">Producto</th>
               <th scope="col">Calificación</th>
@@ -54,37 +72,21 @@ include_once __ROOT."html/templates/get_session.php";
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Computadoras</td>
-              <td>Computadora gamer</td>
-              <td>5</td>
-              <td>$12,500</td>
-              <td>5</td>          
+          <?php foreach($productos as &$prod) { ?>
+            <tr id="prod_row" idprod=<?php echo $prod['out_prodid']?> >
+              <td><?php echo $prod['out_categos']?></td>
+              <td><?php echo $prod['out_titulo']?></td>
+              <td><?php echo $prod['out_calif']?></td>
+              <td><?php echo $prod['out_precio']?></td>
+              <td><?php echo $prod['out_dispo']?></td>
               <td>
                 <div class="input-group mb-1">
-                <input type="text" class="form-control col-6" placeholder="Añadir" aria-label="Piezas" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary col-6" type="button" id="button-addon2">Agregar a invetario</button>
+                <input id="txt_cant" type="number" class="form-control col-6" placeholder="Añadir" aria-label="Piezas" aria-describedby="button-addon2" min="1" max="256" onKeyDown="return false">
+                <button id="btn_addex" class="btn btn-outline-secondary col-6" type="button">Agregar a inventario</button>
                 </div>  
-              </td>
-                         
+              </td>  
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Oficina</td>
-              <td>Silla</td>
-              <td>4</td>
-              <td>$4,500</td>
-              <td>13</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Belleza</td>
-              <td>Maquillaje</td>
-              <td>3</td>
-              <td>$12,500</td>
-              <td>75</td>
-            </tr>
+          <?php } ?>
           </tbody>
         </table>
       </div>
@@ -94,6 +96,8 @@ include_once __ROOT."html/templates/get_session.php";
   <?php include __ROOT."html/templates/footer.php" ?>
 
   <script src="../../js/bootstrap.bundle.js"></script>
+  <script src="../../js/jquery-3.6.1.js"></script>
+  <script src="../../js/existencias.js"></script>
 
 </body>
 </html>

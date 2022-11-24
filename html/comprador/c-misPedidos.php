@@ -16,7 +16,7 @@ include_once __ROOT."html/templates/get_session.php";
 
   <!-- Header -->
   <?php
-  require_once __ROOT."html/templates/headerVendedor.php";
+  require_once __ROOT."html/templates/headerComprador.php";
   require_once __ROOT."php/models/categoria-model.php";
   require_once __ROOT."php/models/pedido-model.php";
   require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";

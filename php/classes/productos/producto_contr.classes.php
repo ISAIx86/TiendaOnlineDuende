@@ -69,6 +69,23 @@ class ProductoController extends ProductoDAO {
         return $this->cat_baja($id);
     }
 
+    public function añadirStock($id_prod, $cant) {
+        if (empty($id_prod)) {
+            return "uncaptured_id";
+        }
+        if (empty($cant)) {
+            return "empty_inputs";
+        }
+        return $this->pro_restock($id_prod, $cant);
+    }
+
+    public function existencias($id_publicador, $categos) {
+        if (empty($id_publicador)) {
+            return "uncaptured_id";
+        }
+        return $this->pro_getexist($id_publicador, $categos);
+    }
+
     public function obtenerProducto($id) {
         if (empty($id)) {
             return "uncaptured_id";
