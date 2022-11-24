@@ -244,7 +244,7 @@ class UsuarioDAO extends DBH {
         $this->clearStatement();
 
         if ($count == 0) {
-            return false;
+            return "not_aviable";
         }
         else return true;
 
@@ -267,7 +267,7 @@ class UsuarioDAO extends DBH {
         $this->clearStatement();
 
         if ($count == 0) {
-            return false;
+            return "not_aviable";
         }
         else return true;
 

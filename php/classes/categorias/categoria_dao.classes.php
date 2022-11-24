@@ -124,6 +124,24 @@ class CategoriaDAO extends DBH {
         
     }
 
+    protected function cat_all() {
+
+        $this->prepareStatement('all_cat');
+
+        $cat = Categoria::create();
+
+        if(!$this->executeCall($cat)) {
+            return "query_error";
+        }
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
     protected function cat_busqueda($text) {
 
         $this->prepareStatement('search_text');
@@ -148,6 +166,7 @@ class CategoriaDAO extends DBH {
         }
 
     }
+
     protected function get_name() {
 
         $this->prepareStatement('get_name');

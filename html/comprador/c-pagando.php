@@ -14,13 +14,41 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
     <!-- Header -->
-    <?php include __ROOT."html/templates/headerComprador.php"?>
+    <?php
+    include __ROOT."html/templates/headerComprador.php";
+    require_once __ROOT."php/models/usuario-model.php";
+    require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+    $result = array();
+    if (isset($_SESSION['user'])) {
+        $controller = new UsuarioController();
+        $result = $controller->listaCarrito($_SESSION['user']['ID']);
+    }
+    ?>
     <!-- Container -->
     <div class = "container" id = "pagina">
         <div class="container">
             <ul class="list-group">
                 <div id="lst_carrito">
-
+                <?php foreach($result as &$prod) {
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src=<?php echo $imageSrc ?> class="d-block w-100" alt="...">
+                            </div>
+                            <div class="col-8">
+                                <div class="fw-bold"><?php echo $prod['rs_titulo']?></div>
+                                <h6>$<?php echo $prod['rs_precio']?></h6>
+                            </div>
+                            <div id="cant_control" class="col-2">
+                            <span id="lbl_cant" class="badge bg-primary rounded-pill">Unidades: <?php echo $prod['rs_cantidad']?></span>
+                            </br>
+                            <span class="badge bg-primary rounded-pill">Subtotal: $<?php echo $prod['rs_total']?></span>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
                 </div>
             </ul>
             <div class = "row">
@@ -106,7 +134,11 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class = "row">
                                 <h1></h1>
                                 <span class="badge bg-secondary rounded-pill">Total a pagar</span>
-                                <span id="lbl_total" class="badge bg-info rounded-pill">$0</span>
+                                <?php if ($carritoTot) { ?>
+                                <span id="lbl_total" class="badge bg-primary rounded-pill"><?php echo "$$carritoTot" ?></span>
+                                <?php } else { ?>
+                                <span id="lbl_total" class="badge bg-primary rounded-pill">$0</span>
+                                <?php } ?>
                             </div>
                             <div class="row">
                                 <h1></h1>

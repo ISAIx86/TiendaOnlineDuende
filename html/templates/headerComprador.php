@@ -44,6 +44,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
+                <li><a class="dropdown-item" href="../comprador/c-misPedidos.php">Mis pedidos</a></li>
                 <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
               </ul>
             </div>

@@ -30,22 +30,24 @@ include_once __ROOT."html/templates/get_session.php";
     <div class="cointainer">
       <ul class="list-group">
         <div id="lst_carrito">
-        <?php foreach ($result as &$prod) { ?>
+        <?php foreach ($result as &$prod) {
+            $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+        ?>
           <li id="emt-list" prodid=<?php echo $prod['rs_id'] ?> class="list-group-item d-flex justify-content-between align-items-start">
             <div class="row">
               <div class="col-2">
-                <img src="../../<?php echo $prod['rs_img'] ?>" class="d-block w-100" alt="...">
+                <img src=<?php echo $imageSrc?> class="d-block w-100" alt="...">
               </div>
               <div class="col-8">
                 <div class="fw-bold"><?php echo $prod['rs_titulo'] ?></div>
-                <h6><?php echo "$".$prod['rs_precio'] ?></h6>
+                <h6 id="lbl_price" value=<?php echo $prod['rs_precio'] ?>><?php echo "$".$prod['rs_precio'] ?></h6>
                 <span class="badge bg-primary rounded-pill"><?php echo $prod['rs_dispo'] ?> Disponibles</span>
                 </br>
                 <button>Guardar en lista</button>
                 <button>Ver productos similares</button>
               </div>
               <div id="cant_control" class="col-2">
-                <span class="badge bg-primary rounded-pill">$<?php echo $prod['rs_total'] ?></span>
+                <span id="lbl_subtotal" class="badge bg-primary rounded-pill">$<?php echo $prod['rs_total'] ?></span>
                 </br>
                 <button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>
                 <span id="lbl_cant" class="badge bg-primary rounded-pill"><?php echo $prod['rs_cantidad'] ?></span>
@@ -65,7 +67,7 @@ include_once __ROOT."html/templates/get_session.php";
               <img src="../../resources/carrito.PNG" class="d-block w-100" alt="...">
             </div>
             <div class="col-2">
-            <?php if ($carritoTot) { ?>
+              <?php if ($carritoTot) { ?>
               <span id="lbl_total" class="badge bg-primary rounded-pill"><?php echo "$$carritoTot" ?></span>
               <?php } else { ?>
               <span id="lbl_total" class="badge bg-primary rounded-pill">$0</span>

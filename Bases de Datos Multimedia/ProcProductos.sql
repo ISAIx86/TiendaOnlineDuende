@@ -85,6 +85,12 @@ case (_proc)
 		update productos set
 			disponibilidad = disponibilidad + _disponibilidad
 		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+-- //// OBTENER DISPONIBILIDAD \\\\ --
+	when ('get_stock') then
+		select
+			disponibilidad as 'out_dispo'
+		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+-- //// OBTENER INFORMACIÓN DE PRODUCTO \\\\ --
 	when ('get_data') then
 		select
 			bin_to_uuid(id_producto) as 'out_id',
@@ -139,7 +145,7 @@ case (_proc)
 	when ('get_vendidos') then
 		select
             bin_to_uuid(p.id_producto) as 'out_id',
-            m.contenido_dir as 'out_img',
+            m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
             p.precio as 'out_precio'
@@ -154,7 +160,7 @@ case (_proc)
 	when ('get_vistos') then
 		select
 			bin_to_uuid(p.id_producto) as 'out_id',
-            m.contenido_dir as 'out_img',
+            m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
             p.precio as 'out_precio'
@@ -169,7 +175,7 @@ case (_proc)
     when ('get_recomend') then
 		select
 			bin_to_uuid(p.id_producto) as 'out_id',
-            m.contenido_dir as 'out_img',
+            m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
             p.precio as 'out_precio'

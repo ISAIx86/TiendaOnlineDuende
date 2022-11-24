@@ -6,7 +6,7 @@ class PedidosDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Pedidos('".$proc."', ?, ?, ?, ?, ?)");
+        $this->setPrepareStatement("call sp_Pedidos('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?)");
     }
 
     private function executeCall($data) {
@@ -15,7 +15,10 @@ class PedidosDAO extends DBH {
             $data->getUsuarioID(),
             $data->getDomicilioID(),
             $data->id_producto,
-            $data->cantidad
+            $data->cantidad,
+            $data->categos,
+            $data->startdate,
+            $data->enddate
         ));
     }
 
@@ -102,6 +105,69 @@ class PedidosDAO extends DBH {
         }
         else return true;
         
+    }
+
+    protected function ped_get_histo($id_usu, $catego, $start_date, $end_date) {
+
+        $this->prepareStatement('get_histo_peds');
+
+        $ped = Pedido::create()->setUsuarioID($id_usu);
+        $ped->categos = $catego;
+        $ped->startdate = $start_date;
+        $ped->enddate = $end_date;
+
+        if (!$this->executeCall($ped)) {
+            return "query_error";
+        }
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
+    protected function ped_ventas_det($id_usu, $catego, $start_date, $end_date) {
+
+        $this->prepareStatement('get_v_detail');
+
+        $ped = Pedido::create()->setUsuarioID($id_usu);
+        $ped->categos = $catego;
+        $ped->startdate = $start_date;
+        $ped->enddate = $end_date;
+
+        if (!$this->executeCall($ped)) {
+            return "query_error";
+        }
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
+    protected function ped_ventas_gro($id_usu, $catego, $start_date, $end_date) {
+
+        $this->prepareStatement('get_v_group');
+
+        $ped = Pedido::create()->setUsuarioID($id_usu);
+        $ped->categos = $catego;
+        $ped->startdate = $start_date;
+        $ped->enddate = $end_date;
+
+        if (!$this->executeCall($ped)) {
+            return "query_error";
+        }
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
     }
 
 }

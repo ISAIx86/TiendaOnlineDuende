@@ -76,6 +76,13 @@ class ProductoController extends ProductoDAO {
         return $this->pro_getdata($id);
     }
 
+    public function obtenerStock($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        return $this->pro_getstock($id);
+    }
+
 }
 
 ?>

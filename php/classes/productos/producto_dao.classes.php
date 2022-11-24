@@ -158,6 +158,30 @@ class ProductoDAO extends DBH {
 
     }
 
+    protected function pro_getstock($id) {
+
+        $this->prepareStatement('get_data');
+
+        $prod = Producto::create()->setID($id);
+
+        if (!$this->executeCall($prod)) {
+            return "query_error";
+        }
+
+        $count = $this->countOfRows();
+        $rt_data = $this->fetchData();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else {
+            return $rt_data[0]['out_dispo'];
+        }
+
+    }
+
 }
 
 ?>

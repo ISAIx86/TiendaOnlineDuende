@@ -13,6 +13,18 @@ class PedidosController extends PedidosDAO {
         } else return false;
     }
 
+    private function prodExisCheck($produs) {
+        foreach ($produs as &$prod) {
+            if (!$this->ped_checar_prod($prod['rs_id'])) {
+                return "product_no_exists";
+            }
+            if (!$this->ped_checar_exis($prod['rs_id'])) {
+                return "product_no_disp";
+            }
+        }
+        return true;
+    }
+
     // Métodos fuertes
     public function registrarPedido(Pedido $ped, $produs) {
         $exist_result = $this->prodExisCheck($produs);
@@ -29,16 +41,25 @@ class PedidosController extends PedidosDAO {
         return true;
     }
 
-    private function prodExisCheck($produs) {
-        foreach ($produs as &$prod) {
-            if (!$this->ped_checar_prod($prod['rs_id'])) {
-                return "product_no_exists";
-            }
-            if (!$this->ped_checar_exis($prod['rs_id'])) {
-                return "product_no_disp";
-            }
+    public function histoPedidos($id_usu, $catego, $start_date, $end_date) {
+        if (empty($id_usu)) {
+            return null;
         }
-        return true;
+        return $this->ped_get_histo($id_usu, $catego, $start_date, $end_date);
+    }
+
+    public function ventasDetallada($id_usu, $catego, $start_date, $end_date) {
+        if (empty($id_usu)) {
+            return null;
+        }
+        return $this->ped_ventas_det($id_usu, $catego, $start_date, $end_date);
+    }
+
+    public function ventasAgrupada($id_usu, $catego, $start_date, $end_date) {
+        if (empty($id_usu)) {
+            return null;
+        }
+        return $this->ped_ventas_gro($id_usu, $catego, $start_date, $end_date);
     }
 
 }

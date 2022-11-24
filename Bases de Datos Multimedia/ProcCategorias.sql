@@ -68,6 +68,11 @@ case (_proc)
 			from categorias
 		where nombre = _nombre;
 -- /// BUSCAR POR TEXTO \\\\ --
+	when ('all_cat') then
+		select
+			nombre as 'out_nombre'
+        from categorias;
+-- /// BUSCAR POR TEXTO \\\\ --
 	when ('search_text') then
 		select
 			bin_to_uuid(id_catego) as 'ID',
@@ -90,4 +95,3 @@ end case;
 	
 end
 $$ DELIMITER ;
-SELECT * FROM categorias;

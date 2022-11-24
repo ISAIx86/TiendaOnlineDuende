@@ -95,17 +95,19 @@ include_once __ROOT."html/templates/get_session.php";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                   </div>
                   <div class="carousel-inner" id="disp_recomend">
-                  <?php foreach($d_recomend as &$prod) { ?>
+                  <?php foreach($d_recomend as &$prod) {
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                  ?>
                     <div class="carousel-item active">
                       <div class = "row">
                         <div class = "col-4">
                           <div class="card" style="width: 18rem;">
-                            <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                            <img src=<?php echo $imageSrc?> class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
                               <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
                               <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
-                              <a href="../producto/c-producto.php?prod='<?php echo $prod['rs_id'] ?>'" class="btn btn-primary">Ver detalles</a>
+                              <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
                       </div>
@@ -138,12 +140,14 @@ include_once __ROOT."html/templates/get_session.php";
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                   </div>
                   <div class="carousel-inner" id="disp_vistos">
-                  <?php foreach($d_vistos as &$prod) { ?>
+                  <?php foreach($d_vistos as &$prod) {
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                  ?>
                     <div class="carousel-item active">
                       <div class = "row">
                         <div class = "col-4">
                           <div class="card" style="width: 18rem;">
-                            <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                            <img src=<?php echo $imageSrc?> class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
                               <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
@@ -181,17 +185,19 @@ include_once __ROOT."html/templates/get_session.php";
                       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner" id="disp_vendidos">
-                    <?php foreach($d_vendidos as &$prod) { ?>
+                    <?php foreach($d_vendidos as &$prod) {
+                      $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                    ?>
                       <div class="carousel-item active">
                         <div class = "row">
                           <div class = "col-4">
                             <div class="card" style="width: 18rem;">
-                              <img src="../../<?php echo $prod['rs_img'] ?>" class="card-img-top" alt="...">
+                              <img src=<?php echo $imageSrc ?> class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
                                 <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
                                 <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
-                                <a href="../producto/c-producto.php?prod='<?php echo $prod['rs_id'] ?>'" class="btn btn-primary">Ver detalles</a>
+                                <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
                               </div>
                             </div>
                         </div>

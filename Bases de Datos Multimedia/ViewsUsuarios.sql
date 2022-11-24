@@ -17,7 +17,7 @@ create or replace view vw_carrito as
 select
 	rlc.id_usuario as 'id_usuario',
     rlc.id_producto as 'id_producto',
-    mult.contenido_dir as 'imagen',
+    mult.contenido as 'imagen',
 	prod.titulo as 'titulo',
     prod.precio as 'precio',
     rlc.cantidad as 'cantidad',

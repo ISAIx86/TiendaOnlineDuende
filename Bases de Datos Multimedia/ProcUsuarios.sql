@@ -153,22 +153,25 @@ case (_proc)
         where id_usuario = uuid_to_bin(_id_usuario);
 -- //// AÑADIR A CARRITO \\\\ --
 	when ('add_carrito') then
-		replace into rel_carrito (
-			id_usuario,
-            id_producto,
-            cantidad
-        ) values (
-			uuid_to_bin(_id_usuario),
-			uuid_to_bin(_id_producto),
-            _cantidad
-        );
+		if (_cantidad <= (select disponibilidad from productos where id_producto = uuid_to_bin(_id_producto))) then
+			replace into rel_carrito (
+				id_usuario,
+				id_producto,
+				cantidad
+			) values (
+				uuid_to_bin(_id_usuario),
+				uuid_to_bin(_id_producto),
+				_cantidad
+			);
+        end if;
 -- //// MODIFICAR CANTIDAD \\\\ --
 	when ('set_carrito') then
+		if (_cantidad <= (select disponibilidad from productos where id_producto = uuid_to_bin(_id_producto))) then
 			update rel_carrito set
 				cantidad = ifnull(_cantidad, cantidad)
 			where id_usuario = uuid_to_bin(_id_usuario) and
 				  id_producto = uuid_to_bin(_id_producto);
-			select "updated" as 'result';
+		end if;
 -- //// QUITAR PRODUCTO DEL CARRITO \\\\ --
 	when ('pop_carrito') then
 		delete from rel_carrito

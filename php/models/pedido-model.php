@@ -11,6 +11,9 @@ class Pedido {
     public $cantidad = null;
     public $precio = null;
     public $subtotal = null;
+    public $categos = null;
+    public $startdate = null;
+    public $enddate = null;
 
     // Building
     public static function create() {

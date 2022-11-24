@@ -9,62 +9,101 @@ include_once __ROOT."html/templates/get_session.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mi lista</title>
   <link rel="stylesheet" href="../../css/bootstrap.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <!-- <link rel="stylesheet" href="./css/Nuevo.css"> -->
 </head>
 <body>
 
   <!-- Header -->
-  <?php include __ROOT."html/templates/headerComprador.php"?>
+  <?php
+  require_once __ROOT."html/templates/headerVendedor.php";
+  require_once __ROOT."php/models/categoria-model.php";
+  require_once __ROOT."php/models/pedido-model.php";
+  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+  require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
+  $catcontroller = new CategoriaController();
+  $pedcontroller = new PedidosController();
+  $categos = $catcontroller->obtenerTodos();
+  $pedidos = array();
+  $cat = null;
+  $stdt = null;
+  $eddt = null;
+  if (isset($_GET['in_cat'])) {
+    if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
+  }
+  if (isset($_GET['in_start'])) {
+    if ($_GET['in_start'] != "") $stdt = $_GET['in_start'];
+  } 
+  if (isset($_GET['in_end'])) {
+    if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
+  } 
+  if (isset($_SESSION['user'])) {
+    $pedidos = $pedcontroller->histoPedidos($_SESSION['user']['ID'], $cat, $stdt, $eddt);
+  }
+  ?>
   <!-- Container -->
   <div class = "container" id = "pagina">
+  <div class = "container">
+      <div class = "row">
+        <div class="container text-center">
+          <div class="row">
+            <form action='c-misPedidos.php' method='get'>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-6 col-sm-6">
+                    <label for="birthday">Fecha inicial:</label>
+                    <input type="date" name="in_start">
+                  </div>
+                  <div class="col-6 col-sm-6">
+                    <label for="birthday">Fecha final:</label>
+                    <input type="date" name="in_end">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class = "row">
+                  <div class="col-6 col-sm-6">
+                    <select class="form-select" name="in_cat" aria-label="Default select example">
+                      <option selected value="">Todas las categorias</option>
+                      <?php foreach($categos as &$cat) { ?>
+                      <option value=<?php echo $cat['out_nombre']?>><?php echo $cat['out_nombre']?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                  <div class="col-6 col-sm-6">
+                      <button type="submit" class="btn btn-info">Filtrar</button>
+                  </div>       
+                </div>      
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <h1>Mis pedidos</h1>
     <div class="cointainer">
-      <ul class="list-group">
+      <ul id="disp_pedidos" class="list-group">
+      <?php foreach($pedidos as &$ped) {
+        $imageSrc = '"data:image/jpg;base64,'.base64_encode($ped['out_img']).'"';
+      ?>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class = "row">
             <div class = "col-2">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
+              <img src=<?php echo $imageSrc?> class="d-block w-100" alt="...">
             </div>
             <div class = "col-8">
-              <div class="fw-bold">Computadora con lucecitas</div>
-              <h6>13/9/2022</h6>
-              <h6>Calificación: 5</h6>                     
+              <p>Folio: <?php echo $ped['out_folio']?></p>
+              <div class="fw-bold"><?php echo $ped['out_prod']?></div>
+              <h6><?php echo $ped['out_fecha']?></h6>
+              <p><?php echo $ped['out_catego']?></p>
+              <h6>Calificación: <?php echo $ped['out_calif']?></h6>                     
             </div>
             <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$14,000</span>
+              <span class="badge bg-primary rounded-pill">$<?php echo $ped['out_precio']?></span>
             </div>
           </div>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class = "row">
-            <div class = "col-2">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class = "col-8">
-              <div class="fw-bold">Computadora con lucecitas</div>
-              <h6>13/9/2022</h6>
-              <h6>Calificación: 5</h6>                     
-            </div>
-            <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$14,000</span>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class = "row">
-            <div class = "col-2">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class = "col-8">
-              <div class="fw-bold">Computadora con lucecitas</div>
-              <h6>13/9/2022</h6>
-              <h6>Calificación: 5</h6>
-            </div>
-            <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$14,000</span>
-            </div>
-          </div>
-        </li>
+      <?php } ?>
       </ul>
     </div>
   </div>
@@ -74,4 +113,3 @@ include_once __ROOT."html/templates/get_session.php";
   <script src="../../js/bootstrap.bundle.js"></script>
 
 </body>
-</html>

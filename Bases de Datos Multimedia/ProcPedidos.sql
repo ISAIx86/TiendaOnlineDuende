@@ -24,7 +24,10 @@ create procedure sp_Pedidos (
     in _id_usuario varchar(36),
     in _domicilio_entr varchar(36),
     in _id_producto varchar(36),
-    in _cantidad int
+    in _cantidad int,
+    in _categos varchar(256),
+    in _init_date timestamp,
+    in _final_date timestamp
 )
 begin
 declare _precio decimal(8,2);
@@ -76,6 +79,92 @@ case (_proc)
 			disponibilidad as "result"
 		from productos
         where id_producto = uuid_to_bin(_id_producto);
+-- //// OBTENER HISTORIAL DE PEDIDOS \\\\ --
+	when ('get_histo_peds') then
+		set @_start_date = "";
+        set @_end_date = "";
+        set @_categos = "";
+        if (_categos is not null) then
+			set @_categos = concat(' and categoria like "%', _categos, '%"');
+		end if;
+        if (_init_date is not null) then
+			set @_start_date = concat(' and fecha_compra >= ', '"', _init_date, '"');
+		end if;
+        if (_final_date is not null) then
+			set @_end_date = concat(' and fecha_compra <= ', '"', _final_date, '"');
+		end if;
+		set @_search_qry = concat(
+			'select
+				folio as out_folio,
+                imagen as out_img,
+				fecha_compra as out_fecha,
+				categoria as out_catego,
+				producto as out_prod,
+				calificacion as out_calif,
+				precio as out_precio
+			from vw_histo_pedidos
+            where id_usuario = uuid_to_bin("',_id_usuario,'")',
+            @_categos, @_start_date, @_end_date,
+            'order by fecha_compra desc;'
+		);
+        prepare qry from @_search_qry;
+		execute qry;
+-- //// OBTENER HISTORIAL DE PEDIDOS \\\\ --
+	when ('get_v_detail') then
+		set @_start_date = "";
+        set @_end_date = "";
+        set @_categos = "";
+        if (_categos is not null) then
+			set @_categos = concat(' and categorias like "%', _categos, '%"');
+		end if;
+        if (_init_date is not null) then
+			set @_start_date = concat(' and fecha_compra >= ', '"', _init_date, '"');
+		end if;
+        if (_final_date is not null) then
+			set @_end_date = concat(' and fecha_compra <= ', '"', _final_date, '"');
+		end if;
+		set @_search_qry = concat(
+			'select
+				fecha_compra as out_fecha,
+				categorias as out_catego,
+				producto as out_prod,
+				calificacion as out_calif,
+				precio as out_precio,
+                disponibilidad as out_dispo
+			from vw_ventas_detallada
+            where id_publicador = uuid_to_bin("',_id_usuario,'")',
+            @_categos, @_start_date, @_end_date,
+            'order by fecha_compra desc;'
+		);
+        prepare qry from @_search_qry;
+		execute qry;
+-- //// OBTENER HISTORIAL DE PEDIDOS \\\\ --
+	when ('get_v_group') then
+		set @_start_date = "";
+        set @_end_date = "";
+        set @_categos = "";
+        if (_categos is not null) then
+			set @_categos = concat(' and categorias like "%', _categos, '%"');
+		end if;
+        if (_init_date is not null) then
+			set @_start_date = concat(' and fecha_compra >= ', '"', _init_date, '"');
+		end if;
+        if (_final_date is not null) then
+			set @_end_date = concat(' and fecha_compra <= ', '"', _final_date, '"');
+		end if;
+		set @_search_qry = concat(
+			'select
+				month as out_month,
+                year as out_year,
+				categorias as out_catego,
+				ventas as out_ventas
+			from vw_ventas_agrupada
+            where id_publicador = uuid_to_bin("',_id_usuario,'")',
+            @_categos, @_start_date, @_end_date,
+            'order by month, year desc;'
+		);
+        prepare qry from @_search_qry;
+		execute qry;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

@@ -56,6 +56,10 @@ class CategoriaController extends CategoriaDAO {
         return $this->cat_authorize($id, $auto);
     }
 
+    public function obtenerTodos() {
+        return $this->cat_all();
+    }
+
     public function buscarPorNombre($texto) {
         if (empty($texto)) {
             return "empty";

@@ -11,15 +11,22 @@ if (isset($_SESSION['user'])) {
         $controller = new UsuarioController();
         $result = $controller->modifCantCarrito($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant']);
         if (gettype($result) == "string") {
-            echo json_encode(array('result'=>"error", 'reason'=>$result));
-            exit();
+            if ($result == "not_aviable") {
+                $total = $controller->totalCarrito($_SESSION['user']['ID']);
+                echo json_encode(array('result'=>"error", 'reason'=>$result, 'total'=>$total));
+                exit();
+            } else {
+                echo json_encode(array('result'=>"error", 'reason'=>$result));
+                exit();
+            }
         } else if (!$result) {
             echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
             exit();
+        } else {
+            $result = $controller->totalCarrito($_SESSION['user']['ID']);
+            echo json_encode(array('result'=>"success", 'total'=>$result));
+            exit();
         }
-        $result = $controller->totalCarrito($_SESSION['user']['ID']);
-        echo json_encode(array('result'=>"success", 'total'=>$result));
-        exit();
     }
 }
 

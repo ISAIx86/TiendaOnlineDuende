@@ -11,8 +11,13 @@ if (isset($_SESSION['user'])) {
         $controller = new UsuarioController();
         $result = $controller->añadirACarrito($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant']);
         if (gettype($result) == "string") {
-            echo json_encode(array('result'=>"error", 'reason'=>$result));
-            exit();
+            if ($result == "not_aviable") {
+                echo json_encode(array('result'=>"error", 'reason'=>$result));
+                exit();
+            } else {
+                echo json_encode(array('result'=>"error", 'reason'=>$result));
+                exit();
+            }
         } else if (!$result) {
             echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
             exit();

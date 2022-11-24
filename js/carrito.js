@@ -64,13 +64,13 @@ $(document).on('click', '#btn_menos', e => {
             return;
         }
         if (data.result == "error") {
-            $('#lbl_total').html('$'+data.total);
-            $('#hdr_carrito').html('$'+data.total);
             setNumber($(e.target), cantidad);
+            setSubtotal($(e.target), cantidad);
         } else {
             $('#lbl_total').html('$'+data.total);
             $('#hdr_carrito').html('$'+data.total);
             setNumber($(e.target), nueva_cant);
+            setSubtotal($(e.target), nueva_cant);
         }
     });
 });
@@ -94,13 +94,13 @@ $(document).on('click', '#btn_mas', e => {
             return;
         }
         if (data.result == "error") {
-            $('#lbl_total').html('$'+data.total);
-            $('#hdr_carrito').html('$'+data.total);
             setNumber($(e.target), cantidad);
+            setSubtotal($(e.target), cantidad);
         } else {
             $('#lbl_total').html('$'+data.total);
             $('#hdr_carrito').html('$'+data.total);
             setNumber($(e.target), nueva_cant);
+            setSubtotal($(e.target), nueva_cant);
         }
     });
 });
@@ -130,6 +130,11 @@ function quitarProductoDeLista(producto_id) {
 
 function setNumber(element, cant) {
     element.parents('div#cant_control').children('span#lbl_cant').html(cant);
+}
+
+function setSubtotal(element, cant) {
+    const price = parseFloat(element.parents('li#emt-list').find('h6#lbl_price').attr('value'));
+    element.parents('div#cant_control').children('span#lbl_subtotal').html('$'+(price*cant).toFixed(2));
 }
 
 /*

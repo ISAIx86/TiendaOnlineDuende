@@ -28,7 +28,9 @@ $(document).ready(function (){
         }
         if (data.result == "error") {
             switch(data.reason) {
-                
+                case "not_aviable": {
+                    alert("No hay suficientes productos en Stock.");
+                }
             }
         } else {
             alert("Producto añadido al carrito.");

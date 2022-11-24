@@ -99,7 +99,7 @@ include_once __ROOT."html/templates/get_session.php";
                 } else if ($file['out_tipo'] == 'v') {
               ?>
                   <div class="carousel-item">
-                    <video src=<?php echo $file['out_dir'] ?> controls autoplay> Vídeo no es soportado... </video>
+                    <video src="../../<?php echo $file['out_dir']?>" controls autoplay> Vídeo no es soportado... </video>
                   </div>
               <?php
                 } 
