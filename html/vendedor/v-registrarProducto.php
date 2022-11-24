@@ -17,7 +17,7 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
-      <div class = "col-6">
+      <div class = "col-sm-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
@@ -49,7 +49,7 @@ include_once __ROOT."html/templates/get_session.php";
           </div>
         </div>
       </div>
-      <div class = "col-6">
+      <div class = "col-sm-6">
         <form id="form_producto">
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">

@@ -114,7 +114,6 @@ background-color: #eee; /* Add a hover effect to all links, except for headers *
 }
 #ico-header{
     position: relative;
-    align-items: center;
     bottom: 0;
     left: 0;
 

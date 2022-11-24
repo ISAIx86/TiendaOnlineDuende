@@ -20,48 +20,55 @@ include_once __ROOT."html/templates/get_session.php";
     <h1>Lista de Favoritos</h1>
     <div class="cointainer">
       <ul class="list-group">  
+
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class = "row">
-            <div class = "col-2">
+            <div class = "col-sm-2">
               <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
             </div>
-            <div class = "col-8">
-              <div class="fw-bold">Computadora con lucecitas</div>
-              <h6>$ 14,000</h6>                   
-            </div>
-            <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$14,000</span>
-              <form>
-                <button type="button" class="btn btn-danger">Quitar</button>
-              </form>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class = "row">
-            <div class = "col-2">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class = "col-8">
+            <div class = "col-sm-8">
               <div class="fw-bold">Computadora con lucecitas</div>
               <h6>$ 14,000</h6>
-              <span class="badge bg-primary rounded-pill">10 disponibles</span>                   
+              <div class = "row">
+              <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-outline-warning" data-toggle="button" aria-pressed="false" autocomplete="off">Agregar a carrito</button>
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Quitar de la lista</button>
+                </div>
+                <div class="col-sm-3"></div>  
+              </div>                   
             </div>
-            <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$14,000</span>
-              <form>
-                <button type="button" class="btn btn-danger">Quitar</button>
-              </form>
+            <div class = "col-sm-2">
             </div>
           </div>
         </li>
+
         <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Nuttella</div>
-            Content for list item
+          <div class = "row">
+            <div class = "col-sm-2">
+              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
+            </div>
+            <div class = "col-sm-8">
+              <div class="fw-bold">Computadora con lucecitas</div>
+              <h6>$ 14,000</h6>
+              <div class = "row">
+              <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-outline-warning" data-toggle="button" aria-pressed="false" autocomplete="off">Agregar a carrito</button>
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Quitar de la lista</button>
+                </div>
+                <div class="col-sm-3"></div>  
+              </div>                   
+            </div>
+            <div class = "col-sm-2">
+            </div>
           </div>
-          <span class="badge bg-primary rounded-pill">14</span>
         </li>
+        
       </ul>
     </div>    
   </div>
