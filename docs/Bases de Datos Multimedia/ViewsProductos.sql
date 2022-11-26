@@ -53,7 +53,9 @@ select
     pct.categorias as 'categoria',
     prods.titulo as 'producto',
     prods.calificacion as 'calificacion',
-    prods.precio as 'precio'
+    prods.precio as 'precio',
+    rpp.cantidad as 'cantidad',
+    rpp.subtotal as 'subtotal'
 from pedidos as peds
 left outer join rel_ped_prod as rpp
 on rpp.folio_pedido = peds.folio
@@ -76,7 +78,7 @@ select
     pct.categorias as 'categorias',
     prods.titulo as 'producto',
     prods.calificacion as 'calificacion',
-    rpp.precio as 'precio',
+    rpp.subtotal as 'precio',
     prods.disponibilidad as 'disponibilidad'
 from rel_ped_prod as rpp
 left outer join pedidos as peds
@@ -96,7 +98,7 @@ select
 	month(peds.fecha_compra) as 'month',
     year(peds.fecha_compra) as 'year',
     cat.nombre as 'categorias',
-    sum(rpp.precio) as 'ventas'
+    sum(rpp.subtotal) as 'ventas'
 from rel_ped_prod as rpp
 left outer join pedidos as peds
 on rpp.folio_pedido = peds.folio
