@@ -16,12 +16,10 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Header -->
     <?php
     include __ROOT."html/templates/headerComprador.php";
-    require_once __ROOT."php/models/usuario-model.php";
-    require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-    $result = array();
+    $productos = array();
     if (isset($_SESSION['user'])) {
-        $controller = new UsuarioController();
-        $result = $controller->listaCarrito($_SESSION['user']['ID']);
+        $controller = new CarritoController();
+        $productos = $controller->listaCarrito($_SESSION['user']['ID']);
     }
     ?>
     <!-- Container -->
@@ -29,8 +27,8 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="container">
             <ul class="list-group">
                 <div id="lst_carrito">
-                <?php foreach($result as &$prod) {
-                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                <?php foreach($productos as &$prod) {
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
                 ?>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="row">
@@ -38,13 +36,13 @@ include_once __ROOT."html/templates/get_session.php";
                                 <img src=<?php echo $imageSrc ?> class="d-block w-100" alt="...">
                             </div>
                             <div class="col-8">
-                                <div class="fw-bold"><?php echo $prod['rs_titulo']?></div>
-                                <h6>$<?php echo $prod['rs_precio']?></h6>
+                                <div class="fw-bold"><?php echo $prod['out_titulo']?></div>
+                                <h6>$<?php echo $prod['out_precio']?></h6>
                             </div>
                             <div id="cant_control" class="col-2">
-                            <span id="lbl_cant" class="badge bg-primary rounded-pill">Unidades: <?php echo $prod['rs_cantidad']?></span>
+                            <span id="lbl_cant" class="badge bg-primary rounded-pill">Unidades: <?php echo $prod['out_cantidad']?></span>
                             </br>
-                            <span class="badge bg-primary rounded-pill">Subtotal: $<?php echo $prod['rs_total']?></span>
+                            <span class="badge bg-primary rounded-pill">Subtotal: $<?php echo $prod['out_total']?></span>
                             </div>
                         </div>
                     </li>
@@ -143,7 +141,9 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class="row">
                                 <h1></h1>
                                 <div class = "col-12">
-                                    <span id="btn_pagar" class="btn text-bg-success">Pagar</span>
+                                    <form action='../../php/includes/pedidos/payRequest.php' method='post'>
+                                        <button type="submit" class="btn text-bg-success">Pagar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -156,8 +156,6 @@ include_once __ROOT."html/templates/get_session.php";
     <?php include __ROOT."html/templates/footer.php"?>
 
     <script src="../../js/bootstrap.bundle.js"></script>
-    <script src="../../js/jquery-3.6.1.js"></script>
-    <script src="../../js/pagando.js"></script>
 
 </body>
 </html>

@@ -3,11 +3,11 @@ $(document).ready(function() {
 
     $('#form_login').submit( e => {
         e.preventDefault();
-        if (!checkCorrectInputs($('#form_login'))) {
+        if (!checkCorrectInputs($(e.target))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
-        let formdata = new FormData($('#form_login')[0]);
+        let formdata = new FormData($(e.target)[0]);
         formdata.append('submit', 1);
         $.ajax({
             url: '../../php/includes/usuarios/login_inc.php',
@@ -106,11 +106,11 @@ $(document).ready(function() {
 
     $('#form_registro_upd').submit( e => {
         e.preventDefault();
-        if (!checkCorrectInputs($('#form_registro_upd'))) {
+        if (!checkCorrectInputs($(e.target))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
-        let formdata = new FormData($('#form_registro_upd')[0]);
+        let formdata = new FormData($(e.target)[0]);
         formdata.append('submit', 1);
         formdata.append('mode', 'data');
         $.ajax({

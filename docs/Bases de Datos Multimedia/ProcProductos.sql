@@ -1,6 +1,6 @@
 -- // FILENAME: ProcProductos.sql
 -- // Autor: Alexis Isaí Contreras Garza
--- // Desc: Procedimientos para los domicilios.
+-- // Desc: Procedimientos para los productos.
 
 -- // UNIVERSIDAD AUTÓNOMA DE NUEVO LEÓN
 -- // FACULTAD DE CIENCIAS FÍSICO MATEMÁTICAS

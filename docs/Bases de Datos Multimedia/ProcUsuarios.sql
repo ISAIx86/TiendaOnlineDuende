@@ -33,9 +33,7 @@ create procedure sp_Usuarios (
     in _pass varchar(256),
     in _avatar blob,
     in _avatar_dir varchar(256),
-    in _autorizador varchar(36),
-    in _id_producto varchar(36),
-    in _cantidad int
+    in _autorizador varchar(36)
 )
 begin
 declare excluder int;
@@ -151,51 +149,6 @@ case (_proc)
             fecha_creacion as 'out_feccre'
         from usuarios
         where id_usuario = uuid_to_bin(_id_usuario);
--- //// AÑADIR A CARRITO \\\\ --
-	when ('add_carrito') then
-		if (_cantidad <= (select disponibilidad from productos where id_producto = uuid_to_bin(_id_producto))) then
-			replace into rel_carrito (
-				id_usuario,
-				id_producto,
-				cantidad
-			) values (
-				uuid_to_bin(_id_usuario),
-				uuid_to_bin(_id_producto),
-				_cantidad
-			);
-        end if;
--- //// MODIFICAR CANTIDAD \\\\ --
-	when ('set_carrito') then
-		if (_cantidad <= (select disponibilidad from productos where id_producto = uuid_to_bin(_id_producto))) then
-			update rel_carrito set
-				cantidad = ifnull(_cantidad, cantidad)
-			where id_usuario = uuid_to_bin(_id_usuario) and
-				  id_producto = uuid_to_bin(_id_producto);
-		end if;
--- //// QUITAR PRODUCTO DEL CARRITO \\\\ --
-	when ('pop_carrito') then
-		delete from rel_carrito
-        where id_usuario = uuid_to_bin(_id_usuario) and
-			  id_producto = uuid_to_bin(_id_producto);
--- //// LIMPIAR CARRITO \\\\ --
-	when ('clean_carrito') then
-		delete from rel_carrito
-        where id_usuario = uuid_to_bin(_id_usuario);
--- //// PRODUCTOS DEL CARRITO \\\\ --
-	when ('get_carrito') then
-		select
-			bin_to_uuid(id_producto) as 'out_id',
-            imagen as 'out_img',
-            titulo as 'out_titulo',
-            precio as 'out_precio',
-            cantidad as 'out_cantidad',
-            disponibilidad as 'out_dispo',
-            total as 'out_total'
-        from vw_carrito
-        where id_usuario = uuid_to_bin(_id_usuario);
--- //// SUMA TOTAL DEL CARRITO \\\\ --
-	when ('get_carr_tot') then
-		select fn_totalCarrito(uuid_to_bin(_id_usuario)) as 'out_total';
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

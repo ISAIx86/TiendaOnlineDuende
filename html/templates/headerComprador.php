@@ -1,7 +1,6 @@
 <?php
-require_once __ROOT."php/models/usuario-model.php";
-require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-$controller = new UsuarioController();
+require_once __ROOT."php/classes/usuarios/carrito_contr.classes.php";
+$controller = new CarritoController();
 $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 ?>
 

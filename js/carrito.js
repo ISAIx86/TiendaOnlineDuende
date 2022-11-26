@@ -5,6 +5,9 @@ $(document).ready(function (){
         if (products > 0) {
             window.location.replace("c-pagando.php");
         }
+        else {
+            alert("No hay productos en el carrito.");
+        }
     });
 
     $('#btn_clean').on('click', e => {
@@ -13,7 +16,7 @@ $(document).ready(function (){
             return;
         }
         $.ajax({
-            url: '../../php/includes/usuarios/limpiar_carrito_inc.php',
+            url: '../../php/includes/carrito/limpiar_carrito_inc.php',
             type: 'POST'
         })
         .done(response => {
@@ -51,7 +54,7 @@ $(document).on('click', '#btn_menos', e => {
         return;
     }
     $.ajax({
-        url: '../../php/includes/usuarios/cant_carrito_inc.php',
+        url: '../../php/includes/carrito/cant_carrito_inc.php',
         type: 'POST',
         data: {'in_prodid':producto_id, 'in_cant':nueva_cant}
     })
@@ -81,7 +84,7 @@ $(document).on('click', '#btn_mas', e => {
     let cantidad = parseInt($(e.target).parents('div#cant_control').children('span#lbl_cant').html());
     let nueva_cant = cantidad + 1;
     $.ajax({
-        url: '../../php/includes/usuarios/cant_carrito_inc.php',
+        url: '../../php/includes/carrito/cant_carrito_inc.php',
         type: 'POST',
         data: {'in_prodid':producto_id, 'in_cant':nueva_cant}
     })
@@ -107,7 +110,7 @@ $(document).on('click', '#btn_mas', e => {
 
 function quitarProductoDeLista(producto_id) {
     $.ajax({
-        url: '../../php/includes/usuarios/pop_carrito_inc.php',
+        url: '../../php/includes/carrito/pop_carrito_inc.php',
         type: 'POST',
         data: {'in_prodid':producto_id}
     })
@@ -136,35 +139,3 @@ function setSubtotal(element, cant) {
     const price = parseFloat(element.parents('li#emt-list').find('h6#lbl_price').attr('value'));
     element.parents('div#cant_control').children('span#lbl_subtotal').html('$'+(price*cant).toFixed(2));
 }
-
-/*
-function appendElement(prod) {
-    $('#lst_carrito').append(
-    '<li id="emt-list" prodid="'+prod.rs_id+'" class="list-group-item d-flex justify-content-between align-items-start">'+
-        '<div class="row">'+
-            '<div class="col-2">'+
-                '<img src="../../'+prod.rs_img+'" class="d-block w-100" alt="...">'+
-            '</div>'+
-            '<div class="col-8">'+
-                '<div class="fw-bold">'+prod.rs_titulo+'</div>'+
-                '<h6>$'+prod.rs_precio+'</h6>'+
-                '<span class="badge bg-primary rounded-pill">'+prod.rs_dispo+' disponibles</span>'+
-                '</br>'+
-                '<button>Guardar en lista</button>'+
-                '<button>Ver productos similares</button>'+
-            '</div>'+
-            '<div id="cant_control" class="col-2">'+
-                '<span class="badge bg-primary rounded-pill">$'+prod.rs_total+'</span>'+
-                '</br>'+
-                '<button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>'+
-                '<span id="lbl_cant" class="badge bg-primary rounded-pill">'+prod.rs_cantidad+'</span>'+
-                '<button id="btn_mas" class="btn btn-secondary btn-circle btn-sm">+</button>'+
-                '<form>'+
-                '<button id="btn_quitar" class="btn btn-danger">Quitar</button>'+
-                '</form>'+
-            '</div>'+
-        '</div>'+
-    '</li>'
-    );
-}
-*/

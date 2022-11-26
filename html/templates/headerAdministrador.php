@@ -1,7 +1,3 @@
-<?php
-require_once __ROOT."php/models/usuario-model.php";
-require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-?>
 <header>
 <div class="container text-center">
     <div class="row">

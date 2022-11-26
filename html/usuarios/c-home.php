@@ -96,7 +96,7 @@ include_once __ROOT."html/templates/get_session.php";
                   </div>
                   <div class="carousel-inner" id="disp_recomend">
                   <?php foreach($d_recomend as &$prod) {
-                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
                   ?>
                     <div class="carousel-item active">
                       <div class = "row">
@@ -104,10 +104,10 @@ include_once __ROOT."html/templates/get_session.php";
                           <div class="card" style="width: 18rem;">
                             <img src=<?php echo $imageSrc?> class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
-                              <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
-                              <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
-                              <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
+                              <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
+                              <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
+                              <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
                       </div>
@@ -141,7 +141,7 @@ include_once __ROOT."html/templates/get_session.php";
                   </div>
                   <div class="carousel-inner" id="disp_vistos">
                   <?php foreach($d_vistos as &$prod) {
-                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
                   ?>
                     <div class="carousel-item active">
                       <div class = "row">
@@ -149,10 +149,10 @@ include_once __ROOT."html/templates/get_session.php";
                           <div class="card" style="width: 18rem;">
                             <img src=<?php echo $imageSrc?> class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
-                              <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
-                              <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
-                              <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
+                              <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
+                              <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
+                              <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
                       </div>
@@ -186,7 +186,7 @@ include_once __ROOT."html/templates/get_session.php";
                     </div>
                     <div class="carousel-inner" id="disp_vendidos">
                     <?php foreach($d_vendidos as &$prod) {
-                      $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+                      $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
                     ?>
                       <div class="carousel-item active">
                         <div class = "row">
@@ -194,10 +194,10 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class="card" style="width: 18rem;">
                               <img src=<?php echo $imageSrc ?> class="card-img-top" alt="...">
                               <div class="card-body">
-                                <h5 class="card-title"><?php echo $prod['rs_titulo'] ?></h5>
-                                <p class="card-text"><?php echo $prod['rs_descripcion'] ?></p>
-                                <p class="card-text"><?php echo $prod['rs_precio'] ?></p>
-                                <a href="../producto/c-producto.php?prod=<?php echo $prod['rs_id'] ?>" class="btn btn-primary">Ver detalles</a>
+                                <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
+                                <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
+                                <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                                <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                               </div>
                             </div>
                         </div>
@@ -226,8 +226,6 @@ include_once __ROOT."html/templates/get_session.php";
   <?php include __ROOT."html/templates/footer.php" ?>
 
   <script src="../../js/bootstrap.bundle.js"></script>
-  <script src="../../js/jquery-3.6.1.js"></script>
-  <script src="../../js/home.js"></script>
 
 </body>
 </html>

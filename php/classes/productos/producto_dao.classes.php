@@ -159,25 +159,11 @@ class ProductoDAO extends DBH {
             return "query_error";
         }
 
-        $count = $this->countOfRows();
-        $rt_data = $this->fetchData();
+        $result = $this->fetchData()[0];
 
         $this->clearStatement();
 
-        if ($count == 0) {
-            return false;
-        }
-        else {
-            return array(
-                "rs_id"=>$rt_data[0]['out_id'],
-                "rs_titulo"=>$rt_data[0]['out_titulo'],
-                "rs_descripcion"=>$rt_data[0]['out_descripcion'],
-                "rs_cotiz"=>$rt_data[0]['out_cotiz'],
-                "rs_precio"=>$rt_data[0]['out_precio'],
-                "rs_dispo"=>$rt_data[0]['out_dispo'],
-                "rs_calif"=>$rt_data[0]['out_calif']
-            );
-        }
+        return $result;
 
     }
 
@@ -211,18 +197,12 @@ class ProductoDAO extends DBH {
             return "query_error";
         }
 
-        $count = $this->countOfRows();
-        $rt_data = $this->fetchData();
+        $result = $this->fetchData()[0]['out_dispo'];
 
         $this->clearStatement();
 
-        if ($count == 0) {
-            return false;
-        }
-        else {
-            return $rt_data[0]['out_dispo'];
-        }
-
+        return $result;
+        
     }
 
 }

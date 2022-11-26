@@ -114,5 +114,6 @@ include_once __ROOT."html/templates/get_session.php";
   <script src="../../js/jquery-3.6.1.js"></script>
   <script src="../../js/validaciones.js"></script>
   <script src="../../js/registroProducto.js"></script>
+  
 </body>
 </html>

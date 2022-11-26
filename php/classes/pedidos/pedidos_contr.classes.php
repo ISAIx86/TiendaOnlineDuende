@@ -15,10 +15,10 @@ class PedidosController extends PedidosDAO {
 
     private function prodExisCheck($produs) {
         foreach ($produs as &$prod) {
-            if (!$this->ped_checar_prod($prod['rs_id'])) {
+            if (!$this->ped_checar_prod($prod['out_id'])) {
                 return "product_no_exists";
             }
-            if (!$this->ped_checar_exis($prod['rs_id'])) {
+            if (!$this->ped_checar_exis($prod['out_id'])) {
                 return "product_no_disp";
             }
         }

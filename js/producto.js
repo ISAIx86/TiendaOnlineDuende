@@ -14,7 +14,7 @@ $(document).ready(function (){
             return;
         }
         $.ajax({
-            url: '../../php/includes/usuarios/add_carrito_inc.php',
+            url: '../../php/includes/carrito/add_carrito_inc.php',
             type: 'POST',
             data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad},
         })

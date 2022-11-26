@@ -44,8 +44,8 @@ class PedidosDAO extends DBH {
         $this->prepareStatement('add_prod');
 
         $ped = Pedido::create()->setID($folio);
-        $ped->id_producto = $prod['rs_id'];
-        $ped->cantidad = $prod['rs_cantidad'];
+        $ped->id_producto = $prod['out_id'];
+        $ped->cantidad = $prod['out_cantidad'];
 
         if (!$this->executeCall($ped)) {
             return "query_error";

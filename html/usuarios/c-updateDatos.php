@@ -18,18 +18,21 @@ include_once __ROOT."html/templates/get_session.php";
     <?php
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once __ROOT."html/templates/headerComprador.php";
+                require_once __ROOT."html/templates/headerComprador.php";
                 break;
             case "vendedor":
-                include_once __ROOT."html/templates/headerVendedor.php";
+                require_once __ROOT."html/templates/headerVendedor.php";
                 break;
             case "administrador":
-                include_once __ROOT."html/templates/headerAdministrador.php";
+                require_once __ROOT."html/templates/headerAdministrador.php";
                 break;
             case "compravende":
-                include_once __ROOT."html/templates/headerCompraVende.php";
+                require_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
+
+        require_once __ROOT."php/models/usuario-model.php";
+        require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
         if (isset($_SESSION['user'])) {
             $controller = new UsuarioController();
@@ -43,7 +46,7 @@ include_once __ROOT."html/templates/get_session.php";
                         header("Location: ../../index.php");
                         break;
                 }
-            } else if (!$userData) {
+            } else if (!isset($userData)) {
                 header("Location: ../../index.php");
             }
         }
@@ -62,13 +65,13 @@ include_once __ROOT."html/templates/get_session.php";
                             <input type="file" id="fle_fotoperfil" name="in_fotoperfil">
                         </div>
                         <div class="form_control" requerido="true" state="empt">
-                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['rs_nombres'] ?>">
+                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['out_nombres'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['rs_apellidos'] ?>">
+                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['out_apellidos'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -76,7 +79,7 @@ include_once __ROOT."html/templates/get_session.php";
                         <div class="form_control" requerido="true" state="empt">
                             <div >Género:</div>
                             <?php
-                                switch($userData['rs_sexo']) {
+                                switch($userData['out_sexo']) {
                                     case 'H': ?>
                                 <input type="radio" id="rdb_h" name="in_genero" value="H" checked>
                                 <label for="rdb_h">Hombre</label>
@@ -110,7 +113,7 @@ include_once __ROOT."html/templates/get_session.php";
                         <div class="form_control" requerido="true" state="empt">
                             <div >Privacidad de cuenta:</div>
                             <?php
-                                if ($userData['rs_privacidad']) {
+                                if ($userData['out_privacidad']) {
                             ?>
                                 <input type="radio" id="rdb_priv" name="in_privacidad" value="1" checked>
                                 <label for="rdb_priv">Privado</label>
@@ -129,13 +132,13 @@ include_once __ROOT."html/templates/get_session.php";
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
                             <div >Fecha de nacimiento:</div>
-                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento" value="<?php echo $userData['rs_fecha_nac'] ?>">
+                            <input type="date" id="txt_fechanac" name="in_fechanac" placeholder="Fecha de nacimiento" value="<?php echo $userData['out_fechanac'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['rs_username'] ?>">
+                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['out_username'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -147,7 +150,7 @@ include_once __ROOT."html/templates/get_session.php";
                             <h2>Actualizar correo electrónico</h2>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['rs_correo'] ?>">
+                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['out_correo'] ?>">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -184,7 +187,7 @@ include_once __ROOT."html/templates/get_session.php";
         </div>
     </div>
     <!-- Footer -->
-    <?php include_once __ROOT."html/templates/footer.php" ?>
+    <?php require_once __ROOT."html/templates/footer.php" ?>
 
     <script src="../../js/bootstrap.bundle.js"></script>
     <script src="../../js/jquery-3.6.1.js"></script>

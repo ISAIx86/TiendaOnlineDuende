@@ -75,18 +75,10 @@ case (_proc)
 -- /// BUSCAR POR TEXTO \\\\ --
 	when ('search_text') then
 		select
-			bin_to_uuid(id_catego) as 'ID',
-            nombre as 'Nombre'
+			bin_to_uuid(id_catego) as 'out_id',
+            nombre as 'out_nombres'
 		from categorias
-        where nombre like concat(_nombre, '%')
-        limit 10;
-        -- //// OBTENER DATOS PARA FORMULARIO \\\\ --
-	when ('get_name') then
-		select
-			id_catego as 'out_id',
-			nombre as 'out_nombres'
-			from categorias
-        where fecha_elim is null
+        where nombre like concat(_nombre, '%') and fecha_elim is null
         limit 10;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else

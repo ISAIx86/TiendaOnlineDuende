@@ -6,7 +6,7 @@ class UsuarioDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Usuarios('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $this->setPrepareStatement("call sp_Usuarios('".$proc."', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
     }
 
     private function executeCall($data) {
@@ -23,9 +23,7 @@ class UsuarioDAO extends DBH {
             $data->getHashedPassword(),
             $data->getAvatar(),
             $data->getAvatarDir(),
-            $data->getCreador(),
-            $data->prodid,
-            $data->cantidad
+            $data->getCreador()
         ));
     }
 
@@ -122,7 +120,7 @@ class UsuarioDAO extends DBH {
         }
 
         $count = $this->countOfRows();
-        $rt_data = $this->fetchData();
+        $result = $this->fetchData()[0];
 
         $this->clearStatement();
 
@@ -130,19 +128,19 @@ class UsuarioDAO extends DBH {
             return "unauthorized_admin";
         }
         else {
-            if (!$rt_data[0]["result"]) {
+            if (!$result["result"]) {
                 return "not_found";
             }
             else {
-                if (!password_verify($pass, $rt_data[0]["out_pass"]))
+                if (!password_verify($pass, $result["out_pass"]))
                     return "wrong_password";
                 else {
                     return array(
-                        "ID"=>$rt_data[0]["out_id"],
-                        "Username"=>$rt_data[0]["out_username"],
-                        "Rol"=>$rt_data[0]["out_rol"],
-                        "Correo"=>$rt_data[0]["out_correo"],
-                        "Avatar"=>$rt_data[0]["out_img"]
+                        "ID"=>$result["out_id"],
+                        "Username"=>$result["out_username"],
+                        "Rol"=>$result["out_rol"],
+                        "Correo"=>$result["out_correo"],
+                        "Avatar"=>$result["out_img"]
                     );
                 }
             }
@@ -160,26 +158,11 @@ class UsuarioDAO extends DBH {
             return "query_error";
         }
 
-        $count = $this->countOfRows();
-        $rt_data = $this->fetchData();
+        $result = $this->fetchData()[0];
 
         $this->clearStatement();
 
-        if ($count == 0) {
-            return false;
-        }
-        else {
-            return array(
-                "rs_nombres"=>$rt_data[0]['out_nombres'],
-                "rs_apellidos"=>$rt_data[0]['out_apellidos'],
-                "rs_username"=>$rt_data[0]['out_username'],
-                "rs_correo"=>$rt_data[0]['out_correo'],
-                "rs_fecha_nac"=>$rt_data[0]['out_fechanac'],
-                "rs_sexo"=>$rt_data[0]['out_sexo'],
-                "rs_privacidad"=>$rt_data[0]['out_privacidad'],
-                "rs_fecha_crea"=>$rt_data[0]['out_feccre']
-            );
-        }
+        return $result;
 
     }
 
@@ -223,145 +206,6 @@ class UsuarioDAO extends DBH {
             return false;
         }
         else return true;
-
-    }
-
-    // Carrito
-    protected function us_addcarrito($id, $prod, $cant) {
-
-        $this->prepareStatement('add_carrito');
-
-        $usu = Usuario::create()->setID($id);
-        $usu->prodid = $prod;
-        $usu->cantidad = $cant;
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $count = $this->countOfRows();
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return "not_aviable";
-        }
-        else return true;
-
-    }
-
-    protected function us_modcantcarr($id, $prod, $cant) {
-
-        $this->prepareStatement('set_carrito');
-
-        $usu = Usuario::create()->setID($id);
-        $usu->prodid = $prod;
-        $usu->cantidad = $cant;
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $count = $this->countOfRows();
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return "not_aviable";
-        }
-        else return true;
-
-    }
-
-    protected function us_popcarrito($id, $prod) {
-
-        $this->prepareStatement('pop_carrito');
-
-        $usu = Usuario::create()->setID($id);
-        $usu->prodid = $prod;
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $count = $this->countOfRows();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-
-    }
-
-    protected function us_cleancarrito($id) {
-
-        $this->prepareStatement('clean_carrito');
-
-        $usu = Usuario::create()->setID($id);
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $count = $this->countOfRows();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-
-    }
-
-    protected function us_getcarrito($id) {
-
-        $this->prepareStatement('get_carrito');
-
-        $usu = Usuario::create()->setID($id);
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $rt_data = $this->fetchData();
-        $result = array();
-
-        $this->clearStatement();
-
-        foreach ($rt_data as &$row) {
-            array_push($result, array(
-                "rs_id"=>$row['out_id'],
-                "rs_img"=>$row['out_img'],
-                "rs_titulo"=>$row['out_titulo'],
-                "rs_precio"=>$row['out_precio'],
-                "rs_cantidad"=>$row['out_cantidad'],
-                "rs_dispo"=>$row['out_dispo'],
-                "rs_total"=>$row['out_total']
-            ));
-        }
-
-        return $result;
-
-    }
-
-    protected function us_gettot_carrito($id) {
-
-        $this->prepareStatement('get_carr_tot');
-
-        $usu = Usuario::create()->setID($id);
-
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
-
-        $count = $this->countOfRows();
-        $result = false;
-        if ($count != 0) {
-            $result = $this->fetchData()[0]['out_total'];
-        }
-
-        $this->clearStatement();
-
-        return $result;
 
     }
 

@@ -145,68 +145,7 @@ class UsuarioController extends UsuarioDAO {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        $result = $this->us_getdata($id);
-        if (!$result) {
-            return "not_found";
-        }
-        return $result;
-    }
-
-    public function añadirACarrito($id, $prodid, $cantidad) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        if (
-            empty($prodid) |
-            empty($cantidad)
-        ) {
-            return "empty_inputs";
-        }
-        return $this->us_addcarrito($id, $prodid, $cantidad);
-    }
-
-    public function modifCantCarrito($id, $prodid, $cantidad) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        if (
-            empty($prodid) |
-            empty($cantidad)
-        ) {
-            return "empty_inputs";
-        }
-        return $this->us_modcantcarr($id, $prodid, $cantidad);
-    }
-
-    public function quitarCarrito($id, $prodid) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        if (empty($prodid)) {
-            return "empty_inputs";
-        }
-        return $this->us_popcarrito($id, $prodid);
-    }
-
-    public function limpiarCarrito($id) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        return $this->us_cleancarrito($id);
-    }
-
-    public function listaCarrito($id) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        return $this->us_getcarrito($id);
-    }
-
-    public function totalCarrito($id) {
-        if (empty($id)) {
-            return "uncaptured_id";
-        }
-        return $this->us_gettot_carrito($id);
+        return $this->us_getdata($id);
     }
 
 }

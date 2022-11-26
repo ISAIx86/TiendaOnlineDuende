@@ -50,29 +50,13 @@ include_once __ROOT."html/templates/get_session.php";
             include_once __ROOT."html/templates/headerCompraVende.php";
             break;
     }
-    require_once __ROOT."php/models/usuario-model.php";
+
     require_once __ROOT."php/models/producto-model.php";
     require_once __ROOT."php/models/multimedia-model.php";
-    require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
     require_once __ROOT."php/classes/productos/producto_contr.classes.php";
     require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
-    if (isset($_SESSION['user'])) {
-        $controller = new UsuarioController();
-        $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
-        if (gettype($userData) == "string") {
-            switch ($userData) {
-                case "uncaptured_id":
-                    header("Location: ../../index.php");
-                    break;
-                case "not_found":
-                    header("Location: ../../index.php");
-                    break;
-            }
-        } else if (!$userData) {
-            header("Location: ../../index.php");
-        }
-    }
-    $infoProd = array("rs_id"=>"", "rs_titulo"=>"", "rs_descripcion"=>"", "rs_precio"=>"", "rs_dispo"=>"", "rs_calif"=>0.0);
+    
+    $infoProd = array();
     $filesProd = array();
     if (isset($_GET['prod'])) {
         $controller = new ProductoController();
@@ -120,21 +104,21 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="card">
           <div class="card-body">
             <div>
-              <h5 class="card-title"><?php echo $infoProd['rs_titulo']?></h5>
+              <h5 class="card-title"><?php echo $infoProd['out_titulo']?></h5>
             </div>
             <div>
-              <p class="card-text"><?php echo $infoProd['rs_descripcion']?></p>
+              <p class="card-text"><?php echo $infoProd['out_descripcion']?></p>
             </div>
             <div>
-              <h3>$ <?php echo $infoProd['rs_precio']?></h3>
+              <h3>$ <?php echo $infoProd['out_precio']?></h3>
             </div>
 
-            <?php if ($infoProd['rs_dispo']) { ?>
+            <?php if ($infoProd['out_dispo'] > 0) { ?>
             <div>
               <h6>Stock Disponible</h6>
             </div>
             <div>
-              <h7> <?php echo $infoProd['rs_dispo'] ?> Disponibles</h7>
+              <h7> <?php echo $infoProd['out_dispo'] ?> Disponibles</h7>
             </div>
             <?php } else { ?>
             <h6>Sin Stock Disponible</h6>
@@ -173,18 +157,18 @@ include_once __ROOT."html/templates/get_session.php";
             </div> 
             <div>
               <div class="valoracion">
-                <input id="radio1" type="radio" name="in_calif" value="5" disabled <?php if ($infoProd['rs_descripcion'] >= 5.0) { ?>checked<?php }?>>
+                <input id="radio1" type="radio" name="in_calif" value="5" disabled <?php if ($infoProd['out_calif'] >= 5.0) { ?>checked<?php }?>>
                 <label for="radio1">★</label>
-                <input id="radio2" type="radio" name="in_calif" value="4" disabled <?php if ($infoProd['rs_descripcion'] >= 4.0 & $infoProd['rs_descripcion'] < 4.9) { ?>checked<?php }?>>
+                <input id="radio2" type="radio" name="in_calif" value="4" disabled <?php if ($infoProd['out_calif'] >= 4.0 & $infoProd['out_calif'] < 4.9) { ?>checked<?php }?>>
                 <label for="radio2">★</label>
-                <input id="radio3" type="radio" name="in_calif" value="3" disabled <?php if ($infoProd['rs_descripcion'] >= 3.0 & $infoProd['rs_descripcion'] < 3.9) { ?>checked<?php }?>>
+                <input id="radio3" type="radio" name="in_calif" value="3" disabled <?php if ($infoProd['out_calif'] >= 3.0 & $infoProd['out_calif'] < 3.9) { ?>checked<?php }?>>
                 <label for="radio3">★</label>
-                <input id="radio4" type="radio" name="in_calif" value="2" disabled <?php if ($infoProd['rs_descripcion'] >= 2.0 & $infoProd['rs_descripcion'] < 2.9) { ?>checked<?php }?>>
+                <input id="radio4" type="radio" name="in_calif" value="2" disabled <?php if ($infoProd['out_calif'] >= 2.0 & $infoProd['out_calif'] < 2.9) { ?>checked<?php }?>>
                 <label for="radio4">★</label>
-                <input id="radio5" type="radio" name="in_calif" value="1" disabled <?php if ($infoProd['rs_descripcion'] >= 1.0 & $infoProd['rs_descripcion'] < 1.9) { ?>checked<?php }?>>
+                <input id="radio5" type="radio" name="in_calif" value="1" disabled <?php if ($infoProd['out_calif'] >= 1.0 & $infoProd['out_calif'] < 1.9) { ?>checked<?php }?>>
                 <label for="radio5">★</label>
               </div>
-              <p><?php echo $infoProd['rs_calif']?></p>
+              <p><?php echo $infoProd['out_calif']?></p>
             </div>
           </div>
         </div>

@@ -36,20 +36,9 @@ class BusquedaProdDAO extends DBH {
             return "query_error";
         }
 
-        $rt_data = $this->fetchData();
-        $result = array();
+        $result = $this->fetchData();
 
         $this->clearStatement();
-
-        foreach ($rt_data as &$row) {
-            array_push($result, array(
-                "rs_id"=>$row['out_id'],
-                "rs_img"=>$row['out_img'],
-                "rs_titulo"=>$row['out_titulo'],
-                "rs_descripcion"=>$row['out_descripcion'],
-                "rs_precio"=>$row['out_precio']
-            ));
-        }
         
         return $result;
 
@@ -71,20 +60,10 @@ class BusquedaProdDAO extends DBH {
             return "query_error";
         }
 
-        $rt_data = $this->fetchData();
-        $result = array();
+        $result = $this->fetchData();
 
         $this->clearStatement();
 
-        foreach ($rt_data as &$row) {
-            array_push($result, array(
-                "rs_id"=>$row['out_id'],
-                "rs_img"=>$row['out_img'],
-                "rs_titulo"=>$row['out_titulo'],
-                "rs_descripcion"=>$row['out_descripcion'],
-                "rs_precio"=>$row['out_precio']
-            ));
-        }
         return $result;
 
     }
@@ -105,20 +84,10 @@ class BusquedaProdDAO extends DBH {
             return "query_error";
         }
 
-        $rt_data = $this->fetchData();
-        $result = array();
+        $result = $this->fetchData();
 
         $this->clearStatement();
-
-        foreach ($rt_data as &$row) {
-            array_push($result, array(
-                "rs_id"=>$row['out_id'],
-                "rs_img"=>$row['out_img'],
-                "rs_titulo"=>$row['out_titulo'],
-                "rs_descripcion"=>$row['out_descripcion'],
-                "rs_precio"=>$row['out_precio']
-            ));
-        }
+        
         return $result;
 
     }

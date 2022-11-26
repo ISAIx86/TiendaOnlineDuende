@@ -16,12 +16,10 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Header -->
   <?php
   include __ROOT."html/templates/headerComprador.php";
-  require_once __ROOT."php/models/usuario-model.php";
-  require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-  $result = array();
+  $productos = array();
   if (isset($_SESSION['user'])) {
-    $controller = new UsuarioController();
-    $result = $controller->listaCarrito($_SESSION['user']['ID']);
+    $controller = new CarritoController();
+    $productos = $controller->listaCarrito($_SESSION['user']['ID']);
   }
   ?>
   <!-- Container -->
@@ -30,27 +28,27 @@ include_once __ROOT."html/templates/get_session.php";
     <div class="cointainer">
       <ul class="list-group">
         <div id="lst_carrito">
-        <?php foreach ($result as &$prod) {
-            $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['rs_img']).'"';
+        <?php foreach ($productos as &$prod) {
+            $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
         ?>
-          <li id="emt-list" prodid=<?php echo $prod['rs_id'] ?> class="list-group-item d-flex justify-content-between align-items-start">
+          <li id="emt-list" prodid=<?php echo $prod['out_id'] ?> class="list-group-item d-flex justify-content-between align-items-start">
             <div class="row">
               <div class="col-2">
                 <img src=<?php echo $imageSrc?> class="d-block w-100" alt="...">
               </div>
               <div class="col-8">
-                <div class="fw-bold"><?php echo $prod['rs_titulo'] ?></div>
-                <h6 id="lbl_price" value=<?php echo $prod['rs_precio'] ?>><?php echo "$".$prod['rs_precio'] ?></h6>
-                <span class="badge bg-primary rounded-pill"><?php echo $prod['rs_dispo'] ?> Disponibles</span>
+                <div class="fw-bold"><?php echo $prod['out_titulo'] ?></div>
+                <h6 id="lbl_price" value=<?php echo $prod['out_precio'] ?>><?php echo "$".$prod['out_precio'] ?></h6>
+                <span class="badge bg-primary rounded-pill"><?php echo $prod['out_dispo'] ?> Disponibles</span>
                 </br>
                 <button>Guardar en lista</button>
                 <button>Ver productos similares</button>
               </div>
               <div id="cant_control" class="col-2">
-                <span id="lbl_subtotal" class="badge bg-primary rounded-pill">$<?php echo $prod['rs_total'] ?></span>
+                <span id="lbl_subtotal" class="badge bg-primary rounded-pill">$<?php echo $prod['out_total'] ?></span>
                 </br>
                 <button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>
-                <span id="lbl_cant" class="badge bg-primary rounded-pill"><?php echo $prod['rs_cantidad'] ?></span>
+                <span id="lbl_cant" class="badge bg-primary rounded-pill"><?php echo $prod['out_cantidad'] ?></span>
                 <button id="btn_mas" class="btn btn-secondary btn-circle btn-sm">+</button>
                 <form>
                   <button id="btn_quitar" class="btn btn-danger">Quitar</button>

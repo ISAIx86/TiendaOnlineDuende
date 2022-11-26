@@ -14,21 +14,24 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
     <!-- Header -->
-    <?php 
+    <?php
         switch ($loggedUser['Rol']) {
             case "comprador":
-                include_once __ROOT."html/templates/headerComprador.php";
+                require_once __ROOT."html/templates/headerComprador.php";
                 break;
             case "vendedor":
-                include_once __ROOT."html/templates/headerVendedor.php";
+                require_once __ROOT."html/templates/headerVendedor.php";
                 break;
             case "administrador":
-                include_once __ROOT."html/templates/headerAdministrador.php";
+                require_once __ROOT."html/templates/headerAdministrador.php";
                 break;
             case "compravende":
-                include_once __ROOT."html/templates/headerCompraVende.php";
+                require_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
+
+        require_once __ROOT."php/models/usuario-model.php";
+        require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
 
         if (isset($_SESSION['user'])) {
             $controller = new UsuarioController();
@@ -38,11 +41,8 @@ include_once __ROOT."html/templates/get_session.php";
                     case "uncaptured_id":
                         header("Location: ../../index.php");
                         break;
-                    case "not_found":
-                        header("Location: ../../index.php");
-                        break;
                 }
-            } else if (!$userData) {
+            } else if (!isset($userData)) {
                 header("Location: ../../index.php");
             }
         }
@@ -79,25 +79,25 @@ include_once __ROOT."html/templates/get_session.php";
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <h5>Usuario</h5>
-                                    <h8><?php echo $userData['rs_username'] ?></h8>
+                                    <h8><?php echo $userData['out_username'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>E-mail</h5>
-                                    <h8><?php echo $userData['rs_correo'] ?></h8>
+                                    <h8><?php echo $userData['out_correo'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Nombre y Apellido</h5>
-                                    <h8><?php echo $userData['rs_nombres'] . " " . $userData['rs_apellidos']  ?></h8>
+                                    <h8><?php echo $userData['out_nombres'] . " " . $userData['out_apellidos']  ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Fecha de nacimiento</h5>
-                                    <h8><?php echo $userData['rs_fecha_nac'] ?></h8>
+                                    <h8><?php echo $userData['out_fechanac'] ?></h8>
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Genero</h5>
                                     <h8>
                                         <?php
-                                            switch ($userData['rs_sexo']) {
+                                            switch ($userData['out_sexo']) {
                                                 case 'H':
                                                     echo "Hombre";
                                                     break;
@@ -115,7 +115,7 @@ include_once __ROOT."html/templates/get_session.php";
                                     <h5>Privacidad de la cuenta</h5>
                                     <h8>
                                         <?php 
-                                            if ($userData['rs_privacidad']) {
+                                            if ($userData['out_privacidad']) {
                                                 echo "Privado";
                                             }
                                             else {
@@ -126,7 +126,7 @@ include_once __ROOT."html/templates/get_session.php";
                                 </li>
                                 <li class="list-group-item">
                                     <h5>Fecha de registro</h5>
-                                    <h8><?php echo $userData['rs_fecha_crea'] ?></h8>
+                                    <h8><?php echo $userData['out_feccre'] ?></h8>
                                 </li>
                             </ul>
                         </div>
