@@ -23,9 +23,7 @@ class CategoriaDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        if (!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $count = $this->countOfRows();
         
@@ -42,9 +40,7 @@ class CategoriaDAO extends DBH {
 
         $this->prepareStatement('modify');
 
-        if (!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $count = $this->countOfRows();
 
@@ -63,9 +59,7 @@ class CategoriaDAO extends DBH {
 
         $cat = Categoria::create()->setID($id);
 
-        if (!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $count = $this->countOfRows();
 
@@ -86,9 +80,7 @@ class CategoriaDAO extends DBH {
 
         $usu = Categoria::create()->setNombre($name);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $count = $this->fetchData()[0]["result"];
 
@@ -109,9 +101,7 @@ class CategoriaDAO extends DBH {
             ->setID($id)
             ->setCreador($auto);
 
-        if(!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $count = $this->countOfRows();
 
@@ -130,9 +120,7 @@ class CategoriaDAO extends DBH {
 
         $cat = Categoria::create();
 
-        if(!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $result = $this->fetchData();
 
@@ -146,12 +134,9 @@ class CategoriaDAO extends DBH {
 
         $this->prepareStatement('search_text');
 
-        $cat = Categoria::create()
-            ->setNombre($text);
+        $cat = Categoria::create()->setNombre($text);
         
-        if(!$this->executeCall($cat)) {
-            return "query_error";
-        }
+        $this->executeCall($cat);
 
         $result = $this->fetchData();
 

@@ -57,10 +57,10 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Footer -->
     <?php include __ROOT."html/templates/footer.php"?>
 
-    <script src="../../js/bootstrap.bundle.js"></script>
-    <script src="../../js/jquery-3.6.1.js"></script>
-    <script src="../../js/validaciones.js"></script>
-    <script src="../../js/registroMetodoPago.js"></script>
+    <script src="../../js/lib/bootstrap.bundle.js"></script>
+    <script src="../../js/lib/jquery-3.6.1.js"></script>
+    <script src="../../js/utilities/validaciones.js"></script>
+    <script src="../../js/comprador/registroMetodoPago.js"></script>
 
 </body>
 </html>

@@ -92,9 +92,9 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Footer -->
   <?php include_once __ROOT."templates/footer.php" ?>
 
-  <script src="../../js/bootstrap.bundle.js"></script>
-  <script src="../../js/jquery-3.6.1.js"></script>
-  <script src="../../js/producto.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/productos/producto.js"></script>
 
 </body>
 </html>

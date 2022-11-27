@@ -11,27 +11,6 @@ include_once __ROOT."html/templates/get_session.php";
   <link rel="stylesheet" href="../../css/bootstrap.css">
   <link rel="stylesheet" href="../../css/style.css">
   <!-- <link rel="stylesheet" href="../../css/Nuevo.css"> -->
-  <style>
-      .valoracion {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-      }
-      .valoracion input {
-        position: absolute;
-        top: -100px;
-      }
-      .valoracion label {
-        float: right;
-        color: #c1b8b8;
-        font-size: 30px; 
-      }
-      .valoracion label:hover,
-      .valoracion label:hover ~ label,
-      .valoracion input:checked ~ label {
-        color: #ecec00;
-      }
-  </style>
 </head>
 <body>
   <!-- Header -->
@@ -435,9 +414,9 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Footer -->
   <?php include __ROOT."html/templates/footer.php"?>
 
-  <script src="../../js/bootstrap.bundle.js"></script>
-  <script src="../../js/jquery-3.6.1.js"></script>
-  <script src="../../js/producto.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/productos/producto.js"></script>
 
 </body>
 </html>

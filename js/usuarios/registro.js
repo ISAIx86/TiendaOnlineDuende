@@ -25,14 +25,20 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch(data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
+                        break
                     case "empty_inputs":
                         alert("Campos capturados vacíos.");
                         break;
-                    case "no_exists":
-                        alert("El correo electrónico no existe.");
-                        break;
                     case "not_found":
                         alert("No se pudo encontrar el usuario. Intentelo más tade.");
+                        break;
+                    case "no_exists":
+                        alert("El correo electrónico no existe.");
                         break;
                     case "wrong_password":
                         alert("Contraseña incorrecta.");
@@ -44,7 +50,7 @@ $(document).ready(function() {
             } else {
                 switch (data.role) {
                     case "comprador":
-                        window.location.replace("../usuarios/c-home.php");
+                        window.location.replace("../comprador/c-home.php");
                         break;
                     case "vendedor":
                         window.location.replace("../usuarios/c-profile.php");
@@ -53,7 +59,8 @@ $(document).ready(function() {
                         window.location.replace("../usuarios/c-profile.php");
                         break;
                     case "compravende":
-                        window.location.replace("../starting/landingPage.html");
+                        alert("Coming soon!");
+                        // TODO: Header de comprador-vendedor.
                         break;
                 }
             }
@@ -85,6 +92,12 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch (data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
+                        break;
                     case "empty_inputs":
                         alert("Algunos campos están vacíos.");
                         break;
@@ -94,8 +107,14 @@ $(document).ready(function() {
                     case "already_exists":
                         alert("El correo electrónico ya ha sido registrado.");
                         break;
-                    case "no_query_results":
-                        alert("Hubo un problema al consultar la información.");
+                    case "img_error":
+                        alert("No se pudo cargar el archivo de imagen.");
+                        break;
+                    case "img_oversize":
+                        alert("El archivo de imagen es demasiado grande.");
+                        break;
+                    case "img_wrongext":
+                        alert("La extensión de archivo no es aceptada.");
                         break;
                 }
             } else {
@@ -130,14 +149,26 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch (data.reason) {
-                    case "uncaptured_id":
-                        alert("No se pudo capturar el ID");
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
                         break;
                     case "empty_inputs":
                         alert("Algunos campos están vacíos.");
                         break;
-                    case "no_query_results":
-                        alert("Hubo un problema al consultar la información.");
+                    case "uncaptured_id":
+                        alert("No se pudo capturar el ID");
+                        break;
+                    case "img_error":
+                        alert("No se pudo cargar el archivo de imagen.");
+                        break;
+                    case "img_oversize":
+                        alert("El archivo de imagen es demasiado grande.");
+                        break;
+                    case "img_wrongext":
+                        alert("La extensión de archivo no es aceptada.");
                         break;
                 }
             } else {
@@ -173,17 +204,23 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch (data.reason) {
-                    case "uncaptured_id":
-                        alert("No se pudo capturar el ID");
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
                         break;
                     case "empty_inputs":
                         alert("Algunos campos están vacíos.");
                         break;
+                    case "uncaptured_id":
+                        alert("No se pudo capturar el ID");
+                        break;
                     case "already_exists":
                         alert("Éste correo electrónico ya está registrado.");
                         break;
-                    case "no_query_results":
-                        alert("Hubo un problema al consultar la información.");
+                    case "actual_email":
+                        alert("El correo ingresado es el actual.");
                         break;
                 }
             } else {
@@ -218,11 +255,17 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch (data.reason) {
-                    case "uncaptured_id":
-                        alert("No se pudo capturar el ID");
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
                         break;
                     case "empty_inputs":
                         alert("Algunos campos están vacíos.");
+                        break;
+                    case "uncaptured_id":
+                        alert("No se pudo capturar el ID");
                         break;
                     case "already_exists":
                         alert("Éste correo electrónico ya está registrado.");
@@ -233,10 +276,7 @@ $(document).ready(function() {
                     case "unmatching_psw":
                         alert("La contraseña confirmada no coincide.");
                         break;
-                    case "no_query_results":
-                        alert("Hubo un problema al consultar la información.");
-                        break;
-                }
+            }
             } else {
                 emptyInputs($('#form_contra_upd'));
                 alert("Contraseña actualizada");

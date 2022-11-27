@@ -13,6 +13,7 @@ $(document).ready(function (){
     $('#btn_clean').on('click', e => {
         const products = $("div#lst_carrito").children().length;
         if (products == 0) {
+            alert("El carrito ya está vacío.");
             return;
         }
         $.ajax({
@@ -28,7 +29,17 @@ $(document).ready(function (){
                 return;
             }
             if (data.result == "error") {
-                
+                switch(data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
+                        break;
+                    case "uncaptured_id":
+                        alert("No se encontró ID de usuario.");
+                        break;
+                }
             } else {
                 alert("Carrito vaciado.");
                 window.location.reload();
@@ -67,8 +78,23 @@ $(document).on('click', '#btn_menos', e => {
             return;
         }
         if (data.result == "error") {
-            setNumber($(e.target), cantidad);
-            setSubtotal($(e.target), cantidad);
+            switch (data.reason) {
+                case "query_error":
+                    alert("Hubo un error en la operación SQL. "+data.details);
+                    break;
+                case "no_query_results":
+                    alert("No hubo resultados en la consulta.");
+                    break;
+                case "empty_inputs":
+                    alert("Alguna información no se cargó adecuadamente.");
+                    break;
+                case "uncaptured_id":
+                    alert("No se encontró ID de usuario.");
+                    break;
+                case "not_aviable":
+                    alert("No hay suficientes productos en stock.");
+                    break;
+            }
         } else {
             $('#lbl_total').html('$'+data.total);
             $('#hdr_carrito').html('$'+data.total);
@@ -97,8 +123,23 @@ $(document).on('click', '#btn_mas', e => {
             return;
         }
         if (data.result == "error") {
-            setNumber($(e.target), cantidad);
-            setSubtotal($(e.target), cantidad);
+            switch (data.reason) {
+                case "query_error":
+                    alert("Hubo un error en la operación SQL. "+data.details);
+                    break;
+                case "no_query_results":
+                    alert("No hubo resultados en la consulta.");
+                    break;
+                case "empty_inputs":
+                    alert("Alguna información no se cargó adecuadamente.");
+                    break;
+                case "uncaptured_id":
+                    alert("No se encontró ID de usuario.");
+                    break;
+                case "not_aviable":
+                    alert("No hay suficientes productos en stock.");
+                    break;
+            }
         } else {
             $('#lbl_total').html('$'+data.total);
             $('#hdr_carrito').html('$'+data.total);
@@ -123,7 +164,20 @@ function quitarProductoDeLista(producto_id) {
             return;
         }
         if (data.result == "error") {
-            
+            switch (data.reason) {
+                case "query_error":
+                    alert("Hubo un error en la operación SQL. "+data.details);
+                    break;
+                case "no_query_results":
+                    alert("No hubo resultados en la consulta.");
+                    break;
+                case "empty_inputs":
+                    alert("Alguna información no se cargó adecuadamente.");
+                    break;
+                case "uncaptured_id":
+                    alert("No se encontró ID de usuario.");
+                    break;
+            }
         } else {
             alert("Producto eliminado del carrito.");
             window.location.reload();

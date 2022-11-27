@@ -13,6 +13,9 @@ use tienda_online;
 
 drop view if exists vw_carrito;
 
+-- //////////////////////////
+-- //// VISTA DE CARRITO \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\
 create or replace view vw_carrito as
 select
 	rlc.id_usuario as 'id_usuario',

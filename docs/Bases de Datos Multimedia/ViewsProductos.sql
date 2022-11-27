@@ -53,7 +53,7 @@ select
     pct.categorias as 'categoria',
     prods.titulo as 'producto',
     prods.calificacion as 'calificacion',
-    prods.precio as 'precio',
+    rpp.precio as 'precio',
     rpp.cantidad as 'cantidad',
     rpp.subtotal as 'subtotal'
 from pedidos as peds

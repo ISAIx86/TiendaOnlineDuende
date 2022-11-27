@@ -55,7 +55,7 @@
   <!-- Footer -->
   <?php include("./templates/footer.php") ?>
 
-  <script src="./js/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
 
 </body>
 </html>

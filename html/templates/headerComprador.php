@@ -9,7 +9,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
   <div class="container text-center">
     <div class="row">
       <div class="col-sm-8">
-        <a href="../usuarios/c-home.php">
+        <a href="../comprador/c-home.php">
           <img src='../../resources/logo02.PNG' class='logotipo'/>
         </a>
       </div>

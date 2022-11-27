@@ -92,7 +92,7 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Footer -->
   <?php include __ROOT."html/templates/footer.php"?>
 
-  <script src="../../js/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
 
 </body>
 </html>

@@ -24,9 +24,7 @@ class MultimediaDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        if (!$this->executeCall($mult)) {
-            return "query_error";
-        }
+        $this->executeCall($mult);
 
         $count = $this->countOfRows();
         
@@ -46,9 +44,7 @@ class MultimediaDAO extends DBH {
 
         $mult = Multimedia::create()->setProductoID($id_prod);
 
-        if (!$this->executeCall($mult)) {
-            return "query_error";
-        }
+        $this->executeCall($mult);
 
         $result = $this->fetchData()[0];
 
@@ -64,9 +60,7 @@ class MultimediaDAO extends DBH {
 
         $mult = Multimedia::create()->setProductoID($id_prod);
 
-        if (!$this->executeCall($mult)) {
-            return "query_error";
-        }
+        $this->executeCall($mult);
 
         $result = $this->fetchData();
 

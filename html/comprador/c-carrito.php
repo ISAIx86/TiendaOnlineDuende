@@ -77,14 +77,14 @@ include_once __ROOT."html/templates/get_session.php";
           </div>
         </li>
       </ul>
-    </div>    
+    </div>
   </div>
   <!-- Footer -->
   <?php include __ROOT."html/templates/footer.php"?>
 
-  <script src="../../js/bootstrap.bundle.js"></script>
-  <script src="../../js/jquery-3.6.1.js"></script>
-  <script src="../../js/carrito.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/comprador/carrito.js"></script>
 
 </body>
 </html>

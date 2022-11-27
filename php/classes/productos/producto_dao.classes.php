@@ -27,9 +27,7 @@ class ProductoDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $result = $this->fetchData();
 
@@ -43,9 +41,7 @@ class ProductoDAO extends DBH {
 
         $this->prepareStatement('modify');
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $count = $this->countOfRows();
 
@@ -64,9 +60,7 @@ class ProductoDAO extends DBH {
 
         $prod = Producto::create()->setID($id);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $count = $this->countOfRows();
 
@@ -87,9 +81,7 @@ class ProductoDAO extends DBH {
             ->setID($id)
             ->setDisponibilidad($cant);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $count = $this->countOfRows();
 
@@ -111,9 +103,7 @@ class ProductoDAO extends DBH {
             ->setID($id_prod)
             ->setCategoria($id_catego);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $count = $this->countOfRows();
 
@@ -133,9 +123,7 @@ class ProductoDAO extends DBH {
         $prod = Producto::create()
             ->setID($id_prod);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $count = $this->countOfRows();
 
@@ -155,9 +143,7 @@ class ProductoDAO extends DBH {
 
         $prod = Producto::create()->setID($id);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $result = $this->fetchData()[0];
 
@@ -175,9 +161,7 @@ class ProductoDAO extends DBH {
             ->setPublicador($id_publ)
             ->setDescripcion($categos);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $result = $this->fetchData();
 
@@ -193,9 +177,7 @@ class ProductoDAO extends DBH {
 
         $prod = Producto::create()->setID($id);
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($prod);
 
         $result = $this->fetchData()[0]['out_dispo'];
 

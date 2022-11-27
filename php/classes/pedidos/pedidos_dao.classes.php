@@ -27,9 +27,7 @@ class PedidosDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $result = $this->fetchData();
 
@@ -47,9 +45,7 @@ class PedidosDAO extends DBH {
         $ped->id_producto = $prod['out_id'];
         $ped->cantidad = $prod['out_cantidad'];
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $count = $this->countOfRows();
 
@@ -70,9 +66,7 @@ class PedidosDAO extends DBH {
         $ped = Pedido::create();
         $ped->id_producto = $prodid;
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $count = $this->fetchData()[0]["result"];
 
@@ -92,9 +86,7 @@ class PedidosDAO extends DBH {
         $ped = Pedido::create();
         $ped->id_producto = $prodid;
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $count = $this->fetchData()[0]["result"];
 
@@ -116,9 +108,7 @@ class PedidosDAO extends DBH {
         $ped->startdate = $start_date;
         $ped->enddate = $end_date;
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $result = $this->fetchData();
 
@@ -137,9 +127,7 @@ class PedidosDAO extends DBH {
         $ped->startdate = $start_date;
         $ped->enddate = $end_date;
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $result = $this->fetchData();
 
@@ -158,9 +146,7 @@ class PedidosDAO extends DBH {
         $ped->startdate = $start_date;
         $ped->enddate = $end_date;
 
-        if (!$this->executeCall($ped)) {
-            return "query_error";
-        }
+        $this->executeCall($ped);
 
         $result = $this->fetchData();
 

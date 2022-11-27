@@ -101,7 +101,9 @@ case (_proc)
 				categoria as out_catego,
 				producto as out_prod,
 				calificacion as out_calif,
-				precio as out_precio
+				precio as out_precio,
+                cantidad as out_cant,
+                subtotal as out_total
 			from vw_histo_pedidos
             where id_usuario = uuid_to_bin("',_id_usuario,'")',
             @_categos, @_start_date, @_end_date,

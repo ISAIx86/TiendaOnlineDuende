@@ -17,6 +17,7 @@ select * from rel_ped_prod;
 
 select * from vw_prod_categos;
 
+select * from vw_histo_pedidos;
 select * from vw_ventas_detallada;
 select * from vw_ventas_agrupada;
 

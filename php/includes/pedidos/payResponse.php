@@ -16,11 +16,11 @@ require_once __ROOT."php/classes/usuarios/carrito_contr.classes.php";
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header('Location: '.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No hay usuario ingresado'&message='Se perdió la sesión de usuario o se ingresó sin autorización.'");
     exit();
 }
 if (empty($_GET['paymentId']) || empty($_GET['PayerID'])) {
-    header('Location: '.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Verbo no válido'&message='Se intentó ejecutar el pago sin verbo'");
     exit();
 }
 
@@ -43,7 +43,7 @@ try {
         $carr_controller = new CarritoController();
         $products = $carr_controller->listaCarrito($_SESSION['user']['ID']);
         if (count($products) == 0) {
-            header('Location: '.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+            header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Carrito vacío'&message='No hay productos para pagar en el carrito.'");
             exit();
         }
 
@@ -57,11 +57,11 @@ try {
             header();
             exit();
         } else if (!$result) {
-            header('Location: '.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+            header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Operación sin resultado'&message='No se completó la operación de registrar pedido.'");
             exit();
         } else {
             $carr_controller->limpiarCarrito($_SESSION['user']['ID']);
-            header('Location: '.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+            header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No se pudo limpiar el carrito'&message='Limpie su carrito manualmente.'");
             exit();
         }
 

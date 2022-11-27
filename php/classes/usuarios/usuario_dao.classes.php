@@ -32,9 +32,7 @@ class UsuarioDAO extends DBH {
 
         $this->prepareStatement('create');
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
         
@@ -51,9 +49,7 @@ class UsuarioDAO extends DBH {
 
         $this->prepareStatement('modify');
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -72,9 +68,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -94,9 +88,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setCorreo($correo);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->fetchData()[0]["result"];
 
@@ -115,9 +107,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setCorreo($correo);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
         $result = $this->fetchData()[0];
@@ -154,9 +144,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $result = $this->fetchData()[0];
 
@@ -173,9 +161,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id)->setCorreo($correo);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 
@@ -194,9 +180,7 @@ class UsuarioDAO extends DBH {
 
         $usu = Usuario::create()->setID($id)->setPassword($pass);
 
-        if (!$this->executeCall($usu)) {
-            return "query_error";
-        }
+        $this->executeCall($usu);
 
         $count = $this->countOfRows();
 

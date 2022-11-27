@@ -32,9 +32,7 @@ class BusquedaProdDAO extends DBH {
             'in_size'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -56,9 +54,7 @@ class BusquedaProdDAO extends DBH {
             'in_size'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -80,9 +76,7 @@ class BusquedaProdDAO extends DBH {
             'in_size'=>null
         );
 
-        if (!$this->executeCall($prod)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -104,9 +98,7 @@ class BusquedaProdDAO extends DBH {
             'in_size'=>$size
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 

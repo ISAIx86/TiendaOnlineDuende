@@ -94,12 +94,15 @@ include_once __ROOT."html/templates/get_session.php";
             <div class = "col-8">
               <p>Folio: <?php echo $ped['out_folio']?></p>
               <div class="fw-bold"><?php echo $ped['out_prod']?></div>
-              <h6><?php echo $ped['out_fecha']?></h6>
+              <h6>Precio: $<?php echo $ped['out_precio']?></h6>
               <p><?php echo $ped['out_catego']?></p>
-              <h6>Calificación: <?php echo $ped['out_calif']?></h6>                     
+              <h6>Calificación: <?php echo $ped['out_calif']?></h6>
+              <h6>Fecha y hora: <?php echo $ped['out_fecha']?></h6>
             </div>
             <div class = "col-2">
-              <span class="badge bg-primary rounded-pill">$<?php echo $ped['out_precio']?></span>
+              <span class="badge bg-primary rounded-pill">Cantidad: <?php echo $ped['out_cant']?></span>
+              <br/>
+              <span class="badge bg-primary rounded-pill">Total: $<?php echo $ped['out_total']?></span>
             </div>
           </div>
         </li>
@@ -110,6 +113,6 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Footer -->
   <?php include __ROOT."html/templates/footer.php"?>
 
-  <script src="../../js/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/bootstrap.bundle.js"></script>
 
 </body>

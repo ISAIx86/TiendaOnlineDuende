@@ -18,11 +18,11 @@ require_once __ROOT."php/classes/usuarios/carrito_contr.classes.php";
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header('Location:'.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No hay usuario ingresado'&message='Se perdió la sesión de usuario o se ingresó sin autorización.'");
     exit();
 }
 if (!($_SERVER["REQUEST_METHOD"] == "POST")) {
-    header('Location:'.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Verbo no válido'&message='Se intentó ejecutar el pago sin verbo'");
     exit();
 }
 
@@ -30,7 +30,7 @@ if (!($_SERVER["REQUEST_METHOD"] == "POST")) {
 $carr_controller = new CarritoController();
 $products = $carr_controller->listaCarrito($_SESSION['user']['ID']);
 if (count($products) == 0) {
-    header('Location:'.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Carrito vacío'&message='No hay productos para pagar en el carrito.'");
     exit();
 }
 
@@ -40,11 +40,11 @@ foreach ($products as &$prod) {
     $stock = $product_controller->obtenerStock($prod['out_id']);
     if ($stock) {
         if ($prod['out_cantidad'] > $stock) {
-            header('Location:'.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+            header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No hay productos'&message='No hay suficientes productos en existencia que usted desea comprar.'");
             exit();
         }
     } else {
-        header('Location:'.__HS_ROOT.'html/comprador/c-compraExitosa.php');
+        header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='Error al buscar existencias'&message='Algo ocurrió mientras checabamos los productos en existencia para esta compra.'");
         exit();
     }
 }
@@ -100,6 +100,7 @@ $payment
 try {
     $payment->create($apiContext);
 } catch (Exception $e) {
+    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No se pudo crear link de pago'&message='Algo salió mal al redirigir a PayPal'&details=".$e);
     throw new Exception('Unable to create link for payment');
 }
 

@@ -26,8 +26,11 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch(data.reason) {
-                    case "empty":
-                        $('#search-list').html("");
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados en la consulta.");
                         break;
                 }
             } else {
@@ -79,20 +82,38 @@ $(document).ready(function() {
             }
             if (data.result == "error") {
                 switch(data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_result":
+                        alert("No hubo resultados en la consulta.");
+                        break;
                     case "empty_inputs":
                         alert("Campos capturados vacíos.");
                         break;
-                    case "no_exists":
-                        alert("El correo electrónico no existe.");
+                    case "missing_owner":
+                        alert("No se capturó el ID del publicador.");
                         break;
-                    case "not_found":
-                        alert("No se pudo encontrar el usuario. Intentelo más tade.");
+                    case "uncaptured_id":
+                        alert("No se capturó el ID de categoría.");
                         break;
-                    case "wrong_password":
-                        alert("Contraseña incorrecta.");
+                    case "no_categos":
+                        alert("El producto no tiene categorías asociadas.");
                         break;
-                    case "unauthorized_admin":
-                        alert("Administrador no autorizado.");
+                    case "insertion_failed":
+                        alert("Hubo un error al registrar el producto.");
+                        break;
+                    case "empty_files":
+                        alert("Archivos vacios.");
+                        break;
+                    case "file_error":
+                        alert("Hubo un error al cargar un archivo.");
+                        break;
+                    case "file_oversize":
+                        alert("Algún archivo es demasiado grande para cargarlo.");
+                        break;
+                    case "file_wrongext":
+                        alert("Algún archivo presenta una extensión no permitida.");
                         break;
                 }
             } else {

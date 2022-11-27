@@ -28,8 +28,21 @@ $(document).ready(function (){
         }
         if (data.result == "error") {
             switch(data.reason) {
+                case "query_error":
+                    alert("Hubo un error en la operación SQL. "+data.details);
+                    break;
+                case "no_query_results":
+                    alert("No hubo resultados en la consulta.");
+                    break;
+                case "empty_inputs":
+                    alert("Alguna información no se cargó adecuadamente.");
+                    break;
+                case "uncaptured_id":
+                    alert("No se encontró ID de usuario.");
+                    break;
                 case "not_aviable": {
                     alert("No hay suficientes productos en Stock.");
+                    break;
                 }
             }
         } else {

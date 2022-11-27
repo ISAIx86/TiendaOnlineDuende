@@ -28,9 +28,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>$cant
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $count = $this->countOfRows();
 
@@ -53,9 +51,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>$cant
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $count = $this->countOfRows();
 
@@ -78,9 +74,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $count = $this->countOfRows();
 
@@ -101,9 +95,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $count = $this->countOfRows();
 
@@ -124,9 +116,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -146,9 +136,7 @@ class CarritoDAO extends DBH {
             'in_cantidad'=>null
         );
 
-        if (!$this->executeCall($data)) {
-            return "query_error";
-        }
+        $this->executeCall($data);
 
         $result = $this->fetchData()[0]['out_total'];
 
