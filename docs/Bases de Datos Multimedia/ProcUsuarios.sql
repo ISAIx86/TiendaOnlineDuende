@@ -31,7 +31,7 @@ create procedure sp_Usuarios (
     in _rol varchar(16),
     in _correo_e varchar(256),
     in _pass varchar(256),
-    in _avatar blob,
+    in _avatar longblob,
     in _avatar_dir varchar(256),
     in _autorizador varchar(36)
 )
@@ -117,7 +117,7 @@ case (_proc)
 					attr1 as 'out_rol',
 					attr2 as 'out_correo',
 					attr3 as 'out_pass',
-					avatar_dir as 'out_img'
+					avatar as 'out_img'
 				from usuarios
 				where attr2 = _correo_e and autorizador is not null;
             else

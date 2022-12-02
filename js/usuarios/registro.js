@@ -286,6 +286,8 @@ $(document).ready(function() {
 
     bindFields();
 
+    checkAllFields();
+
 });
 
 // Campos de formularios
