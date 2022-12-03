@@ -286,5 +286,7 @@ create table if not exists rel_review (
     
     calificacion decimal (2,1) not null comment "Valoración del cliente",
     comentario varchar(256) not null comment "Comentario del cliente",
-    fecha timestamp not null default current_timestamp comment "Fecha y hora del comentario"
+    fecha timestamp not null default current_timestamp comment "Fecha y hora del comentario",
+    
+    primary key (id_usuario, id_producto)
 );

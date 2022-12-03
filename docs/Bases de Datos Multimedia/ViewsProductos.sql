@@ -17,6 +17,7 @@ drop view if exists vw_histo_pedidos;
 drop view if exists vw_ventas_detallada;
 drop view if exists vw_ventas_agrupada;
 drop view if exists vw_existencias;
+drop view if exists vw_reviews;
 
 -- /////////////////////////////////////////////////
 -- //// VISTA RELACION PEDIDO PRODUCTOS SOLO ID \\\\
@@ -125,3 +126,18 @@ select
 from productos as prod
 left outer join vw_prod_categos as vpc
 on prod.id_producto = vpc.id_producto;
+
+-- ///////////////////////
+-- //// VISTA REVIEWS \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\
+create or replace view vw_reviews as
+select
+	rlr.id_producto as 'id_producto',
+	usu.username as 'username',
+    usu.avatar as 'avatar',
+    rlr.calificacion as 'calif',
+    rlr.comentario as 'comentario',
+    rlr.fecha as 'fecha'
+from rel_review as rlr
+left outer join usuarios as usu
+on rlr.id_usuario = usu.id_usuario;

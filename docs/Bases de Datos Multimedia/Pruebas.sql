@@ -1,5 +1,7 @@
 -- // FILENAME: Pruebas.sql
 
+select * from usuarios;
+
 select
 	bin_to_uuid(id_usuario),
     folio,

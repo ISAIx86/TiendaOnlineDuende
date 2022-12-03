@@ -1,10 +1,49 @@
 $(document).ready(function (){
 
-    $('input[type="radio"][name="in_calif"]').on('change', function() {
-        let value = $(this).val();
-        alert("Tu calificación es de " + value + " estrellas.");
-    });
-
+    $('#form_calif').submit(e => {
+        e.preventDefault()
+        debugger;
+        if ($('input[type="radio"][name="in_val"]').val() == ""){
+            alert("Elija la cantidad de estrellas para valorar el producto.");
+            return;
+        }
+        let formdata = new FormData($(e.target)[0]);
+        formdata.append('submit', 1);
+        $.ajax({
+            url: '../../php/includes/calificaciones/insert_calif_inc.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false
+        }).done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch(data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la consulta:", data.details);
+                        break;
+                    case "no_query_results":
+                        alert("No hubo resultados del la consulta.");
+                        break;
+                    case "empty_inputs":
+                        alert("Algunos campos no se capuraron correctamente.");
+                        break;
+                    case "uncaptured_id":
+                        alert("El ID del producto no se capturo correctamente.");
+                        break;
+                }
+            } else {
+                window.location.reload();
+            }
+        });
+    })
+    
     $('#btn_carrito').on('click', e => {
         const urlParams = new URLSearchParams(window.location.search);
         const cantidad = $('#txt_cantidad').val();

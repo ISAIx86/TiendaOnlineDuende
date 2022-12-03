@@ -37,6 +37,7 @@ include_once __ROOT."html/templates/get_session.php";
     
     $infoProd = array();
     $filesProd = array();
+    $reviews = array();
     if (isset($_GET['prod'])) {
         $controller = new ProductoController();
         $infoProd = $controller->obtenerProducto($_GET['prod']);
@@ -135,23 +136,87 @@ include_once __ROOT."html/templates/get_session.php";
               </div>
             </div> 
             <div>
-              <div class="valoracion">
-                <input id="radio1" type="radio" name="in_calif" value="5" disabled <?php if ($infoProd['out_calif'] >= 5.0) { ?>checked<?php }?>>
-                <label for="radio1">★</label>
-                <input id="radio2" type="radio" name="in_calif" value="4" disabled <?php if ($infoProd['out_calif'] >= 4.0 & $infoProd['out_calif'] < 4.9) { ?>checked<?php }?>>
-                <label for="radio2">★</label>
-                <input id="radio3" type="radio" name="in_calif" value="3" disabled <?php if ($infoProd['out_calif'] >= 3.0 & $infoProd['out_calif'] < 3.9) { ?>checked<?php }?>>
-                <label for="radio3">★</label>
-                <input id="radio4" type="radio" name="in_calif" value="2" disabled <?php if ($infoProd['out_calif'] >= 2.0 & $infoProd['out_calif'] < 2.9) { ?>checked<?php }?>>
-                <label for="radio4">★</label>
-                <input id="radio5" type="radio" name="in_calif" value="1" disabled <?php if ($infoProd['out_calif'] >= 1.0 & $infoProd['out_calif'] < 1.9) { ?>checked<?php }?>>
-                <label for="radio5">★</label>
+              <div class="calificacion">
+                <input id="cal1" type="radio" disabled <?php if ($infoProd['out_calif'] >= 5.0) { ?>checked<?php }?>>
+                <label for="cal1">★</label>
+                <input id="cal2" type="radio" disabled <?php if ($infoProd['out_calif'] >= 4.0 & $infoProd['out_calif'] < 4.9) { ?>checked<?php }?>>
+                <label for="cañ2">★</label>
+                <input id="cal3" type="radio" disabled <?php if ($infoProd['out_calif'] >= 3.0 & $infoProd['out_calif'] < 3.9) { ?>checked<?php }?>>
+                <label for="cal3">★</label>
+                <input id="cal4" type="radio" disabled <?php if ($infoProd['out_calif'] >= 2.0 & $infoProd['out_calif'] < 2.9) { ?>checked<?php }?>>
+                <label for="cal4">★</label>
+                <input id="cal5" type="radio" disabled <?php if ($infoProd['out_calif'] >= 1.0 & $infoProd['out_calif'] < 1.9) { ?>checked<?php }?>>
+                <label for="cal5">★</label>
               </div>
               <p><?php echo $infoProd['out_calif']?></p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- ESTE DIV TIENE EL FORM DE CALIFICACION -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div>
+              <h5>Califique el producto<h5>
+            </div>
+            <form id="form_calif">
+              <input type="hidden" name="in_prodid" value=<?php echo $infoProd['out_id'] ?>>
+              <label for="in_calif" class="form-label">Su calificación</label>
+              <div class="form_control" requerido="true" state="empt">
+                <div class="valoracion">
+                  <input id="radio1" type="radio" name="in_val" value="5">
+                  <label for="radio1">★</label>
+                  <input id="radio2" type="radio" name="in_val" value="4">
+                  <label for="radio2">★</label>
+                  <input id="radio3" type="radio" name="in_val" value="3">
+                  <label for="radio3">★</label>
+                  <input id="radio4" type="radio" name="in_val" value="2">
+                  <label for="radio4">★</label>
+                  <input id="radio5" type="radio" name="in_val" value="1">
+                  <label for="radio5">★</label>
+                </div>
+              </div>
+              <div class="form_control" requerido="true" state="empt">
+                <input type="text" class="form-control" id="txt_review" name="in_review" placeholder="¿Qué opina del producto?">
+              </div>
+              <button class="btn btn-primary">Calificar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ESTE DIV TIENE LOS REVIEW -->
+    <div class="cointainer">
+      <ul id="disp_pedidos" class="list-group">
+        <?php foreach($reviews as &$rev) { ?>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class = "row">
+            <div class = "col-2">
+              <h6></h6>
+              <img class='imgCuadrada' src="../../resources/default_user.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class = "col-10">
+              <div class="calificacion">
+                <input id="radio1" type="radio" value="5" disabled <?php if ($rev['out_calif'] >= 5.0) { ?>checked<?php }?>>
+                <label for="radio1">★</label>
+                <input id="radio2" type="radio" value="4" disabled <?php if ($rev['out_calif'] >= 4.0 & $rev['out_calif'] < 4.9) { ?>checked<?php }?>>
+                <label for="radio2">★</label>
+                <input id="radio3" type="radio" value="3" disabled <?php if ($rev['out_calif'] >= 3.0 & $rev['out_calif'] < 3.9) { ?>checked<?php }?>>
+                <label for="radio3">★</label>
+                <input id="radio4" type="radio" value="2" disabled <?php if ($rev['out_calif'] >= 2.0 & $rev['out_calif'] < 2.9) { ?>checked<?php }?>>
+                <label for="radio4">★</label>
+                <input id="radio5" type="radio" value="1" disabled <?php if ($rev['out_calif'] >= 1.0 & $rev['out_calif'] < 1.9) { ?>checked<?php }?>>
+                <label for="radio5">★</label>
+              </div>
+              <p>Aqui aparece el comentario del cliente respecto a su opinion del producto.</p>
+            </div>
+          </div>
+        </li>
+        <?php } ?>
+      </ul>
     </div>
     <div class = "container">
       <div id = "productosRecomendados">
