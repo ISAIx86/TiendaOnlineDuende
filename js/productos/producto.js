@@ -1,8 +1,7 @@
 $(document).ready(function (){
 
     $('#form_calif').submit(e => {
-        e.preventDefault()
-        debugger;
+        e.preventDefault();
         if ($('input[type="radio"][name="in_val"]').val() == ""){
             alert("Elija la cantidad de estrellas para valorar el producto.");
             return;

@@ -22,12 +22,14 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="mb-3">
             <label for="in_nombre" class="form-label">Categoria</label>
             <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
+            <small>Error</small>
           </div>
         </div>
         <div class="form_control" requerido="true" state='empt'>
           <div class="mb-3">
             <label for="in_descrip" class="form-label">Descripcion</label>
             <textarea class="form-control" id="txt_descrip" name="in_descrip" rows="3"></textarea>
+            <small>Error</small>
           </div>
         </div>
         <div class="mb-3">

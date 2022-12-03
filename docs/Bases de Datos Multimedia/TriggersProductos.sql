@@ -32,8 +32,8 @@ for each row
 begin
 	declare _reviews int;
     declare _total_calif decimal;
-    select count(*) into _reviews where id_producto = new.id_producto;
-    select sum(calificacion) into _total_calif where id_producto = new.id_producto group by id_producto;
+    select count(*) into _reviews from rel_review where id_producto = new.id_producto;
+    select sum(calificacion) into _total_calif from rel_review where id_producto = new.id_producto group by id_producto;
 	update productos set
 		calificacion = (_total_calif / _reviews)
 	where id_producto = new.id_producto;

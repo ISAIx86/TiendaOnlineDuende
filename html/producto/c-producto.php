@@ -34,6 +34,7 @@ include_once __ROOT."html/templates/get_session.php";
     require_once __ROOT."php/models/multimedia-model.php";
     require_once __ROOT."php/classes/productos/producto_contr.classes.php";
     require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
+    require_once __ROOT."php/classes/calificaciones/calif_contr.classes.php";
     
     $infoProd = array();
     $filesProd = array();
@@ -43,6 +44,8 @@ include_once __ROOT."html/templates/get_session.php";
         $infoProd = $controller->obtenerProducto($_GET['prod']);
         $controllermult = new MultimediaController();
         $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
+        $controllercal = new CalificacionesController();
+        $reviews = $controllercal->obtenerCalificaciones($_GET['prod']);
     }
   ?>
   <!-- Container -->
@@ -190,28 +193,31 @@ include_once __ROOT."html/templates/get_session.php";
     </div>
     <!-- ESTE DIV TIENE LOS REVIEW -->
     <div class="cointainer">
-      <ul id="disp_pedidos" class="list-group">
-        <?php foreach($reviews as &$rev) { ?>
+      <ul id="disp_calif" class="list-group">
+        <?php foreach($reviews as &$rev) { 
+          $imageSrc = '"data:image/jpg;base64,'.base64_encode($rev['out_img']).'"';
+        ?>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class = "row">
             <div class = "col-2">
-              <h6></h6>
-              <img class='imgCuadrada' src="../../resources/default_user.jpg" class="d-block w-100" alt="...">
+              <h6><?php echo $rev['out_username']?></h6>
+              <img class='imgRedonda' src=<?php echo $imageSrc?> e class="d-block w-100" alt="...">
             </div>
             <div class = "col-10">
               <div class="calificacion">
-                <input id="radio1" type="radio" value="5" disabled <?php if ($rev['out_calif'] >= 5.0) { ?>checked<?php }?>>
-                <label for="radio1">★</label>
-                <input id="radio2" type="radio" value="4" disabled <?php if ($rev['out_calif'] >= 4.0 & $rev['out_calif'] < 4.9) { ?>checked<?php }?>>
-                <label for="radio2">★</label>
-                <input id="radio3" type="radio" value="3" disabled <?php if ($rev['out_calif'] >= 3.0 & $rev['out_calif'] < 3.9) { ?>checked<?php }?>>
-                <label for="radio3">★</label>
-                <input id="radio4" type="radio" value="2" disabled <?php if ($rev['out_calif'] >= 2.0 & $rev['out_calif'] < 2.9) { ?>checked<?php }?>>
-                <label for="radio4">★</label>
-                <input id="radio5" type="radio" value="1" disabled <?php if ($rev['out_calif'] >= 1.0 & $rev['out_calif'] < 1.9) { ?>checked<?php }?>>
-                <label for="radio5">★</label>
+                <input id="cal1" type="radio" value="5" disabled <?php if ($rev['out_val'] >= 5.0) { ?>checked<?php }?>>
+                <label for="cal1">★</label>
+                <input id="cal2" type="radio" value="4" disabled <?php if ($rev['out_val'] >= 4.0 & $rev['out_val'] < 4.9) { ?>checked<?php }?>>
+                <label for="cal2">★</label>
+                <input id="cal3" type="radio" value="3" disabled <?php if ($rev['out_val'] >= 3.0 & $rev['out_val'] < 3.9) { ?>checked<?php }?>>
+                <label for="cal3">★</label>
+                <input id="cal4" type="radio" value="2" disabled <?php if ($rev['out_val'] >= 2.0 & $rev['out_val'] < 2.9) { ?>checked<?php }?>>
+                <label for="cal4">★</label>
+                <input id="cal5" type="radio" value="1" disabled <?php if ($rev['out_val'] >= 1.0 & $rev['out_val'] < 1.9) { ?>checked<?php }?>>
+                <label for="cal5">★</label>
               </div>
-              <p>Aqui aparece el comentario del cliente respecto a su opinion del producto.</p>
+              <p><?php echo $rev['out_comment']?></p>
+              <small><?php echo $rev['out_fecha']?></small>
             </div>
           </div>
         </li>

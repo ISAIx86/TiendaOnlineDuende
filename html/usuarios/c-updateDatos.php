@@ -63,6 +63,7 @@ include_once __ROOT."html/templates/get_session.php";
                         <div class="form_control" requerido="false" state='empt'>
                             <label for="FotoPerfil">Foto de perfil:</label>
                             <input type="file" id="fle_fotoperfil" name="in_fotoperfil">
+                            <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state="empt">
                             <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['out_nombres'] ?>">
@@ -109,6 +110,7 @@ include_once __ROOT."html/templates/get_session.php";
                                         break;
                                 }
                             ?>
+                            <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state="empt">
                             <div >Privacidad de cuenta:</div>
@@ -129,6 +131,7 @@ include_once __ROOT."html/templates/get_session.php";
                             <?php
                                 }
                             ?>
+                            <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
                             <div >Fecha de nacimiento:</div>

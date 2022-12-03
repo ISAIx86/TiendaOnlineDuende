@@ -47,24 +47,28 @@ include_once __ROOT."html/templates/get_session.php";
             <div class="mb-3">
               <label for="txt_nombre" class="form-label">Producto</label>
               <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto">
+              <small>Error</small>
             </div>
           </div>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_descrip" class="form-label">Descripcion</label>
               <textarea class="form-control" id="txt_descrip" name="in_descrip" maxlength="256" rows="3" style="resize: none;"></textarea>
+              <small>Error</small>
             </div>
           </div>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_descrip" class="form-label">Cantidad disponible</label>
               <input type="number" class="form-control" id="txt_dispo" name="in_dispo" max="256", min="1"></input>
+              <small>Error</small>
             </div>
           </div>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="img_fotos" class="form-label">Fotografias del producto</label>
               <input class="form-control" type="file" id="fle_media" name="in_files[]" multiple>
+              <small>Error</small>
             </div>
           </div>
           <div class="mb-3">
@@ -72,6 +76,7 @@ include_once __ROOT."html/templates/get_session.php";
             <select id="lbx_catego" name="in_catego" size="5">
               <option>Sin categorías</option>
             </select>
+            <small>Error</small>
           </div>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
@@ -95,6 +100,7 @@ include_once __ROOT."html/templates/get_session.php";
                     <span class="input-group-text">$</span>
                     <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)">
                     <span class="input-group-text">.00</span>
+                    <small>Error</small>
                   </div>
                 </div>
               </div>

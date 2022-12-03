@@ -36,21 +36,22 @@ case (_proc)
             calificacion,
             comentario
         ) values (
-			_id_usuario,
-            _id_producto,
+			uuid_to_bin(_id_usuario),
+            uuid_to_bin(_id_producto),
             _calificacion,
             _comentario
         );
 -- //// OBTENER  \\\\ --
     when ('get_by_prod') then
 		select
-			username,
-            avatar,
-            calif,
-            comentario,
-            fecha
+			username as 'out_username',
+            avatar as 'out_img',
+            calif as 'out_val',
+            comentario as 'out_comment',
+            fecha as 'out_fecha'
         from vw_reviews
-        where id_producto = uuid_to_bin(_id_producto);
+        where id_producto = uuid_to_bin(_id_producto)
+        limit 10;
     else
 		select "invalid_command" as 'result';
 end case;
