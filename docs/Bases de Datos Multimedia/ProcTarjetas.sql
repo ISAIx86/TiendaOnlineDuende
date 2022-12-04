@@ -20,7 +20,7 @@ drop procedure if exists sp_Tarjetas;
 $$ DELIMITER ;
 DELIMITER $$
 create procedure sp_Tarjetas (
-	in proc varchar(16),
+	in _proc varchar(16),
 	in _id_tarj varchar(36),
 	in _id_usuario varchar(36),
     in _nombre_tarj varchar(128),
