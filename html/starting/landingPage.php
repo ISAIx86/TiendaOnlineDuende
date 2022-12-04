@@ -94,6 +94,7 @@
     <script src="../../js/lib/bootstrap.bundle.js"></script>
     <script src="../../js/lib/jquery-3.6.1.js"></script>
     <script src="../../js/utilities/validaciones.js"></script>
+    <script src="../../js/usuarios/checarCampos.js"></script>
     <script src="../../js/usuarios/registro.js"></script>
 </body>
 </html>
