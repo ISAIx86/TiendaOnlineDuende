@@ -33,13 +33,13 @@ include_once __ROOT."html/templates/get_session.php";
         $details = "";
 
         if (isset($_GET['context'])) {
-            if ($GET['context'] != "") $context = $_GET['context'];
+            $context = $_GET['context'];
         }
         if (isset($_GET['message'])) {
-            if ($GET['message'] != "") $message = $_GET['message'];
+            $message = $_GET['message'];
         }
         if (isset($_GET['details'])) {
-            if ($GET['details'] != "") $details = $_GET['details'];
+            $details = $_GET['details'];
         }
     ?>
     <!-- Container -->

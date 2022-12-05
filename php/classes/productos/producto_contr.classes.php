@@ -16,6 +16,16 @@ class ProductoController extends ProductoDAO {
         } else return false;
     }
 
+    private function hasEmptyInputForModify(Producto $prod) {
+        if (
+            empty($prod->getTitulo()) |
+            empty($prod->getDescripcion()) |
+            empty($prod->getPrecio())
+        ) {
+            return true;
+        } else return false;
+    }
+
     // Métodos fuertes
     public function crearProducto(Producto &$prod, $categos) {
         if (empty($prod->getPublicador())) {
@@ -45,7 +55,7 @@ class ProductoController extends ProductoDAO {
         if (empty($prod->getID())) {
             return "uncaptured_id";
         }
-        if ($this->hasEmptyInput($prod)) {
+        if ($this->hasEmptyInputForModify($prod)) {
             return "empty_inputs";
         }
         if (!$this->rcat_restart($prod->getID())) {

@@ -26,9 +26,9 @@ if (isset($_SESSION['user'])) {
             echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
             exit();
         }
-        $array_files = array();
-        $countfiles = count($_FILES['in_files']['name']);
-        if ($countfiles > 0) {
+        if (strcmp($_FILES['in_files']['name'][0], "") != 0) {
+            $array_files = array();
+            $countfiles = count($_FILES['in_files']['name']);
             $controllermult = new MultimediaController();
             $result = $controllermult->limpiarArchivos($nuevo->getID());
             if (gettype($result) == "string") {
@@ -47,7 +47,6 @@ if (isset($_SESSION['user'])) {
                     'size' => $_FILES['in_files']['size'][$i]
                 ));
             }
-            
             $result = $controllermult->insertarMultimedia($nuevo->getID(), $array_files);
         }
         if (gettype($result) == "string") {

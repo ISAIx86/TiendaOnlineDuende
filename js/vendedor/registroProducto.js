@@ -125,6 +125,78 @@ $(document).ready(function() {
         });
     });
 
+    $('#form_producto_upd').submit(e => {
+        e.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!checkCorrectInputs($(e.target))) {
+            alert("Algunos campos contienen errores o están vacíos.");
+            return;
+        }
+        if (categorias.length == 0) {
+            alert("Asigne al menos una categoria al producto.");
+            return;
+        }
+        let formdata = new FormData($(e.target)[0]);
+        formdata.append('in_prodid', urlParams.get('prod'));
+        formdata.append('in_categos', JSON.stringify(categorias));
+        formdata.append('submit', 1);
+        $.ajax({
+            url: '../../php/includes/productos/modif_prod_inc.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false
+        }).done(response => {
+            let data;
+            try {
+                data = $.parseJSON(response);
+            } catch (err) {
+                $(".container-footer").append(response);
+                return;
+            }
+            if (data.result == "error") {
+                switch(data.reason) {
+                    case "query_error":
+                        alert("Hubo un error en la operación SQL. "+data.details);
+                        break;
+                    case "no_query_result":
+                        alert("No hubo resultados en la consulta.");
+                        break;
+                    case "empty_inputs":
+                        alert("Campos capturados vacíos.");
+                        break;
+                    case "missing_owner":
+                        alert("No se capturó el ID del publicador.");
+                        break;
+                    case "uncaptured_id":
+                        alert("No se capturó el ID de categoría.");
+                        break;
+                    case "no_categos":
+                        alert("El producto no tiene categorías asociadas.");
+                        break;
+                    case "insertion_failed":
+                        alert("Hubo un error al registrar el producto.");
+                        break;
+                    case "empty_files":
+                        alert("Archivos vacios.");
+                        break;
+                    case "file_error":
+                        alert("Hubo un error al cargar un archivo.");
+                        break;
+                    case "file_oversize":
+                        alert("Algún archivo es demasiado grande para cargarlo.");
+                        break;
+                    case "file_wrongext":
+                        alert("Algún archivo presenta una extensión no permitida.");
+                        break;
+                }
+            } else {
+                alert("Producto editado.");
+                window.location.reload();
+            }
+        });
+    });
+
     bindFields();
 
 });

@@ -69,6 +69,24 @@ class MultimediaDAO extends DBH {
         return $result;
 
     }
+
+    protected function mult_clean($id_prod) {
+
+        $this->prepareStatement('clean_files');
+
+        $mult = Multimedia::create()->setProductoID($id_prod);
+
+        $this->executeCall($mult);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0)
+            return false;
+        else return true;
+
+    }
     
 }
 

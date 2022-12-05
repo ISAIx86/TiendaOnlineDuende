@@ -87,6 +87,13 @@ class MultimediaController extends MultimediaDAO {
         return $this->mult_getfiles($id_prod);
     }
 
+    public function limpiarArchivos($id_prod) {
+        if (empty($id_prod)) {
+            return "uncaptured_id";
+        }
+        return $this->mult_clean($id_prod);
+    }
+
 }
 
 ?>

@@ -100,7 +100,8 @@ $payment
 try {
     $payment->create($apiContext);
 } catch (Exception $e) {
-    header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No se pudo crear link de pago'&message='Algo salió mal al redirigir a PayPal'&details=".$e);
+    header("Location:".__HS_ROOT."html/templates/something_went_wrong.php?context=No se pudo crear link de pago&message=Algo salió mal al redirigir a PayPal");
+    exit();
     throw new Exception('Unable to create link for payment');
 }
 

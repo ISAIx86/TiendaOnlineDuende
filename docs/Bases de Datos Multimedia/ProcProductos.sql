@@ -174,8 +174,7 @@ case (_proc)
 -- //// ELIMINAR TODA CATEGORIA \\\\ --
     when ('restart_cat') then
 		delete from rel_cat
-        where id_producto = uuid_to_bin(_id_producto)
-        and fecha_elim is null and id_autorizador is not null;
+        where id_producto = uuid_to_bin(_id_producto);
 -- //// OBTENER CATEGORIAS \\\\ --
 	when ('get_categos') then
 		select

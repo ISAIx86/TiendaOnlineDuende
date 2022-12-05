@@ -42,10 +42,10 @@ $(document).on('click', '#btn_addex', e => {
     });
 });
 
-$(document).on('click', '$btn_del', e => {
+$(document).on('click', '#btn_del', e => {
     let product = $(e.target).parents('tr#prod_row').attr('idprod');
     $.ajax({
-        url: '../../php/includes/productos/add_exist_inc.php',
+        url: '../../php/includes/productos/delete_prod_inc.php',
         type: 'POST',
         data: {'in_prodid':product, 'submit':'1'}
     }).done(response => {

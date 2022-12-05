@@ -79,7 +79,7 @@ include_once __ROOT."html/templates/get_session.php";
         </div>
       </div>
       <div class = "col-6">
-        <form id="form_producto" enctype='multiple/form-data'>
+        <form id="form_producto_upd" enctype='multiple/form-data'>
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_nombre" class="form-label">Producto</label>
@@ -94,7 +94,7 @@ include_once __ROOT."html/templates/get_session.php";
               <small>Error</small>
             </div>
           </div>
-          <div class="form_control" requerido="true" state='empt'>
+          <div class="form_control" requerido="false" state='empt'>
             <div class="mb-3">
               <label for="img_fotos" class="form-label">Fotografias del producto</label>
               <input class="form-control" type="file" id="fle_media" name="in_files[]" multiple>
@@ -139,7 +139,7 @@ include_once __ROOT."html/templates/get_session.php";
             </div>
           </div>
           <div class="mb-3">
-            <button type="submit" class="btn btn-primary mb-3">Registrar</button>
+            <button type="submit" class="btn btn-primary mb-3">Editar</button>
           </div>
         </form>
       </div>
