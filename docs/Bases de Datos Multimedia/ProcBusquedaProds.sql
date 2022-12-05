@@ -41,6 +41,7 @@ case (_proc)
         left outer join multimedia as m
         on m.id_prod = p.id_producto
         where m.tipo = 'i'
+        and p.fecha_elim is null and p.id_autorizador is not null
         group by p.id_producto
         order by fn_ventasProductos(id_producto) desc
         limit 10;
@@ -56,6 +57,7 @@ case (_proc)
         left outer join multimedia as m
         on m.id_prod = p.id_producto
         where m.tipo = 'i'
+        and p.fecha_elim is null and p.id_autorizador is not null
         group by p.id_producto
         order by vistas desc
         limit 10;
@@ -71,6 +73,7 @@ case (_proc)
         left outer join multimedia as m
         on m.id_prod = p.id_producto
         where m.tipo = 'i'
+        and p.fecha_elim is null and p.id_autorizador is not null
         group by p.id_producto
         order by calificacion desc
         limit 10;

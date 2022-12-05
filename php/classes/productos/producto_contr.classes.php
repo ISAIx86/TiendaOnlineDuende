@@ -10,7 +10,6 @@ class ProductoController extends ProductoDAO {
             empty($prod->getTitulo()) |
             empty($prod->getDescripcion()) |
             empty($prod->getDisponibilidad()) |
-            $prod->getCotizacion() != null |
             empty($prod->getPrecio())
         ) {
             return true;
@@ -42,22 +41,21 @@ class ProductoController extends ProductoDAO {
         return true;
     }
 
-    public function modificarProducto(Producto &$prod) {
+    public function modificarProducto(Producto &$prod, $categos) {
         if (empty($prod->getID())) {
             return "uncaptured_id";
         }
         if ($this->hasEmptyInput($prod)) {
             return "empty_inputs";
         }
+        if (!$this->rcat_restart($prod->getID())) {
+            return "failed_restart_categos";
+        }
         if (!$this->pro_modificar($prod)) {
             return false;
         }
-        $rl_cat_dao = new RelCatDAO();
-        if (!$rl_cat_dao->rcat_restart($prod->getID())) {
-            return "failed_restart_categos";
-        }
         foreach ($categos as &$cat) {
-            $rl_cat_dao->rcat_crear($proid, $cat['ID']);
+            $this->rcat_add($prod->getID(), $cat->id);
         }
         return true;
     }
@@ -66,7 +64,27 @@ class ProductoController extends ProductoDAO {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        return $this->cat_baja($id);
+        return $this->pro_baja($id);
+    }
+
+    public function autorizarProducto($id_prod, $id_admin) {
+        if (empty($id_prod)) {
+            return "uncaptured_id";
+        }
+        if (empty($id_admin)) {
+            return "uncaptured_admin";
+        }
+        return $this->pro_autho($id_prod, $id_admin);
+    }
+
+    public function denegarProducto($id_prod, $id_admin) {
+        if (empty($id_prod)) {
+            return "uncaptured_id";
+        }
+        if (empty($id_admin)) {
+            return "uncaptured_admin";
+        }
+        return $this->pro_deny($id_prod, $id_admin);
     }
 
     public function añadirStock($id_prod, $cant) {
@@ -93,11 +111,29 @@ class ProductoController extends ProductoDAO {
         return $this->pro_getdata($id);
     }
 
+    public function obtenerProductoAutorizar($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        return $this->pro_getdataunauth($id);
+    }
+
+    public function obtenerCategorias($id) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        return $this->rcat_getcat($id);
+    }
+
     public function obtenerStock($id) {
         if (empty($id)) {
             return "uncaptured_id";
         }
         return $this->pro_getstock($id);
+    }
+
+    public function obtenerPeticiones() {
+        return $this->pro_getautho();
     }
 
 }

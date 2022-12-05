@@ -1,5 +1,4 @@
 function checkAllFields() {
-    debugger;
     $('#txt_nombres').trigger('change');
     $('#txt_apellidos').trigger('change');
     $('input[type="radio"][name="in_genero"]').trigger('change');

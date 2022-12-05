@@ -94,6 +94,48 @@ class ProductoDAO extends DBH {
 
     }
 
+    protected function pro_autho($id_prod, $id_autho) {
+
+        $this->prepareStatement('autho');
+
+        $prod = Producto::create()
+            ->setID($id_prod)
+            ->setPublicador($id_autho);
+
+        $this->executeCall($prod);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
+    protected function pro_deny($id_prod, $id_autho) {
+
+        $this->prepareStatement('deny');
+
+        $prod = Producto::create()
+            ->setID($id_prod)
+            ->setPublicador($id_autho);
+
+        $this->executeCall($prod);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+
+    }
+
     // Cagetorias
     protected function rcat_add($id_prod, $id_catego) {
 
@@ -136,10 +178,44 @@ class ProductoDAO extends DBH {
 
     }
 
+    protected function rcat_getcat($id_prod) {
+
+        $this->prepareStatement('get_categos');
+
+        $prod = Producto::create()
+            ->setID($id_prod);
+
+        $this->executeCall($prod);
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
     // Consultas
     protected function pro_getdata($id) {
 
         $this->prepareStatement('get_data');
+
+        $prod = Producto::create()->setID($id);
+
+        $this->executeCall($prod);
+
+        $result = $this->fetchData()[0];
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
+    // Consultas
+    protected function pro_getdataunauth($id) {
+
+        $this->prepareStatement('get_data_unautho');
 
         $prod = Producto::create()->setID($id);
 
@@ -185,6 +261,22 @@ class ProductoDAO extends DBH {
 
         return $result;
         
+    }
+
+    protected function pro_getautho() {
+
+        $this->prepareStatement('get_toautho');
+
+        $prod = Producto::create();
+
+        $this->executeCall($prod);
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
     }
 
 }

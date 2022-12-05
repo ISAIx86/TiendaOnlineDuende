@@ -68,18 +68,28 @@ case (_proc)
 			cotizacion = ifnull(_cotizacion, cotizacion),
 			precio = ifnull(_precio, precio),
 			fecha_modif = sysdate()
-		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
 -- //// ELIMINAR PRODUCTO \\\\ --
     when ('delete') then
 		update productos set
 			fecha_elim = sysdate()
-		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
 -- //// AUTORIZAR PRODUCTO \\\\ --
     when ('autho') then
 		update productos set
-			id_autorizador = uuid_to_bin(_id_aurorizador),
+			id_autorizador = ifnull(uuid_to_bin(_id_publicador), id_autorizador),
 			fecha_autorizado = sysdate()
-		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is null;
+-- //// DENEGAR \\\\
+	when ('deny') then
+		update productos set
+			id_autorizador = ifnull(uuid_to_bin(_id_publicador), id_autorizador),
+            fecha_elim = sysdate()
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is null;
 -- //// EXISTENCIAS \\\\ --
 	when ('get_exist') then
         set @_categos = "";
@@ -88,15 +98,17 @@ case (_proc)
 		end if;
 		set @_search_qry = concat(
 			'select
+				bin_to_uuid(id_prod) as out_prodid,
+                imagen as out_img,
 				categorias as out_categos,
-                bin_to_uuid(id_prod) as out_prodid,
                 titulo as out_titulo,
 				calificacion as out_calif,
 				precio as out_precio,
                 disponibilidad as out_dispo
 			from vw_existencias
             where id_publicador = uuid_to_bin("',_id_publicador,'")',
-            @_categos,';'
+            @_categos,
+            ' and fec_elim is null and id_autorizador is not null;'
 		);
         prepare qry from @_search_qry;
 		execute qry;
@@ -104,12 +116,14 @@ case (_proc)
     when ('restock') then
 		update productos set
 			disponibilidad = disponibilidad + _disponibilidad
-		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
 -- //// OBTENER DISPONIBILIDAD \\\\ --
 	when ('get_stock') then
 		select
 			disponibilidad as 'out_dispo'
-		where id_producto = uuid_to_bin(_id_producto) and fecha_elim is null;
+		where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
 -- //// OBTENER INFORMACIÓN DE PRODUCTO \\\\ --
 	when ('get_data') then
 		select
@@ -121,7 +135,32 @@ case (_proc)
             disponibilidad as 'out_dispo',
             calificacion as 'out_calif'
 		from productos
-        where id_producto = uuid_to_bin(_id_producto);
+        where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
+-- //// OBTENER INFORMACION DE PRODUCTO SIN AUTORIZAR \\\\ --
+	when ('get_data_unautho') then
+		select
+			bin_to_uuid(id_producto) as 'out_id',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            cotizacion as 'out_cotiz',
+            precio as 'out_precio',
+            disponibilidad as 'out_dispo',
+            calificacion as 'out_calif'
+		from productos
+        where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null;
+-- //// OBTENER PRODUCTOS PARA AUTORIZAR \\\\ --
+	when ('get_toautho') then
+		select
+			bin_to_uuid(id_prod) as 'out_prodid',
+            imagen as 'out_img',
+            titulo as 'out_titulo',
+            descripcion as 'out_descripcion',
+            cotizacion as 'out_cotiz',
+            precio as 'out_precio'
+		from vw_listaauto
+        where fecha_elim is null and id_autorizador is null;
 -- //// AÑADIR CATEGORIA \\\\ --
 	when ('add_cat') then
 		insert into rel_cat(
@@ -135,7 +174,17 @@ case (_proc)
 -- //// ELIMINAR TODA CATEGORIA \\\\ --
     when ('restart_cat') then
 		delete from rel_cat
-        where id_producto = uuid_to_bin(_id_producto);
+        where id_producto = uuid_to_bin(_id_producto)
+        and fecha_elim is null and id_autorizador is not null;
+-- //// OBTENER CATEGORIAS \\\\ --
+	when ('get_categos') then
+		select
+			bin_to_uuid(cat.id_catego) as 'out_id',
+            cat.nombre as 'out_nombre'
+        from rel_cat as rlc
+        left outer join categorias as cat
+        on rlc.id_categoria = cat.id_catego
+        where rlc.id_producto = uuid_to_bin(_id_producto);
     else
 		select "invalid_command" as 'result';
 end case;

@@ -13,7 +13,16 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php include_once __ROOT."html/templates/headerAdministrador.php";?>
+  <?php
+    require_once __ROOT."html/templates/headerAdministrador.php";
+    require_once __ROOT."php/models/producto-model.php";
+    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+    $lista = array();
+    if (isset($_SESSION['user'])) {
+      $controller = new ProductoController();
+      $lista = $controller->obtenerPeticiones();
+    }
+  ?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">
@@ -41,48 +50,33 @@ include_once __ROOT."html/templates/get_session.php";
     </div>
     <div class = "container" id = "tablaVentas">
       <div class = "row">
-        <table class="table table-sm table-dark">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Computadoras</td>
-              <td>Computadora gamer</td>
-              <td>Aprobado</td>                
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Oficina</td>
-              <td>Silla</td>
-              <td>Aprobado</td>  
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Belleza</td>
-              <td>Maquillaje</td>
-              <td>Rechazado</td>  
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Computadoras</td>
-              <td>Computadora gamer</td>
-              <td>Aprobado</td>                
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Oficina</td>
-              <td>Silla</td>
-              <td>Aprobado</td>  
-            </tr>
-          </tbody>
-        </table>
+        <div class="cointainer">
+          <ul id="disp_pedidos" class="list-group">
+          <?php foreach($lista as &$prod) {
+            $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
+          ?>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class = "row">
+                <div class = "col-2">
+                  <img src=<?php echo $imageSrc?> class="d-block w-100" alt="...">
+                </div>
+                <div class = "col-8">
+                  <h6>Titulo: <?php echo $prod['out_titulo']?></h6>
+                  <p>Descripción: <?php echo $prod['out_descripcion']?></p>
+                  <?php if ($prod['out_cotiz']) { ?>
+                    <h3>Cotizado</h3>
+                  <?php } else { ?>
+                    <h3><?php echo $prod['out_precio']?></h3>
+                  <?php } ?>
+                </div>
+                <div class = "col-2">
+                  <a href="a-aprobarproducto.php?prod=<?php echo $prod['out_prodid']?>" class="btn btn-primary">Ver detalles</a>
+                </div>
+              </div>
+            </li>
+          <?php } ?>
+        </ul>
+      </div>
       </div>
     </div>
   </div>

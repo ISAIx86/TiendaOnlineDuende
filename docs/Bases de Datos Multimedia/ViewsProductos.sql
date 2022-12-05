@@ -118,14 +118,21 @@ create or replace view vw_existencias as
 select
 	prod.id_publicador as 'id_publicador',
     prod.id_producto as 'id_prod',
+    multi.contenido as 'imagen',
 	vpc.categorias as 'categorias',
 	prod.titulo as 'titulo',
 	prod.calificacion as 'calificacion',
 	prod.precio as 'precio',
-	prod.disponibilidad as 'disponibilidad'
+	prod.disponibilidad as 'disponibilidad',
+    prod.fecha_elim as 'fec_elim',
+    prod.id_autorizador as 'id_autorizador'
 from productos as prod
 left outer join vw_prod_categos as vpc
-on prod.id_producto = vpc.id_producto;
+on prod.id_producto = vpc.id_producto
+left outer join multimedia as multi
+on prod.id_producto = multi.id_prod
+where multi.tipo = 'i'
+group by prod.id_producto;
 
 -- ///////////////////////
 -- //// VISTA REVIEWS \\\\
@@ -141,3 +148,22 @@ select
 from rel_review as rlr
 left outer join usuarios as usu
 on rlr.id_usuario = usu.id_usuario;
+
+-- //////////////////////////////////
+-- //// VISTA LISTA AUTORIZACION \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+create or replace view vw_listaauto as
+select
+	prod.id_producto as 'id_prod',
+    prod.id_autorizador as 'id_autorizador',
+    multi.contenido as 'imagen',
+    prod.titulo as 'titulo',
+    prod.descripcion as 'descripcion',
+    prod.cotizacion as 'cotizacion',
+    prod.precio as 'precio',
+    prod.fecha_elim as 'fecha_elim'
+from productos as prod
+left outer join multimedia as multi
+on prod.id_producto = multi.id_prod
+where multi.tipo = 'i'
+group by prod.id_producto;

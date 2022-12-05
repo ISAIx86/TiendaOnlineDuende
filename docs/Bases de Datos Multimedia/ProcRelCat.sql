@@ -41,6 +41,8 @@ case (_proc)
     when ('restart') then
 		delete from rel_cat
         where id_producto = uuid_to_bin(_id_producto);
+-- //// OBTENER CATEGORÍAS DE PRODUCTO \\\\ --
+	
     else
 		select "invalid_command" as 'result';
 end case;

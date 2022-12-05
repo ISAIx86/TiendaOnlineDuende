@@ -51,9 +51,19 @@ class CategoriaController extends CategoriaDAO {
             return "uncaptured_id";
         }
         if (empty($auto)) {
-            return "empty_inputs";
+            return "uncaptured_admin";
         }
         return $this->cat_authorize($id, $auto);
+    }
+
+    public function denegarCategoria($id, $auto) {
+        if (empty($id)) {
+            return "uncaptured_id";
+        }
+        if (empty($auto)) {
+            return "uncaptured_admin";
+        }
+        return $this->cat_deny($id, $auto);
     }
 
     public function obtenerTodos() {
@@ -65,6 +75,10 @@ class CategoriaController extends CategoriaDAO {
             return "empty";
         }
         return $this->cat_busqueda($texto);
+    }
+
+    public function obtenerPeticiones() {
+        return $this->cat_getautho();
     }
     
 }

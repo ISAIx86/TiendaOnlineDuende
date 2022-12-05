@@ -9,6 +9,8 @@ let categorias = [];
 
 $(document).ready(function() {
 
+    bindCategos();
+
     $('#txt_incatego').on('keyup', e => {
         let text = $('#txt_incatego').val();
         $.ajax({
@@ -145,7 +147,7 @@ $(document).on('click', '#item_catego_list', e => {
 });
 
 function appendElement(htmlList, element) {
-    let text='<li><a id="item_catego" catego_id="'+element["ID"]+'" value="'+element["Nombre"]+'">'+element["Nombre"]+'</a></li>';
+    let text='<li><a id="item_catego" catego_id="'+element["out_id"]+'" value="'+element["out_nombre"]+'">'+element["out_nombre"]+'</a></li>';
     htmlList[0] += text;
 }
 
@@ -162,6 +164,16 @@ function updateCategoList() {
 }
 
 // Campos de formularios
+
+function bindCategos() {
+    let categoarr = $('#lbx_catego').children('#item_catego_list').toArray();
+    categoarr.forEach(elem => {
+        categorias.push(new Categoria(
+            elem.getAttribute('catego_id'),
+            elem.getAttribute('value')
+        ))
+    })
+}
 
 function bindFields() {
 
@@ -196,6 +208,7 @@ function bindFields() {
 function loadMedia(elements) {
     const imgext = ['jpeg', 'jpg', 'png', 'gif'];
     const vidext = ['mp4'];
+    $('#mda_carousel').html("");
     for (let i = 0; i < elements.length; i++) {
         let ext = elements[i].name.split('.').pop().toLowerCase()
         if ($.inArray(ext, imgext) > -1) {

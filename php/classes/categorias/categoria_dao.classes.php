@@ -78,7 +78,7 @@ class CategoriaDAO extends DBH {
 
         $this->prepareStatement('check');
 
-        $usu = Categoria::create()->setNombre($name);
+        $cat = Categoria::create()->setNombre($name);
 
         $this->executeCall($cat);
 
@@ -95,7 +95,28 @@ class CategoriaDAO extends DBH {
 
     protected function cat_authorize($id, $auto) {
 
-        $this->prepareStatement('authorize');
+        $this->prepareStatement('autho');
+        
+        $cat = Categoria::create()
+            ->setID($id)
+            ->setCreador($auto);
+
+        $this->executeCall($cat);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+        
+    }
+
+    protected function cat_deny($id, $auto) {
+
+        $this->prepareStatement('deny');
         
         $cat = Categoria::create()
             ->setID($id)
@@ -136,6 +157,22 @@ class CategoriaDAO extends DBH {
 
         $cat = Categoria::create()->setNombre($text);
         
+        $this->executeCall($cat);
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+
+    }
+
+    protected function cat_getautho() {
+
+        $this->prepareStatement('get_toautho');
+
+        $cat = Categoria::create();
+
         $this->executeCall($cat);
 
         $result = $this->fetchData();

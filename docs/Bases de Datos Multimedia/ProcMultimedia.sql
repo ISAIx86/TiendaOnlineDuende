@@ -50,7 +50,8 @@ case (_proc)
             contenido_dir as 'out_dir',
             tipo as 'out_tipo'
 		from multimedia
-        where id_prod = uuid_to_bin(_id_prod);
+        where id_prod = uuid_to_bin(_id_prod)
+        and fecha_elim is null;
 -- //// OBTENER UNA IMAGEN DEL PRODCUTO \\\\ --
 	when ('get_img') then
 		select
@@ -59,7 +60,14 @@ case (_proc)
             tipo as 'out_tipo'
 		from multimedia
         where id_prod = uuid_to_bin(_id_prod) and tipo = 'i'
+        and fecha_elim is null
         limit 1;
+-- //// ELIMINAR ARCHIVOS DE PRODUCTO \\\\ --
+	when ('clean_files') then
+		update multimedia set
+			fecha_elim = sysdate()
+		where id_prod = uuid_to_bin(_id_prod)
+        and fecha_elim is null;
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

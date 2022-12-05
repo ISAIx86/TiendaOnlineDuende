@@ -35,7 +35,7 @@ abstract class DBH {
             if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
                 echo json_encode(array('result'=>"error", 'reason'=>"query_error", 'details'=>$this->stmt->errorInfo())); 
             } else {
-                header("Location: ".__RHOST."html/templates/something_went_wrong.php?context='Error en la consulta'&message='Hay un error en la estructura de la consulta de la base de datos.'&details=".$this->stmt->errorInfo()."");
+                header("Location:".__RHOST."html/templates/something_went_wrong.php?context='Error en la consulta'&message='Hay un error en la estructura de la consulta de la base de datos.'&details=".$this->stmt->errorInfo()."");
             }
             $this->clearStatement();
             exit();

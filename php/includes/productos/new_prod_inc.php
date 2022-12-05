@@ -10,12 +10,14 @@ require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
 session_start();
 if (isset($_SESSION['user'])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+        $precio = 1.0;
+        if (isset($_POST['in_precio'])) $precio = $_POST['in_precio'];
         $nuevo = Producto::create()
             ->setPublicador($_SESSION['user']['ID'])
             ->setTitulo($_POST['in_nombre'])
             ->setDescripcion($_POST['in_descrip'])
             ->setCotizacion($_POST['in_tipoprecio'] == 'CT' ? 1 : 0)
-            ->setPrecio($_POST['in_precio'])
+            ->setPrecio($precio)
             ->setDisponibilidad($_POST['in_dispo']);
         $controller = new ProductoController();
         $result = $controller->crearProducto($nuevo, json_decode($_POST['in_categos']));
@@ -34,7 +36,7 @@ if (isset($_SESSION['user'])) {
                 'type' => $_FILES['in_files']['type'][$i],
                 'tmp_name' => $_FILES['in_files']['tmp_name'][$i],
                 'error' => $_FILES['in_files']['error'][$i],
-                'size' => $_FILES['in_files']['size'][$i],
+                'size' => $_FILES['in_files']['size'][$i]
             ));
         }
         $controllermult = new MultimediaController();

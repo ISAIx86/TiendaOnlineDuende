@@ -63,17 +63,23 @@ include_once __ROOT."html/templates/get_session.php";
         <table class="table table-sm table-dark">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">Categoria</th>
               <th scope="col">Producto</th>
               <th scope="col">Calificación</th>
               <th scope="col">Precio</th>
               <th scope="col">Existencia</th>
               <th scope="col">Añadir</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
             </tr>
           </thead>
           <tbody>
-          <?php foreach($productos as &$prod) { ?>
-            <tr id="prod_row" idprod=<?php echo $prod['out_prodid']?> >
+          <?php foreach($productos as &$prod) {
+            $imageSrc = '"data:image/jpg;base64,'.base64_encode($prod['out_img']).'"';
+          ?>
+            <tr id="prod_row" idprod=<?php echo $prod['out_prodid']?>>
+              <td><img class='imgCuadrada' src=<?php echo $imageSrc?> class="d-block w-100"></td>
               <td><?php echo $prod['out_categos']?></td>
               <td><?php echo $prod['out_titulo']?></td>
               <td><?php echo $prod['out_calif']?></td>
@@ -84,7 +90,13 @@ include_once __ROOT."html/templates/get_session.php";
                 <input id="txt_cant" type="number" class="form-control col-6" placeholder="Añadir" aria-label="Piezas" aria-describedby="button-addon2" min="1" max="256" onKeyDown="return false">
                 <button id="btn_addex" class="btn btn-outline-secondary col-6" type="button">Agregar a inventario</button>
                 </div>  
-              </td>  
+              </td>
+              <td>
+                <a href="v_editarProducto.php?prod=<?php echo $prod['out_prodid']?>">
+                  <button class="btn btn-outline-secondary col-6">Editar</button>
+                </a>
+              </td>
+              <td><button id="btn_del" class="btn btn-outline-secondary col-6" type="button">Eliminar</button></td>
             </tr>
           <?php } ?>
           </tbody>

@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (gettype($result) == "string") {
         echo json_encode(array('result'=>"error", 'reason'=>$result));
         exit();
-    } else if (!$result) {
+    } else if (gettype($result)!="array" & !$result) {
         echo json_encode(array('result'=>"error", 'reason'=>"no_query_results"));
         exit();
     }

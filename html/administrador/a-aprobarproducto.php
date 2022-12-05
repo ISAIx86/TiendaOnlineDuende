@@ -13,28 +13,53 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php include_once __ROOT."html/templates/headerAdministrador.php";?>
+  <?php 
+    require_once __ROOT."html/templates/headerAdministrador.php";
+    require_once __ROOT."php/models/producto-model.php";
+    require_once __ROOT."php/models/multimedia-model.php";
+    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+    require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
+    $infoProd = array();
+    $filesProd = array();
+    if (isset($_GET['prod'])) {
+      $controller = new ProductoController();
+      $infoProd = $controller->obtenerProductoAutorizar($_GET['prod']);
+      $controllermult = new MultimediaController();
+      $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
+    }
+  ?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
       <div class = "col-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../resources/p01.PNG" class="d-block w-100" alt="...">
+          <div id="mda_carousel" class="carousel-inner">
+            <div class="carousel-inner">
+              <?php
+                foreach ($filesProd as &$file) {
+                  if ($file['out_tipo'] == 'i') {
+                    $imageSrc = '"data:image/jpg;base64,'.base64_encode($file["out_cont"]).'"';
+              ?>
+                <div class="carousel-item active">
+                  <img src=<?php echo $imageSrc ?> class="d-block w-100" alt="...">
+                </div>
+              <?php 
+                  } else if ($file['out_tipo'] == 'v') {
+              ?>
+                <div class="carousel-item">
+                  <video src="../../<?php echo $file['out_dir']?>" controls autoplay> Vídeo no es soportado... </video>
+                </div>
+              <?php
+                  }
+                }
+              ?>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#mda_carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#mda_carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -44,35 +69,25 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="card">
           <div class="card-body">
             <div>
-              <h5 class="card-title">Computadora Gamer de Ultima Generación</h5>
+              <h5 class="card-title"><?php echo $infoProd['out_titulo']?></h5>
             </div>
             <div>
-              <h6 class="card-subtitle mb-2 text-muted">Nuevo</h6>
+              <p class="card-text"><?php echo $infoProd['out_descripcion']?></p>
             </div>
             <div>
-              <p class="card-text">-Pc de escritorio solo agrega tu monitor preferido HD o incluso 4k (soporta monitores con entrada VGA y HDMI capacidad de hasta 2 monitores simultáneos) </p>
-            </div>
-            <div>
-              <h3>$15,999</h3>
-            </div>
-            <div>
-              <h6>IVA incluido</h6>
-            </div>
-            <div>
-              <h6>Stock Disponible</h6>
-            </div>
-            <div>
-              <h7>5 Disponibles</h7>
+              <?php if ($infoProd['out_cotiz']) { ?>
+                <h3>Cotizado</h3>
+              <?php } else { ?>
+                <h3><?php echo $infoProd['out_precio']?></h3>
+              <?php } ?>
             </div>
             <div class ="container">
-              <form class="row">
-                <div class="col">
-                  <button type="button" class="btn btn-success">Aprobar</button>
-                </div>
-                <div class="col">
-                  <button type="button" class="btn btn-danger">Denegar</button>
-                </div>
-              </form>
+              <div class="col">
+                <button id="btn_auto" type="button" class="btn btn-success">Aprobar</button>
+              </div>
+              <div class="col">
+                <button id="btn_deny" type="button" class="btn btn-danger">Denegar</button>
+              </div>
             </div> 
           </div>
         </div>
@@ -83,6 +98,8 @@ include_once __ROOT."html/templates/get_session.php";
   <?php include __ROOT."html/templates/footer.php"?>
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/administrador/aprobar.js"></script>
 
 </body>
 </html>

@@ -54,10 +54,10 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-                <a class="nav-link" href="../administrador/a-aprobarproducto.php">Aprobar Productos</a>
+                <a class="nav-link" href="../administrador/a-listaAprobados.php">Aprobar Productos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../administrador/a-listaAprobados.php">Productos aprobados</a>
+                <a class="nav-link" href="../administrador/a-listaCategorias.php">Aprobar Categorías</a>
             </li>
         </ul>
     </div>
