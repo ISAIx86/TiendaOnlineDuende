@@ -26,7 +26,7 @@ create procedure sp_Listas (
     in _nombre varchar(32),
     in _descripcion varchar(256),
     in _privacidad boolean,
-    in _imagen blob,
+    in _imagen longblob,
     in _imagen_dir varchar(256)
 )
 begin
@@ -71,38 +71,41 @@ case (_proc)
 -- //// OBTENER LISTAS DEL USUARIO \\\\ --
 	when ('get_cards') then
 		select
-			id_lista as 'out_id',
+			bin_to_uuid(id_lista) as 'out_id',
             imagen as 'out_img',
             nombre as 'out_nombre',
             descripcion as 'out_descripcion',
             privacidad as 'out_privacidad'
         from listas
-        where id_usuario = uuid_to_bin(id_usuario);
+        where id_usuario = uuid_to_bin(_id_usuario)
+        and fecha_elim is null;
 -- //// OBTENER VISTA DE LISTAS USUARIO \\\\ --
 	when ('get_cards_user') then
 		select
-			id_lista as 'out_id',
+			bin_to_uuid(id_lista) as 'out_id',
             imagen as 'out_img',
             nombre as 'out_nombre',
             descripcion as 'out_descripcion'
         from listas
         where id_usuario = uuid_to_bin(id_usuario)
-        and privacidad = 0;
+        and privacidad = 0
+        and fecha_elim is null;
 -- //// OBTENER INFORMACIÓN DE LISTA \\\\ --
 	when ('get_data') then
 		select
-			id_lista as 'out_id',
+			bin_to_uuid(id_lista) as 'out_id',
             imagen as 'out_img',
             nombre as 'out_nombre',
             descripcion as 'out_descripcion',
             privacidad as 'out_privacidad'
 		from listas
         where id_lista = uuid_to_bin(_id_lista)
-        and id_usuario = uuid_to_bin(_id_usuario);
+        and id_usuario = uuid_to_bin(_id_usuario)
+        and fecha_elim is null;
 -- //// OBTENER LISTA \\\\ --
 	when ('get_items') then
 		select
-			id_producto as 'out_id',
+			bin_to_uuid(id_producto) as 'out_id',
             imagen as 'out_img',
             titulo as 'out_titulo',
             cotizacion as 'out_cotiz',

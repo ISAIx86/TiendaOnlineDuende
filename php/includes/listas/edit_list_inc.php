@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
             ->setCreador($_SESSION['user']['ID'])
             ->setNombre($_POST['in_nombre'])
             ->setDescripcion($_POST['in_descrip'])
-            ->setPrivacidad($_POST['in_descrip'])
+            ->setPrivacidad($_POST['in_privacidad'])
             ->setImagenInfo($_FILES['in_img']);
         $controller = new ListaController();
         $result = $controller->modificarLista($nuevo);

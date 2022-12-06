@@ -9,3 +9,5 @@ select * from productos;
 select * from super_admins;
 select * from categorias;
 select * from usuarios;
+
+select * from listas;

@@ -43,7 +43,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
                 <li><a class="dropdown-item" href="../comprador/c-misPedidos.php">Mis pedidos</a></li>
-                <li><a class="dropdown-item" href="../listas/c-misListas.php">Mis listas</a></li>
                 <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
               </ul>
             </div>
@@ -53,7 +52,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
     </div>
   </div>
 </header>
-
 <div class = "container" id = "divBusqueda">          
     <form class="row" id = "buscador">
       <div class="col-9" id = "txt-busqueda">    
@@ -85,7 +83,7 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
           <a class="nav-link active" aria-current="page" href="../producto/c-busqueda.php">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../listas/c-listas.php">Regalar</a>
+          <a class="nav-link active" aria-current="page" href="../listas/c-misListas.php">Mis listas</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>

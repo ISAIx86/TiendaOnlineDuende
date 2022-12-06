@@ -98,7 +98,7 @@ create table if not exists listas (
     
     privacidad boolean not null comment "Bandera de privacidad. Si es 0, la lista es pública. Si es 1, la lista es privada",
     
-    imagen blob comment "Imagen miniatura de la lista",
+    imagen longblob comment "Imagen miniatura de la lista",
     imagen_dir varchar(256) comment "Ruta del recurso de imagen de la lista",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro",

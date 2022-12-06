@@ -1,6 +1,17 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/lista-model.php";
+require_once __ROOT."php/classes/listas/lista_contr.classes.php";
+$productos = array();
+if ($_GET['list']) {
+    $controller = new ListaController();
+    $productos = $controller->obtenerProductos($_GET['list']);
+} else {
+    header("Location:../comprador/c-home.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -14,19 +25,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-        require_once __ROOT."html/templates/headerComprador.php";
-        require_once __ROOT."php/models/lista-model.php";
-        require_once __ROOT."php/classes/listas/list_contr.classes.php";
-        $productos = array();
-        if ($_GET['list']) {
-            $controller = new ListaController();
-            $productos = $controller->obtenerProductos($_GET['list']);
-        } else {
-            header("Location:../comprador/c-home.php");
-            exit();
-        }
-    ?>
+  <?php require_once __ROOT."html/templates/headerComprador.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <h1>Titulo de lista</h1>

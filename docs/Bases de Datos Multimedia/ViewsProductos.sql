@@ -183,10 +183,13 @@ select
     prod.disponibilidad as 'disponibilidad',
     prod.calificacion as 'calificacion'
 from rel_li_prod as rlp
+left outer join listas as lis
+on rlp.id_lista = lis.id_lista
 left outer join productos as prod
 on rlp.id_producto = prod.id_producto
 left outer join multimedia as multi
 on prod.id_producto = multi.id_prod
 where prod.fecha_elim is null and prod.id_autorizador is not null
 and multi.tipo = 'i'
+and lis.fecha_elim is null
 group by rlp.id_producto;

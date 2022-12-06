@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $('#form_lista').submit(e => {
         e.preventDefault();
-        if (!checkCorrectInputs(e.target)) {
+        if (!checkCorrectInputs($(e.target))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     $('#form_lista_upd').submit(e => {
         e.preventDefault();
-        if (!checkCorrectInputs(e.target)) {
+        if (!checkCorrectInputs($(e.target))) {
             alert("Algunos campos contienen errores o están vacíos.");
             return;
         }
@@ -61,7 +61,7 @@ $(document).ready(function() {
         formdata.append('id_lista', urlParams.get('list'));
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/listas/',
+            url: '../../php/includes/listas/edit_list_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -123,7 +123,7 @@ function bindFields() {
 
     $('#txt_descrip').on('change', e => {
         let contenido = $(e.target).val();
-        type_textnum($(e.target), contenido, 32)
+        type_textnum($(e.target), contenido, 256)
     })
 
 }

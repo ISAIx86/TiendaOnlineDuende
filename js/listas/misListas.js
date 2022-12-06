@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
     $('#btn_del').on('click', e => {
-        const urlParams = new URLSearchParams(window.location.search);
+        let id_list = $(e.target).parents('li#list_row').attr('listid');
         $.ajax({
-            url: '../../php/includes/listas/',
+            url: '../../php/includes/listas/del_list_inc.php',
             type: 'POST',
-            data: {'id_lista':urlParams.get('list'), 'submit':1}
+            data: {'id_lista':id_list, 'submit':1}
         }).done(response => {
             let data;
             try {
@@ -19,7 +19,7 @@ $(document).ready(function() {
                     
                 }
             } else {
-                alert("Lista creada.");
+                alert("Lista eliminada.");
                 window.location.reload();
             }
         });

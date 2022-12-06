@@ -71,7 +71,7 @@ include_once __ROOT."html/templates/get_session.php";
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
-  <script src="../../utilities/validaciones.js"></script>
+  <script src="../../js/utilities/validaciones.js"></script>
   <script src="../../js/listas/crearLista.js"></script>
 
 </body>

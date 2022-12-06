@@ -1,6 +1,6 @@
 <?php
 
-require_once "categoria_dao.classes.php";
+require_once "lista_dao.classes.php";
 
 class ListaController extends ListaDAO {
 
@@ -33,7 +33,7 @@ class ListaController extends ListaDAO {
             return "img_wrongext";
         }
         $new_img_name = uniqid("IMG-", true).'.'.$img_ex;
-        $img_upload_path = "/resources/lists/$new_img_name";
+        $img_upload_path = "resources/lists/$new_img_name";
         $lst->setImagenDir($img_upload_path)
             ->setImagen(file_get_contents($img_info["tmp_name"]));
         $result = move_uploaded_file($img_info["tmp_name"], __ROOT.$img_upload_path);

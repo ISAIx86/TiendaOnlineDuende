@@ -1,6 +1,18 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/lista-model.php";
+require_once __ROOT."php/classes/listas/lista_contr.classes.php";
+$misListas = array();
+if (isset($_SESSION['user'])) {
+  $controller = new ListaController();
+  $misListas = $controller->obtenerListas($_SESSION['user']['ID']);
+} else {
+  header("Location:../templates/something_went_wrong.php?context=¡Oops! Problema menor&message=Hubo un problema al consutlar tus listas.");
+  exit();
+}
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -14,19 +26,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-    require_once __ROOT."html/templates/headerComprador.php";
-    require_once __ROOT."php/models/lista-model.php";
-    require_once __ROOT."php/classes/listas/list_contr.classes.php";
-    $misListas = array();
-    if ($_GET['list']) {
-        $controller = new ListaController();
-        $misListas = $controller->obtenerListas($_SESSION['user']['ID']);
-    } else {
-        header("Location:../comprador/c-home.php");
-        exit();
-    }
-  ?>
+  <?php require_once __ROOT."html/templates/headerComprador.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <h1>Mis Listas</h1>
@@ -37,15 +37,15 @@ include_once __ROOT."html/templates/get_session.php";
         <?php foreach ($misListas as &$lista) {
           $imageSrc = '"data:image/jpg;base64,'.base64_encode($lista['out_img']).'"';
         ?>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li id="list_row" class="list-group-item d-flex justify-content-between align-items-start" listid=<?php echo $lista['out_id']?>>
           <div class = "row">
             <div class = "col-2">
               <img src=<?php echo $imageSrc?> class="d-block w-100" alt="...">
             </div>
             <div class = "col-8">
               <div class="fw-bold"><?php echo $lista['out_nombre']?></div>
-              <h6><?php echo $lista['out_nombre']?></h6>
-              <?php if ($lista['privacidad']) {?>
+              <h6><?php echo $lista['out_descripcion']?></h6>
+              <?php if ($lista['out_privacidad']) {?>
               <h6>Privado</h6>
               <?php } else { ?>
               <h6>Público</h6>
@@ -73,7 +73,7 @@ include_once __ROOT."html/templates/get_session.php";
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
-  <script src="../../js/listas/crearLista.js"></script>
+  <script src="../../js/listas/misListas.js"></script>
 
 </body>
 </html>

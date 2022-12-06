@@ -16,7 +16,7 @@ include_once __ROOT."html/templates/get_session.php";
     <?php
         require_once __ROOT."html/templates/headerComprador.php";
         require_once __ROOT."php/models/lista-model.php";
-        require_once __ROOT."php/classes/listas/list_contr.classes.php";
+        require_once __ROOT."php/classes/listas/lista_contr.classes.php";
         $infoLista = array();
         if ($_GET['list']) {
             $controller = new ListaController();
@@ -41,7 +41,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class="form_control" requerido="true" state='empt'>
                     <div class="mb-3">
                         <label for="in_nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" value=<?php echo $infoLista['out_nombre']?>>
+                        <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" value="<?php echo $infoLista['out_nombre']?>">
                     </div>
                     <small>Error</small>
                 </div>
@@ -52,18 +52,18 @@ include_once __ROOT."html/templates/get_session.php";
                     </div>
                     <small>Error</small>
                 </div>
-                <div class="form_control" requerido="true" state='empt'>
+                <div class="form_control" requerido="false" state='empt'>
                     <div class="mb-3">
                         <div class = "row">
                             <div class = "col-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" id="rdb_publ" type="radio" name="in_privacidad" value="0" <?php if ($infoLista['out_privacidad']) {?>checked<?php }?>>
+                                    <input class="form-check-input" id="rdb_publ" type="radio" name="in_privacidad" value="0" <?php if ($infoLista['out_privacidad'] == "0") {?>checked<?php }?>>
                                     <label class="form-check-label" for="rdb_publ">
                                         Público
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" id="rdb_priv" type="radio" name="in_privacidad" value="1" <?php if ($infoLista['out_privacidad']) {?>checked<?php }?>>
+                                    <input class="form-check-input" id="rdb_priv" type="radio" name="in_privacidad" value="1" <?php if ($infoLista['out_privacidad'] == "1") {?>checked<?php }?>>
                                     <label class="form-check-label" for="rdb_priv">
                                         Privado
                                     </label>
@@ -73,7 +73,7 @@ include_once __ROOT."html/templates/get_session.php";
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary mb-3">Registrar</button>
+                    <button type="submit" class="btn btn-primary mb-3">Editar</button>
                 </div>
             </form>
         </div>
@@ -83,7 +83,7 @@ include_once __ROOT."html/templates/get_session.php";
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
-  <script src="../../utilities/validaciones.js"></script>
+  <script src="../../js/utilities/validaciones.js"></script>
   <script src="../../js/listas/crearLista.js"></script>
   <script src="../../js/listas/checarCampos.js"></script>
 

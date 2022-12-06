@@ -62,11 +62,9 @@ function type_image(element, contenido) {
         setCSSFor(element, '', '');
         return;
     }
-    for (let i = 0; i < contenido.length; i++) {
-        if ($.inArray(contenido[i].name.split('.').pop().toLowerCase(), extensions) == -1) {
-            setCSSFor(element, 'error', 'El formato de archivo no está permitido.');
-            return;
-        }
+    if ($.inArray(contenido.split('.').pop().toLowerCase(), extensions) == -1) {
+        setCSSFor(element, 'error', 'El formato de archivo no está permitido.');
+        return;
     }
     setCSSFor(element, 'success', '');
 }
