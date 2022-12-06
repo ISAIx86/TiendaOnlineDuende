@@ -122,6 +122,7 @@ select
 	vpc.categorias as 'categorias',
 	prod.titulo as 'titulo',
 	prod.calificacion as 'calificacion',
+    prod.cotizacion as 'cotizacion',
 	prod.precio as 'precio',
 	prod.disponibilidad as 'disponibilidad',
     prod.fecha_elim as 'fec_elim',
@@ -167,3 +168,25 @@ left outer join multimedia as multi
 on prod.id_producto = multi.id_prod
 where multi.tipo = 'i'
 group by prod.id_producto;
+
+-- //////////////////////////////////
+-- //// VISTA LISTA AUTORIZACION \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+create or replace view vw_lista as
+select
+	rlp.id_lista as 'id_lista',
+    prod.id_producto as 'id_producto',
+    multi.contenido as 'imagen',
+    prod.titulo as 'titulo',
+    prod.cotizacion as 'cotizacion',
+    prod.precio as 'precio',
+    prod.disponibilidad as 'disponibilidad',
+    prod.calificacion as 'calificacion'
+from rel_li_prod as rlp
+left outer join productos as prod
+on rlp.id_producto = prod.id_producto
+left outer join multimedia as multi
+on prod.id_producto = multi.id_prod
+where prod.fecha_elim is null and prod.id_autorizador is not null
+and multi.tipo = 'i'
+group by rlp.id_producto;

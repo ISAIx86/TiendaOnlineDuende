@@ -11,9 +11,9 @@
 
 use tienda_online;
 
--- //////////////////////////////////////
--- //// PROCEDIMIENTOS DE CATEGORÍAS \\\\
--- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+-- //////////////////////////////////
+-- //// PROCEDIMIENTOS DE LISTAS \\\\
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 DELIMITER $$
 drop procedure if exists sp_Listas;
@@ -60,12 +60,57 @@ case (_proc)
 			imagen = ifnull(_imagen, imagen),
 			imagen_dir = ifnull(_imagen_dir, imagen_dir),
 			fecha_modif = sysdate()
-		where id_lista = uuid_to_bin(_id_lista);
+		where id_lista = uuid_to_bin(_id_lista)
+        and fecha_elim is null and id_usuario = uuid_to_bin(_id_usuario);
 -- //// ELIMINAR LISTA \\\\ --
     when ('delete') then
 		update listas set
 			fecha_elim = sysdate()
-		where id_lista = uuid_to_bin(_id_lista);
+		where id_lista = uuid_to_bin(_id_lista)
+        and fecha_elim is null and id_usuario = uuid_to_bin(_id_usuario);
+-- //// OBTENER LISTAS DEL USUARIO \\\\ --
+	when ('get_cards') then
+		select
+			id_lista as 'out_id',
+            imagen as 'out_img',
+            nombre as 'out_nombre',
+            descripcion as 'out_descripcion',
+            privacidad as 'out_privacidad'
+        from listas
+        where id_usuario = uuid_to_bin(id_usuario);
+-- //// OBTENER VISTA DE LISTAS USUARIO \\\\ --
+	when ('get_cards_user') then
+		select
+			id_lista as 'out_id',
+            imagen as 'out_img',
+            nombre as 'out_nombre',
+            descripcion as 'out_descripcion'
+        from listas
+        where id_usuario = uuid_to_bin(id_usuario)
+        and privacidad = 0;
+-- //// OBTENER INFORMACIÓN DE LISTA \\\\ --
+	when ('get_data') then
+		select
+			id_lista as 'out_id',
+            imagen as 'out_img',
+            nombre as 'out_nombre',
+            descripcion as 'out_descripcion',
+            privacidad as 'out_privacidad'
+		from listas
+        where id_lista = uuid_to_bin(_id_lista)
+        and id_usuario = uuid_to_bin(_id_usuario);
+-- //// OBTENER LISTA \\\\ --
+	when ('get_items') then
+		select
+			id_producto as 'out_id',
+            imagen as 'out_img',
+            titulo as 'out_titulo',
+            cotizacion as 'out_cotiz',
+            precio as 'out_precio',
+            disponibilidad as 'out_disponibilidad',
+            calificacion as 'out_calif'
+        from vw_lista
+        where id_lista = uuid_to_bin(_id_lista);
 -- //// COMANDO NO VÁLIDO \\\\ --
 	else 
 		select "invalid_command" as 'result';

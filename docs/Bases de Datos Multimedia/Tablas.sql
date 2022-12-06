@@ -246,7 +246,9 @@ create table if not exists super_admins (
 drop table if exists rel_li_prod;
 create table if not exists rel_li_prod (
 	id_lista binary(16) not null comment "ID de lista",
-    id_producto binary(16) not null comment "ID del producto"
+    id_producto binary(16) not null comment "ID del producto",
+    
+    primary key(id_lista, id_producto)
 );
 
 -- //// TABLA RELACIÓN CARRITO //// --
