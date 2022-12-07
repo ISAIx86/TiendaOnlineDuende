@@ -10,4 +10,6 @@ select * from super_admins;
 select * from categorias;
 select * from usuarios;
 
+select * from rel_li_prod;
+
 select * from listas;

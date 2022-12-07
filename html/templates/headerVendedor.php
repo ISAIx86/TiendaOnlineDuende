@@ -26,56 +26,52 @@
         </div>
     </div>
 </div>
-</header>
-
-<div class = "container-flex" id = "navegacion">
-    <div class = "container-sm">
-        <form class="row" id = "buscador">
-            <div class="col-9">
-                <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
-                <datalist id="datalistOptions">
-                    <option value="Electronica">
-                    <option value="Ropa">
-                    <option value="Anime">
-                    <option value="Oficina">
-                    <option value="Jardineria">
-                </datalist>
-            </div>
-            <div class="col-3">
-                <button type="submit" class="btn btn-warning mb-3">
-                    <img src='../../resources/busqueda.png' class='imgCuadrada30' href="../producto/c-busqueda.php"/>
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class = "container">
-    <nav class="navbar navbar-expand-lg bg-opacity-50">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<div class = "container-sm">
+    <form class="row" id = "buscador">
+        <div class="col-9">
+            <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
+            <datalist id="datalistOptions">
+                <option value="Electronica">
+                <option value="Ropa">
+                <option value="Anime">
+                <option value="Oficina">
+                <option value="Jardineria">
+            </datalist>
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-warning mb-3">
+                <a href="../producto/c-busqueda.html">Buscar</a>
             </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../vendedor/v-registrarProducto.php">Registrar producto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../vendedor/v-crearCategoria.php">Registrar categoria</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../vendedor/v-cotizacion.php">Cotizaciones pendientes</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../vendedor/v-existencia.php">Existencias</a></li>
-                            <li><a class="dropdown-item" href="../vendedor/v-listaVentas.php">Ventas detalladas</a></li>
-                            <li><a class="dropdown-item" href="../vendedor/v-ventaAgrupada.php">Ventas agrupadas</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        </div>
+    </form>
+</div>
+</header>
+<nav class="navbar navbar-expand-lg bg-opacity-50">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="../vendedor/v-registrarProducto.php">Registrar producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../vendedor/v-crearCategoria.php">Registrar categoria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../vendedor/v-cotizacion.php">Cotizaciones pendientes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../vendedor/v-existencia.php">Existencias</a></li>
+                        <li><a class="dropdown-item" href="../vendedor/v-listaVentas.php">Ventas detalladas</a></li>
+                        <li><a class="dropdown-item" href="../vendedor/v-ventaAgrupada.php">Ventas agrupadas</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </nav>
     </div>
