@@ -17,16 +17,11 @@ include_once __ROOT."html/templates/get_session.php";
   <?php
   include_once __ROOT."html/templates/headerComprador.php";
   require_once __ROOT."php/classes/productos/busqueda_contr.classes.php";
-  $d_recomend = array();
-  $d_vistos = array();
-  $d_vendidos = array();
-  if (isset($_SESSION['user'])) {
-    $controller = new BusquedaProdController();
-    $d_recomend = $controller->masRecomendados();
-    $d_vistos = $controller->masVistos();
-    $d_vendidos = $controller->masVendidos();
-  }
-  ?>
+  $controller = new BusquedaProdController();
+  $d_recomend = $controller->masRecomendados();
+  $d_vistos = $controller->masVistos();
+  $d_vendidos = $controller->masVendidos();
+?>
 
   <!-- Container -->
   <div class = "container" id = "pagina">

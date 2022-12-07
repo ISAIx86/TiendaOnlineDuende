@@ -1,6 +1,22 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/producto-model.php";
+require_once __ROOT."php/models/multimedia-model.php";
+require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
+$infoProd = array();
+$filesProd = array();
+if (isset($_GET['prod'])) {
+  $controller = new ProductoController();
+  $infoProd = $controller->obtenerProductoAutorizar($_GET['prod']);
+  $controllermult = new MultimediaController();
+  $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
+} else {
+  header("Location: ../templates/something_went_wrong.php?context='Producto perdido'&message=El ID del producto se perdió.");
+  exit();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,21 +29,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php 
-    require_once __ROOT."html/templates/headerAdministrador.php";
-    require_once __ROOT."php/models/producto-model.php";
-    require_once __ROOT."php/models/multimedia-model.php";
-    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
-    require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
-    $infoProd = array();
-    $filesProd = array();
-    if (isset($_GET['prod'])) {
-      $controller = new ProductoController();
-      $infoProd = $controller->obtenerProductoAutorizar($_GET['prod']);
-      $controllermult = new MultimediaController();
-      $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
-    }
-  ?>
+  <?php require_once __ROOT."html/templates/headerAdministrador.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">

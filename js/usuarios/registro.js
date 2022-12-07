@@ -118,6 +118,7 @@ $(document).ready(function() {
                         break;
                 }
             } else {
+                alert("Su cuenta fue creada con éxito. Inicie sesión.")
                 window.location.replace("landingPage.php");
             }
         });

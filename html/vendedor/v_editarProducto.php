@@ -1,6 +1,24 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/multimedia-model.php";
+require_once __ROOT."php/models/producto-model.php";
+require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
+require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+$prodfiles = array();
+$prodcategos = array();
+$prodInfo = array();
+if ($_GET['prod']) {
+    $multcontroller = new MultimediaController();
+    $prodcontroller = new ProductoController();
+    $prodfiles = $multcontroller->obtenerArchivos($_GET['prod']);
+    $prodcategos = $prodcontroller->obtenerCategorias($_GET['prod']);
+    $prodInfo = $prodcontroller->obtenerProducto($_GET['prod']);
+} else {
+    header("Location: v-existencia.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,26 +31,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-    require_once __ROOT."html/templates/headerVendedor.php";
-    require_once __ROOT."php/models/multimedia-model.php";
-    require_once __ROOT."php/models/producto-model.php";
-    require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
-    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
-    $prodfiles = array();
-    $prodcategos = array();
-    $prodInfo = array();
-    if ($_GET['prod']) {
-        $multcontroller = new MultimediaController();
-        $prodcontroller = new ProductoController();
-        $prodfiles = $multcontroller->obtenerArchivos($_GET['prod']);
-        $prodcategos = $prodcontroller->obtenerCategorias($_GET['prod']);
-        $prodInfo = $prodcontroller->obtenerProducto($_GET['prod']);
-    } else {
-        header("Location: v-existencia.php");
-        exit();
-    }
-  ?>
+  <?php require_once __ROOT."html/templates/headerVendedor.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
@@ -83,7 +82,7 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_nombre" class="form-label">Producto</label>
-              <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto" value="<?php echo $prodInfo['out_titulo']?>">
+              <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto" value="<?php echo $prodInfo['out_titulo']?>" autocomplete="off">
               <small>Error</small>
             </div>
           </div>
@@ -130,7 +129,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class = "col-6">
                   <div class="input-group mb-3">
                     <span class="input-group-text">$</span>
-                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)" value=<?php echo $prodInfo['out_precio']?>>
+                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)" value=<?php echo $prodInfo['out_precio']?> autocomplete="off">
                     <span class="input-group-text">.00</span>
                     <small>Error</small>
                   </div>

@@ -1,6 +1,17 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/categoria-model.php";
+require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+$categosList = array();
+if (isset($_SESSION['user'])) {
+  $controller = new CategoriaController();
+  $categosList = $controller->obtenerPeticiones();
+} else {
+  header("Location: ../templates/something_went_wrong.php?context='Producto perdido'&message=El ID del producto se perdió.");
+  exit();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,16 +24,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-  require_once __ROOT."html/templates/headerAdministrador.php";
-  require_once __ROOT."php/models/categoria-model.php";
-  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
-  $categosList = array();
-  if (isset($_SESSION['user'])) {
-    $controller = new CategoriaController();
-    $categosList = $controller->obtenerPeticiones();
-  }
-  ?>
+  <?php require_once __ROOT."html/templates/headerAdministrador.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">

@@ -46,7 +46,7 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_nombre" class="form-label">Producto</label>
-              <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto">
+              <input type="text" class="form-control" id="txt_nombre" name="in_nombre" maxlength="64" placeholder="Ingrese nombre del producto" autocomplete="off">
               <small>Error</small>
             </div>
           </div>
@@ -98,7 +98,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class = "col-6">
                   <div class="input-group mb-3">
                     <span class="input-group-text">$</span>
-                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)">
+                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)" autocomplete="off">
                     <span class="input-group-text">.00</span>
                     <small>Error</small>
                   </div>

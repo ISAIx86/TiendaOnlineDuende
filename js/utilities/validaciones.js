@@ -45,8 +45,11 @@ function type_float(element, contenido) {
     if (contenido.length == 0) {
         setCSSFor(element, '', '');
     }
-    else if (contenido.length > 7) {
+    else if (contenido.length > 8) {
         setCSSFor(element, 'error', 'Demasiados caracteres. No mas de 7 caracteres.');
+    }
+    else if (parseFloat(contenido) <= 0) {
+        setCSSFor(element, 'error', 'El precio no debe ser negativo.');
     }
     else if (!validarPrecio(contenido)) {
         setCSSFor(element, 'error', 'El formato de precio no es válido.');
@@ -225,7 +228,7 @@ function validarPassword(input) {
 }
 
 function validarPrecio(input) {
-    return /^\d+\.\d{0,2}$/.test(input)
+    return /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/gm.test(input)
 }
 
 function validarNumTarj(input) {

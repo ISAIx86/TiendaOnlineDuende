@@ -16,11 +16,8 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Header -->
     <?php
     include __ROOT."html/templates/headerComprador.php";
-    $productos = array();
-    if (isset($_SESSION['user'])) {
-        $controller = new CarritoController();
-        $productos = $controller->listaCarrito($_SESSION['user']['ID']);
-    }
+    $controller = new CarritoController();
+    $productos = $controller->listaCarrito($_SESSION['user']['ID']);
     ?>
     <!-- Container -->
     <div class = "container" id = "pagina">

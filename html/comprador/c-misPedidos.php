@@ -1,6 +1,30 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/categoria-model.php";
+require_once __ROOT."php/models/pedido-model.php";
+require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
+$catcontroller = new CategoriaController();
+$pedcontroller = new PedidosController();
+$categos = $catcontroller->obtenerTodos();
+$pedidos = array();
+$cat = null;
+$stdt = null;
+$eddt = null;
+if (isset($_GET['in_cat'])) {
+  if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
+}
+if (isset($_GET['in_start'])) {
+  if ($_GET['in_start'] != "") $stdt = $_GET['in_start'];
+} 
+if (isset($_GET['in_end'])) {
+  if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
+} 
+if (isset($_SESSION['user'])) {
+  $pedidos = $pedcontroller->histoPedidos($_SESSION['user']['ID'], $cat, $stdt, $eddt);
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -15,32 +39,7 @@ include_once __ROOT."html/templates/get_session.php";
 <body>
 
   <!-- Header -->
-  <?php
-  require_once __ROOT."html/templates/headerComprador.php";
-  require_once __ROOT."php/models/categoria-model.php";
-  require_once __ROOT."php/models/pedido-model.php";
-  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
-  require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
-  $catcontroller = new CategoriaController();
-  $pedcontroller = new PedidosController();
-  $categos = $catcontroller->obtenerTodos();
-  $pedidos = array();
-  $cat = null;
-  $stdt = null;
-  $eddt = null;
-  if (isset($_GET['in_cat'])) {
-    if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
-  }
-  if (isset($_GET['in_start'])) {
-    if ($_GET['in_start'] != "") $stdt = $_GET['in_start'];
-  } 
-  if (isset($_GET['in_end'])) {
-    if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
-  } 
-  if (isset($_SESSION['user'])) {
-    $pedidos = $pedcontroller->histoPedidos($_SESSION['user']['ID'], $cat, $stdt, $eddt);
-  }
-  ?>
+  <?php require_once __ROOT."html/templates/headerComprador.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
   <div class = "container">
@@ -96,6 +95,18 @@ include_once __ROOT."html/templates/get_session.php";
               <div class="fw-bold"><?php echo $ped['out_prod']?></div>
               <h6>Precio: $<?php echo $ped['out_precio']?></h6>
               <p><?php echo $ped['out_catego']?></p>
+              <div class="calificacion">
+                <input id="cal1" type="radio" value="5" disabled <?php if ($ped['out_calif'] >= 5.0) { ?>checked<?php }?>>
+                <label for="cal1">★</label>
+                <input id="cal2" type="radio" value="4" disabled <?php if ($ped['out_calif'] >= 4.0 & $ped['out_calif'] < 4.9) { ?>checked<?php }?>>
+                <label for="cal2">★</label>
+                <input id="cal3" type="radio" value="3" disabled <?php if ($ped['out_calif'] >= 3.0 & $ped['out_calif'] < 3.9) { ?>checked<?php }?>>
+                <label for="cal3">★</label>
+                <input id="cal4" type="radio" value="2" disabled <?php if ($ped['out_calif'] >= 2.0 & $ped['out_calif'] < 2.9) { ?>checked<?php }?>>
+                <label for="cal4">★</label>
+                <input id="cal5" type="radio" value="1" disabled <?php if ($ped['out_calif'] >= 1.0 & $ped['out_calif'] < 1.9) { ?>checked<?php }?>>
+                <label for="cal5">★</label>
+              </div>
               <h6>Calificación: <?php echo $ped['out_calif']?></h6>
               <h6>Fecha y hora: <?php echo $ped['out_fecha']?></h6>
             </div>

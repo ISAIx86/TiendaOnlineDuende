@@ -1,6 +1,31 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/producto-model.php";
+require_once __ROOT."php/models/multimedia-model.php";
+require_once __ROOT."php/models/lista-model.php";
+require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
+require_once __ROOT."php/classes/calificaciones/calif_contr.classes.php";
+require_once __ROOT."php/classes/listas/lista_contr.classes.php";
+$infoProd = array();
+$filesProd = array();
+$reviews = array();
+$listas = array();
+if (isset($_GET['prod'])) {
+    $controller = new ProductoController();
+    $controllermult = new MultimediaController();
+    $controllercal = new CalificacionesController();
+    $controllerlis = new ListaController();
+    $infoProd = $controller->obtenerProducto($_GET['prod']);
+    $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
+    $reviews = $controllercal->obtenerCalificaciones($_GET['prod']);
+    $listas = $controllerlis->obtenerListas($_SESSION['user']['ID']);
+} else {
+  header("Location: ../templates/something_went_wrong.php?context='Producto perdido'&message=El ID del producto se perdió.");
+  exit();
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -28,24 +53,6 @@ include_once __ROOT."html/templates/get_session.php";
         case "compravende":
             include_once __ROOT."html/templates/headerCompraVende.php";
             break;
-    }
-
-    require_once __ROOT."php/models/producto-model.php";
-    require_once __ROOT."php/models/multimedia-model.php";
-    require_once __ROOT."php/classes/productos/producto_contr.classes.php";
-    require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
-    require_once __ROOT."php/classes/calificaciones/calif_contr.classes.php";
-    
-    $infoProd = array();
-    $filesProd = array();
-    $reviews = array();
-    if (isset($_GET['prod'])) {
-        $controller = new ProductoController();
-        $infoProd = $controller->obtenerProducto($_GET['prod']);
-        $controllermult = new MultimediaController();
-        $filesProd = $controllermult->obtenerArchivos($_GET['prod']);
-        $controllercal = new CalificacionesController();
-        $reviews = $controllercal->obtenerCalificaciones($_GET['prod']);
     }
   ?>
   <!-- Container -->
@@ -114,7 +121,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class = "row">
                   <div class="col-4">
                     <label for="inputPassword2" class="visually-hidden">Cantidad</label>
-                    <input type="number" class="form-control" id="txt_cantidad" placeholder="Cantidad" min="1" max="256" onKeyDown="return false">
+                    <input type="number" class="form-control" id="txt_cantidad" placeholder="Cantidad" value="1" min="1" max="256" onKeyDown="return false">
                   </div>
                 </div>
                 <div class="row">          
@@ -130,11 +137,11 @@ include_once __ROOT."html/templates/get_session.php";
                       Agregar a Lista
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Favoritos</a></li>
-                      <li><a class="dropdown-item" href="#">Publica</a></li>
-                      <li><a class="dropdown-item" href="#">Privada</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Nueva Lista</a></li>
+                      <?php if (count($listas) == 0) { ?>
+                        <li>No tienes listas</li>
+                      <?php } else foreach($listas as &$list) { ?>
+                        <li><a id="btn_list" class="dropdown-item" idlist=<?php echo $list['out_id']?>><?php echo $list['out_nombre']?></a></li>
+                      <?php } ?>
                     </ul>
                   </div>  
                 </div>

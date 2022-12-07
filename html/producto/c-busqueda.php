@@ -16,18 +16,18 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Header -->
   <?php 
     switch ($loggedUser['Rol']) {
-        case "comprador":
-            include_once __ROOT."html/templates/headerComprador.php";
-            break;
-        case "vendedor":
-            include_once __ROOT."html/templates/headerVendedor.php";
-            break;
-        case "administrador":
-            include_once __ROOT."html/templates/headerAdministrador.php";
-            break;
-        case "compravende":
-            include_once __ROOT."html/templates/headerCompraVende.php";
-            break;
+      case "comprador":
+          include_once __ROOT."html/templates/headerComprador.php";
+          break;
+      case "vendedor":
+          include_once __ROOT."html/templates/headerVendedor.php";
+          break;
+      case "administrador":
+          include_once __ROOT."html/templates/headerAdministrador.php";
+          break;
+      case "compravende":
+          include_once __ROOT."html/templates/headerCompraVende.php";
+          break;
     }
     include __ROOT."php/models/usuario-model.php";
     include __ROOT."php/classes/usuarios/usuario_contr.classes.php";

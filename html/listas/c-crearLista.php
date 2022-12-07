@@ -29,7 +29,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class="form_control" requerido="true" state='empt'>
                     <div class="mb-3">
                         <label for="in_nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions">
+                        <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" autocomplete="off">
                     </div>
                     <small>Error</small>
                 </div>

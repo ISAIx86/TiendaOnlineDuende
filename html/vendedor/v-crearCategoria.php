@@ -21,7 +21,7 @@ include_once __ROOT."html/templates/get_session.php";
         <div class="form_control" requerido="true" state='empt'>
           <div class="mb-3">
             <label for="in_nombre" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria...">
+            <input type="text" class="form-control" id="txt_nombre" name="in_nombre" list="datalistOptions" placeholder="Ingrese una categoria..." autocomplete="off">
             <small>Error</small>
           </div>
         </div>

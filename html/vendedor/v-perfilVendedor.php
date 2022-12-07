@@ -1,6 +1,23 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+include __ROOT."php/models/usuario-model.php";
+include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+$controller = new UsuarioController();
+$userData = $controller->obtenerDatos($_SESSION['user']['ID']);
+if (gettype($userData) == "string") {
+    switch ($userData) {
+        case "uncaptured_id":
+            header("Location: ../../index.php");
+            break;
+        case "not_found":
+            header("Location: ../../index.php");
+            break;
+    }
+} else if (!$userData) {
+    header("Location: ../../index.php");
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -27,24 +44,6 @@ include_once __ROOT."html/templates/get_session.php";
         case "compravende":
             include_once __ROOT."html/templates/headerCompraVende.php";
             break;
-    }
-    include __ROOT."php/models/usuario-model.php";
-    include __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-    if (isset($_SESSION['user'])) {
-        $controller = new UsuarioController();
-        $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
-        if (gettype($userData) == "string") {
-            switch ($userData) {
-                case "uncaptured_id":
-                    header("Location: ../../index.php");
-                    break;
-                case "not_found":
-                    header("Location: ../../index.php");
-                    break;
-            }
-        } else if (!$userData) {
-            header("Location: ../../index.php");
-        }
     }
   ?>
   <!-- Container -->

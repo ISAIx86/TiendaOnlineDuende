@@ -1,6 +1,11 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/superadmin-model.php";
+require_once __ROOT."php/classes/superadmin/superadmin_contr.classes.php";
+$controller = new SuperAdminController();
+$admins = $controller->peticionesUsuarios();
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,16 +18,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-  require_once __ROOT."html/templates/headerSadmin.php";
-  require_once __ROOT."php/models/superadmin-model.php";
-  require_once __ROOT."php/classes/superadmin/superadmin_contr.classes.php";
-  $admins = array();
-  if (isset($_SESSION['user'])) {
-    $controller = new SuperAdminController();
-    $admins = $controller->peticionesUsuarios();
-  }
-  ?>
+  <?php require_once __ROOT."html/templates/headerSadmin.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">

@@ -1,6 +1,24 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/usuario-model.php";
+require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+
+$controller = new UsuarioController();
+$userData = $controller->obtenerDatos($_SESSION['user']['ID']);
+if (gettype($userData) == "string") {
+    switch ($userData) {
+        case "uncaptured_id":
+            header("Location: ../../index.php");
+            break;
+        case "not_found":
+            header("Location: ../../index.php");
+            break;
+    }
+} else if (!isset($userData)) {
+    header("Location: ../../index.php");
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -30,26 +48,6 @@ include_once __ROOT."html/templates/get_session.php";
                 require_once __ROOT."html/templates/headerCompraVende.php";
                 break;
         }
-
-        require_once __ROOT."php/models/usuario-model.php";
-        require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
-
-        if (isset($_SESSION['user'])) {
-            $controller = new UsuarioController();
-            $userData = $controller->obtenerDatos($_SESSION['user']['ID']);
-            if (gettype($userData) == "string") {
-                switch ($userData) {
-                    case "uncaptured_id":
-                        header("Location: ../../index.php");
-                        break;
-                    case "not_found":
-                        header("Location: ../../index.php");
-                        break;
-                }
-            } else if (!isset($userData)) {
-                header("Location: ../../index.php");
-            }
-        }
     ?>
     <!-- Container -->
     <div class = "container" id = "pagina">
@@ -66,13 +64,13 @@ include_once __ROOT."html/templates/get_session.php";
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state="empt">
-                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['out_nombres'] ?>">
+                            <input type="text" id="txt_nombres" name="in_nombres" maxlength="64" placeholder="Nombres" value="<?php echo $userData['out_nombres'] ?>" autocomplete="off">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['out_apellidos'] ?>">
+                            <input type="text" id="txt_apellidos" name="in_apellidos" maxlength="64" placeholder="Apellidos" value="<?php echo $userData['out_apellidos'] ?>" autocomplete="off">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -141,7 +139,7 @@ include_once __ROOT."html/templates/get_session.php";
                             <small>Error</small>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['out_username'] ?>">
+                            <input type="text" id="txt_username" name="in_username" maxlength="32" placeholder="Nombre de usuario" value="<?php echo $userData['out_username'] ?>" autocomplete="off">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>
@@ -153,7 +151,7 @@ include_once __ROOT."html/templates/get_session.php";
                             <h2>Actualizar correo electrónico</h2>
                         </div>
                         <div class="form_control" requerido="true" state='empt'>
-                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['out_correo'] ?>">
+                            <input type="email" id="txt_correo" name="in_correo" maxlength="256" placeholder="Correo electrónico" value="<?php echo $userData['out_correo'] ?>" autocomplete="off">
                             <i class="fas fa-check-circle"></i>
                             <i class="fas fa-exclamation-circle"></i>
                             <small>Error</small>

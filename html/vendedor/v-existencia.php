@@ -1,6 +1,21 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/categoria-model.php";
+require_once __ROOT."php/models/producto-model.php";
+require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+$catcontroller = new CategoriaController();
+$prodcontroller = new ProductoController();
+$categos = $catcontroller->obtenerTodos();
+$productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
+
+$cat = null;
+if (isset($_GET['in_cat'])) {
+  if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
+}
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,24 +28,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-  require_once __ROOT."html/templates/headerVendedor.php";
-  require_once __ROOT."php/models/categoria-model.php";
-  require_once __ROOT."php/models/producto-model.php";
-  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
-  require_once __ROOT."php/classes/productos/producto_contr.classes.php";
-  $catcontroller = new CategoriaController();
-  $prodcontroller = new ProductoController();
-  $categos = $catcontroller->obtenerTodos();
-  $productos = array();
-  $cat = null;
-  if (isset($_GET['in_cat'])) {
-    if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
-  }
-  if (isset($_SESSION['user'])) {
-    $productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
-  }
-  ?>
+  <?php require_once __ROOT."html/templates/headerVendedor.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">

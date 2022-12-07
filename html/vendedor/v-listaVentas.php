@@ -1,6 +1,27 @@
 <?php
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
+require_once __ROOT."php/models/categoria-model.php";
+require_once __ROOT."php/models/pedido-model.php";
+require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
+require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
+$catcontroller = new CategoriaController();
+$pedcontroller = new PedidosController();
+$categos = $catcontroller->obtenerTodos();
+$ventas = $pedcontroller->ventasDetallada($_SESSION['user']['ID'], $cat, $stdt, $eddt);
+$cat = null;
+$stdt = null;
+$eddt = null;
+if (isset($_GET['in_cat'])) {
+  if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
+}
+if (isset($_GET['in_start'])) {
+  if ($_GET['in_start'] != "") $stdt = $_GET['in_start'];
+} 
+if (isset($_GET['in_end'])) {
+  if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -13,32 +34,7 @@ include_once __ROOT."html/templates/get_session.php";
 </head>
 <body>
   <!-- Header -->
-  <?php
-  require_once __ROOT."html/templates/headerVendedor.php";
-  require_once __ROOT."php/models/categoria-model.php";
-  require_once __ROOT."php/models/pedido-model.php";
-  require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
-  require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
-  $catcontroller = new CategoriaController();
-  $pedcontroller = new PedidosController();
-  $categos = $catcontroller->obtenerTodos();
-  $ventas = array();
-  $cat = null;
-  $stdt = null;
-  $eddt = null;
-  if (isset($_GET['in_cat'])) {
-    if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
-  }
-  if (isset($_GET['in_start'])) {
-    if ($_GET['in_start'] != "") $stdt = $_GET['in_start'];
-  } 
-  if (isset($_GET['in_end'])) {
-    if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
-  } 
-  if (isset($_SESSION['user'])) {
-    $ventas = $pedcontroller->ventasDetallada($_SESSION['user']['ID'], $cat, $stdt, $eddt);
-  }
-  ?>
+  <?php require_once __ROOT."html/templates/headerVendedor.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "container">

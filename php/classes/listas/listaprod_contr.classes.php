@@ -1,6 +1,6 @@
 <?php
 
-require_once "categoria_dao.classes.php";
+require_once "listaprod_dao.classes.php";
 
 class ListaProductoController extends ListaProductoDAO {
 
