@@ -60,6 +60,11 @@ header{
     font-family: 'Abril Fatface';
     text-align: left;
 }
+#buscador {
+    background: #CADE01;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
 #navegacion{
     background: #CADE01;
     font-family: 'Abril Fatface';
@@ -199,17 +204,16 @@ background-color: #eee; /* Add a hover effect to all links, except for headers *
 }
 
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
+
+
+
+
 
 .hidden {
   display: none;
 }
 
-.footer-gray {
+footer-gray {
   background-color: #CADE01;
   width: 100%;
 }
@@ -314,74 +318,6 @@ html {
     padding: 0;
   }
 }
-/* BEGIN EMAIL CAPTURE STYLES*/
-
-.footer-email {
-  text-align: center;
-}
-
-#ftrEmailForm {
-  height: 44px;
-}
-
-#ftrEmailForm .error {
-  display: none;
-  color: red;
-  text-align: left;
-}
-
-#ftrEmailForm #ftrEmailInput {
-  background: none repeat scroll 0 0 #FFF;
-  border: 1px solid #D6D6D6;
-  box-sizing: border-box;
-  color: #888;
-  float: left;
-  font: normal normal 14px/1.4 "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  padding: 5px;
-  width: 70%;
-  height: 100%;
-}
-
-#ftrEmailForm #ftrEmailInput:hover {
-  border: 1px solid #888;
-}
-
-#ftrEmailForm #ftrEmailInput:focus {
-  border: 1px solid #ef9223;
-  outline: #ef9223 auto 5px;
-}
-
-#ftrEmailForm .button {
-  width: 30%;
-  height: 100%;
-  padding: 5px;
-  float: left;
-  border: 1px solid #DFDFDF;
-  box-sizing: border-box;
-  color: #000;
-  font: normal bold 18px/1 BebasFamily, BebasNeueRegular, "Bebas Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  text-transform: uppercase;
-  background: #FFF;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #e1e1e1));
-  background: -webkit-linear-gradient(top, white 0, #e1e1e1 100%);
-  background: -moz-linear-gradient(top, white 0, #e1e1e1 100%);
-  background: -ms-linear-gradient(top, white 0, #e1e1e1 100%);
-  background: -o-linear-gradient(top, white 0, #e1e1e1 100%);
-  background: linear-gradient(to bottom, white 0, #e1e1e1 100%);
-  cursor: pointer;
-  vertical-align: middle;
-  outline: none;
-}
-
-#ftrEmailForm .button:hover,
-#ftrEmailForm .button:active {
-  background: black;
-  color: #FFF;
-  outline: none;
-}
-/* BEGIN SOCIAL STYLES*/
 
 .footer-social {
   text-align: center;
@@ -480,24 +416,5 @@ html {
   }
 }
 
-.ftr-bbb span,
-.ftr-stella span {
-  background-image: url("http://cache1.artprintimages.com/images/jump_pages/rebrand2/images/subnav2.png");
-  background-repeat: no-repeat;
-  background-color: transparent;
-  cursor: pointer;
-  display: inline-block;
-  height: 36px;
-  margin: 0;
-  padding: 0;
-}
 
-.ftr-bbb span {
-  background-position: -339px -8px;
-  width: 96px;
-}
 
-.ftr-stella span {
-  background-position: -339px -107px;
-  width: 57px;
-}

@@ -1,11 +1,15 @@
 <header>
-<div class="container text-center">
-    <div class="row">
-        <div class="col-sm-8">
-            <img src='../../resources/logo02.PNG' class='logotipo'/>
-        </div>
-        <div class="col-sm-4">
+    <div class = "container-flex">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-8">
+            <a href="../comprador/c-home.php">
+              <img src='../../resources/logo02.PNG' class='logotipo'/>
+            </a>
+          </div>
+          <div class="col-sm-4">
             <div class = "row">
+            <div class = "col-6"></div>
                 <div class = "col-6">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,9 +28,12 @@
                 </div>
             </div>
         </div>
+        </div>
+      </div>
     </div>
-</div>
-<div class = "container-sm">
+</header>
+<div class = "container-flex" id = "buscador">
+<div class = "container">
     <form class="row" id = "buscador">
         <div class="col-9">
             <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
@@ -39,14 +46,12 @@
             </datalist>
         </div>
         <div class="col-3">
-            <button type="submit" class="btn btn-warning mb-3">
-                <a href="../producto/c-busqueda.html">Buscar</a>
-            </button>
+        <button type="submit" class="btn btn-warning mb-3">
+          <img src='../../resources/busqueda.png' class='imgCuadrada30' href="../producto/c-busqueda.php"/>
+        </button>
         </div>
     </form>
-</div>
-</header>
-<nav class="navbar navbar-expand-lg bg-opacity-50">
+    <nav class="navbar navbar-expand-lg bg-opacity-50">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -74,6 +79,8 @@
             </ul>
         </div>
     </nav>
+</div>
+</div>
     </div>
 
 </div>

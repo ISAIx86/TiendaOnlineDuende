@@ -6,8 +6,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 
 <div id = "encabezado">
   <header>
- 
-
     <div class = "container-flex">
       <div class="container text-center">
         <div class="row">
