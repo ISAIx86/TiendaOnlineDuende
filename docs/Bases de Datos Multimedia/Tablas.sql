@@ -213,12 +213,14 @@ create table if not exists cotizaciones (
     id_comprador binary(16) not null comment "ID del comprador",
 	id_producto binary(16) not null comment "ID del producto",
     
-    precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
-    cantidad int not null comment "Cantidad de productos a comprar",
-    aprovado boolean comment "Cotización aprovada por el vendedor. 0 si no fue aprovada, 1 si fue aprovada",
-    aceptado boolean comment "Cotización aceptada por el comprado. 0 si no fue aceptada, 1 si fue aceptada",
+    vend_precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
+    vend_cantidad int not null comment "Cantidad de productos a comprar",
+    com_precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
+    com_cantidad int not null comment "Cantidad de productos a comprar",
+    estado char comment "Estado de la cotización. 'P' es pendiente. 'O' es abierta. 'C' es cerrada.",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro del cotizacion",
+    fecha_modif timestamp null default null comment "Fecha de la última modificación",
     
     primary key(id_cotiz)
 );

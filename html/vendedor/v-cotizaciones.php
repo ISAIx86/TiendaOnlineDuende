@@ -26,13 +26,10 @@ if (isset($_SESSION['user'])) {
 </head>
 <body>
   <!-- Header -->
-  <?php require_once __ROOT."html/templates/headerComprador.php";?>
+  <?php require_once __ROOT."html/templates/headerVendedor.php";?>
   <!-- Container -->
   <div class = "container" id = "pagina">
-    <h1>Mis Listas</h1>
-    <div class="container">
-      <a href="c-crearLista.php"><button class="btn btn-success">Crear lista</button></a>
-    </div>
+    <h1>Cotizaciones pendientes</h1>
     <div class="cointainer">
       <ul class="list-group">
         <?php foreach ($misListas as &$lista) {
