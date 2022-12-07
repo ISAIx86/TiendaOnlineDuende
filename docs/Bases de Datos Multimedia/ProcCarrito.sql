@@ -23,23 +23,40 @@ create procedure sp_Carrito (
 	in _proc varchar(16),
     in _id_usuario varchar(36),
     in _id_producto varchar(36),
-    in _cantidad int
+    in _cantidad int,
+    in _subcot decimal(8,2)
 )
 begin
-
 case (_proc)
 	-- //// AÑADIR A CARRITO \\\\ --
 	when ('add') then
 		if (_cantidad <= (select disponibilidad from productos where id_producto = uuid_to_bin(_id_producto))) then
-			replace into rel_carrito (
-				id_usuario,
-				id_producto,
-				cantidad
-			) values (
-				uuid_to_bin(_id_usuario),
-				uuid_to_bin(_id_producto),
-				_cantidad
-			);
+			if (_subcot is not null) then
+				replace into rel_carrito (
+					id_usuario,
+					id_producto,
+					cantidad,
+					subtotal
+				) values (
+					uuid_to_bin(_id_usuario),
+					uuid_to_bin(_id_producto),
+					_cantidad,
+					_subcot
+				);
+            else
+				set @_precio_prod = (select precio from productos where id_producto = uuid_to_bin(id_producto));
+				replace into rel_carrito (
+					id_usuario,
+					id_producto,
+					cantidad,
+					subtotal
+				) values (
+					uuid_to_bin(_id_usuario),
+					uuid_to_bin(_id_producto),
+					_cantidad,
+					@_precio_prod
+				);
+            end if;
         end if;
 -- //// MODIFICAR CANTIDAD \\\\ --
 	when ('set') then
@@ -64,7 +81,8 @@ case (_proc)
 			bin_to_uuid(id_producto) as 'out_id',
             imagen as 'out_img',
             titulo as 'out_titulo',
-            precio as 'out_precio',
+            cotizado as 'out_cot',
+            subtotal as 'out_precio',
             cantidad as 'out_cantidad',
             disponibilidad as 'out_dispo',
             total as 'out_total'

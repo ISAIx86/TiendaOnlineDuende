@@ -213,14 +213,14 @@ create table if not exists cotizaciones (
     id_comprador binary(16) not null comment "ID del comprador",
 	id_producto binary(16) not null comment "ID del producto",
     
-    vend_precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
-    vend_cantidad int not null comment "Cantidad de productos a comprar",
-    com_precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
+    vend_precio decimal(8,2) null default null comment "Oferta de precio unitario por el producto",
+    vend_cantidad int null default null comment "Cantidad de productos a comprar",
+    com_precio decimal(8,2) null default null comment "Oferta de precio unitario por el producto",
     com_cantidad int not null comment "Cantidad de productos a comprar",
-    estado char comment "Estado de la cotización. 'P' es pendiente. 'O' es abierta. 'C' es cerrada.",
+    estado char not null default 'P' comment "Estado de la cotización. 'P' es pendiente. 'O' es abierta. 'C' es cerrada.",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro del cotizacion",
-    fecha_modif timestamp null default null comment "Fecha de la última modificación",
+    fecha_modif timestamp null default current_timestamp comment "Fecha de la última modificación",
     
     primary key(id_cotiz)
 );
@@ -259,6 +259,7 @@ create table if not exists rel_carrito (
 	id_usuario binary(16) not null comment "ID del usuario",
     id_producto binary(16) not null comment "ID del producto",
     
+    subtotal decimal(8,2) not null,
     cantidad int not null comment "Cantidad de productos a comprar",
     
     primary key(id_usuario, id_producto)

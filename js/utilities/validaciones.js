@@ -249,6 +249,6 @@ function cantidadContenidoCorrecto(input) {
             return true;
         } else return false;
     }).length;
-    if (countImg >= 3 & countVideo >= 1) return true;
+    if (countImg >= 1 & countVideo >= 0) return true;
     else return false;
 }

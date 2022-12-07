@@ -22,10 +22,10 @@ select
     rlc.id_producto as 'id_producto',
     mult.contenido as 'imagen',
 	prod.titulo as 'titulo',
-    prod.precio as 'precio',
+    rlc.subtotal as 'subtotal',
     rlc.cantidad as 'cantidad',
     prod.disponibilidad as 'disponibilidad',
-    prod.precio * rlc.cantidad as 'total'
+    rlc.subtotal * rlc.cantidad as 'total'
 from rel_carrito as rlc
 left outer join productos as prod
 on rlc.id_producto = prod.id_producto

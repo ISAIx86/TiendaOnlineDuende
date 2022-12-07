@@ -5,7 +5,7 @@ require_once "carrito_dao.classes.php";
 class CarritoController extends CarritoDAO {
 
     // Métodos fuertes
-    public function añadirACarrito($userid, $prodid, $cantidad) {
+    public function añadirACarrito($userid, $prodid, $cantidad, $sub) {
         if (empty($userid)) {
             return "uncaptured_id";
         }
@@ -15,7 +15,7 @@ class CarritoController extends CarritoDAO {
         ) {
             return "empty_inputs";
         }
-        return $this->car_add($userid, $prodid, $cantidad);
+        return $this->car_add($userid, $prodid, $cantidad, $sub);
     }
 
     public function modifCantCarrito($userid, $prodid, $cantidad) {

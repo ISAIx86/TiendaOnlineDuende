@@ -26,92 +26,106 @@ create procedure sp_Cotizaciones (
     in _id_comprador varchar(36),
     in _id_producto varchar(36),
     in _precio decimal(8,2),
-    in _cantidad int,
-    in _aceptado boolean
+    in _cantidad int
 )
 begin
 
 case (_proc)
 -- //// CREAR LISTA \\\\ --
 	when ('create') then
+		set @_publicador = (select id_publicador from productos where id_producto = uuid_to_bin(_id_producto));
 		insert into cotizaciones (
 			id_cotiz,
 			id_publicador,
 			id_comprador,
 			id_producto,
-			precio,
-			cantidad
+			com_cantidad
 		) values (
 			uuid_to_bin(uuid()),
-			uuid_to_bin(_id_publicador),
+			@_publicador,
 			uuid_to_bin(_id_comprador),
 			uuid_to_bin(_id_producto),
-			_precio,
 			_cantidad
 		);
--- //// MODIFICAR LISTA \\\\ --
-    when ('modify') then
-		update listas set
-			nombre = ifnull(_nombre, nombre),
-			descripcion = ifnull(_descripcion, descripcion),
-			privacidad = ifnull(_privacidad, privacidad),
-			imagen = ifnull(_imagen, imagen),
-			imagen_dir = ifnull(_imagen_dir, imagen_dir),
+-- //// MODIFICAR PRECIO OFRECIDO DEL VENDEDOR \\\\ --
+    when ('set_vendor') then
+		update cotizaciones set
+			vend_precio = ifnull(_precio, vend_precio),
+			vend_cantidad = ifnull(_cantidad, vend_cantidad),
+            estado = 'O',
 			fecha_modif = sysdate()
-		where id_lista = uuid_to_bin(_id_lista)
-        and fecha_elim is null and id_usuario = uuid_to_bin(_id_usuario);
--- //// ELIMINAR LISTA \\\\ --
-    when ('delete') then
-		update listas set
-			fecha_elim = sysdate()
-		where id_lista = uuid_to_bin(_id_lista)
-        and fecha_elim is null and id_usuario = uuid_to_bin(_id_usuario);
+		where id_cotiz = uuid_to_bin(_id_cotiz)
+        and estado != 'C';
+-- //// MODIFICAR PRECIO OFRECIDO POR EL COMPRADOR \\\\ --
+    when ('set_compr') then
+		update cotizaciones set
+			com_precio = ifnull(_precio, com_precio),
+			com_cantidad = ifnull(_cantidad, com_cantidad),
+            estado = 'O',
+			fecha_modif = sysdate()
+		where id_cotiz = uuid_to_bin(_id_cotiz)
+        and estado != 'C';
+	when ('deny') then
+		update cotizaciones set
+			estado = 'C'
+		where id_cotiz = uuid_to_bin(_id_cotiz);
+-- //// ACEPTAR COTIZACION \\\\ --
+	when ('accept') then
+		update cotizaciones set
+			estado = 'C'
+		where id_cotiz = uuid_to_bin(_id_cotiz);
+		call sp_Carrito(
+			'add',
+            (select id_comprador from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            (select id_producto from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            (select vend_cantidad from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            (select vend_precio from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz))
+		);
 -- //// OBTENER LISTAS DEL USUARIO \\\\ --
-	when ('get_cards') then
+	when ('get_cards_v') then
 		select
-			bin_to_uuid(id_lista) as 'out_id',
-            imagen as 'out_img',
-            nombre as 'out_nombre',
-            descripcion as 'out_descripcion',
-            privacidad as 'out_privacidad'
-        from listas
-        where id_usuario = uuid_to_bin(_id_usuario)
-        and fecha_elim is null;
--- //// OBTENER VISTA DE LISTAS USUARIO \\\\ --
-	when ('get_cards_user') then
-		select
-			bin_to_uuid(id_lista) as 'out_id',
-            imagen as 'out_img',
-            nombre as 'out_nombre',
-            descripcion as 'out_descripcion'
-        from listas
-        where id_usuario = uuid_to_bin(id_usuario)
-        and privacidad = 0
-        and fecha_elim is null;
--- //// OBTENER INFORMACIÓN DE LISTA \\\\ --
-	when ('get_data') then
-		select
-			bin_to_uuid(id_lista) as 'out_id',
-            imagen as 'out_img',
-            nombre as 'out_nombre',
-            descripcion as 'out_descripcion',
-            privacidad as 'out_privacidad'
-		from listas
-        where id_lista = uuid_to_bin(_id_lista)
-        and id_usuario = uuid_to_bin(_id_usuario)
-        and fecha_elim is null;
--- //// OBTENER LISTA \\\\ --
-	when ('get_items') then
-		select
-			bin_to_uuid(id_producto) as 'out_id',
+			bin_to_uuid(id_cotiz) as 'out_id',
+            comp_avatar as 'out_cavatar',
+            comp_username as 'out_cuser',
             imagen as 'out_img',
             titulo as 'out_titulo',
-            cotizacion as 'out_cotiz',
-            precio as 'out_precio',
-            disponibilidad as 'out_disponibilidad',
-            calificacion as 'out_calif'
-        from vw_lista
-        where id_lista = uuid_to_bin(_id_lista);
+            cantidad as 'out_cantidad',
+            fecha_modif as 'out_fechamod'
+        from vw_cotiz_card
+        where id_publicador = uuid_to_bin(_id_publicador)
+        and estado != 'C'
+        order by fecha_modif desc;
+-- //// OBTENER LISTAS DEL USUARIO \\\\ --
+	when ('get_cards_c') then
+		select
+			bin_to_uuid(id_cotiz) as 'out_id',
+            publ_avatar as 'out_pavatar',
+            publ_username as 'out_puser',
+            imagen as 'out_img',
+            titulo as 'out_titulo',
+            cantidad as 'out_cantidad',
+            fecha_modif as 'out_fechamod'
+        from vw_cotiz_card
+        where id_comprador = uuid_to_bin(_id_comprador)
+        and estado != 'C'
+        order by fecha_modif desc;
+-- //// OBTENER INFORMACION DE COTIZACION \\\\ --
+	when ('get_data') then
+		select
+			bin_to_uuid(id_cotiz) as 'out_id',
+            publ_avatar as 'out_pavatar',
+            publ_username as 'out_puser',
+            comp_avatar as 'out_cavatar',
+            comp_username as 'out_cuser',
+            imagen as 'out_img',
+            titulo as 'out_titulo',
+            v_precio as 'out_vprecio',
+            v_cantidad as 'out_vcant',
+            c_precio as 'out_cprecio',
+            c_cantidad as 'out_ccant'
+		from vw_cotiz_info
+        where id_cotiz = uuid_to_bin(_id_cotiz)
+        and estado != 'C';
 -- //// COMANDO NO VÁLIDO \\\\ --
 	else 
 		select "invalid_command" as 'result';
