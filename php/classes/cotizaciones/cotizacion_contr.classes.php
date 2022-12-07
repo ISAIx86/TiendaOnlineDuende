@@ -4,81 +4,72 @@ require_once "cotizacion_dao.classes.php";
 
 class CotizacionController extends CotizacionDAO {
 
-    // Métodos débiles
-    private function hasEmptyInput(Categoria $cat) {
-        if(
-            empty($cat->getNombre()) |
-            empty($cat->getDescripcion()) 
-        ) {
-            return true;
-        } else return false;
-    }
-
-    private function categoCheck($name) {
-        return $this->cat_checar_nombre($name);
-    }
-
-    // Métodos fuertes
-    public function crearCategoria(Categoria $cat) {
-        if ($this->hasEmptyInput($cat)) {
+    public function crearCotizacion($iduser, $idprod, $cant) {
+        if (empty($iduser)) {
+            return "uncaptured_user";
+        }
+        if (empty($idprod)) {
+            return "uncaptured_prod";
+        }
+        if (empty($subtot) | empty($cant)) {
             return "empty_inputs";
         }
-        if ($this->categoCheck($cat->getNombre())) {
-            return "already_exists";
-        }
-        return $this->cat_crear($cat);
+        return $this->cot_crear($iduser, $idprod, $subtot, $cant);
     }
 
-    public function modificarCategoria(Categoria &$cat) {
-        if (empty($cat->getID())) {
+    public function ofertaComprador($idcot, $subtot, $cant) {
+        if (empty($idcot)) {
             return "uncaptured_id";
         }
-        if ($this->hasEmptyInput($cat)) {
+        if (empty($subtot) | $empty($cant)) {
             return "empty_inputs";
         }
-        return $this->cat_modificar($cat);
+        return $this->cot_setvend($idcot, $subtot, $cant);
     }
-    
-    public function borrarCategoria($id) {
+
+    public function ofertaVendedor($idcot, $subtot, $cant) {
+        if (empty($idcot)) {
+            return "uncaptured_id";
+        }
+        if (empty($subtot) | $empty($cant)) {
+            return "empty_inputs";
+        }
+        return $this->cot_setcomp($idcot, $subtot, $cant);
+    }
+
+    public function denegar($idcot) {
+        if (empty($idcot)) {
+            return "uncaptured_id";
+        }
+        return $this->cot_denegar($idcot);
+    }
+
+    public function aceptar($idcot) {
+        if (empty($idcot)) {
+            return "uncaptured_id";
+        }
+        return $this->cot_aceptar($idcot);
+    }
+
+    public function obtenerCotizacion($idcot) {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        return $this->cat_baja($id);
+        return $this->cot_info($idcot);
     }
 
-    public function autorizarCategoria($id, $auto) {
+    public function listaVendedor($idusu) {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        if (empty($auto)) {
-            return "uncaptured_admin";
-        }
-        return $this->cat_authorize($id, $auto);
+        return $this->cotv_lista($idusu);
     }
 
-    public function denegarCategoria($id, $auto) {
+    public function listaComprador($idusu) {
         if (empty($id)) {
             return "uncaptured_id";
         }
-        if (empty($auto)) {
-            return "uncaptured_admin";
-        }
-        return $this->cat_deny($id, $auto);
-    }
-
-    public function obtenerTodos() {
-        return $this->cat_all();
-    }
-
-    public function buscarPorNombre($texto) {
-        if (empty($texto)) {
-            return "empty";
-        }
-        return $this->cat_busqueda($texto);
-    }
-
-    public function obtenerPeticiones() {
-        return $this->cat_getautho();
+        return $this->cotc_lista($idusu);
     }
     
 }

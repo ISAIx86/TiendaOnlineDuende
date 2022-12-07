@@ -20,7 +20,7 @@ class CotizacionDAO extends DBH {
         ));
     }
     // CRUD
-    protected function cot_crear($iduser, $idprod, $subtot, $cant) {
+    protected function cot_crear($iduser, $idprod, $cant) {
 
         $this->prepareStatement('create');
 
@@ -29,7 +29,7 @@ class CotizacionDAO extends DBH {
             'id_publ'=>null,
             'id_compr'=>$iduser,
             'id_prod'=>$idprod,
-            'precio'=>$subtot,
+            'precio'=>null,
             'cantidad'=>$cant
         );
 
@@ -98,76 +98,71 @@ class CotizacionDAO extends DBH {
         
     }
 
+    protected function cot_aceptar($id) {
+
+        $this->prepareStatement('accept');
+
+        $data = array(
+            'id_cotiz'=>$id,
+            'id_publ'=>null,
+            'id_compr'=>null,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
+
+        $this->executeCall($data);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+    }
+
+    protected function cot_denegar($id) {
+        $this->prepareStatement('deny');
+
+        $data = array(
+            'id_cotiz'=>$id,
+            'id_publ'=>null,
+            'id_compr'=>null,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
+
+        $this->executeCall($data);
+
+        $count = $this->countOfRows();
+
+        $this->clearStatement();
+
+        if ($count == 0) {
+            return false;
+        }
+        else return true;
+    }
+
     // Consultas
 
-    protected function cat_checar_nombre($name) {
+    protected function cotv_lista($id_publ) {
 
-        $this->prepareStatement('check');
+        $this->prepareStatement('get_cards_v');
 
-        $cat = Categoria::create()->setNombre($name);
+        $data = array(
+            'id_cotiz'=>null,
+            'id_publ'=>$id_publ,
+            'id_compr'=>null,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
 
-        $this->executeCall($cat);
-
-        $count = $this->fetchData()[0]["result"];
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-
-    }
-
-    protected function cat_authorize($id, $auto) {
-
-        $this->prepareStatement('autho');
-        
-        $cat = Categoria::create()
-            ->setID($id)
-            ->setCreador($auto);
-
-        $this->executeCall($cat);
-
-        $count = $this->countOfRows();
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-        
-    }
-
-    protected function cat_deny($id, $auto) {
-
-        $this->prepareStatement('deny');
-        
-        $cat = Categoria::create()
-            ->setID($id)
-            ->setCreador($auto);
-
-        $this->executeCall($cat);
-
-        $count = $this->countOfRows();
-
-        $this->clearStatement();
-
-        if ($count == 0) {
-            return false;
-        }
-        else return true;
-        
-    }
-
-    protected function cat_all() {
-
-        $this->prepareStatement('all_cat');
-
-        $cat = Categoria::create();
-
-        $this->executeCall($cat);
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -177,13 +172,20 @@ class CotizacionDAO extends DBH {
 
     }
 
-    protected function cat_busqueda($text) {
+    protected function cotc_lista($id_comp) {
 
-        $this->prepareStatement('search_text');
+        $this->prepareStatement('get_cards_v');
 
-        $cat = Categoria::create()->setNombre($text);
-        
-        $this->executeCall($cat);
+        $data = array(
+            'id_cotiz'=>null,
+            'id_publ'=>null,
+            'id_compr'=>$id_comp,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
+
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 
@@ -193,13 +195,20 @@ class CotizacionDAO extends DBH {
 
     }
 
-    protected function cat_getautho() {
+    protected function cot_info($id) {
 
-        $this->prepareStatement('get_toautho');
+        $this->prepareStatement('get_data');
 
-        $cat = Categoria::create();
+        $data = array(
+            'id_cotiz'=>$id,
+            'id_publ'=>null,
+            'id_compr'=>null,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
 
-        $this->executeCall($cat);
+        $this->executeCall($data);
 
         $result = $this->fetchData();
 

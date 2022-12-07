@@ -22,10 +22,20 @@ select
 	cotiz.id_cotiz as 'id_cotiz',
     cotiz.id_publicador as 'id_publicador',
     cotiz.id_comprador as 'id_comprador',
+    publ.avatar as 'publ_avatar',
+    publ.username as 'publ_username',
+    comp.avatar as 'comp_avatar',
+    comp.username as 'comp_username',
     multi.contenido as 'imagen',
     prod.titulo as 'titulo',
-    cotiz.estado as 'estado'
+    cotiz.com_cantidad as 'cantidad',
+    cotiz.estado as 'estado',
+    cotiz.fecha_modif as 'fecha_modif'
 from cotizaciones as cotiz
+left outer join usuarios as publ
+on cotiz.id_publicador = publ.id_usuario
+left outer join usuarios as comp
+on cotiz.id_comprador = comp.id_usuario
 left outer join productos as prod
 on cotiz.id_producto = prod.id_producto
 left outer join multimedia as multi
@@ -40,6 +50,10 @@ create or replace view vw_cotiz_info as
 select
 	cotiz.id_cotiz as 'id_cotiz',
     cotiz.id_publicador as 'id_publicador',
+    publ.avatar as 'publ_avatar',
+    publ.username as 'publ_username',
+    comp.avatar as 'comp_avatar',
+    comp.username as 'comp_username',
     cotiz.id_comprador as 'id_comprador',
     multi.contenido as 'imagen',
     prod.titulo as 'titulo',
@@ -49,6 +63,10 @@ select
     cotiz.com_cantidad as 'c_cantidad',
     cotiz.estado as 'estado'
 from cotizaciones as cotiz
+left outer join usuarios as publ
+on cotiz.id_publicador = publ.id_usuario
+left outer join usuarios as comp
+on cotiz.id_comprador = comp.id_usuario
 left outer join productos as prod
 on cotiz.id_producto = prod.id_producto
 left outer join multimedia as multi

@@ -215,12 +215,12 @@ create table if not exists cotizaciones (
     
     vend_precio decimal(8,2) null default null comment "Oferta de precio unitario por el producto",
     vend_cantidad int null default null comment "Cantidad de productos a comprar",
-    com_precio decimal(8,2) not null comment "Oferta de precio unitario por el producto",
+    com_precio decimal(8,2) null default null comment "Oferta de precio unitario por el producto",
     com_cantidad int not null comment "Cantidad de productos a comprar",
     estado char not null default 'P' comment "Estado de la cotización. 'P' es pendiente. 'O' es abierta. 'C' es cerrada.",
     
     fecha_creacion timestamp not null default current_timestamp comment "Fecha de registro del cotizacion",
-    fecha_modif timestamp null default null comment "Fecha de la última modificación",
+    fecha_modif timestamp null default current_timestamp comment "Fecha de la última modificación",
     
     primary key(id_cotiz)
 );

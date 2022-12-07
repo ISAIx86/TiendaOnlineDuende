@@ -115,21 +115,27 @@ if (isset($_GET['prod'])) {
             <?php } else { ?>
             <h6>Sin Stock Disponible</h6>
             <?php } ?>
-            
+
             <div class ="container">
-              <form>
-                <div class = "row">
-                  <div class="col-4">
-                    <label for="inputPassword2" class="visually-hidden">Cantidad</label>
-                    <input type="number" class="form-control" id="txt_cantidad" placeholder="Cantidad" value="1" min="1" max="256" onKeyDown="return false">
+              <div class = "row">
+                <div class="col-4">
+                  <label for="inputPassword2" class="visually-hidden">Cantidad</label>
+                  <input type="number" class="form-control" id="txt_cantidad" placeholder="Cantidad" value="1" min="1" max="256" onKeyDown="return false">
+                </div>
+              </div>
+              <?php if ($infoProd['out_cotiz']) { ?>
+                <div class="row">          
+                  <div class="col">
+                    <button id="btn_cot" type="button" class="btn btn-warning">Cotizar</button>
                   </div>
                 </div>
+              <?php } else { ?>
                 <div class="row">          
                   <div class="col">
                     <button id="btn_carrito" type="button" class="btn btn-warning">Agregar a carrito</button>
                   </div>
                 </div>
-              </form>
+              <?php } ?>
               <div class = "row">
                 <div class="col">
                   <div class="btn-group">
