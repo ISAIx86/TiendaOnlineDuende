@@ -18,6 +18,8 @@ include_once __ROOT."html/templates/get_session.php";
     <div class = "container" id = "pagina">
         <h5>Crear lista</h5>
         <div class = "row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
             <form id="form_lista">
                 <div class="form_control" requerido="false" state='empt'>
                     <div class="mb-3">
@@ -43,7 +45,7 @@ include_once __ROOT."html/templates/get_session.php";
                 <div class="form_control" requerido="false" state='empt'>
                     <div class="mb-3">
                         <div class = "row">
-                            <div class = "col-6">
+                            <div class = "col-1">
                                 <div class="form-check">
                                     <input class="form-check-input" id="rdb_publ" type="radio" name="in_privacidad" value="0" checked>
                                     <label class="form-check-label" for="rdb_publ">
@@ -61,9 +63,12 @@ include_once __ROOT."html/templates/get_session.php";
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary mb-3">Registrar</button>
+                    <button type="submit" class="btn btn-outline-success mb-3">Registrar</button>
                 </div>
             </form>
+            </div>
+            <div class="col-sm-2"></div>
+
         </div>
     </div>
   <!-- Footer -->

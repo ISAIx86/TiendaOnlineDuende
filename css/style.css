@@ -2,37 +2,75 @@
 
 	top :0;
 }
+
 header{
     background: #FFFFFF;
-    font-family: 'Candara';
+    font-family: 'Abril Fatface';
 }
 .partesuperior{
     background: #1e392a;
-    font-family: 'Candara';
+    font-family: 'Abril Fatface';
     text-align: center;
 
 }
 .buscador {
     background: #CADE01;
-    font-family: 'Candara';
+    font-family: 'Abril Fatface';
     text-align: left;
     position: absolute;
 }
+
+#perfilDatostitulo {
+    background: #6924a5;
+    font-family: 'Abril Fatface';
+    color: #FFFFFF;
+    text-align: left;
+}
+#perfilDatos {
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
+#color1 {
+    background: #6924a5;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
+#color2 {
+    background: #CADE01;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
+#color3 {
+    background: #FFFFFF;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
+#color4 {
+    background: #120727;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
+#divTop {
+    background: #6924a5;
+    font-family: 'Abril Fatface';
+    text-align: left;
+}
 #divBusqueda {
     background: #CADE01;
-    font-family: 'Candara';
+    font-family: 'Abril Fatface';
     text-align: left;
 }
 #navegacion{
     background: #CADE01;
-    font-family: 'Candara';
+    font-family: 'Abril Fatface';
+    color: #FFFFFF;
     text-align: left;
 }
 #txt-busqueda{
     margin-top: 10px;
 }
 footer{
-    background: #3cc47c;
+    background: #CADE01;
     text-align: center;
 }
 .imgRedonda {

@@ -52,7 +52,10 @@ if (gettype($userData) == "string") {
     <!-- Container -->
     <div class = "container" id = "pagina">
         <div class = "row">
-            <div class = "col-12">
+            <div class = "col-md-2">
+
+            </div>
+            <div class = "col-md-8">
                 <div class="form-container">
                     <div class="header">
                         <h2>Actualizar Datos</h2>
@@ -184,6 +187,9 @@ if (gettype($userData) == "string") {
                         <button>Actualizar contraseña</button>
                     </form>
                 </div>
+            </div>
+            <div class = "col-md-2">
+
             </div>
         </div>
     </div>
