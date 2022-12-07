@@ -6,52 +6,69 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 
 <div id = "encabezado">
   <header>
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-sm-8">
-        <a href="../comprador/c-home.php">
-          <img src='../../resources/logo02.PNG' class='logotipo'/>
-        </a>
-      </div>
-      <div class="col-sm-4" id = "ico-header" >
-        <div class = "row">
-          <div class = "col-6">
-            <div class="dropdown">
-              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src='../../resources/carrito.PNG' class='imgCuadrada' />
-                <?php if ($carritoTot) { ?> 
-                <h5 id="hdr_carrito"><?php echo "$$carritoTot" ?></h5>
-                <?php } else { ?>
-                  <h5 id="hdr_carrito">$0</h5>
-                <?php } ?>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../comprador/c-carrito.php">Ver carrito</a></li>
-              </ul>
-            </div>
+ 
+  <div class = "container-flex" id = "color2">
+    <h12>.</h12>
+  </div>
+  <div class = "container-flex" id = "color1">
+    <h12>.</h12>
+  </div>
+  <div class = "container-flex" id = "color3">
+    <h12>.</h12>
+  </div>
+  <div class = "container-flex" id = "color4">
+    <h12>.</h12>
+  </div>
+    <div class = "container-flex">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-8">
+            <a href="../comprador/c-home.php">
+              <img src='../../resources/logo02.PNG' class='logotipo'/>
+            </a>
           </div>
-          <div class = "col-6">
-            <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if ($loggedUser["Avatar"] == null) { ?>
-                <img src='../../resources/default_user.jpg' class='imgRedonda'/>
-                <?php } else { $imageSrc = '"data:image/jpg;base64,'.base64_encode($loggedUser["Avatar"]).'"'; ?>
-                <img src=<?php echo $imageSrc ?> class='imgRedonda'/>
-                <?php } ?>
-                <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
-                <li><a class="dropdown-item" href="../comprador/c-misPedidos.php">Mis pedidos</a></li>
-                <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
-              </ul>
+          <div class="col-sm-4" id = "ico-header" >
+            <div class = "row">
+              <div class = "col-6">
+                <div class="dropdown">
+                  <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src='../../resources/carrito.PNG' class='imgCuadrada' />
+                    <?php if ($carritoTot) { ?> 
+                    <h5 id="hdr_carrito"><?php echo "$$carritoTot" ?></h5>
+                    <?php } else { ?>
+                      <h5 id="hdr_carrito">$0</h5>
+                    <?php } ?>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="../comprador/c-carrito.php">Ver carrito</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class = "col-6">
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php if ($loggedUser["Avatar"] == null) { ?>
+                    <img src='../../resources/default_user.jpg' class='imgRedonda'/>
+                    <?php } else { $imageSrc = '"data:image/jpg;base64,'.base64_encode($loggedUser["Avatar"]).'"'; ?>
+                    <img src=<?php echo $imageSrc ?> class='imgRedonda'/>
+                    <?php } ?>
+                    <h5 id="txt_usertag"><?php echo $loggedUser['Username'] ?></h5>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="../usuarios/c-profile.php">Mi cuenta</a></li>
+                    <li><a class="dropdown-item" href="../comprador/c-misPedidos.php">Mis pedidos</a></li>
+                    <li><a class="dropdown-item" href="../../php/includes/usuarios/close_session_inc.php">Cerrar sesión</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  
 </header>
+<div class = "container-flex" id = "divBusqueda">   
 <div class = "container" id = "divBusqueda">          
     <form class="row" id = "buscador">
       <div class="col-9" id = "txt-busqueda">    
@@ -99,5 +116,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
     </div>
   </div>
 </nav>
+</div>
 </div>
 </div>

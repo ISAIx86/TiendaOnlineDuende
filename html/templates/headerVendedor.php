@@ -60,23 +60,7 @@
                     <a class="nav-link" href="../vendedor/v-crearCategoria.php">Registrar categoria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../vendedor/v-cotizaciones.php">Cotizaciones<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-secondary">Home</button>
-                    <button type="button" class="btn btn-secondary">Page</button>
-                    
-                    <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" 
-                    data - toggle = "dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="#">Dropdown link</a>
-                    <a class="dropdown-item" href="#">Dropdown link</a>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    </a>
+                    <a class="nav-link" href="../vendedor/v-cotizacion.php">Cotizaciones pendientes</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>
@@ -89,5 +73,8 @@
                 </li>
             </ul>
         </div>
+    </nav>
     </div>
-</nav>
+
+</div>
+
