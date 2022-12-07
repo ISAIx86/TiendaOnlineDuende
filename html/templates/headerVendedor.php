@@ -60,7 +60,7 @@
                     <a class="nav-link" href="../vendedor/v-crearCategoria.php">Registrar categoria</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../vendedor/v-cotizacion.php">Cotizaciones pendientes</a>
+                    <a class="nav-link" href="../vendedor/v-cotizaciones.php">Cotizaciones pendientes</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Consultas</a>

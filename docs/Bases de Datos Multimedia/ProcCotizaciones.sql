@@ -76,8 +76,8 @@ case (_proc)
 		where id_cotiz = uuid_to_bin(_id_cotiz);
 		call sp_Carrito(
 			'add',
-            (select id_comprador from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
-            (select id_producto from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            (select bin_to_uuid(id_comprador) from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            (select bin_to_uuid(id_producto) from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
             (select vend_cantidad from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
             (select vend_precio from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz))
 		);

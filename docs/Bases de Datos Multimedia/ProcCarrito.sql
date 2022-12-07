@@ -81,7 +81,6 @@ case (_proc)
 			bin_to_uuid(id_producto) as 'out_id',
             imagen as 'out_img',
             titulo as 'out_titulo',
-            cotizado as 'out_cot',
             subtotal as 'out_precio',
             cantidad as 'out_cantidad',
             disponibilidad as 'out_dispo',

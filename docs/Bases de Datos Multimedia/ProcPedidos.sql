@@ -51,8 +51,8 @@ case (_proc)
 -- //// AÑADIR PRODUCTO AL PEDIDO \\\\ --
 	when ('add_prod') then
 		select
-			precio into _precio
-		from productos
+			subtotal into _precio
+		from rel_carrito
 		where id_producto = uuid_to_bin(_id_producto);
 		insert into rel_ped_prod(
 			folio_pedido,

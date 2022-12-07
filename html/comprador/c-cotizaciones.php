@@ -2,7 +2,7 @@
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/classes/cotizaciones/cotizaciones_contr.classes.php";
+require_once __ROOT."php/classes/cotizaciones/cotizacion_contr.classes.php";
 $controller = new CotizacionController();
 $cotizaciones = $controller->listaComprador($_SESSION['user']['ID']);
 ?>
@@ -36,7 +36,6 @@ $cotizaciones = $controller->listaComprador($_SESSION['user']['ID']);
             </div>
             <div class = "col-8">
               <div class="fw-bold"><?php echo $cot['out_puser']?></div>
-              <img src=<?php echo $imageUsr?> class="d-block w-100" alt="...">
               <h6>Cantidad solicitda: <?php echo $cot['out_cantidad']?></h6>
               <h6>Fecha: <?php echo $cot['out_fechamod']?></h6>
             </div>
@@ -61,6 +60,7 @@ $cotizaciones = $controller->listaComprador($_SESSION['user']['ID']);
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/cotizaciones/listas.js"></script>
 
 </body>
 </html>

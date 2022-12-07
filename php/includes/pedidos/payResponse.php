@@ -61,7 +61,6 @@ try {
             exit();
         } else {
             $carr_controller->limpiarCarrito($_SESSION['user']['ID']);
-            header("Location: ".__HS_ROOT."html/templates/something_went_wrong.php?context='No se pudo limpiar el carrito'&message='Limpie su carrito manualmente.'");
             exit();
         }
 

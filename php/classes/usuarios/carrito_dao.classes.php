@@ -50,7 +50,8 @@ class CarritoDAO extends DBH {
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>$prodid,
-            'in_cantidad'=>$cant
+            'in_cantidad'=>$cant,
+            'in_sub'=>null
         );
 
         $this->executeCall($data);
@@ -73,7 +74,8 @@ class CarritoDAO extends DBH {
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>$prodid,
-            'in_cantidad'=>null
+            'in_cantidad'=>null,
+            'in_sub'=>null
         );
 
         $this->executeCall($data);
@@ -94,7 +96,8 @@ class CarritoDAO extends DBH {
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>null,
-            'in_cantidad'=>null
+            'in_cantidad'=>null,
+            'in_sub'=>null
         );
 
         $this->executeCall($data);
@@ -115,7 +118,8 @@ class CarritoDAO extends DBH {
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>null,
-            'in_cantidad'=>null
+            'in_cantidad'=>null,
+            'in_sub'=>null
         );
 
         $this->executeCall($data);
@@ -135,7 +139,8 @@ class CarritoDAO extends DBH {
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>null,
-            'in_cantidad'=>null
+            'in_cantidad'=>null,
+            'in_sub'=>null
         );
 
         $this->executeCall($data);

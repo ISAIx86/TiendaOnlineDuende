@@ -11,30 +11,30 @@ class CotizacionController extends CotizacionDAO {
         if (empty($idprod)) {
             return "uncaptured_prod";
         }
-        if (empty($subtot) | empty($cant)) {
+        if (empty($cant)) {
             return "empty_inputs";
         }
-        return $this->cot_crear($iduser, $idprod, $subtot, $cant);
+        return $this->cot_crear($iduser, $idprod, $cant);
     }
 
     public function ofertaComprador($idcot, $subtot, $cant) {
         if (empty($idcot)) {
             return "uncaptured_id";
         }
-        if (empty($subtot) | $empty($cant)) {
+        if (empty($subtot) | empty($cant)) {
             return "empty_inputs";
         }
-        return $this->cot_setvend($idcot, $subtot, $cant);
+        return $this->cot_setcomp($idcot, $subtot, $cant);
     }
 
     public function ofertaVendedor($idcot, $subtot, $cant) {
         if (empty($idcot)) {
             return "uncaptured_id";
         }
-        if (empty($subtot) | $empty($cant)) {
+        if (empty($subtot) | empty($cant)) {
             return "empty_inputs";
         }
-        return $this->cot_setcomp($idcot, $subtot, $cant);
+        return $this->cot_setvend($idcot, $subtot, $cant);
     }
 
     public function denegar($idcot) {
@@ -52,21 +52,21 @@ class CotizacionController extends CotizacionDAO {
     }
 
     public function obtenerCotizacion($idcot) {
-        if (empty($id)) {
+        if (empty($idcot)) {
             return "uncaptured_id";
         }
         return $this->cot_info($idcot);
     }
 
     public function listaVendedor($idusu) {
-        if (empty($id)) {
+        if (empty($idusu)) {
             return "uncaptured_id";
         }
         return $this->cotv_lista($idusu);
     }
 
     public function listaComprador($idusu) {
-        if (empty($id)) {
+        if (empty($idusu)) {
             return "uncaptured_id";
         }
         return $this->cotc_lista($idusu);
