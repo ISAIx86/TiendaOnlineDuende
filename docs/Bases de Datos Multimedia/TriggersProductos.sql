@@ -13,6 +13,7 @@ use tienda_online;
 
 drop trigger if exists tr_productoCompra;
 drop trigger if exists tr_promedioCalif;
+drop trigger if exists tr_changePrice;
 
 DELIMITER $$
 create trigger tr_productoCompra
@@ -37,5 +38,20 @@ begin
 	update productos set
 		calificacion = (_total_calif / _reviews)
 	where id_producto = new.id_producto;
+end;
+$$ DELIMITER ;
+
+DELIMITER $$
+create trigger tr_changePrice
+after update on productos
+for each row
+begin
+	if (old.cotizacion != new.cotizacion and new.cotizacion = true) then
+		delete from rel_carrito where id_producto = new.id_producto;
+	else
+		update rel_carrito set
+			subtotal = new.precio
+		where id_producto = new.id_producto;
+    end if;
 end;
 $$ DELIMITER ;

@@ -6,26 +6,28 @@ class CarritoDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Carrito('".$proc."', ?, ?, ?);");
+        $this->setPrepareStatement("call sp_Carrito('".$proc."', ?, ?, ?, ?);");
     }
 
     private function executeCall($data) {
         return $this->executeQuery(array(
             $data['in_userid'],
             $data['in_prodid'],
-            $data['in_cantidad']
+            $data['in_cantidad'],
+            $data['in_sub']
         ));
     }
 
     // Carrito
-    protected function car_add($userid, $prodid, $cant) {
+    protected function car_add($userid, $prodid, $cant, $sub) {
 
         $this->prepareStatement('add');
 
         $data = array(
             'in_userid'=>$userid,
             'in_prodid'=>$prodid,
-            'in_cantidad'=>$cant
+            'in_cantidad'=>$cant,
+            'in_sub'=>$sub
         );
 
         $this->executeCall($data);
