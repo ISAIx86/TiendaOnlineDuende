@@ -9,13 +9,12 @@ require_once __ROOT."php/classes/productos/producto_contr.classes.php";
 $catcontroller = new CategoriaController();
 $prodcontroller = new ProductoController();
 $categos = $catcontroller->obtenerTodos();
-$productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
 
 $cat = null;
 if (isset($_GET['in_cat'])) {
   if ($_GET['in_cat'] != "") $cat = $_GET['in_cat'];
 }
-
+$productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
 ?>
 <!doctype html>
 <html lang="es">

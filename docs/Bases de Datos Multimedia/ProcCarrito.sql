@@ -44,7 +44,7 @@ case (_proc)
 					_subcot
 				);
             else
-				set @_precio_prod = (select precio from productos where id_producto = uuid_to_bin(id_producto));
+				set @_precio_prod = (select precio from productos where id_producto = uuid_to_bin(_id_producto));
 				replace into rel_carrito (
 					id_usuario,
 					id_producto,

@@ -61,6 +61,7 @@ try {
             exit();
         } else {
             $carr_controller->limpiarCarrito($_SESSION['user']['ID']);
+            header("Location: ".__HS_ROOT."html/comprador/c-compraExitosa.php");
             exit();
         }
 

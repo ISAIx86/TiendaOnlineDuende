@@ -11,7 +11,24 @@ select * from categorias;
 select * from usuarios;
 select * from cotizaciones;
 
+select bin_to_uuid(id_usuario), username from usuarios;
 
+select 
+	bin_to_uuid(id_publicador),
+    bin_to_uuid(id_comprador),
+    bin_to_uuid(id_producto),
+    estado
+from cotizaciones;
+
+select
+	bin_to_uuid(id_cotiz) as 'out_id',
+	comp_avatar as 'out_cavatar',
+	comp_username as 'out_cuser',
+	imagen as 'out_img',
+	titulo as 'out_titulo',
+	cantidad as 'out_cantidad',
+	fecha_modif as 'out_fechamod'
+from vw_cotiz_card;
 
 select * from rel_li_prod;
 

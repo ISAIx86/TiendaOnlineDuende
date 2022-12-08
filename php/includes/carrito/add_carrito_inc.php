@@ -8,7 +8,7 @@ session_start();
 if (isset($_SESSION['user'])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $controller = new CarritoController();
-        $result = $controller->añadirACarrito($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant']);
+        $result = $controller->añadirACarrito($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant'], null);
         if (gettype($result) == "string") {
             echo json_encode(array('result'=>"error", 'reason'=>$result));
             exit();

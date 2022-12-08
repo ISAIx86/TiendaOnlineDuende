@@ -9,7 +9,6 @@ require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
 $catcontroller = new CategoriaController();
 $pedcontroller = new PedidosController();
 $categos = $catcontroller->obtenerTodos();
-$ventas = $pedcontroller->ventasDetallada($_SESSION['user']['ID'], $cat, $stdt, $eddt);
 $cat = null;
 $stdt = null;
 $eddt = null;
@@ -22,6 +21,7 @@ if (isset($_GET['in_start'])) {
 if (isset($_GET['in_end'])) {
   if ($_GET['in_end'] != "") $eddt = $_GET['in_end'];
 }
+$ventas = $pedcontroller->ventasDetallada($_SESSION['user']['ID'], $cat, $stdt, $eddt);
 ?>
 <!doctype html>
 <html lang="es">

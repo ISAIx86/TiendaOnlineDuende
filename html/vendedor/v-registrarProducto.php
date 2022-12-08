@@ -60,7 +60,7 @@ include_once __ROOT."html/templates/get_session.php";
           <div class="form_control" requerido="true" state='empt'>
             <div class="mb-3">
               <label for="txt_descrip" class="form-label">Cantidad disponible</label>
-              <input type="number" class="form-control" id="txt_dispo" name="in_dispo" max="256", min="1"></input>
+              <input type="number" class="form-control" id="txt_dispo" name="in_dispo" max="256" min="1" value="1" onKeyDown="return false"></input>
               <small>Error</small>
             </div>
           </div>
