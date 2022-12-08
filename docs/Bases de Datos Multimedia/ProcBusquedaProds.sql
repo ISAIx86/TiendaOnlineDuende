@@ -36,6 +36,7 @@ case (_proc)
             m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
+            p.cotizacion as 'out_cotiz',
             p.precio as 'out_precio'
         from productos as p
         left outer join multimedia as m
@@ -52,6 +53,7 @@ case (_proc)
             m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
+            p.cotizacion as 'out_cotiz',
             p.precio as 'out_precio'
         from productos as p
         left outer join multimedia as m
@@ -68,6 +70,7 @@ case (_proc)
             m.contenido as 'out_img',
             p.titulo as 'out_titulo',
             p.descripcion as 'out_descripcion',
+            p.cotizacion as 'out_cotiz',
             p.precio as 'out_precio'
         from productos as p
         left outer join multimedia as m

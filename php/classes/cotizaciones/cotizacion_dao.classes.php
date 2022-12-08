@@ -174,7 +174,7 @@ class CotizacionDAO extends DBH {
 
     protected function cotc_lista($id_comp) {
 
-        $this->prepareStatement('get_cards_v');
+        $this->prepareStatement('get_cards_c');
 
         $data = array(
             'id_cotiz'=>null,
@@ -210,7 +210,7 @@ class CotizacionDAO extends DBH {
 
         $this->executeCall($data);
 
-        $result = $this->fetchData();
+        $result = $this->fetchData()[0];
 
         $this->clearStatement();
 

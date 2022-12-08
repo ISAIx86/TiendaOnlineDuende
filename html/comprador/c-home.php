@@ -101,7 +101,11 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class="card-body">
                               <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
                               <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
-                              <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <?php if ($prod['out_cotiz']) { ?>
+                                <p>Cotizado</p>
+                              <?php } else { ?>
+                                <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <?php } ?>
                               <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
@@ -146,7 +150,11 @@ include_once __ROOT."html/templates/get_session.php";
                             <div class="card-body">
                               <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
                               <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
-                              <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <?php if ($prod['out_cotiz']) { ?>
+                                <p>Cotizado</p>
+                              <?php } else { ?>
+                                <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                              <?php } ?>
                               <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                             </div>
                           </div>
@@ -191,7 +199,11 @@ include_once __ROOT."html/templates/get_session.php";
                               <div class="card-body">
                                 <h5 class="card-title"><?php echo $prod['out_titulo'] ?></h5>
                                 <p class="card-text"><?php echo $prod['out_descripcion'] ?></p>
-                                <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                                <?php if ($prod['out_cotiz']) { ?>
+                                  <p>Cotizado</p>
+                                <?php } else { ?>
+                                  <p class="card-text"><?php echo $prod['out_precio'] ?></p>
+                                <?php } ?>
                                 <a href="../producto/c-producto.php?prod=<?php echo $prod['out_id'] ?>" class="btn btn-primary">Ver detalles</a>
                               </div>
                             </div>

@@ -9,6 +9,9 @@ select * from productos;
 select * from super_admins;
 select * from categorias;
 select * from usuarios;
+select * from cotizaciones;
+
+
 
 select * from rel_li_prod;
 

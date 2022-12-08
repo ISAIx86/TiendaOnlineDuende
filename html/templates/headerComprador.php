@@ -89,14 +89,15 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../listas/c-misListas.php">Mis listas</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="c-cotizaciones.php">Cotizaciones</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Recomendados</a></li>
             <li><a class="dropdown-item" href="#">Más populares</a></li>
             <li><a class="dropdown-item" href="#">Más Vendidos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Vender</a></li>
           </ul>
         </li>
       </ul>

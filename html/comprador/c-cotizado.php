@@ -37,15 +37,15 @@ if (isset($_GET['cotiz'])) {
         <div class="card">
           <div class="card-body">
             <div>
-                <h5 class="card-title"><?php echo $infoProd['out_titulo']?></h5>
+                <h5 class="card-title"><?php echo $cotiz['out_titulo']?></h5>
             </div>
             <div>
-                <p class="card-text"><?php echo $infoProd['out_puser']?></p>
+                <p class="card-text"><?php echo $cotiz['out_puser']?></p>
                 <img class='imgRedonda' src=<?php echo $publAvatar?> e class="d-block w-100" alt="...">
             </div>
             <div>
-                <p class="card-text">Cantidad: <?php echo $infoProd['out_vcant']?></p>
-                <p class="card-text">Precio unitario: <?php echo $infoProd['out_vprecio']?></p>
+                <p class="card-text">Cantidad: <?php echo $cotiz['out_vcant']?></p>
+                <p class="card-text">Precio unitario: <?php echo $cotiz['out_vprecio']?></p>
             </div>
             <div>
                 <label for="txt_cantidad" class="visually-hidden">Cantidad</label>
@@ -55,13 +55,13 @@ if (isset($_GET['cotiz'])) {
             </div>
             <div class ="container">
               <div class="col">
-                <button id="btn_auto" type="button" class="btn btn-success">Aceptar</button>
+                <button id="btn_accept" type="button" class="btn btn-success">Aceptar</button>
               </div>
               <div class="col">
-                <button id="btn_cambiar" type="button" class="btn btn-success">Cambiar</button>
+                <button id="btn_cambiar_c" type="button" class="btn btn-success">Cambiar</button>
               </div>
               <div class="col">
-                <button id="btn_deny" type="button" class="btn btn-danger">Denegar</button>
+                <button id="btn_deny_c" type="button" class="btn btn-danger">Denegar</button>
               </div>
             </div> 
           </div>
@@ -74,6 +74,8 @@ if (isset($_GET['cotiz'])) {
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/utilities/validaciones.js"></script>
+  <script src="../../js/cotizaciones/cotizado.js"></script>
 
 </body>
 </html>
