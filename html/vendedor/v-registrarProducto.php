@@ -17,7 +17,7 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Container -->
   <div class = "container" id = "pagina">
     <div class = "row">
-      <div class = "col-6">
+      <div class = "col-md-6">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div id="mda_carousel" class="carousel-inner">
             
@@ -95,7 +95,7 @@ include_once __ROOT."html/templates/get_session.php";
                       </label>
                     </div>    
                 </div>
-                <div class = "col-6">
+                <div class = "col-sm-6">
                   <div class="input-group mb-3">
                     <span class="input-group-text">$</span>
                     <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)" autocomplete="off">
