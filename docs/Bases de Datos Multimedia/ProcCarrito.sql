@@ -24,7 +24,8 @@ create procedure sp_Carrito (
     in _id_usuario varchar(36),
     in _id_producto varchar(36),
     in _cantidad int,
-    in _subcot decimal(8,2)
+    in _subcot decimal(8,2),
+    in _cotiz boolean
 )
 begin
 case (_proc)
@@ -36,12 +37,14 @@ case (_proc)
 					id_usuario,
 					id_producto,
 					cantidad,
-					subtotal
+					subtotal,
+                    cotizado
 				) values (
 					uuid_to_bin(_id_usuario),
 					uuid_to_bin(_id_producto),
 					_cantidad,
-					_subcot
+					_subcot,
+                    _cotiz
 				);
             else
 				set @_precio_prod = (select precio from productos where id_producto = uuid_to_bin(_id_producto));
@@ -66,6 +69,11 @@ case (_proc)
 			where id_usuario = uuid_to_bin(_id_usuario) and
 				  id_producto = uuid_to_bin(_id_producto);
 		end if;
+-- //// CHECAR SI ESTA COTIZADO \\\\ --
+	when ('cotiz') then
+		select cotizado from rel_carrito
+        where id_usuario = uuid_to_bin(_id_usuario) and
+			id_producto = uuid_to_bin(_id_producto);
 -- //// QUITAR PRODUCTO DEL CARRITO \\\\ --
 	when ('pop') then
 		delete from rel_carrito
@@ -83,6 +91,7 @@ case (_proc)
             titulo as 'out_titulo',
             subtotal as 'out_precio',
             cantidad as 'out_cantidad',
+            cotizado as 'out_cotizado',
             disponibilidad as 'out_dispo',
             total as 'out_total'
         from vw_carrito

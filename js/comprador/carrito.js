@@ -94,6 +94,9 @@ $(document).on('click', '#btn_menos', e => {
                 case "not_aviable":
                     alert("No hay suficientes productos en stock.");
                     break;
+                case "is_cotiz":
+                    alert("La cantidad no se puede modificar porque ya está cotizado;")
+                    break;
             }
         } else {
             $('#lbl_total').html('$'+data.total);
@@ -138,6 +141,9 @@ $(document).on('click', '#btn_mas', e => {
                     break;
                 case "not_aviable":
                     alert("No hay suficientes productos en stock.");
+                    break;
+                case "is_cotiz":
+                    alert("La cantidad no se puede modificar porque ya está cotizado;")
                     break;
             }
         } else {

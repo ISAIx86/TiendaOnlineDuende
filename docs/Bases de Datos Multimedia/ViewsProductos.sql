@@ -57,8 +57,8 @@ select
     rpp.precio as 'precio',
     rpp.cantidad as 'cantidad',
     rpp.subtotal as 'subtotal'
-from pedidos as peds
-left outer join rel_ped_prod as rpp
+from rel_ped_prod as rpp
+left outer join pedidos as peds
 on rpp.folio_pedido = peds.folio
 left outer join productos as prods
 on prods.id_producto = rpp.id_producto
@@ -67,7 +67,7 @@ on pct.id_producto = prods.id_producto
 left outer join multimedia as multi
 on prods.id_producto = multi.id_prod
 where multi.tipo = 'i'
-group by peds.folio;
+group by rpp.folio_pedido, rpp.id_producto;
 
 -- ////////////////////////////////////
 -- //// VISTA HISTORIAL DE PEDIDOS \\\\

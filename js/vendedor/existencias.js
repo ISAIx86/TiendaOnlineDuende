@@ -8,7 +8,7 @@ $(document).on('click', '#btn_addex', e => {
         cantidad = parseInt(cantidad);
     }
     $.ajax({
-        url: '../../php/includes/productos/add_exist.php',
+        url: '../../php/includes/productos/add_exist_inc.php',
         type: 'POST',
         data: {'in_prodid':product, 'in_cant':cantidad, 'submit':'1'}
     })

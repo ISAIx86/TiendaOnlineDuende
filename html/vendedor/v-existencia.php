@@ -80,7 +80,13 @@ $productos = $prodcontroller->existencias($_SESSION['user']['ID'], $cat);
               <td><?php echo $prod['out_categos']?></td>
               <td><?php echo $prod['out_titulo']?></td>
               <td><?php echo $prod['out_calif']?></td>
-              <td><?php echo $prod['out_precio']?></td>
+              <td>
+                <?php if ($prod['out_cotiz']) {?>
+                  Cotizado
+                <?php } else { 
+                 echo $prod['out_precio'];
+                 } ?>
+              </td>
               <td><?php echo $prod['out_dispo']?></td>
               <td>
                 <div class="input-group mb-1">

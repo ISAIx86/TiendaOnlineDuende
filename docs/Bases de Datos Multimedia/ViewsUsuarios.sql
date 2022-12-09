@@ -24,6 +24,7 @@ select
 	prod.titulo as 'titulo',
     rlc.subtotal as 'subtotal',
     rlc.cantidad as 'cantidad',
+    rlc.cotizado as 'cotizado',
     prod.disponibilidad as 'disponibilidad',
     rlc.subtotal * rlc.cantidad as 'total'
 from rel_carrito as rlc

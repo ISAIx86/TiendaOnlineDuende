@@ -8,7 +8,7 @@ session_start();
 if (isset($_SESSION['user'])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $controller = new CotizacionController();
-        $result = $controller->crearCotizacion($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant']);
+        $result = $controller->crearCotizacion($_SESSION['user']['ID'], $_POST['in_prodid'], $_POST['in_cant'], $_POST['in_subtot']);
         if (gettype($result) == "string") {
             echo json_encode(array('result'=>"error", 'reason'=>$result));
             exit();

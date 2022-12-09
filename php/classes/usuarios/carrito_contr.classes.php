@@ -28,6 +28,9 @@ class CarritoController extends CarritoDAO {
         ) {
             return "empty_inputs";
         }
+        if ($this->car_checkcotiz($userid, $prodid)) {
+            return "is_cotiz";
+        }
         return $this->car_set($userid, $prodid, $cantidad);
     }
 

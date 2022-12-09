@@ -39,13 +39,15 @@ case (_proc)
 			id_publicador,
 			id_comprador,
 			id_producto,
-			com_cantidad
+			com_cantidad,
+            com_precio
 		) values (
 			uuid_to_bin(uuid()),
 			@_publicador,
 			uuid_to_bin(_id_comprador),
 			uuid_to_bin(_id_producto),
-			_cantidad
+			_cantidad,
+            _precio
 		);
 -- //// MODIFICAR PRECIO OFRECIDO DEL VENDEDOR \\\\ --
     when ('set_vendor') then
@@ -79,7 +81,8 @@ case (_proc)
             (select bin_to_uuid(id_comprador) from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
             (select bin_to_uuid(id_producto) from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
             (select vend_cantidad from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
-            (select vend_precio from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz))
+            (select vend_precio from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz)),
+            true
 		);
 -- //// OBTENER LISTAS DEL USUARIO \\\\ --
 	when ('get_cards_v') then
@@ -126,6 +129,14 @@ case (_proc)
 		from vw_cotiz_info
         where id_cotiz = uuid_to_bin(_id_cotiz)
         and estado != 'C';
+-- //// CHECAR SI TIENE RESPUESTA \\\\ --
+	when ('checkV') then
+		set @checking = (select vend_cantidad from cotizaciones where id_cotiz = uuid_to_bin(_id_cotiz));
+        if (@checking is not null) then
+			select 1 as 'result';
+		else
+			select 0 as 'result';
+		end if;
 -- //// COMANDO NO VÁLIDO \\\\ --
 	else 
 		select "invalid_command" as 'result';

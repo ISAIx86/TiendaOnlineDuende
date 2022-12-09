@@ -44,9 +44,13 @@ include_once __ROOT."html/templates/get_session.php";
               <div id="cant_control" class="col-2">
                 <span id="lbl_subtotal" class="badge bg-primary rounded-pill">$<?php echo $prod['out_total'] ?></span>
                 </br>
-                <button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>
+                <?php if (!$prod['out_cotizado']) { ?>
+                  <button id="btn_menos" class="btn btn-secondary btn-circle btn-sm">-</button>
+                <?php } ?>
                 <span id="lbl_cant" class="badge bg-primary rounded-pill"><?php echo $prod['out_cantidad'] ?></span>
-                <button id="btn_mas" class="btn btn-secondary btn-circle btn-sm">+</button>
+                <?php if (!$prod['out_cotizado']) { ?>
+                  <button id="btn_mas" class="btn btn-secondary btn-circle btn-sm">+</button>
+                <?php } ?>
                 <form>
                   <button id="btn_quitar" class="btn btn-danger">Quitar</button>
                 </form>

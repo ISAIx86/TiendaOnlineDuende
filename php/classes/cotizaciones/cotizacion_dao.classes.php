@@ -20,7 +20,7 @@ class CotizacionDAO extends DBH {
         ));
     }
     // CRUD
-    protected function cot_crear($iduser, $idprod, $cant) {
+    protected function cot_crear($iduser, $idprod, $cant, $subtot) {
 
         $this->prepareStatement('create');
 
@@ -29,7 +29,7 @@ class CotizacionDAO extends DBH {
             'id_publ'=>null,
             'id_compr'=>$iduser,
             'id_prod'=>$idprod,
-            'precio'=>null,
+            'precio'=>$subtot,
             'cantidad'=>$cant
         );
 
@@ -148,6 +148,29 @@ class CotizacionDAO extends DBH {
     }
 
     // Consultas
+    
+    protected function cot_checkv($id) {
+
+        $this->prepareStatement('checkV');
+
+        $data = array(
+            'id_cotiz'=>$id,
+            'id_publ'=>null,
+            'id_compr'=>null,
+            'id_prod'=>null,
+            'precio'=>null,
+            'cantidad'=>null
+        );
+
+        $this->executeCall($data);
+
+        $result = $this->fetchData()[0]['result'];
+
+        if ($result == "0")
+            return false;
+        else return true;
+
+    }
 
     protected function cotv_lista($id_publ) {
 

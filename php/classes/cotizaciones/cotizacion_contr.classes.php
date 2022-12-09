@@ -4,7 +4,7 @@ require_once "cotizacion_dao.classes.php";
 
 class CotizacionController extends CotizacionDAO {
 
-    public function crearCotizacion($iduser, $idprod, $cant) {
+    public function crearCotizacion($iduser, $idprod, $cant, $subtot) {
         if (empty($iduser)) {
             return "uncaptured_user";
         }
@@ -14,7 +14,7 @@ class CotizacionController extends CotizacionDAO {
         if (empty($cant)) {
             return "empty_inputs";
         }
-        return $this->cot_crear($iduser, $idprod, $cant);
+        return $this->cot_crear($iduser, $idprod, $cant, $subtot);
     }
 
     public function ofertaComprador($idcot, $subtot, $cant) {
@@ -47,6 +47,9 @@ class CotizacionController extends CotizacionDAO {
     public function aceptar($idcot) {
         if (empty($idcot)) {
             return "uncaptured_id";
+        }
+        if (!$this->cot_checkv($idcot)) {
+            return "no_vend_offer";
         }
         return $this->cot_aceptar($idcot);
     }

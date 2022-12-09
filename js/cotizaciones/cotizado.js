@@ -29,6 +29,9 @@ $(document).ready(function(){
                     case "uncaptured_id":
                         alert("No se capturó el ID de categoría.");
                         break;
+                    case "no_vend_offer":
+                        alert("El vendedor aún no ha propuesto su precio final.");
+                        break;
                 }
             } else {
                 alert("Cotizacion aceptada.");

@@ -95,6 +95,15 @@ $(document).ready(function (){
     $('#btn_cot').on('click', e => {
         const urlParams = new URLSearchParams(window.location.search);
         const cantidad = $('#txt_cantidad').val();
+        const subtotal = $('#txt_precio').val();
+        if (subtotal == "") {
+            alert("El campo de precio unitario está vacío.");
+            return;
+        }
+        else if (!validarPrecio(subtotal)) {
+            alert("El formato de precio es inválido.");
+            return;
+        }
         if (cantidad == "") {
             alert("El campo de cantidad está vacío.");
             return;
@@ -105,7 +114,7 @@ $(document).ready(function (){
         $.ajax({
             url: '../../php/includes/cotizaciones/add_cotiz_inc.php',
             type: 'POST',
-            data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad},
+            data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad, 'in_subtot':subtotal},
         })
         .done(response => {
             let data;

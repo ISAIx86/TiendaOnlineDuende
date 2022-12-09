@@ -49,41 +49,44 @@ foreach ($products as &$prod) {
     }
 }
 
+// PAYER
 $payer = new Payer();
 $payer->setPaymentMethod('paypal');
 
-// Enlistar objetos de compra.
-$transactions = array();
+$invoiceNumber = uniqid();
+$currency = 'MXN';
+$description = 'Paypal transaction';
+$my_items = array();
+$total = 0.0;
+
 foreach ($products as &$product) {
-    
-    $currency = 'MXN';
-    $item_qty = (int)$product['out_cantidad'];
-    $amountPayable = (float)$product['out_precio'];
-    $product_name = $product['out_titulo'];
-    $item_code = $product['out_id'];
-    $description = 'Paypal transaction';
-    $invoiceNumber = uniqid();
-    $my_items = array(
-        array('name'=>$product_name, 'quantity'=>$item_qty, 'price'=>$amountPayable, 'sku'=>$item_code, 'currency'=>$currency)
+    $total += (float)$product['out_precio'] * (int)$product['out_cantidad'];
+    array_push(
+        $my_items,
+        array (
+            'name'=>$product['out_titulo'],
+            'quantity'=>(int)$product['out_cantidad'],
+            'price'=>(float)$product['out_precio'],
+            'sku'=>$product['out_id'],
+            'currency'=>$currency
+        )
     );
-
-    $amount = new Amount();
-    $amount
-        ->setCurrency($currency)
-        ->setTotal((float)$amountPayable * $item_qty);
-
-    $items = new ItemList();
-    $items->setItems($my_items);
-
-    $transaction = new Transaction();
-    $transaction
-        ->setAmount($amount)
-        ->setDescription($description)
-        ->setInvoiceNumber($invoiceNumber)
-        ->setItemList($items);
-    array_push($transactions, $transaction);
-
 }
+
+$amount = new Amount();
+$amount
+    ->setCurrency($currency)
+    ->setTotal($total);
+
+$items = new ItemList();
+$items->setItems($my_items);
+
+$transaction = new Transaction();
+$transaction
+    ->setAmount($amount)
+    ->setDescription($description)
+    ->setInvoiceNumber($invoiceNumber)
+    ->setItemList($items);
 
 $redirectUrls = new RedirectUrls();
 $redirectUrls
@@ -94,7 +97,7 @@ $payment = new Payment();
 $payment
     ->setIntent('sale')
     ->setPayer($payer)
-    ->setTransactions($transactions)
+    ->setTransactions([$transaction])
     ->setRedirectUrls($redirectUrls);
 
 try {
@@ -109,3 +112,4 @@ header('location:' . $payment->getApprovalLink());
 exit();
 
 ?>
+

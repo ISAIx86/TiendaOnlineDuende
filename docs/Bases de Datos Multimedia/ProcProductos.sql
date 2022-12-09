@@ -103,6 +103,7 @@ case (_proc)
 				categorias as out_categos,
                 titulo as out_titulo,
 				calificacion as out_calif,
+                cotizacion as out_cotiz,
 				precio as out_precio,
                 disponibilidad as out_dispo
 			from vw_existencias

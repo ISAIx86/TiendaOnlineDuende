@@ -6,7 +6,7 @@ class CarritoDAO extends DBH {
 
     // Statement
     protected function prepareStatement($proc) {
-        $this->setPrepareStatement("call sp_Carrito('".$proc."', ?, ?, ?, ?);");
+        $this->setPrepareStatement("call sp_Carrito('".$proc."', ?, ?, ?, ?, ?);");
     }
 
     private function executeCall($data) {
@@ -14,7 +14,8 @@ class CarritoDAO extends DBH {
             $data['in_userid'],
             $data['in_prodid'],
             $data['in_cantidad'],
-            $data['in_sub']
+            $data['in_sub'],
+            null
         ));
     }
 
@@ -60,9 +61,29 @@ class CarritoDAO extends DBH {
 
         $this->clearStatement();
 
-        if ($count == 0) {
+        if ($count == 0)
             return "not_aviable";
-        }
+        else return true;
+
+    }
+
+    protected function car_checkcotiz($userid, $prodid) {
+
+        $this->prepareStatement('cotiz');
+
+        $data = array(
+            'in_userid'=>$userid,
+            'in_prodid'=>$prodid,
+            'in_cantidad'=>null,
+            'in_sub'=>null
+        );
+
+        $this->executeCall($data);
+
+        $result = $this->fetchData()[0]['cotizado'];
+
+        if ($result == "0")
+            return false;
         else return true;
 
     }

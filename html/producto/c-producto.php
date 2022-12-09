@@ -101,10 +101,15 @@ if (isset($_GET['prod'])) {
             <div>
               <p class="card-text"><?php echo $infoProd['out_descripcion']?></p>
             </div>
-            <div>
-              <h3>$ <?php echo $infoProd['out_precio']?></h3>
-            </div>
-
+            <?php if ($infoProd['out_cotiz']) { ?>
+              <div>
+                <h3>Cotizado</h3>
+              </div>
+            <?php } else { ?>
+              <div>
+                <h3>$ <?php echo $infoProd['out_precio']?></h3>
+              </div>
+            <?php } ?>
             <?php if ($infoProd['out_dispo'] > 0) { ?>
             <div>
               <h6>Stock Disponible</h6>
@@ -124,8 +129,10 @@ if (isset($_GET['prod'])) {
                 </div>
               </div>
               <?php if ($infoProd['out_cotiz']) { ?>
-                <div class="row">          
+                <div class="row">
                   <div class="col">
+                    <label for="txt_precio" class="visually-hidden">Precio unitario</label>
+                    <input type="text" id="txt_precio" name="in_precio" class="form-control" maxlength="8" aria-label="Amount (to the nearest dollar)" placeholder="Ingrese un precio que desea por este producto." autocomplete="off">   
                     <button id="btn_cot" type="button" class="btn btn-warning">Cotizar</button>
                   </div>
                 </div>
@@ -502,6 +509,7 @@ if (isset($_GET['prod'])) {
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
   <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/utilities/validaciones.js"></script>
   <script src="../../js/productos/producto.js"></script>
 
 </body>
