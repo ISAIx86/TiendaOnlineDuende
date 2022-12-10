@@ -59,7 +59,6 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 <div class = "container" id = "divBusqueda">          
     <form class="row" action="../comprador/c-busqueda.php" method="get">
       <div class="col-9" id = "txt-busqueda">    
-        <input type="hidden" name="srch_type" value="prod">
         <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
         <datalist id="datalistOptions">
           <option value="Electronica">
@@ -74,14 +73,11 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
           <img src='../../resources/busqueda.png' class='imgCuadrada30'>
         </button>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-secondary active">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> todo
+          <label class="btn btn-secondary">
+            <input type="radio" name="srch_type" id="srch_prod" autocomplete="off" value="prod" checked> Productos
           </label>
           <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option2" autocomplete="off"> productos
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option3" autocomplete="off"> humanos
+            <input type="radio" name="srch_type" id="srch_user" autocomplete="off" value="user"> Usuarios
           </label>
         </div>
       </div>

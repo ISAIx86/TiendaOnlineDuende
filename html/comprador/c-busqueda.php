@@ -34,7 +34,8 @@ if ($type == "prod") {
       )
     );
   } 
-} else if ($type == "usu") {
+} else if ($type == "user") {
+  require_once __ROOT."php/models/usuario-model.php";
   require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
   $redirect = __ROOT."html/usuarios/c-perfil.php?user=";
   $btn = "Ver perfil";
@@ -147,6 +148,8 @@ if ($type == "prod") {
   <?php include __ROOT."html/templates/footer.php"?>
 
   <script src="../../js/lib/bootstrap.bundle.js"></script>
+  <script src="../../js/lib/jquery-3.6.1.js"></script>
+  <script src="../../js/usuarios/busqueda.js"></script>
 
 </body>
 </html>

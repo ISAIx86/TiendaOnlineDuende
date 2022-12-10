@@ -18,9 +18,6 @@ class BusquedaProdController extends BusquedaProdDAO {
     }
 
     public function busquedaAvanzada($title) {
-        if (empty($title)) {
-            return "empty_inputs";
-        }
         return $this->adv_search($title, null, null, null, null);
     }
 
