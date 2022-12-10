@@ -8,3 +8,15 @@ select * from vw_histo_pedidos;
 
 select * from rel_carrito;
 select * from cotizaciones;
+
+select
+	bin_to_uuid(prods.id_producto) as 'out_id',
+	multi.contenido as 'out_img',
+	prods.titulo as 'out_titulo',
+	prods.descripcion as 'out_descripcion',
+	prods.precio as 'out_precio'
+from productos as prods
+left outer join multimedia as multi
+on prods.id_producto = multi.id_prod
+where prods.titulo like concat("C", '%') and multi.tipo = 'i'
+group by prods.id_producto;

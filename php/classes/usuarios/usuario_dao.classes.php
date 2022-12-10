@@ -154,6 +154,22 @@ class UsuarioDAO extends DBH {
 
     }
 
+    protected function us_advsrch($search) {
+
+        $this->prepareStatement('adv_search');
+
+        $usu = Usuario::create()->setUsername($search);
+
+        $this->executeCall($usu);
+
+        $result = $this->fetchData();
+
+        $this->clearStatement();
+
+        return $result;
+        
+    }
+
     // Modificaciones individuales
     protected function us_cambiar_correo($id, $correo) {
 

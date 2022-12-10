@@ -34,7 +34,7 @@
 </header>
 <div class = "container-flex" id = "buscador">
 <div class = "container">
-    <form class="row" id = "buscador">
+    <form class="row" action="../usuarios/c-busqueda.php" method="get">
         <div class="col-9">
             <input class="form-control" id="txt_search" name="in_search" list="datalistOptions" placeholder="Ingrese una categoria...">
             <datalist id="datalistOptions">
@@ -47,7 +47,7 @@
         </div>
         <div class="col-3">
         <button type="submit" class="btn btn-warning mb-3">
-          <img src='../../resources/busqueda.png' class='imgCuadrada30' href="../producto/c-busqueda.php"/>
+          <img src='../../resources/busqueda.png' class='imgCuadrada30'/>
         </button>
         </div>
     </form>

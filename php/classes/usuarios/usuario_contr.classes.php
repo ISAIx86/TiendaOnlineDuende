@@ -148,6 +148,13 @@ class UsuarioController extends UsuarioDAO {
         return $this->us_getdata($id);
     }
 
+    public function busquedaAvanzada($search) {
+        if (empty($search)) {
+            return "empty_inputs";
+        }
+        return $this->us_advsrch($search);
+    }
+
 }
 
 ?>

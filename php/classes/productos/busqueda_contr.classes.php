@@ -17,11 +17,11 @@ class BusquedaProdController extends BusquedaProdDAO {
         return $this->get_vistos();
     }
 
-    public function busquedaAvanzada() {
-        if (empty($id)) {
-            return "uncaptured_id";
+    public function busquedaAvanzada($title) {
+        if (empty($title)) {
+            return "empty_inputs";
         }
-        return $this->adv_search();
+        return $this->adv_search($title, null, null, null, null);
     }
 
 }

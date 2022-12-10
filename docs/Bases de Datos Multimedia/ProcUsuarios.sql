@@ -149,6 +149,14 @@ case (_proc)
             fecha_creacion as 'out_feccre'
         from usuarios
         where id_usuario = uuid_to_bin(_id_usuario);
+-- //// BUSQUEDA DE USUARIOS \\\\ --
+	when ('adv_search') then
+		select
+			bin_to_uuid(id_usuario) as 'out_id',
+            avatar as 'out_avatar',
+			username as 'out_user'
+		from usuarios
+		where username like concat(_username, '%');
 -- //// COMANDO NO VÁLIDO \\\\ --
     else
 		select "invalid_command" as 'result';

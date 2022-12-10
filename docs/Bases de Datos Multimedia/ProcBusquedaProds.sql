@@ -82,20 +82,17 @@ case (_proc)
         limit 10;
 -- //// BÚSQUEDA AVANZADA \\\\\ --
 	when ('adv_search') then
-		set @pagem = ((_page - 1) * _size);
-		set @_search_qry = concat(
-			"select
-				bin_to_uuid(id_producto) as 'out_id',
-				titulo as 'out_titulo',
-				descripcion as 'out_descripcion',
-				precio as 'out_precio'
-			from productos
-            where titulo like concat(",_titulo,", '%')
-            order by ",_order_by,"
-            limit ",@pagem,", ",_size,";"
-		);
-		prepare qry from @_search_qry;
-		execute qry;
+		select
+			bin_to_uuid(prods.id_producto) as 'out_id',
+			multi.contenido as 'out_img',
+			prods.titulo as 'out_titulo',
+			prods.descripcion as 'out_descripcion',
+			prods.precio as 'out_precio'
+		from productos as prods
+		left outer join multimedia as multi
+		on prods.id_producto = multi.id_prod
+		where prods.titulo like concat(_titulo, '%') and multi.tipo = 'i'
+		group by prods.id_producto;
 	else
 		select "invalid_command" as 'result';
 end case;

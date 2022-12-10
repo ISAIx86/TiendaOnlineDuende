@@ -40,7 +40,7 @@
         </div>
         <div class="col-3">
             <button type="submit" class="btn btn-warning mb-3">
-                <a href="../producto/c-busqueda.html">Buscar</a>
+                <a href="../usuarios/c-busqueda.php">Buscar</a>
             </button>
         </div>
     </form>
