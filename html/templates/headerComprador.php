@@ -73,6 +73,17 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
         <button type="submit" class="btn btn-warning mb-3">
           <img src='../../resources/busqueda.png' class='imgCuadrada30'>
         </button>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> todo
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> productos
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> humanos
+          </label>
+        </div>
       </div>
     </form>
 </div>
