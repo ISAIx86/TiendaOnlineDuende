@@ -18,6 +18,8 @@ drop view if exists vw_ventas_detallada;
 drop view if exists vw_ventas_agrupada;
 drop view if exists vw_existencias;
 drop view if exists vw_reviews;
+drop view if exists vw_listaauto;
+drop view if exists vw_lista;
 
 -- /////////////////////////////////////////////////
 -- //// VISTA RELACION PEDIDO PRODUCTOS SOLO ID \\\\

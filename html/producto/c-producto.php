@@ -205,7 +205,7 @@ if (isset($_GET['prod'])) {
                 </div>
               </div>
               <div class="form_control" requerido="true" state="empt">
-                <input type="text" class="form-control" id="txt_review" name="in_review" placeholder="¿Qué opina del producto?">
+                <input type="text" class="form-control" id="txt_review" name="in_review" placeholder="¿Qué opina del producto?" autocomplete="off">
               </div>
               <button class="btn btn-primary">Calificar</button>
             </form>

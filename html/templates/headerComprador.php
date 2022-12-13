@@ -92,20 +92,20 @@ $carritoTot = $controller->totalCarrito($loggedUser['ID']);
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../producto/c-busqueda.php">Productos</a>
+          <a class="nav-link active" aria-current="page" href="../comprador/c-home.php">Productos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../listas/c-misListas.php">Mis listas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="c-cotizaciones.php">Cotizaciones</a>
+          <a class="nav-link active" aria-current="page" href="../comprador/c-cotizaciones.php">Cotizaciones</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Recomendados</a></li>
-            <li><a class="dropdown-item" href="#">Más populares</a></li>
-            <li><a class="dropdown-item" href="#">Más Vendidos</a></li>
+            <li><a class="dropdown-item" href="../comprador/c-home.php#productosRecomendados">Recomendados</a></li>
+            <li><a class="dropdown-item" href="../comprador/c-home.php#productosPopulares">Más populares</a></li>
+            <li><a class="dropdown-item" href="../comprador/c-home.php#productosMasVendidos">Más Vendidos</a></li>
           </ul>
         </li>
       </ul>

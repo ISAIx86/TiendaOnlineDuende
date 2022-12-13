@@ -51,6 +51,7 @@ case (_proc)
             fecha as 'out_fecha'
         from vw_reviews
         where id_producto = uuid_to_bin(_id_producto)
+        order by fecha desc
         limit 10;
     else
 		select "invalid_command" as 'result';
