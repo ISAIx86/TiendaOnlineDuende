@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     $('#btn_auto').on('click', e => {
         $.ajax({
-            url: "../../php/includes/productos/authorize_prod_inc.php",
+            url: "../../includes/productos/authorize_prod_inc.php",
             type: 'POST',
             data: {'in_prodid':urlParams.get('prod'), 'mode':'auto', 'submit':1}
         }).done(response => {
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
     $('#btn_deny').on('click', e => {
         $.ajax({
-            url: "../../php/includes/productos/authorize_prod_inc.php",
+            url: "../../includes/productos/authorize_prod_inc.php",
             type: 'POST',
             data: {'in_prodid':urlParams.get('prod'), 'mode':'deny', 'submit':1}
         }).done(response => {

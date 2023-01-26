@@ -1,11 +1,11 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/models/multimedia-model.php";
-require_once __ROOT."php/models/producto-model.php";
-require_once __ROOT."php/classes/multimedia/multimedia_contr.classes.php";
-require_once __ROOT."php/classes/productos/producto_contr.classes.php";
+use App\Controllers\MultimediaController;
+use App\Controllers\ProductoController;
+
 $prodfiles = array();
 $prodcategos = array();
 $prodInfo = array();

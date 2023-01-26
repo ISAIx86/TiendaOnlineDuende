@@ -9,7 +9,7 @@ $(document).ready(function() {
         let formdata = new FormData($(e.target)[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/superadmin/superadmin_login_inc.php',
+            url: '../../includes/superadmin/superadmin_login_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,

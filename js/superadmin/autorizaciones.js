@@ -1,7 +1,7 @@
 $(document).on('click', '#btn_auto', e => {
     let id_usuario = $(e.target).parents('tr#adm_row').attr('idusu');
     $.ajax({
-        url: '../../php/includes/superadmin/authorize_admin_inc.php',
+        url: '../../includes/superadmin/authorize_admin_inc.php',
         type: 'POST',
         data: {'in_userid':id_usuario, 'submit':1}
     }).done(response => {

@@ -1,9 +1,9 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/models/superadmin-model.php";
-require_once __ROOT."php/classes/superadmin/superadmin_contr.classes.php";
+use App\Controllers\SuperAdminController;
 $controller = new SuperAdminController();
 $admins = $controller->peticionesUsuarios();
 ?>

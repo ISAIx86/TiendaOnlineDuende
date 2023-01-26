@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#btn_auto').on('click', e => {
         let id_cat = $(e.target).parents('tr#cat_row').attr('idcat');
         $.ajax({
-            url: "../../php/includes/categorias/authorize_catego_inc.php",
+            url: "../../includes/categorias/authorize_catego_inc.php",
             type: 'POST',
             data: {'in_catid':id_cat, 'mode':'auto', 'submit':1}
         }).done(response => {
@@ -39,7 +39,7 @@ $(document).ready(function() {
     $('#btn_deny').on('click', e => {
         let id_cat = $(e.target).parents('tr#cat_row').attr('idcat');
         $.ajax({
-            url: "../../php/includes/categorias/authorize_catego_inc.php",
+            url: "../../includes/categorias/authorize_catego_inc.php",
             type: 'POST',
             data: {'in_catid':id_cat, 'mode':'deny', 'submit':1}
         }).done(response => {

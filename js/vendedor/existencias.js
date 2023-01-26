@@ -8,7 +8,7 @@ $(document).on('click', '#btn_addex', e => {
         cantidad = parseInt(cantidad);
     }
     $.ajax({
-        url: '../../php/includes/productos/add_exist_inc.php',
+        url: '../../includes/productos/add_exist_inc.php',
         type: 'POST',
         data: {'in_prodid':product, 'in_cant':cantidad, 'submit':'1'}
     })
@@ -45,7 +45,7 @@ $(document).on('click', '#btn_addex', e => {
 $(document).on('click', '#btn_del', e => {
     let product = $(e.target).parents('tr#prod_row').attr('idprod');
     $.ajax({
-        url: '../../php/includes/productos/delete_prod_inc.php',
+        url: '../../includes/productos/delete_prod_inc.php',
         type: 'POST',
         data: {'in_prodid':product, 'submit':'1'}
     }).done(response => {

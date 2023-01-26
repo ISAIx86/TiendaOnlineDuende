@@ -1,4 +1,5 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 ?>
@@ -16,6 +17,8 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Header -->
     <?php
     include __ROOT."html/templates/headerComprador.php";
+
+    use App\Controllers\CarritoController;
     $controller = new CarritoController();
     $productos = $controller->listaCarrito($_SESSION['user']['ID']);
     ?>

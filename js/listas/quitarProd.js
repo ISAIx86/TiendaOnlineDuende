@@ -4,7 +4,7 @@ $(document).ready(function() {
         const urlParams = new URLSearchParams(window.location.search);
         let id_prod = $(e.target).attr('idprod');
         $.ajax({
-            url: '../../php/includes/listas/del_prod_inc.php',
+            url: '../../includes/listas/del_prod_inc.php',
             type: 'POST',
             data: {'id_lista':urlParams.get('list'), 'id_prod':id_prod, submit:1}
         }).done(response => {

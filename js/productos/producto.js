@@ -9,7 +9,7 @@ $(document).ready(function (){
         let formdata = new FormData($(e.target)[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/calificaciones/insert_calif_inc.php',
+            url: '../../includes/calificaciones/insert_calif_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -54,7 +54,7 @@ $(document).ready(function (){
             return;
         }
         $.ajax({
-            url: '../../php/includes/carrito/add_carrito_inc.php',
+            url: '../../includes/carrito/add_carrito_inc.php',
             type: 'POST',
             data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad},
         })
@@ -112,7 +112,7 @@ $(document).ready(function (){
             return;
         }
         $.ajax({
-            url: '../../php/includes/cotizaciones/add_cotiz_inc.php',
+            url: '../../includes/cotizaciones/add_cotiz_inc.php',
             type: 'POST',
             data: {'in_prodid':urlParams.get('prod'), 'in_cant':cantidad, 'in_subtot':subtotal},
         })
@@ -154,7 +154,7 @@ $(document).ready(function (){
         const urlParams = new URLSearchParams(window.location.search);
         let id_list = $(e.target).attr('idlist');
         $.ajax({
-            url: '../../php/includes/listas/add_prod_inc.php',
+            url: '../../includes/listas/add_prod_inc.php',
             type: 'POST',
             data: {'id_lista':id_list, 'id_prod':urlParams.get('prod'), submit:1}
         }).done(response => {

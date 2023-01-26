@@ -1,4 +1,5 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 ?>
@@ -15,8 +16,8 @@ include_once __ROOT."html/templates/get_session.php";
     <!-- Header -->
     <?php
         require_once __ROOT."html/templates/headerComprador.php";
-        require_once __ROOT."php/models/lista-model.php";
-        require_once __ROOT."php/classes/listas/lista_contr.classes.php";
+        
+        use App\Controllers\ListaController;
         $infoLista = array();
         if ($_GET['list']) {
             $controller = new ListaController();

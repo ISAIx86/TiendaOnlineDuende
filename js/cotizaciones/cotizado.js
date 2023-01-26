@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     $('#btn_accept').on('click', e => {
         $.ajax({
-            url: "../../php/includes/cotizaciones/aceptar_inc.php",
+            url: "../../includes/cotizaciones/aceptar_inc.php",
             type: 'POST',
             data: {'in_cotid':urlParams.get('cotiz')}
         }).done(response => {
@@ -60,7 +60,7 @@ $(document).ready(function(){
             return;
         }
         $.ajax({
-            url: "../../php/includes/cotizaciones/cambiar_cotiz.php",
+            url: "../../includes/cotizaciones/cambiar_cotiz.php",
             type: 'POST',
             data: {'in_idcot':id, 'mode':'v', 'in_sub':subtotal, 'in_cant':cantidad}
         }).done(response => {
@@ -113,7 +113,7 @@ $(document).ready(function(){
             return;
         }
         $.ajax({
-            url: "../../php/includes/cotizaciones/cambiar_cotiz.php",
+            url: "../../includes/cotizaciones/cambiar_cotiz.php",
             type: 'POST',
             data: {'in_idcot':id, 'mode':'c', 'in_sub':subtotal, 'in_cant':cantidad}
         }).done(response => {
@@ -148,7 +148,7 @@ $(document).ready(function(){
 
     $('#btn_deny_v').on('click', e => {
         $.ajax({
-            url: "../../php/includes/cotizaciones/denegar_inc.php",
+            url: "../../includes/cotizaciones/denegar_inc.php",
             type: 'POST',
             data: {'in_cotid':urlParams.get('cotiz')}
         }).done(response => {
@@ -183,7 +183,7 @@ $(document).ready(function(){
 
     $('#btn_deny_c').on('click', e => {
         $.ajax({
-            url: "../../php/includes/cotizaciones/denegar_inc.php",
+            url: "../../includes/cotizaciones/denegar_inc.php",
             type: 'POST',
             data: {'in_cotid':urlParams.get('cotiz')}
         }).done(response => {

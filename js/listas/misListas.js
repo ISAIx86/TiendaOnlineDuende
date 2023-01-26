@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#btn_del').on('click', e => {
         let id_list = $(e.target).parents('li#list_row').attr('listid');
         $.ajax({
-            url: '../../php/includes/listas/del_list_inc.php',
+            url: '../../includes/listas/del_list_inc.php',
             type: 'POST',
             data: {'id_lista':id_list, 'submit':1}
         }).done(response => {

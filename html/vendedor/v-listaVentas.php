@@ -1,11 +1,11 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/models/categoria-model.php";
-require_once __ROOT."php/models/pedido-model.php";
-require_once __ROOT."php/classes/categorias/categoria_contr.classes.php";
-require_once __ROOT."php/classes/pedidos/pedidos_contr.classes.php";
+use App\Controllers\CategoriaController;
+use App\Controllers\ProductoController;
+
 $catcontroller = new CategoriaController();
 $pedcontroller = new PedidosController();
 $categos = $catcontroller->obtenerTodos();

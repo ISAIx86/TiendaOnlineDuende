@@ -1,4 +1,5 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 $type = null;
@@ -13,11 +14,13 @@ if (isset($_GET['in_search'])) {
   if ($_GET['in_search'] != "") $search = $_GET['in_search'];
 }
 
+use App\Controllers\BusquedaProdController;
+use App\Controllers\UsuarioController;
+
 $redirect = "";
 $btn = "";
 $data = array();
 if ($type == "prod") {
-  require_once __ROOT."php/classes/productos/busqueda_contr.classes.php";
   $redirect = "../producto/c-producto.php?prod=";
   $btn = "Ver producto";
   $controller = new BusquedaProdController();

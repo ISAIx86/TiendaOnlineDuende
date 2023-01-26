@@ -10,7 +10,7 @@ $(document).ready(function() {
         let formdata = new FormData($('#form_categoria')[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/categorias/insert_catego_inc.php',
+            url: '../../includes/categorias/insert_catego_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,

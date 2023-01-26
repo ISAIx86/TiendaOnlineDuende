@@ -1,5 +1,6 @@
 <?php
-require_once __ROOT."php/classes/usuarios/carrito_contr.classes.php";
+require_once "../../myautoload.php";
+use App\Controllers\CarritoController;
 $controller = new CarritoController();
 $carritoTot = $controller->totalCarrito($loggedUser['ID']);
 ?>

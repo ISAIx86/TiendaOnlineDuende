@@ -10,7 +10,7 @@ $(document).ready(function() {
         let formdata = new FormData($(e.target)[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/usuarios/login_inc.php',
+            url: '../../includes/usuarios/login_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -76,7 +76,7 @@ $(document).ready(function() {
         let formdata = new FormData($('#form_registro')[0]);
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/usuarios/registro_inc.php',
+            url: '../../includes/usuarios/registro_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -134,7 +134,7 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'data');
         $.ajax({
-            url: '../../php/includes/usuarios/update_data_inc.php',
+            url: '../../includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -189,7 +189,7 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'email');
         $.ajax({
-            url: '../../php/includes/usuarios/update_data_inc.php',
+            url: '../../includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -240,7 +240,7 @@ $(document).ready(function() {
         formdata.append('submit', 1);
         formdata.append('mode', 'password');
         $.ajax({
-            url: '../../php/includes/usuarios/update_data_inc.php',
+            url: '../../includes/usuarios/update_data_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,

@@ -14,7 +14,7 @@ $(document).ready(function() {
     $('#txt_incatego').on('keyup', e => {
         let text = $('#txt_incatego').val();
         $.ajax({
-            url: '../../php/includes/categorias/buscar_catego_inc.php',
+            url: '../../includes/categorias/buscar_catego_inc.php',
             type: 'GET',
             data: { 'in_texto' : text }
         })
@@ -69,7 +69,7 @@ $(document).ready(function() {
         formdata.append('in_categos', JSON.stringify(categorias));
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/productos/new_prod_inc.php',
+            url: '../../includes/productos/new_prod_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,
@@ -141,7 +141,7 @@ $(document).ready(function() {
         formdata.append('in_categos', JSON.stringify(categorias));
         formdata.append('submit', 1);
         $.ajax({
-            url: '../../php/includes/productos/modif_prod_inc.php',
+            url: '../../includes/productos/modif_prod_inc.php',
             type: 'POST',
             data: formdata,
             processData: false,

@@ -1,9 +1,9 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/models/lista-model.php";
-require_once __ROOT."php/classes/listas/lista_contr.classes.php";
+use App\Controllers\ListaController;
 $misListas = array();
 if (isset($_SESSION['user'])) {
   $controller = new ListaController();

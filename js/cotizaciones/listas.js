@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('#btn_del').on('click', e => {
         let id_cot = $(e.target).parents('li#cot_row').attr('cotid');
         $.ajax({
-            url: "../../php/includes/cotizaciones/denegar_inc.php",
+            url: "../../includes/cotizaciones/denegar_inc.php",
             type: 'POST',
             data: {'in_cotid':id_cot}
         }).done(response => {

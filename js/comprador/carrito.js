@@ -17,7 +17,7 @@ $(document).ready(function (){
             return;
         }
         $.ajax({
-            url: '../../php/includes/carrito/limpiar_carrito_inc.php',
+            url: '../../includes/carrito/limpiar_carrito_inc.php',
             type: 'POST'
         })
         .done(response => {

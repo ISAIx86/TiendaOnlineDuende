@@ -1,9 +1,9 @@
 <?php
+require_once "../../myautoload.php";
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
 
-require_once __ROOT."php/models/usuario-model.php";
-require_once __ROOT."php/classes/usuarios/usuario_contr.classes.php";
+use App\Controllers\UsuarioController;
 
 $controller = new UsuarioController();
 $userData = $controller->obtenerDatos($_SESSION['user']['ID']);

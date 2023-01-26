@@ -1,6 +1,9 @@
 <?php
+require_once "../../myautoload.php";
+
 define("__ROOT", $_SERVER["DOCUMENT_ROOT"]."/TiendaOnlineDuende/");
 include_once __ROOT."html/templates/get_session.php";
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -16,7 +19,7 @@ include_once __ROOT."html/templates/get_session.php";
   <!-- Header -->
   <?php
   include_once __ROOT."html/templates/headerComprador.php";
-  require_once __ROOT."php/classes/productos/busqueda_contr.classes.php";
+  use App\Controllers\BusquedaProdController;
   $controller = new BusquedaProdController();
   $d_recomend = $controller->masRecomendados();
   $d_vistos = $controller->masVistos();

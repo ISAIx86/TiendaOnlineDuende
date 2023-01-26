@@ -1,4 +1,7 @@
 <?php
+
+require_once "myautoload.php";
+
 define("__HOST", (!empty($_SERVER['HTTPS']) ? 'https' : 'http')."://".$_SERVER["HTTP_HOST"]."/TiendaOnlineDuende/");
 session_start();
 if (isset($_SESSION['user'])) {
@@ -22,6 +25,6 @@ if (isset($_SESSION['user'])) {
     }
 }
 else {
-    header("Location: ".__HOST."html/starting/landingPage.php");
+    header("Location: ".__HOST."html/starting/landingPage.html");
 }
 ?>
